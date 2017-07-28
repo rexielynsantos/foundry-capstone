@@ -1,0 +1,20 @@
+.slimScrollBar {
+background: none repeat scroll 0 0 #ffffff !important;
+border-radius: 0;
+display: none;
+height: 702.936px;
+position: absolute;
+right: 1px;
+top: 145px;
+width: 10px!important;
+z-index: 99;
+opacity:0.7!important;
+}
+
+
+/*textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
+    border-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
+    outline: 0 none;
+}
+*/
