@@ -1,4 +1,5 @@
 @extends('master')
+@section('pageTitle', 'Workflow Management')
 @section('content')
 <div class="content-header">
   <h3 style="color:black;font-family: 'Abel', sans-serif;font-size: 180%;"> <i class="fa  fa-spinner"></i>&nbsp;&nbsp;&nbsp;Workflow Management </h3>

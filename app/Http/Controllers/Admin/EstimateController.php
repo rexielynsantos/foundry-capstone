@@ -40,6 +40,18 @@ class EstimateController extends Controller
 			return Response::json($prodd);
     }
 
+    public function submitOrder(Request $request)
+    {
+      $prodVar = DB::table('tblproductvariant')
+        ->leftjoin('tblproductdetail', 'tblproductdetail.strProductVariantID', '=', 'tblproductvariant.strProductVariantID')
+        ->leftjoin('tblproduct', 'tblproduct.strProductID', '=', 'tblproductdetail.strProductID')
+        ->where('tblproduct.strProductName', $request->prodName)
+        // ->where('tblproduct.strProductName', $request->prodName)
+        ->get();
+
+			return Response::json($prodVar);
+    }
+
   	public function addEstimate(Request $request)
   	{
     $id = str_random(10);

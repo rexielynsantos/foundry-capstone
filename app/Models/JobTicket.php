@@ -9,7 +9,7 @@ class JobTicket extends Model
     protected $table = 'tbljobticket';
     protected $primaryKey = 'strJobTicketID';
     public $incrementing = false;
-    public $timestamps = true;
+    public $timestamps = false;
     protected $fillable = [
     	'strEmployeeID',
     	'strStageID',

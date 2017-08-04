@@ -31,17 +31,24 @@
 
               <div class="row">
                 <div class="col-md-12">
-                 <div class="form-group has-feedback">
-                  <div class="form-group">
-                    <select class="form-control select2" id="supplierselection" style="width: 100%;" required>
-                      <option value="first" selected disabled>Select a Supplier</option>
-                    @foreach($supplier as $sup)
-                    <option>{{$sup->strSupplierName}}</option>
-                    @endforeach
-                    </select>
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                  </div>
-                 </div>
+
+                   
+                   <!-- <div class="form-group has-feedback"> -->
+                        <div class="form-group">
+                          <!-- <label for="paymentTermName" class="control-label">Payment Term
+                          <span style="color:red">*</span>
+                          </label> -->
+                          <select class="form-control select2" id="supplierselection" style="width: 100%;" required>
+                            <option value="first" selected disabled>Select a Supplier</option>
+                          @foreach($supplier as $sup)
+                          <option>{{$sup->strSupplierName}}</option>
+                          @endforeach
+                          </select>
+                          <!-- <span class="glyphicon form-control-feedback" aria-hidden="true"></span> -->
+                        </div>
+                   <!-- </div> -->
+                
+
                 </div>
               </div>
 
@@ -49,7 +56,7 @@
                 <div class="col-md-12">
                   <label> Address </label>
                   <div class="form-group">
-                    <input type="text" class="form-control validate letter" id="street" name="street" value="" placeholder="Street" disabled>
+                    <input type="text" data-value="this.value()" class="form-control validate letter" id="street" name="street" value="" placeholder="Street" disabled>
                   </div>
                 </div>
               </div>
@@ -86,12 +93,6 @@
           <div class="box box-primary direct-chat direct-chat-primary" style="overflow:hidden;height:500px">
             <div class="box-header with-border">
               <h3 class="box-title">New Purchase Order</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
             </div>
 
             <div class="box-body" style="height: 400px">
@@ -144,6 +145,7 @@
                   <li>
                     <a href="#">
                       <img class="contacts-list-img" src="../images/girl1.png" alt="User Image">
+
                         <div class="contacts-list-info">
                               <span class="contacts-list-name">
                                 Select Materials to Order
@@ -204,9 +206,14 @@
               <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Orders" data-widget="chat-pane-toggle">
                   Add Purchase Details</button>
                 &nbsp;
+
               <button type="submit" class="btn bg-blue btn-flat pull-right"><i class="glyphicon glyphicon-ok"></i> &nbsp;Submit</button>
              </div>
-           </div>
+
+              <button type="button" class="btn bg-blue btn-flat pull-right"><a href="/transaction/purchase-final"><i class="glyphicon glyphicon-ok"></i> &nbsp;Submit</a></button>
+            </div>
+          </div>
+
         </div>
       </div>
   </section>

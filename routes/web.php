@@ -38,6 +38,15 @@ Route::post('/maintenance/productVariant-update','Admin\ProductVariantController
 Route::post('/maintenance/productVariant-delete','Admin\ProductVariantController@deleteProductVariant');
 Route::post('/maintenance/productVariant-activate','Admin\ProductVariantController@activateProductVariant');
 
+Route::get('/maintenance/materialVariants','Admin\MaterialVariantController@viewMaterialVariant');
+// Route::get('/maintenance/materialVariant-reactivate','Admin\MaterialVariantController@reactivateMaterialVariant');
+Route::post('/maintenance/materialVariant-add','Admin\MaterialVariantController@addMaterialVariant');
+Route::post('/maintenance/materialVariant-edit','Admin\MaterialVariantController@editMaterialVariant');
+Route::post('/maintenance/materialVariant-update','Admin\MaterialVariantController@updateMaterialVariant');
+Route::post('/maintenance/materialVariant-delete','Admin\MaterialVariantController@deleteMaterialVariant');
+// Route::post('/maintenance/productVariant-activate','Admin\MaterialVariantController@activateMaterialVariant');
+
+
 Route::get('/maintenance/productType','Admin\ProductTypeController@viewProductType');
 Route::get('/maintenance/productType-reactivate','Admin\ProductTypeController@reactivateProductType');
 Route::get('/maintenance/productType-all','Admin\ProductTypeController@getAllStage');
@@ -161,7 +170,8 @@ Route::post('/maintenance/supplier-status','Admin\SupplierController@statusSuppl
 Route::get('/maintenance/material','Admin\MaterialController@viewMaterial');
 Route::get('/maintenance/material-reactivate','Admin\MaterialController@reactivateMaterial');
 Route::get('/maintenance/supplier-all','Admin\MaterialController@getAllSupplier');
-// Route::post('/maintenance/materialCart','Admin\MaterialController@addMat');
+Route::post('/transaction/material-dependVariant','Admin\MaterialController@getSelectedVariant');
+Route::post('/transaction/materialCart','Admin\MaterialController@addCart');
 Route::post('/maintenance/material-add','Admin\MaterialController@addMaterial');
 Route::post('/maintenance/material-edit','Admin\MaterialController@editMaterial');
 Route::post('/maintenance/material-update','Admin\MaterialController@updateMaterial');
@@ -169,6 +179,7 @@ Route::post('/maintenance/material-delete','Admin\MaterialController@deleteMater
 Route::post('/maintenance/material-activate','Admin\MaterialController@activateMaterial');
 Route::post('/maintenance/material-active','Admin\MaterialController@activeMaterial');
 Route::post('/maintenance/material-status','Admin\MaterialController@statusMaterial');
+Route::get('/maintenance/variant-alls','Admin\MaterialController@getAllVariant');
 
 Route::get('/maintenance/dataReactivation', function () {
     return view('Reactivation.dataReactivation');
@@ -179,6 +190,7 @@ Route::get('/maintenance/dataReactivation', function () {
 Route::get('/transaction/estimate','Admin\EstimateController@viewEstimate');
 Route::get('/transaction/estimate-add','Admin\EstimateController@viewAddEstimate');
 Route::post('/transaction/cart','Admin\EstimateController@addCart');
+Route::post('/transaction/submitOrder','Admin\EstimateController@submitOrder');
 
 Route::post('/transaction/estimate-add','Admin\EstimateController@addEstimate');
 Route::post('/transaction/estimate-get','Admin\EstimateController@getEstimate');
@@ -205,13 +217,19 @@ Route::get('/transaction/purchase-add','Admin\PurchaseAddController@viewaddPurch
 Route::post('/transaction/Supplier','Admin\PurchaseAddController@showSupplierDetails');
 Route::post('/transaction/GetDetails','Admin\PurchaseAddController@GetDetails');
 Route::post('/transaction/purchaseCart','Admin\PurchaseAddController@addCart');
+
 Route::post('/transaction/purchaseorder-add','Admin\PurchaseAddController@addPurchaseOrder');
+
 
 Route::get('/transaction/receive','Admin\ReceiveMaterialsController@viewReceivePurchase');
 
 Route::get('/transaction/receive-add','Admin\ReceiveAddMaterialsController@viewReceiveAddPurchase');
 Route::get('/transaction/material-all','Admin\ReceiveAddMaterialsControlelr@getAllMaterial');
+
 Route::post('/transaction/receiveCart','Admin\ReceiveAddMaterialsController@addCart');
+
+
+
 
 Route::get('/transaction/inspectPurchase', function () {
     return view('Transaction.inspectPurchase');
@@ -224,6 +242,12 @@ Route::get('/transaction/stocks', function () {
 Route::get('/transaction/estimate-final', function () {
     return view('Transaction.estimate-final');
 });
+
+Route::get('/transaction/purchase-final', function () {
+    return view('Transaction.purchase-final');
+});
+
+
 
 Route::get('/transaction/purchase-final', function () {
     return view('Transaction.purchase-final');

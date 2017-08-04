@@ -19,6 +19,9 @@ class CreatePurchaseDetailTable extends Migration
         $table->double('dblReorderQty');
         $table->double('dblAddlQty');
         $table->string('strUOMID');
+
+        $table->double('dblAmount'); //amount
+        $table->string('strRemarks');
         $table->foreign('strPurchaseID')
                   ->references('strPurchaseID')->on('tblpurchase');
         $table->foreign('strMaterialID')

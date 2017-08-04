@@ -15,7 +15,7 @@ class ProductController extends Controller
 {
     public function getAllVariant()
     {
-      $variant = ProductVariant::where('strStatus', 'Active')->get();
+      $variant = ProductVariant::with('unit')->where('strStatus', 'Active')->get();
 
       return response()->json($variant);
     }

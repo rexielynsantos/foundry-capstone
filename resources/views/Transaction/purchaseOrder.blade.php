@@ -51,7 +51,6 @@
 
               <table id="purchasesTable" class="display">
                 <thead>
-
                   <th> PO No. </th>
                   <th> Supplier </th>
                   <th width="30%"> Orders</th>
@@ -66,11 +65,16 @@
                   <td>{{$purch->supplier->strSupplierName}} </td>
                    <td> 
                   @foreach($purch->material as $mat)
+
                   <li width="35%" style="list-style-type:circle"> {{$mat->details->strMaterialName}} - {{$mat->dblReorderQty+$mat->dblAddlQty}}{{$mat->details->unit->strUOMName}}</li>
+
+                  <li width="35%" style="list-style-type:circle"> {{$mat->details->strMaterialName}} - {{$mat->dblMaterialQty}}{{$mat->details->unit->strUOMName}}</li>
+
                   @endforeach
                   <td> {{$purch->paymentterm->strPaymentTermName}} </td>
                   </td> 
                   <td>12/30/12</td>
+
 
                   <td> <small class="label pull-right bg-blue">{{$purch->strStatus}}</small> </td>
                 </tr>

@@ -14,12 +14,12 @@ class MaterialSupplierTableSeeder extends Seeder
         DB::table('tblmaterialsupplier')->insert([
             'strMaterialID' => 'MAT00001',
             'strSupplierID' => 'SUP00001',
-            // 'dblMaterialCost' => 1000.50
+            'dblMaterialCost' => 1000.50
         ]);
         DB::table('tblmaterialsupplier')->insert([
             'strMaterialID' => 'MAT00001',
             'strSupplierID' => 'SUP00002',
-            // 'dblMaterialCost' => 500.50
+            'dblMaterialCost' => 500.50
         ]);
     }
 }

@@ -19,6 +19,9 @@ class Unit extends Model
     public function productvariant() {
         return $this->hasOne('App\Models\ProductVariant', 'strProductVariantID', 'strProductVariantID');
     }
+    public function materialvariant() {
+        return $this->hasOne('App\Models\MaterialVariant', 'strMaterialVariantID', 'strMaterialVariantID');
+    }
     public function material() {
         return $this->hasOne('App\Models\Material', 'strMaterialID', 'strMaterialID');
     }

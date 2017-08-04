@@ -62,8 +62,6 @@ class ProductVariantController extends Controller
 
     public function editProductVariant(Request $request)
     {
-      // $variant = ProductVariant::with('producttype.details')->where('strProductVariantID', $request->variant_id)->first();
-      // return $variant;
 
       $variant = ProductVariant::where('strProductVariantID', $request->variant_id)
                 ->first();

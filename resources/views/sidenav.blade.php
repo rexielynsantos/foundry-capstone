@@ -54,6 +54,8 @@
             </li>
             <li><a href="/maintenance/productVariant"><i class="fa fa-circle-o"></i> Product Variants </a></li>
             <li><a href="/maintenance/supplier"><i class="fa fa-circle-o"></i> Suppliers</a></li>
+            <li><a href="/maintenance/materialVariants"><i class="fa fa-circle-o"></i> Material Variants</a></li>
+
             <li><a href="/maintenance/material"><i class="fa fa-circle-o"></i> Materials</a></li>
            <li> <a href="/transaction/jobOrder-monitoring"><i class="fa fa-circle-o"></i> Product Specification </a>
             <li><a href="/maintenance/product"><i class="fa fa-circle-o"></i> Products</a></li>

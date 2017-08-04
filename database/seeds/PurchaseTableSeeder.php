@@ -15,6 +15,7 @@ class PurchaseTableSeeder extends Seeder
           'strPurchaseID' => 'P00001',
           'strSupplierID' => 'SUP00001',
           'strPaymentTermID' => 'PT00002',
+          'strPaymentTermID' => 'PT00001',
           'strStatus' => 'Pending'
       ]);
       DB::table('tblpurchase')->insert([

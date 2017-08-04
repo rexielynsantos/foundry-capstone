@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(JobtitleTableSeeder::class);
         $this->call(EmployeeTableSeeder::class);
         $this->call(UserActionTableSeeder::class);
-        $this->call(PaymentTermTableSeeder::class);
+        // $this->call(PaymentTermTableSeeder::class);
         $this->call(UnitTableSeeder::class);
         $this->call(ProductVariantSeeder::class);
         $this->call(SupplierTableSeeder::class);
@@ -43,6 +43,8 @@ class DatabaseSeeder extends Seeder
          $this->call(ReceivePurchaseTableSeeder::class);
          $this->call(ReceivePurchaseDetailTableSeeder::class);
          $this->call(UserTableSeeder::class);
+         $this->call(MaterialVariantTableSeeder::class);
+
 
     }
 }

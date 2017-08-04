@@ -18,7 +18,6 @@ class CreateJobticketTable extends Migration
         $table->string('strEmployeeID');
         $table->string('strStageID');
         $table->string('strSubStageID')->nullable();
-        $table->timestamps();
         $table->foreign('strStageID')
                   ->references('strStageID')->on('tblstage');
         $table->foreign('strSubStageID')

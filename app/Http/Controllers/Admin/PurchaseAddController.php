@@ -47,6 +47,7 @@ class PurchaseAddController extends Controller
     {
 
 
+
     $suppl = DB::table('tblsupplier')
     ->where('strSupplierID', $request->supplier_name)
     ->get();
@@ -84,10 +85,19 @@ class PurchaseAddController extends Controller
           }
         }
 
+
     $purchase = Purchase::with('material.details', 'unit', 'supplier', 'paymentterm')->where('strPurchaseID',$id)->first();
     return $purchase;
 
+    $suppl = DB::table('tblsupplier')
+    ->where('strSupplierID', $request->supplier_name)
+    ->get();
+
+
+    return Response::json($suppl);
+
     }
+
     
 
 }

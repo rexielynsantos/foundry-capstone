@@ -6,16 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class MaterialDetail extends Model
 {
-    protected $table = 'tblmaterialdetail';
+    protected $table = 'tblmaterialsupplier';
     public $incrementing = false;
     public $timestamps = false;
     
     protected $fillable = [
+    	'strSupplierID',
     	'strMaterialID',
-    	'strMaterialVariantID',
+        // 'dblMaterialCost',
     ];
    
-    public function details(){
-        return $this->hasOne('App\Models\MaterialVariant','strMaterialVariantID','strMaterialVariantID');
+    public function details2(){
+        return $this->hasOne('App\Models\Supplier','strSupplierID','strSupplierID');
     }
 }
+

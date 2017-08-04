@@ -13,7 +13,7 @@ $(document).ready(function(){
           $("#variantSelect").empty();
           for(var i = 0; i < data.length; i++)
           {
-             $(`<option value=`+data[i].strProductVariantID+`>`+data[i].intVariantQty+`</option>`).appendTo("#variantSelect");
+             $(`<option value=`+data[i].intVariantQty  + ' ' + data[i].unit.strUOMName +`</option>`).appendTo("#variantSelect");
           }
         }
     });

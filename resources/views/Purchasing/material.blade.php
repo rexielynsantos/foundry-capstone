@@ -24,6 +24,7 @@
             <th class="hidden">ID</th>
             <th>Name</th>
             <th>Supplier(s)</th>
+            <th>Variant(s)</th>
             <th>Re-order Level</th>
             <th>Re-order Quantity</th>
             <th>Description</th>
@@ -38,6 +39,12 @@
 
               @foreach($mtrl->supplier as $supl)
                 <li width="35%" style="list-style-type:circle"> {{$supl->details2->strSupplierName}}</li>
+              @endforeach
+            </td>
+            <td>
+
+              @foreach($mtrl->materialvariant as $mv)
+                <li width="35%" style="list-style-type:circle"> {{$mv->details->intVariantQty}}</li>
               @endforeach
             </td>
             <td>{{$mtrl->intReorderLevel}}</td>

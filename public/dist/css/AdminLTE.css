@@ -2722,6 +2722,7 @@ table.text-center th {
   border-bottom-left-radius: 0;
   position: relative;
   overflow-x: hidden;
+  overflow-y: hidden;
   padding: 0;
 }
 .direct-chat.chat-pane-open .direct-chat-contacts {
@@ -2737,7 +2738,7 @@ table.text-center th {
   transform: translate(0, 0);
   padding: 10px;
   height: 250px;
-  overflow: auto;
+  overflow: hidden;
 }
 .direct-chat-msg,
 .direct-chat-text {

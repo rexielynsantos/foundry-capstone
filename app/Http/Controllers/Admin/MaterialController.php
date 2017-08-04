@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MaterialRequest;
 use App\Models\Material;
+use App\Models\MaterialSupplier;
+use App\Models\MaterialVariant;
 use App\Models\MaterialDetail;
 use App\Models\Supplier;
 use App\Models\Unit;
@@ -13,6 +15,12 @@ use DB;
 use Response;
 class MaterialController extends Controller
   {
+    public function getAllVariant()
+    {
+      $variant = MaterialVariant::with('unit')->  where('strStatus', 'Active')->get();
+
+      return response()->json($variant);
+    }
 
     public function getAllSupplier(){
     $supli = Supplier::where('strStatus','Active')->get();
@@ -21,8 +29,9 @@ class MaterialController extends Controller
     }
     public function viewMaterial()
     {
-      $material = Material::with('supplier.details2')->where('strStatus', 'Active')->get();
+      $material = Material::with(['supplier.details2','materialvariant.details'])->where('strStatus', 'Active')->get();
       $unit = Unit::where('strStatus', 'Active')->get();
+      
 
         // return Response::json($material);
         return view('Purchasing.material')
@@ -30,6 +39,30 @@ class MaterialController extends Controller
         ->with('unit', $unit);
 
     }
+    public function getSelectedVariant(Request $request)
+    {
+
+      $variant = DB::table('tblmaterialvariant')
+              ->join('tblmaterialdetail', 'tblmaterialdetail.strMaterialVariantID', '=', 'tblmaterialvariant.strMaterialVariantID')
+              ->select('tblmaterialvariant.*')
+              ->where('tblmaterialdetail.strMaterialID', '=', $request->variant_data)
+              ->get();
+
+
+        return Response::json($variant);  
+
+      }
+    public function addCart(Request $request)
+    {
+
+      // $supp = Supplier::where('strSupplierName',  $request->supplier_data)->get();
+      // return response()->json($supp);
+      $supp = DB::table('tblsupplier')
+       ->where('tblsupplier.strSupplierID', $request->supplier_data)
+        ->get();
+        return Response::json($supp);
+
+      }
     public function addMaterial(Request $request)
     {
       $id = str_random(10);
@@ -45,18 +78,29 @@ class MaterialController extends Controller
 
       if($request->input('supplier_data') != ''){
         foreach($request->input('supplier_data') as $supplier){
-          MaterialDetail::insert([
+          MaterialSupplier::insert([
             'strMaterialID' => $id,
-            'strSupplierID' => $supplier
+            'strSupplierID' => $supplier,
+            'dblMaterialCost' =>$request->input('mat_cost'),
           ]);
         }
       }
-      $material = Material::with(['supplier.details2', 'unit'])->where('strMaterialID', $id)->first();
+      if($request->input('variant_data') != ''){
+        foreach($request->input('variant_data') as $variant){
+          MaterialDetail::insert([
+            'strMaterialID' => $id,
+            'strMaterialVariantID' => $variant
+          ]);
+        }
+      }
+
+
+      $material = Material::with(['supplier.details2','materialvariant.details', 'unit'])->where('strMaterialID', $id)->first();
       return $material;
     }
     public function editMaterial(Request $request)
     {
-      $material = Material::with(['supplier.details2', 'unit'])->where('strMaterialID', $request->material_id)->first();
+      $material = Material::with(['supplier.details2','materialvariant.details', 'unit'])->where('strMaterialID', $request->material_id)->first();
       // $supplier = MaterialDetail::where('strMaterialID', $request->material_id)->get();
        // return response()->json(['material' => $material, 'supplier' => $supplier]);
       return $material;
@@ -75,18 +119,28 @@ class MaterialController extends Controller
             'strStatus' => 'Active'
         ]);
 
-      MaterialDetail::where('strMaterialID', $request->material_id)
+      MaterialSupplier::where('strMaterialID', $request->material_id)
         ->delete();
+      MaterialDetail::where('strMaterialID', $request->material_id)
+      ->delete();
 
         if($request->input('supplier_data') != ''){
           foreach($request->input('supplier_data') as $supplier){
-            MaterialDetail::insert([
+            MaterialSupplier::insert([
               'strMaterialID' => $request->material_id,
               'strSupplierID' => $supplier
             ]);
           }
         }
-    $material = Material::with(['supplier.details2', 'unit'])->where('tblmaterial.strMaterialID', $request->material_id)
+          if($request->input('variant_data') != ''){
+          foreach($request->input('variant_data') as $variant){
+            MaterialDetail::insert([
+              'strMaterialID' => $request->material_id,
+              'strMaterialVariantID' => $variant
+            ]);
+          }
+        }
+    $material = Material::with(['supplier.details2','materialvariant.details', 'unit'])->where('tblmaterial.strMaterialID', $request->material_id)
             ->first();
     return response()->json($material);
 

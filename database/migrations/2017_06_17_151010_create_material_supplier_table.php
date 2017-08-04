@@ -17,7 +17,7 @@ class CreateMaterialSupplierTable extends Migration
         {   
             $table ->string('strSupplierID');
             $table ->string('strMaterialID');
-            // $table ->double('dblMaterialCost');
+            $table ->double('dblMaterialCost');
             $table->foreign('strSupplierID')
                   ->references('strSupplierID')->on('tblsupplier')
                   ->onUpdate('cascade');

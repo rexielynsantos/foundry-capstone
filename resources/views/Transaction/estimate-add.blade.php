@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- <h3 style="color:black;font-family: 'Abel', sans-serif;font-size: 180%;">Order Estimate </h3> -->
-<form class="" id="estimate_form" role="form" data-toggle="validator">
+<form class="" id="estimate_form" method="POST" action="/transaction/submitOrder" role="form" data-toggle="validator">
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -37,7 +37,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Company Name">
+                    <input type="text" id="companyName" class="form-control" placeholder="Company Name">
                   </div>
                 </div>
               </div>
@@ -45,21 +45,21 @@
                 <div class="col-md-12">
                   <label> Address </label>
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Street No. ">
+                    <input type="text" id="streetNum" class="form-control" placeholder="Street No. ">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Brgy ">
+                    <input type="text" id="brgy" class="form-control" placeholder="Brgy ">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="City ">
+                    <input type="text" id="city" class="form-control" placeholder="City ">
                   </div>
                 </div>
               </div>
@@ -107,7 +107,7 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  <button type="button" class="btn btn-success btn-flat pull-right"><i class="fa fa-arrow-right"></i></button>
+                  <button type="button" id="submitInfo" class="btn btn-success btn-flat pull-right"><i class="fa fa-arrow-right"></i></button>
                 </div>
               </div>
 
@@ -133,14 +133,14 @@
               <div class="row" style="margin-left: 5px;">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="To:">
+                    <input type="text" id="compTo" class="form-control" disabled placeholder="To:">
                   </div>
                 </div>
               </div>
               <div class="row" style="margin-left: 5px;">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Address:">
+                    <input type="text" id="confAddress" class="form-control" disabled placeholder="Address:">
                   </div>
                 </div>
               </div>
@@ -203,7 +203,6 @@
                             <th>Action</th>
                           </thead>
                           <tbody>
-                          
                           </tbody>
                       </table>
                       </div>
@@ -229,12 +228,30 @@
   </section>
 
 </form>
-
-
+<!--variant modal  -->
+<div class="modal fade" id="varModal" role="dialog">
+  <div class="col-md-6 col-md-offset-3  ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+          <h4 class="modal-title">
+            Add Product Variant
+          </h4>
+      </center>
+      </div>
+      <select id="prodVarSelect" name="prodVarSelect" class='form-control select2' multiple='multiple' style='width: 100%;border:1px solid #3434343'>
+        <option></option>
+      </select>
+      <div class="modal-footer">
+          <button id="prodvarAdd" type="button" class="btn bg-blue btn-flat pull-right">Add</button>
+      </div>
+    </div>
+    </div>
+</div>
 
 
 @push('scripts')
- <script type="text/javascript" src="{{URL::asset('js/tables/quote-Table.js')}}"></script>
+ <!-- <script type="text/javascript" src="{{URL::asset('js/tables/quote-Table.js')}}"></script> -->
   <script type="text/javascript" src="{{URL::asset('js/logic/estimate-add.js')}}"></script>
 
 <script>

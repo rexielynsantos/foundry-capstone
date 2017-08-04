@@ -24,4 +24,7 @@ class Material extends Model
     public function unit() {
         return $this->belongsTo('App\Models\Unit', 'strUOMID', 'strUOMID');
     }
+    public function materialvariant(){
+        return $this->hasMany('App\Models\MaterialDetail', 'strMaterialID','strMaterialID');
+    }
 }

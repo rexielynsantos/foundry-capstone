@@ -52,6 +52,7 @@
                 
                 </div>
               </div>
+
               <div class="row">
                 <div class="col-md-12">
                    <div class="form-group">
@@ -64,6 +65,16 @@
                           </select>
                           <!-- <span class="glyphicon form-control-feedback" aria-hidden="true"></span> -->
                         </div>
+                </div>
+              </div>
+
+               <div class="row">
+                <div class="col-md-12"> 
+                  <div class="form-group">
+                    <label for="supplierSelect" class="control-label">Received from:
+                    </label>
+                    <input type="text" class="form-control" id="receiveFrom">
+                  </div>
                 </div>
               </div>
 
@@ -94,8 +105,36 @@
             </div>
           </div>
         </div>
-
         <div class="col-md-9">
+
+          <div class="nav-tabs-custom">
+            <ul id="mytabs" class="nav nav-tabs">
+              <li class="active"><a href="#tab_1" data-toggle="tab">Step 1: Receiving</a></li>
+              <li><a href="#tab_2" data-toggle="tab">Step 2: Inspection</a></li>
+            </ul>
+            
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+              <br>
+                <div class="row">
+                   <label style="margin-left:15px"> Material Name </label>
+                </div>
+                <div class="row">
+                  <div class="col-md-9">
+                    <div class="form-group">
+                       <select id="matReceiveSelect" name="matReceiveSelect" class="form-control select2" multiple="multiple" data-placeholder="Select Materials" style="width: 100%;border:1px solid #3434343">
+                       </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                        <button type="button" onclick="displayMaterial()" style="height: 33px" class="btn btn-primary btn-flat">Add</button>
+                  </div>
+                 </div>
+               <hr>
+               <div class="row">
+                 <div class="col-md-12">
+                   <table id="receiveMatTable" class="table table-bordered">
+
           <!-- DIRECT CHAT PRIMARY -->
           <div class="box box-primary direct-chat direct-chat-primary" style="overflow:hidden;height:500px">
             <div class="box-header with-border">
@@ -130,101 +169,92 @@
                 <div class="col-md-12">
                    <table id="jobtixTable" border="1" class="display">
                         <thead>
-                          <th> # </th>
-                          <th width="40%"> Material</th>
-                          <th width="20%"> Supplier </th>
-                          <th> Quantity Received </th>
-                          <th> Date Received</th>
+                          <th width="60%"> Material</th>
+                          <th width="10%"> Quantity Expected </th>
+                          <th width="10%"> Quantity Received </th>
+                          <th width="10%"> Cost </th>
+                          <th width="10%"> Amount </th>
                         </thead>
-                       <tr>
-                        <td> 1 </td>
-                        <td> Buhangin </td>
-                        <td> Wacker Neuson </td>
-                        <td> <input type="number" width="5px" id="qtyReceived"> </td>
-                        <td> insertdate here </td>
-                       </tr>
-                      </table>
-                </div>
-              </div>
-
-              <!-- Contacts are loaded here -->
-              <div class="direct-chat-contacts"  style="height: 500px">
-                <ul class="contacts-list">
-                  <li>
-                    <a href="#">
-                      <img class="contacts-list-img" src="../images/girl1.png" alt="User Image">
-
-                      <div class="contacts-list-info">
-                            <span class="contacts-list-name">
-                              Select Materials to Order
-                              <small class="contacts-list-date pull-right">2/28/2015</small>
-                            </span>
-                        <span class="contacts-list-msg">No maximum number of products to be selected</span>
-                      </div>
-                      <!-- /.contacts-list-info -->
-                    </a>
-                  </li>
-                  <!-- End Contact Item -->
-                </ul>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="row">
-                      <div class="col-md-9">
-                        <div class="form-group" style="margin-left:55px">
-
-                           <select id="prodSelect" name="prodSelect" class="form-control select2" multiple="multiple" data-placeholder="Select Products" style="width: 100%;border:1px solid #3434343">
-                           </select>
-
-                           <span> You chose 3 materials </span>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                            <button type="button" onclick="displayProduct()" style="height: 33px" class="btn btn-primary btn-flat"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Add to Cart</button>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-9">
-                        <table id="quoteTable" border="0" class="display"  style="margin-left:55px;color:black">
-                          <thead>
-                            <th>Item (Material Name)</th>
-                            <th>Description</th>
-                            <th>Qty</th>
-                            <th> U/M</th>
-                            <th> Amount </th>
-                            <th> Charge To </th>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td> </td>
-                              <td> </td>
-                              <td> </td>
-                              <td> </td>
-                              <td> </td>
-                              <td> </td>
-                           </tr>
-                          </tbody>
-                      </table>
-                      </div>
-                    </div>
+                        <tbody>
+                         <tr>
+                          <td> Buhangin </td>
+                          <td> 500 </td>
+                          <td> <input type="number"  id="qtyReceived"> </td>
+                          <td> <input type="number" id="costReceived"> </td>
+                          <td> 12000 </td>
+                         </tr>
+                        </tbody>  
+                   </table>
                   </div>
                 </div>
-
-                <!-- /.contatcts-list -->
+                <div class="row">
+                  <div class="col-md-12">
+                    <button type="reset" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i></button>
+                    <button type="button" id="changetabbutton" class="btn bg-blue btn-flat pull-right"><i class="glyphicon glyphicon-ok"></i></button>
+                  </div>
+                </div>
               </div>
-              <!-- /.direct-chat-pane -->
-            </div>
-            <!-- /.box-body -->
-              <div class="box-footer">
-              <div class="pull-right">
-              <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Orders" data-widget="chat-pane-toggle">
-                  Add Purchase Details</button>
-                &nbsp;
-              <button type="submit" class="btn bg-blue btn-flat pull-right"><i class="glyphicon glyphicon-ok"></i> &nbsp;Submit</button>
+
+              <div class="tab-pane" id="tab_2">
+                <br>
+                Remaining Items <br>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <input type=text" data-placeholder="BUHANGIN" disabled> 
+                              </div>
+                          </div>
+                          
+                      </div>
+                      <div class="col-md-3">
+                          <div class="row">
+                              <div class="col-md-12">
+                                   <select> 
+                              <option> For Supplier Return </option>
+                          </select>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                          <input type="text"> 
+                      </div>
+
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                       <input type=text" data-placeholder="ayoq na" disabled> 
+                      </div>
+                      <div class="col-md-3">
+                          <select> 
+                              <option> For Supplier Return </option>
+                          </select>
+                      </div>
+                       <div class="col-md-3">
+                          <input type="text"> 
+                      </div>
+                  </div>
+               <!--  <div class="row">
+                   <label style="margin-left:15px"> Rejected Items </label>
+                </div>
+                <div class="row">
+                  <div class="col-md-9">
+                    <div class="form-group">
+                       <select id="matReceiveSelect" name="matReceiveSelect" class="form-control select2" multiple="multiple" data-placeholder="Select Materials" style="width: 100%;border:1px solid #3434343">
+                       </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                        <button type="button" onclick="displayMaterial()" style="height: 33px" class="btn btn-primary btn-flat">Add</button>
+                  </div>
+                 </div> -->
+               <hr> 
+              </div>
+
             </div>
           </div>
         </div>
-      </div>
+    </div>
   </section>
 
 </form>
@@ -232,134 +262,25 @@
 
 
 
+
+
 @push('scripts')
- <script type="text/javascript" src="{{URL::asset('js/logic/estimate.js')}}"></script>
-
 <script>
-// $("#addtocart").click(function(){
-// 	var tbl = $('#quoteTable').DataTable();
-// 	var disp = $('#prodSelect').val();
-//   console.log(disp);
-//   tbl.row.add([
-//     disp
-//   ]).draw(false);
-	// var prods = [];
-  //
-	// for(var i = 0; i < disp.length; i++)
-  //   {
-  //      prods[i] = prods[i][0];
-  //   }
-		// $.ajax({
-	  //   type: "POST",
-	  //   url: "/transaction/cart",
-	  //   data: {
-	  //       prods_id: prods
-	  //   },
-	  //   success: function(result) {
-	  //     alert("blob");
-    //
-	  //     noty({
-	  //         type: 'error',
-	  //         layout: 'bottomRight',
-	  //         timeout: 3000,
-	  //         text: '<h4><center>Added to Cart!</center></h4>',
-	  //       });
-	  //   },
-	  //   error: function(result) {
-	  //       alert('error');
-	  //   }
-	  // });
-// });
+$('#receiveMatTable').DataTable(
+  {
+     "searching": false,
+     "ordering": false,
+     "paging": false,  
+     "bInfo" : false,
+  });
+$(function(){
 
-$(function () {
-	//Enable iCheck plugin for checkboxes
-	//iCheck for checkbox and radio inputs
-	$('.mailbox-messages input[type="checkbox"]').iCheck({
-	  checkboxClass: 'icheckbox_flat-blue',
-	  radioClass: 'iradio_flat-blue'
-	});
+    $('#changetabbutton').click(function(e){
+      e.preventDefault();
+        $('#mytabs a[href="#tab_2"]').tab('show');
+    })
 
-	//Enable check and uncheck all functionality
-	$(".checkbox-toggle").click(function () {
-	  var clicks = $(this).data('clicks');
-	  if (clicks) {
-	    //Uncheck all checkboxes
-	    $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-	    $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-	  } else {
-	    //Check all checkboxes
-	    $(".mailbox-messages input[type='checkbox']").iCheck("check");
-	    $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-	  }
-	  $(this).data("clicks", !clicks);
-	});
-
-	//Handle starring for glyphicon and font awesome
-	$(".mailbox-star").click(function (e) {
-	  e.preventDefault();
-	  //detect type
-	  var $this = $(this).find("a > i");
-	  var glyph = $this.hasClass("glyphicon");
-	  var fa = $this.hasClass("fa");
-
-	  //Switch states
-	  if (glyph) {
-	    $this.toggleClass("glyphicon-star");
-	    $this.toggleClass("glyphicon-star-empty");
-	  }
-
-	  if (fa) {
-	    $this.toggleClass("fa-star");
-	    $this.toggleClass("fa-star-o");
-	  }
-	});
-});
-
-function displayProduct(){
-	var disp = $('#prodSelect').val();
-
-  var table = document.getElementById("quoteTable");
-  var tbl = $('#quoteTable').DataTable(
-    {
-    "searching": false,
-    "ordering": false,
-    "paging": false,
-
-    });
-
-    for (var j = 0; j < disp.length; j++) {
-        var row = table.insertRow(0);
-        var cell1 = row.insertCell(0);
-        cell1.innerHTML = disp[j];
-    }
-	// console.log(disp);
-}
-
-function nexttest(evt){
-  alert(evt.target.value);
-}
-
-function addRow(tableID) {
-
-  var table = document.getElementById(tableID);
-
-  var rowCount = table.rows.length;
-  var row = table.insertRow(rowCount);
-
-  var cell1 = row.insertCell(0);
-  cell1.innerHTML = rowCount + 1;
-
-  //  var x = document.getElementById("prodSelect").value;
-  // document.getElementById("demo").innerHTML = "You selected: " + x;
-
-  var cell2 = row.insertCell(1);
-  var element2 = document.createElement("input");
-  element2.type = "text";
-  element2.name = "txtbox[]";
-  element2.onchange = nexttest;
-  cell2.appendChild(element2);
-
-}
+})
 </script>
 
 @endpush

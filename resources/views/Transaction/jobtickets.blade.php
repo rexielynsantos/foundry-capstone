@@ -26,14 +26,14 @@
           <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-            <center>  <h4 class="modal-title">Update Job Ticket No. 8324823532</h4> </center>
+            <center>  <h4 class="modal-title">Update Job Ticket No. <span id="endjtid"></span> </h4> </center>
        </div>
           <div class="modal-body">
             <div class="row">
               <div class="col-md-6">
-              <label> Personnel Name: Jhonny Manuel </label> <br>
-              <label> Stage: Waxing</label> <br>
-              <label> Sub-Stage: Primary Coating </label> <br>
+              <label> Personnel Name: </label> <label id="endjtpersonnel"></label><br>
+              <label> Stage: <span id="endjtstage"></span></label> <br>
+              <label> Sub-Stage: <span id="endjtsubstage"></span> </label> <br>
               <hr>
 
              </div>
@@ -114,19 +114,20 @@
                 </div>
                 <!-- /.btn-group -->
                 <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                <div class="pull-right">
+                <!-- <div class="pull-right">
                   1-50/200
                   <div class="btn-group">
                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div>
+                  </div> -->
                   <!-- /.btn-group -->
-                </div>
+                <!-- </div> -->
                 <!-- /.pull-right -->
               </div>
               <div class="table-responsive mailbox-messages">
-                <table class="table table-hover table-striped">
+                <table id="jobTicketTable" class="table table-hover table-striped">
                   <thead>
+                    <th class="hidden"> ID </th>
                     <th> Personnel </th>
                     <th> Part Name </th>
                     <th> Stage  </th>
@@ -137,16 +138,35 @@
                     <th> Actions </th>
                   </thead>
                   <tbody>
-                   <tr>
-                    <td class="mailbox-name"><a href="read-mail.html">Jhonny Cruz</a></td>
-                    <td>Bracket Wheel </td>
-                    <td>Waxing </td>
-                     <td>Sub-sequent Coating </td>
-                    <td>120 pcs </td>
-                    <td>2:00pm</td>
-                    <td>-</td>
-                    <td> <button id = "btnendticket" data-toggle="modal" data-target="#endticketmodal"> <i class="fa fa-edit"></i></button></td>
-                  </tr>
+                   @foreach($jobticket as $job)
+                     <tr>
+                      <td class="hidden"> {{$job -> strJobTicketID}}</td>
+                      <td class="mailbox-name"><a href="read-mail.html">{{$job -> employee -> strEmployeeFirst}} {{$job -> employee -> strEmployeeLast}}</a></td>
+                      <td>
+                        @foreach($job -> product as $p)
+                          <li width="35%" style="list-style-type:circle">{{$p->details->strProductName}}</li>
+                        @endforeach
+                      </td>
+                      <td> {{$job -> stage -> strStageName}} </td>
+                       <td> {{$job -> substage -> strSubStageName}} </td>
+                      <td>
+                        @foreach($job -> product as $p)
+                          <li width="35%" style="list-style-type:circle">{{$p->dblJobFinished}}</li>
+                        @endforeach
+                      </td>
+                      <td>
+                        @foreach($job -> product as $p)
+                          <li width="35%" style="list-style-type:circle">{{$p->timeStarted}}</li>
+                        @endforeach
+                      </td>
+                      <td>
+                        @foreach($job -> product as $p)
+                          <li width="35%" style="list-style-type:circle">{{$p->timeFinished}}</li>
+                        @endforeach
+                      </td>
+                      <td> <button id = "btnendticket" data-toggle="modal" data-target="#endticketmodal"> <i class="fa fa-edit"></i></button></td>
+                    </tr>
+                   @endforeach
                   </tbody>
                 </table>
                 <!-- /.table -->
@@ -157,14 +177,18 @@
             <div class="box-footer no-padding">
               <div class="mailbox-controls">
 
+
+                <!-- <div class="pull-right">
+
                 <div class="pull-right">
+
                   1-50/200
                   <div class="btn-group">
                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div>
+                  </div> -->
                   <!-- /.btn-group -->
-                </div>
+                <!-- </div> -->
                 <!-- /.pull-right -->
               </div>
             </div>
@@ -224,7 +248,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="substage" class="control-label">Sub-Stage<span style="color:red">*</span></label>
+                      <label for="substage" class="control-label">Sub-Stage</label>
                       <select class="form-control select2" id = "substage" style="width: 100%;" required>
                         <option value="first" selected disabled>Select a Sub-Stage</option>
 
@@ -234,12 +258,12 @@
                 </div>
               </div>
               <div class="col-md-9">
-                   <label> Choose Products </label>
+                   <label class="control-label">Choose Products<span style="color:red">*</span></label>
             <div class="row">
                  <div class="col-md-10">
                       <div class="form-group">
 
-                         <select id="prodSelect" name="prodSelect" class="form-control select2" multiple="multiple" data-placeholder="Select Products" style="width: 100%;border:1px solid #3434343">
+                         <select id="prodSelect" name="prodSelect" class="form-control select2" multiple="multiple" data-placeholder="Select Products" style="width: 100%;border:1px solid #3434343" required>
                           @foreach ($prodd as $productt)
                               <option value="{{$productt->strProductID}}">{{$productt->strProductName}}</option>
                               @endforeach
@@ -257,8 +281,9 @@
               <div id="hidee" class="col-md-10">
                 <table id="jobtixTable" class="table table-bordered">
                 <thead>
-                  <!-- <th> # </th> -->
-                  <th width="50%"> Part Name </th>
+
+                  <th class="hidden"> ID </th>
+                  <th> Part Name </th>
                   <th> Type </th>
                   <th> Time Started</th>
                   <th> Action </th>
@@ -278,8 +303,8 @@
 
 
            <div class="modal-footer">
-                <button type="reset" id="btnClear" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i> &nbsp;Clear</button>
-                <button type="submit" class="btn bg-blue btn-flat pull-right"><i class="glyphicon glyphicon-ok"></i> &nbsp;Submit</button>
+                <button type="submit" class="btn btn-info pull-left"><i class="glyphicon glyphicon-ok"></i> &nbsp;Save</button>
+                <button type="reset" id="btnClear" class="btn btn-default pull-left"><i class="fa fa-pencil"></i> &nbsp;Clear</button>
             </div>
        </form>
     </div>
@@ -337,6 +362,8 @@
       }
     });
   });
+
+
 </script>
 
 @endpush

@@ -17,7 +17,8 @@ class PurchaseDetailTableSeeder extends Seeder
           'dblReorderQty' => 100,
           'dblAddlQty' =>50,
           'strUOMID' => 'U00001',
-
+          'dblAmount' =>23.89, 
+          'strRemarks' => 'kainis'
       ]);
       DB::table('tblpurchasedetail')->insert([
           'strPurchaseID' => 'P00001',
@@ -46,6 +47,8 @@ class PurchaseDetailTableSeeder extends Seeder
           'dblReorderQty' => 200,
           'dblAddlQty' =>100,
           'strUOMID' => 'U00001',
+          'dblAmount' =>50.89, 
+          'strRemarks' => 'kainis'
       ]);
     }
 }
