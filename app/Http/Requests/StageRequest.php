@@ -25,6 +25,7 @@ class StageRequest extends FormRequest
     {
         return [
             'stage_name' => 'required|min:2|max:35',
+            // 'substage_id' => 'required'
             'stage_desc'   => 'min:2|max:255',
         ];
     }

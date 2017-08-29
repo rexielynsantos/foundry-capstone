@@ -1,7 +1,7 @@
 @extends('master')
 @section('pageTitle', 'Inventory')
 @section('content')
-	
+
 
 <form class="" id="purchase_form" role="form" data-toggle="validator">
   <section class="content-header">
@@ -16,27 +16,9 @@
   <section class="content">
     <div class="row">
       <div class="col-md-3">
-        <a href="../transaction/purchase-add" id="btnAddpurchase" class="btn btn-block btn-social btn-instagram"><i class="fa fa-edit"></i> New Purchase Order </a>
-        <a href="/transaction/receive-add" class="btn btn-block btn-social btn-linkedin"><i class="fa fa-truck"></i> Receive Delivery </a>
+        <a id="btnAddpurchase" class="btn btn-block btn-social btn-instagram"><i class="fa fa-edit"></i> New Purchase Order </a>
+        <a id="btnAddReceive" class="btn btn-block btn-social btn-linkedin"><i class="fa fa-truck"></i> Receive Delivery </a>
         <a href="/transaction/stocks" class="btn btn-block btn-social btn-bitbucket"><i class="fa fa-industry"></i> Monitor Stocks </a>
-    <!--     <div class="box box-solid">
-          <div class="box-header with-border">
-            <h3 class="box-title">Folders</h3>
-
-            <div class="box-tools">
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-            </div>
-          </div>
-          <div class="box-body no-padding">
-            <ul class="nav nav-pills nav-stacked">
-              <li class="active"><a href="#"><i class="fa fa-inbox"></i> Purchase Order
-                <span class="label label-primary pull-right">12</span></a></li>
-              <li><a href="/transaction/receive"><i class="fa fa-envelope-o"></i> Receiving </a></li>
-              <li><a href="/transaction/receive"><i class="fa fa-envelope-o"></i> Stock Monitoring </a></li>
-            </ul>
-          </div>
-        </div> -->
       </div>
       <!-- /.col -->
       <div class="col-md-9">
@@ -53,7 +35,10 @@
                 <thead>
                   <th> PO No. </th>
                   <th> Supplier </th>
-                  <th width="30%"> Orders</th>
+                  <th width="30%"> Material </th>
+
+
+
                   <th> Payment Term  </th>
                   <th> Order Date </th>
                   <th> Status </th>
@@ -63,20 +48,26 @@
                  <tr>
                   <td>{{$purch->strPurchaseID}}</td>
                   <td>{{$purch->supplier->strSupplierName}} </td>
-                   <td> 
+                   <td>
                   @foreach($purch->material as $mat)
-
-                  <li width="35%" style="list-style-type:circle"> {{$mat->details->strMaterialName}} - {{$mat->dblReorderQty+$mat->dblAddlQty}}{{$mat->details->unit->strUOMName}}</li>
-
-                  <li width="35%" style="list-style-type:circle"> {{$mat->details->strMaterialName}} - {{$mat->dblMaterialQty}}{{$mat->details->unit->strUOMName}}</li>
-
+                  <li width="35%"> {{$mat->details->strMaterialName}}</li>
+                   
+                    <ul>
+                     @foreach($mat->materialvariant as $vars)
+                        <li width="35%" style="list-style-type:circle"> {{$vars->details->intVariantQty}}{{$vars->details->unit->strUOMName}}</li>
+                      @endforeach
+                    </ul>
+                   
                   @endforeach
+                  </td>
+
+
                   <td> {{$purch->paymentterm->strPaymentTermName}} </td>
-                  </td> 
-                  <td>12/30/12</td>
+                  </td>
+                  <td>{{date('Y-m-d')}}</td>
 
 
-                  <td> <small class="label pull-right bg-blue">{{$purch->strStatus}}</small> </td>
+                  <td> <small class="label pull-right bg-blue">{{$purch->strPStatus}}</small> </td>
                 </tr>
                 @endforeach
                 </tbody>
@@ -111,7 +102,7 @@
               <div class="row">
                  <div class="col-md-12">
                    <table border="1">
-                    <tr> 
+                    <tr>
                       <td width="450px"> <b> To: </b> Wacker Neuson </td>
                       <td width="450px"> <b> Date: </b>11/9/2015 </td>
                     </tr>
@@ -119,7 +110,7 @@
                       <td width="450px"> <b> Address: </b> Muntinlupa City </td>
                       <td width="450px"> <b> Terms: </b> 30 days after delivery </td>
                     </tr>
-                    <tr> 
+                    <tr>
                       <td width="450px"> <b> Attention: </b> Mr. Raul Reyes </td>
                       <td width="450px"> <b> Delivery: </b> 5WEEKS </td>
                    </tr>
@@ -127,12 +118,12 @@
                    </table>
                   </div>
               </div>
-              <hr> 
+              <hr>
 
                 <div class="row">
                   <div class="col-md-12">
                    <table border="1">
-                    <tr> 
+                    <tr>
                       <td width="180px"> <b> Part Name </b></td>
                       <td width="210px"> <b>  Description </b></td>
                       <td width="150px"> <b> Qty </b>  </td>
@@ -140,49 +131,49 @@
                       <td width="130px"> <b> Amount </b> </td>
                     </tr>
 
-                    <tr> 
+                    <tr>
                       <td width="180px"> Bracket Wheel Mount</td>
-                      <td width="210px"> 
-                        <li width="35%" style="list-style-type:circle"> 500ml</li> 
-                        <li width="35%" style="list-style-type:circle"> 300ml</li> 
-                        <li width="35%" style="list-style-type:circle"> 100ml</li> 
+                      <td width="210px">
+                        <li width="35%" style="list-style-type:circle"> 500ml</li>
+                        <li width="35%" style="list-style-type:circle"> 300ml</li>
+                        <li width="35%" style="list-style-type:circle"> 100ml</li>
                       </td>
-                      <td width="150px"> 
-                        <li width="35%" style="list-style-type:circle"> 100pcs</li> 
-                        <li width="35%" style="list-style-type:circle"> 50pcs</li> 
-                        <li width="35%" style="list-style-type:circle"> 10pcs</li>  
+                      <td width="150px">
+                        <li width="35%" style="list-style-type:circle"> 100pcs</li>
+                        <li width="35%" style="list-style-type:circle"> 50pcs</li>
+                        <li width="35%" style="list-style-type:circle"> 10pcs</li>
                       </td>
 
                       <td width="130px"> 125.00  </td>
                       <td width="130px"> 28.000.00 </td>
                     </tr>
-                    <tr> 
+                    <tr>
                       <td width="180px"> Bracket Wheel Mount</td>
-                      <td width="210px"> 
-                        <li width="35%" style="list-style-type:circle"> 500ml</li> 
-                        <li width="35%" style="list-style-type:circle"> 300ml</li> 
-                        <li width="35%" style="list-style-type:circle"> 100ml</li> 
+                      <td width="210px">
+                        <li width="35%" style="list-style-type:circle"> 500ml</li>
+                        <li width="35%" style="list-style-type:circle"> 300ml</li>
+                        <li width="35%" style="list-style-type:circle"> 100ml</li>
                       </td>
-                      <td width="150px"> 
-                        <li width="35%" style="list-style-type:circle"> 100pcs</li> 
-                        <li width="35%" style="list-style-type:circle"> 50pcs</li> 
-                        <li width="35%" style="list-style-type:circle"> 10pcs</li>  
+                      <td width="150px">
+                        <li width="35%" style="list-style-type:circle"> 100pcs</li>
+                        <li width="35%" style="list-style-type:circle"> 50pcs</li>
+                        <li width="35%" style="list-style-type:circle"> 10pcs</li>
                       </td>
 
                       <td width="130px"> 125.00  </td>
                       <td width="130px"> 28.000.00 </td>
                     </tr>
-                    <tr> 
+                    <tr>
                       <td width="180px"> Bracket Wheel Mount</td>
-                      <td width="210px"> 
-                        <li width="35%" style="list-style-type:circle"> 500ml</li> 
-                        <li width="35%" style="list-style-type:circle"> 300ml</li> 
-                        <li width="35%" style="list-style-type:circle"> 100ml</li> 
+                      <td width="210px">
+                        <li width="35%" style="list-style-type:circle"> 500ml</li>
+                        <li width="35%" style="list-style-type:circle"> 300ml</li>
+                        <li width="35%" style="list-style-type:circle"> 100ml</li>
                       </td>
-                      <td width="150px"> 
-                        <li width="35%" style="list-style-type:circle"> 100pcs</li> 
-                        <li width="35%" style="list-style-type:circle"> 50pcs</li> 
-                        <li width="35%" style="list-style-type:circle"> 10pcs</li>  
+                      <td width="150px">
+                        <li width="35%" style="list-style-type:circle"> 100pcs</li>
+                        <li width="35%" style="list-style-type:circle"> 50pcs</li>
+                        <li width="35%" style="list-style-type:circle"> 10pcs</li>
                       </td>
 
                       <td width="130px"> 125.00  </td>
@@ -208,14 +199,6 @@
 
 @push('scripts')
  <script type="text/javascript" src="{{URL::asset('js/logic/purchase.js')}}"></script>
-<script>
-$('#purchasesTable').DataTable(
-  {
-     "searching": false,
-    "ordering": false,
-    "paging": false,
-  });
-</script>
-
+ <script type="text/javascript" src="{{URL::asset('js/logic/receive-add.js')}}"></script>
 @endpush
 @stop

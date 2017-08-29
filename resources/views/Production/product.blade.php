@@ -23,7 +23,7 @@
         <thead>
             <tr>
                 <th class="hidden">ID</th>
-                <th>Image</th>
+           <!--      <th>Image</th> -->
                 <th>Product Name</th>
                 <th>Type</th>
                 <th>Variants</th>
@@ -35,13 +35,13 @@
         @foreach($product as $produ)
             <tr>
                 <td class="hidden">{{$produ->strProductID}}</td>
-                <td>
+            <!--     <td>
                   @if($produ->strProductImagePath == '')
                     <image src="" style="width:50px;height:50px;" alt="No image"/>
                   @else
                     <image src="{{ Storage::url($produ->strProductImagePath) }}" style="width:50px;height:50px;" alt="No image"/>
                   @endif
-                </td>
+                </td> -->
                 <td>{{$produ->strProductName}}</td>
                 <td>{{$produ->producttype->strProductTypeName}}</td>
                 <td>

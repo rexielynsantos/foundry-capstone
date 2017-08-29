@@ -14,17 +14,20 @@ class Material extends Model
     	'strMaterialName',
     	'strMaterialDesc',
         'intReorderLevel',
-        'intReorderQuantity',
+        'intReorderQty',
         'strUOMID',
     	'strStatus',
     ];
-    public function supplier(){
-        return $this->hasMany('App\Models\MaterialDetail', 'strMaterialID','strMaterialID');
-    }
+    // public function supplier(){
+    //     return $this->hasMany('App\Models\MaterialDetail', 'strMaterialID','strMaterialID');
+    // }
     public function unit() {
         return $this->belongsTo('App\Models\Unit', 'strUOMID', 'strUOMID');
     }
     public function materialvariant(){
         return $this->hasMany('App\Models\MaterialDetail', 'strMaterialID','strMaterialID');
+    }
+    public function materialsupplier(){
+        return $this->hasMany('App\Models\MaterialSupplier', 'strMaterialID','strMaterialID');
     }
 }

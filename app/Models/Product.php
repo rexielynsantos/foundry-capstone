@@ -26,6 +26,9 @@ class Product extends Model
     public function productvariant(){
         return $this->hasMany('App\Models\ProductDetail', 'strProductID','strProductID');
     }
+    public function unit() {
+        return $this->belongsTo('App\Models\Unit', 'strUOMID', 'strUOMID');
+    }
     // public function productvariants(){
     //     return $this->hasMany('App\Models\QuoteProductVariant', 'strProductID','strProductID');
     // }

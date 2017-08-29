@@ -20,7 +20,7 @@ class QuoteRequestTableSeeder extends Seeder
           'strCustContactPerson' => 'Ronald Santos',
           'strCustEmail' => 'ronaldsantos@gmail.com',
           'strCustContactNo' => '09345678756',
-          'strStatus' => 'Approved',
+          'strStatus' => 'Pending',
       ]);
         DB::table('tblquoterequest')->insert([
           'strQuoteRequestID' => 'QR00002',
@@ -31,7 +31,7 @@ class QuoteRequestTableSeeder extends Seeder
           'strCustContactPerson' => 'Ken Llana',
           'strCustEmail' => 'kenllana@gmail.com',
           'strCustContactNo' => '09343435353',
-          'strStatus' => 'Approved',
+          'strStatus' => 'Pending',
       ]);
     }
 }

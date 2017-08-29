@@ -12,8 +12,9 @@ class Purchase extends Model
     public $timestamps = false;
     protected $fillable = [
     	'strSupplierID',	
+        'strSupplierContactPerson',
     	'strPaymentTermID',
-        'strStatus'
+        'strPStatus'
 
     ];
 

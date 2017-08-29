@@ -1,5 +1,5 @@
 @extends('master')
-@section('pageTitle', 'Inventory')
+@section('pageTitle', 'Purchase Order')
 @section('content')
 
 
@@ -16,8 +16,8 @@
 
   <section class="content">
       <div class="row">
-        <div class="col-md-4">
-          <a href="../transaction/purchaseOrder" class="btn btn-block btn-social btn-github">  <i class="fa fa-arrow-left"></i> Back to Main </a> <br>
+        <div class="col-md-3">
+          <a href="../transaction/purchaseOrder" class="btn btn-primary btn-block margin-bottom"> </i> Back to Main </a> 
 
           <div class="box box-solid">
             <div class="box-header with-border">
@@ -41,7 +41,7 @@
                           <select class="form-control select2" id="supplierselection" style="width: 100%;" required>
                             <option value="first" selected disabled>Select a Supplier</option>
                           @foreach($supplier as $sup)
-                          <option>{{$sup->strSupplierName}}</option>
+                          <option value = "{{$sup->strSupplierID}}">{{$sup->strSupplierName}}</option>
                           @endforeach
                           </select>
                           <!-- <span class="glyphicon form-control-feedback" aria-hidden="true"></span> -->
@@ -55,23 +55,31 @@
               <div class="row">
                 <div class="col-md-12">
                   <label> Address </label>
-                  <div class="form-group">
-                    <input type="text" data-value="this.value()" class="form-control validate letter" id="street" name="street" value="" placeholder="Street" disabled>
-                  </div>
+                    <div class="form-group has-feedback">
+                      <div class="form-group">
+                        <input type="text" data-value="this.value()" class="form-control validate letter" id="street" name="street" value="" placeholder="Street" disabled>
+                        <div class="help-block with-errors"></div>
+                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                      </div>
+                    </div>
                 </div>
               </div>
 
               <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="brgy" name="brgy" placeholder="Brgy " disabled>
+                  <div class="col-md-12">
+                    <div class="form-group has-feedback">
+                      <div class="form-group">
+                        <input type="text" class="form-control validate letter" id="brgy" name="brgy" placeholder="Brgy " disabled>
+                        <div class="help-block with-errors"></div>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="city" name="city" placeholder="City " disabled>
+                    <input type="text" class="form-control validate letter" id="city" name="city" placeholder="City " disabled>
                   </div>
                 </div>
               </div>
@@ -80,28 +88,29 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  <button id="sendPODetails" type="button" class="btn btn-success btn-flat pull-right"><i class="fa fa-arrow-right"></i></button>
+                  <button id="sendPODetails" type="button" class="btn btn-primary btn-flat pull-right"><i class="fa fa-arrow-right"></i></button>
                 </div>
               </div>
 
             </div>
           </div>
-
         </div>
+        <div id="hiddenFirst" style="display:none" class="hideable">
+        <div class="col-md-9">
 
-        <div class="col-md-8">
-          <div class="box box-primary direct-chat direct-chat-primary" style="overflow:hidden;height:500px">
-            <div class="box-header with-border">
-              <h3 class="box-title">New Purchase Order</h3>
-            </div>
-
-            <div class="box-body" style="height: 400px">
-            <br>
-              <div class="row" style="margin-left: 5px;">
+          <div class="nav-tabs-custom">
+            <ul id="mytabs" class="nav nav-tabs">
+              <li class="active"><a href="#tab_1" data-toggle="tab">Step 1: Purchase Details</a></li>
+              <li><a href="#tab_2" data-toggle="tab">Step 2: Order Details</a></li>
+            </ul>
+            
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+                 <div class="row" style="margin-left: 5px;">
                 <div class="col-md-12">
                   <div class="form-group">
                   <label class="control-label">To:</label>
-                    <input id ="supplierTo" type="text" class="form-control">
+                    <input id ="supplierTo" type="text" class="form-control" disabled="">
                   </div>
                 </div>
               </div>
@@ -109,15 +118,19 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="control-label">Address:</label>
-                    <input id="supplierAdd" type="text" class="form-control">
+                    <input id="supplierAdd" type="text" class="form-control" disabled="">
                   </div>
                 </div>
               </div>
                <div class="row" style="margin-left: 5px;">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="control-label">Attention:</label>
-                    <input type="text" class="form-control">
+                  <div class="form-group has-feedback">
+                    <div class="form-group">
+                      <label class="control-label">Attention:</label>
+                      <input type="text" id="contactPerson" class="form-control validate letter">
+                       <div class="help-block with-errors"></div>
+                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -134,88 +147,90 @@
                           @endforeach
 
                           </select>
+                           <div class="help-block with-errors"></div>
                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         </div>
                    </div>
                 </div>
+
               </div>
-
-              <div class="direct-chat-contacts"  style="height: 500px">
-                <ul class="contacts-list">
-                  <li>
-                    <a href="#">
-                      <img class="contacts-list-img" src="../images/girl1.png" alt="User Image">
-
-                        <div class="contacts-list-info">
-                              <span class="contacts-list-name">
-                                Select Materials to Order
-                                <small class="contacts-list-date pull-right">2/28/2015</small>
-                              </span>
-                          <span class="contacts-list-msg">No maximum number of materials to be selected</span>
-                        </div>
-                    </a>
-                  </li>
-                </ul>
+              <br>
 
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="row">
+                    <button type="reset" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i></button>
+                    <button type="button" id="changetabbutton" class="btn bg-blue btn-flat pull-right"><i class="glyphicon glyphicon-ok"></i></button>
+                  </div>
+                </div>
+            </div>
+
+              <div class="tab-pane" id="tab_2">
+                            <br>
+                <div class="row">
+                  <div class="col-md-12">
+                   <label> Material Name </label>
+                  </div>
+                </div>
+               <div class="row">
                       <div class="col-md-9">
-                        <div class="form-group" style="margin-left:55px">
+                        <div class="form-group">
 
                             <select id="matSelect" name="matSelect" class="form-control select2" multiple="multiple" data-placeholder="Select Materials" style="width: 100%;border:1px solid #3434343">
-                            @foreach ($matt as $mat)
-                                <option value="{{$mat->strMaterialName}}">{{$mat->strMaterialName}}</option>
-                                @endforeach
+                            
                            </select>
-
-                           <span> You chose 3 materials </span>
                         </div>
                       </div>
                       <div class="col-md-3">
                             <button type="button" id="addCart" style="height: 33px" class="btn btn-primary btn-flat"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Add to Cart</button>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="hiddendiv">
-                      <div class="col-md-9">
-                        <table id="addMaterialsTable" border="0" class="display compact" cellspacing="0" width="100%"  style="margin-left:55px;color:black">
-                          <thead style="color:white">
-                            <th>Items</th>
-                            <th>Re-order Quantity</th>
-                            <th>Addtl. Qty</th>
-                            <th> U/M</th>
-                            <th> Action </th>
-                        
-                          </thead>
-                          <tbody>
-                           
-                          </tbody>
-                      </table>
-                      </div>
-                     </div>
-                    </div>
+               <hr>
+                <div class="row">
+                  <div class="col-md-12">
+                    <table id="addMaterialsTable" name="example" border="0" class="table table-bordered">
+                      <thead style="color:black">
+                        <th class = "hidden">ID</th>
+                        <th width="60%">Items</th>
+                        <th width="60%">Variant</th>
+                        <th width="10%">Re-order Quantity</th>
+                        <th width="10%">Addtl. Qty</th>
+                        <th width="10%"> U/M</th>
+                        <th width="10%"> Cost</th>
+                      <!--   <th width="10%"> Total Qty</th> -->
+                        <th width="10%"> Action </th>
+                    
+                      </thead>
+                      <tbody>
+                       
+                      </tbody>
+                   </table>
+                  </div>
+                </div>
+                     <br>
+                     <br>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <button type="reset" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i></button>
+                    <button type="submit" class="btn bg-blue btn-flat pull-right">Submit</button>
                   </div>
                 </div>
 
               </div>
-            </div>
 
-           <div class="box-footer">
-              <div class="pull-right">
-              <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Orders" data-widget="chat-pane-toggle">
-                  Add Purchase Details</button>
-                &nbsp;
-
-              <button type="submit" class="btn bg-blue btn-flat pull-right"><i class="glyphicon glyphicon-ok"></i> &nbsp;Submit</button>
-             </div>
-
-              <button type="button" class="btn bg-blue btn-flat pull-right"><a href="/transaction/purchase-final"><i class="glyphicon glyphicon-ok"></i> &nbsp;Submit</a></button>
             </div>
           </div>
-
         </div>
-      </div>
+        </div>
+        </div>
+      
+
+
+
+
+
+
+     
   </section>
 
 </form>
@@ -225,6 +240,17 @@
 
 @push('scripts')
  <script type="text/javascript" src="{{URL::asset('js/logic/purchase.js')}}"></script>
+ <script>
+  $(function(){
+
+    $('#changetabbutton').click(function(e){
+      e.preventDefault();
+        $('#mytabs a[href="#tab_2"]').tab('show');
+    })
+
+})
+ </script>
+<!--   <link rel="stylesheet" href="/dist/css/style.css" type="text/css"> -->
 
 @endpush
 @stop

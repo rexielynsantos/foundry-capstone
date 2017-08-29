@@ -32,4 +32,7 @@ class Employee extends Model
     public function jobticket(){
         return $this->hasOne('App\Models\JobTicket', 'strEmployeeID');
     }
+    public function prodinspection(){
+        return $this->hasOne('App\Models\ProductInspection', 'strEmployeeID');
+    }
 }

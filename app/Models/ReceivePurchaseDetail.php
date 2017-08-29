@@ -11,18 +11,13 @@ class ReceivePurchaseDetail extends Model
     public $timestamps = false;
     protected $fillable = [
         'strReceivePurchaseID',
-    	'strMaterialID',	
-    	'intQtyReceived',
-        'strUOMID'
-
+    	'strMaterialID',
     ];
     public function details(){
-        return $this->hasOne('App\Models\PurchaseDetail','strMaterialID','strMaterialID');
+        return $this->hasOne('App\Models\Material','strMaterialID', 'strMaterialID');
     }
-    public function unit() {
-        return $this->belongsTo('App\Models\Unit', 'strUOMID', 'strUOMID');
+    public function materialvariant(){
+        return $this->hasMany('App\Models\ReceiveMatVariantDetail', 'strMaterialID','strMaterialID');
     }
-
-
 
 }

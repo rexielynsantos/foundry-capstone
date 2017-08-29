@@ -16,13 +16,17 @@ class CreateReceivepurchaseDetailTable extends Migration
         Schema::create('tblreceivepurchasedetail', function (Blueprint $table) {
         $table->string('strReceivePurchaseID');
         $table->string('strMaterialID');
-        $table->integer('intQtyReceived');
-        $table->string('strUOMID');
-        $table->integer('intQtyLeft');
+        // $table->string('strMaterialVariantID');
+        // $table->integer('intQtyReceived');
+        // $table->string('strUOMID');
+        // $table->integer('intQtyLeft');
         $table->foreign('strMaterialID')
           ->references('strMaterialID')->on('tblpurchasedetail');
-         $table->foreign('strUOMID')
-          ->references('strUOMID')->on('tbluom');
+        // $table->foreign('strMaterialVariantID')
+        //   ->references('strMaterialVariantID')->on('tblmaterialvariant');
+        // $table->foreign('strUOMID')
+        //   ->references('strUOMID')->on('tbluom');
+         
         });
     }
 
@@ -36,3 +40,4 @@ class CreateReceivepurchaseDetailTable extends Migration
         Schema::dropIfExists('tblreceivepurchasedetail');
     }
 }
+

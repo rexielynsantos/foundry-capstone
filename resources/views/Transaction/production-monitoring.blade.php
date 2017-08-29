@@ -1,7 +1,93 @@
 @extends('master')
 @section('pageTitle', 'Production Monitoring')
 @section('content')
-	
+	 <div class="modal fade" style="margin-top:50px" id="jobModal" role="dialog">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <center>
+              <h4 class="modal-title">Use Products </h4>
+              </center>
+            </div>
+            <form class="" id="mod_form"  role="form" data-toggle="validator">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12">
+                  
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label class="pull-right"> {{date('Y-m-d')}} </label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                       <div class="form-group has-feedback">
+                      <div class="form-group">
+                        <label for="jobOrderNo" class="control-label">Use in: <span style="color:red">*</span></label>
+                        <select class="form-control select2" id = "joborderNo" style="width: 100%;" required>
+                          <option value="first" selected disabled>Select Job Order No. </option>
+                         
+                        </select>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                      </div>
+                    </div>
+                      </div>
+                    <div class="col-md-6">
+                       <div class="form-group has-feedback">
+                      <div class="form-group">
+                        <label for="stageName" class="control-label">Stage</label>
+                        <select class="form-control select2" id = "stageName" style="width: 100%;" required>
+                          <option value="first" selected disabled>Select Stage </option>
+                         
+                        </select>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="materialsReq" class="control-label">Order Details: <span style="color:red">*</span></label>
+                    </div>
+
+                    <div class="col-md-12">
+                       <table id="addMaterialsTable" name="example" border="0" class="table table-bordered">
+                      <thead style="color:black">
+                        <th class = "hidden">ID</th>
+                        <th width="60%">Product</th>
+                        <th> Target Quantity </th>
+                        <th> Add Finish Products </th>
+                        <th> Remaining </th>
+                      </thead>
+                      <tbody>
+                       
+                      </tbody>
+                   </table>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                  <div class="col-md-12">
+                   
+                  </div>
+                </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i> &nbsp;Clear</button>
+                <button type="submit" class="btn bg-blue btn-flat pull-right"><i class="glyphicon glyphicon-ok"></i> &nbsp;Save</button>
+            </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+ </div>
 
     <section class="content-header">
       <h1>
@@ -62,7 +148,7 @@
                     <td>50 </td>
                     <td>150</td>
                     <td>150</td>
-                    <td> <button> View In-Process </button> </td>
+                    <td> <button class="btn btn-primary" id="btnuse" data-toggle="modal" data-target="#jobModal"> Use </button> </td>
                   </tr>
                   <tr>
                     <td class="mailbox-name"><a href="read-mail.html">Baril</a></td>
@@ -71,44 +157,9 @@
                     <td>50 </td>
                     <td>150</td>
                     <td>150</td>
-                    <td> <button> View In-Process </button> </td>
+                   <td> <button class="btn btn-primary" id="btnuse" data-toggle="modal" data-target="#jobModal"> Use </button> </td>
                   </tr>
-                  <tr>
-                    <td class="mailbox-name"><a href="read-mail.html">Buhay q</a></td>
-                    <td>72 </td>
-                     <td>150 </td>
-                    <td>50 </td>
-                    <td>150</td>
-                    <td>150</td>
-                    <td> <button> View In-Process </button> </td>
-                  </tr>
-                  <tr>
-                    <td class="mailbox-name"><a href="read-mail.html">Yaw q na</a></td>
-                    <td>56 </td>
-                     <td>150 </td>
-                    <td>50 </td>
-                    <td>150</td>
-                    <td>150</td>
-                    <td> <button> View In-Process </button> </td>
-                  </tr>
-                  <tr>
-                    <td class="mailbox-name"><a href="read-mail.html">Barilin kita</a></td>
-                    <td>788 </td>
-                     <td>150 </td>
-                    <td>50 </td>
-                    <td>150</td>
-                    <td>150</td>
-                    <td> <button> View In-Process </button> </td>
-                  </tr>
-                   <tr>
-                    <td class="mailbox-name"><a href="read-mail.html">lagot u kay duterts</a></td>
-                    <td>78 </td>
-                     <td>150 </td>
-                    <td>50 </td>
-                    <td>150</td>
-                    <td>150</td>
-                    <td> <button> View In-Process </button> </td>
-                  </tr>
+          
                    <tr>
                     <td class="mailbox-name"><a href="read-mail.html">Beng beng</a></td>
                     <td>12 </td>
@@ -116,7 +167,7 @@
                     <td>50 </td>
                     <td>150</td>
                     <td>150</td>
-                    <td> <button> View In-Process </button> </td>
+                    <td> <button class="btn btn-primary" id="btnuse" data-toggle="modal" data-target="#jobModal"> Use </button> </td>
                   </tr>
                   </tbody>
                 </table>
@@ -148,110 +199,6 @@
     </section>
 
 
-<div class="modal fade" style="margin-top:50px" id="ticketmodal" role="dialog">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-            <center>  <h4 class="modal-title">New Job Ticket</h4> </center>
-       </div>
-        <form class="" id="mod_form" role="form" data-toggle="validator">
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-12">
-                <label class="pull-right"> INSERT DATE HERE </label>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="stage" class="control-label">Sub-Stage<span style="color:red">*</span></label>
-                  <select class="form-control select2" id = "substage" style="width: 100%;" required>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <hr>
-             <label> Choose Products </label>
-            <div class="row">
-             <div class="col-md-9">
-                  <div class="form-group">
-                 
-                     <select id="prodSelect" name="prodSelect" class="form-control select2" multiple="multiple" data-placeholder="Select Products" style="width: 100%;border:1px solid #3434343">
-                      
-                     </select>
-
-                     <span> You chose 3 product(s) </span>
-                  </div>
-              </div>
-            
-              <div class="col-md-2">
-                <button type="button" onclick="displayProduct()" style="height: 33px" class="btn btn-primary btn-flat"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Add</button>
-              </div>
-            </div>
-          <div class="row">
-            <div class="col-md-10">
-              <table id="jobtixTable" border="1" class="display"  style="color:black;"">
-              <thead>
-                <th> # </th>
-                <th width="50%"> Part Name </th>
-                <th> Type </th>
-                <th> Quantity Done </th>
-                <th> Time Alotted</th>
-              </thead>
-             <tr>
-              <td> 1 </td>
-              <td> Bracket Wheel Mount </td>
-              <td> Investment Casting </td>
-              <td> <input type="number" width="5px" id="qtyFinished"> </td>
-              <td> inserttimepicker here </td>
-             </tr>
-             <tr>
-              <td> 2 </td>
-              <td> Art Fossil </td>
-              <td> Artworks </td>
-              <td> <input type="number" width="5px" id="qtyFinished"> </td>
-              <td> inserttimepicker here </td>
-             </tr>
-            </table>
-            </div>
-          </div>
-
-           <div class="modal-footer">
-                <button type="reset" id="btnClear" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i> &nbsp;Clear</button>
-                <button type="submit" class="btn bg-blue btn-flat pull-right"><i class="glyphicon glyphicon-ok"></i> &nbsp;Submit</button>
-            </div>
-       </form>           
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" style="margin-top:50px" id="viewProduct" role="dialog">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-          <center>
-        <h4 class="modal-title">Product Information</h4>
-        </center>
-      </div>
-      <form class="" id="viewform"  role="form" data-toggle="validator">
-      <div class="modal-body">
-        <div class="row">
-        <label> pakoooo </label>
-        </div>
-      </div>
-      <div class="modal-footer">
-          <button type="reset" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i> &nbsp;Clear</button>
-          <button type="submit" class="btn bg-blue btn-flat pull-right"><i class="glyphicon glyphicon-ok"></i> &nbsp;Save</button>
-      </div>
-      </form>
-    </div>
-  </div>
- </div>
 
 
 

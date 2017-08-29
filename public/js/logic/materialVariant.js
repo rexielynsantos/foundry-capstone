@@ -31,8 +31,8 @@ $(document).ready(function(){
         {
           console.log(data);
           $('#variantQty').val(data.variant.intVariantQty);
-          $('#variantDesc').val(data.variant.stMaterialVariantDesc);
           $('#variantUnit').val(data.variant.strUOMID).change();
+          $('#variantDesc').val(data.variant.strMaterialVariantDesc);
           // URL OF EDIT
           tempID = data.variant.strMaterialVariantID;
 

@@ -16,7 +16,7 @@ class CreatePaymentTermTable extends Migration
       Schema::create('tblpaymentterm', function (Blueprint $table) {
         $table->string('strPaymentTermID')->primary();
         $table->string('strPaymentTermName')->unique();
-        $table->string('strPaymentTermDesc');
+        $table->text('strPaymentTermDesc')->nullable();
         $table->string('strStatus');
       });
     }

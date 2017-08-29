@@ -16,8 +16,9 @@ class CreatePurchaseTable extends Migration
         Schema::create('tblpurchase', function (Blueprint $table) {
         $table->string('strPurchaseID')->primary();
         $table->string('strSupplierID');
+        $table->string('strSupplierContactPerson');
         $table->string('strPaymentTermID');
-        $table->string('strStatus');
+        $table->string('strPStatus');
         $table->foreign('strSupplierID')
           ->references('strSupplierID')->on('tblsupplier');
         $table->foreign('strPaymentTermID')

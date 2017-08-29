@@ -6,14 +6,14 @@
                 <span aria-hidden="true">&times;</span></button>
                 <center>
               <h4 class="modal-title"> Product Information </h4> </center>
-
+               
             </div>
              <!-- <form class="" id="product_form" name="product_form" role="form" data-toggle="validator" enctype="multipart/form-data"> -->
            <form class="" id="product_form" name="product_form" role="form" data-toggle="validator">
             <div class="modal-body">
-              <div class="row">
+              <div class="row"> 
                 <div class="col-md-6">
-                  <input type="file" id ="prod_image" name="prod_image" accept="image/*">
+                    <input id="kv-explorer" type="file" id="prodImage" multiple>
                 </div>
                 <div class="col-md-6">
                   <div class="row">
@@ -56,7 +56,7 @@
                            <select id="variantSelect" name="variantSelect" class="form-control select2" multiple="multiple" data-placeholder="Select Variants" style="width: 100%;border:1px solid #A9A9A9" >
                            </select>
                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                          <!--  <small> <a href="../maintenance/productVariant"> + Add New Variant </a></small>  -->
+                          <!--  <small> <a href="../maintenance/productVariant"> + Add New Variant </a></small>  --> 
                         </div>
                       </div>
                     </div>
@@ -85,7 +85,7 @@
                 <button type="submit" class="btn bg-blue btn-flat pull-right"><i class="glyphicon glyphicon-ok"></i> &nbsp;Save</button>
             </div>
                 </form>
-
+                       
          </div>
       </div>
-    </div>
+    </div>    

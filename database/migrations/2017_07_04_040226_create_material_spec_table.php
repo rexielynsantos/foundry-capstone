@@ -15,6 +15,7 @@ class CreateMaterialSpecTable extends Migration
     {
         Schema::create('tblmatspec', function (Blueprint $table) {
         $table->string('strMatSpecID')->primary();
+        $table->string('strVarianceCode');
         $table->string('strProductID');
         $table->foreign('strProductID')
                   ->references('strProductID')->on('tblproduct');

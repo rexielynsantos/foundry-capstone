@@ -12,7 +12,7 @@ class ReceivePurchase extends Model
     public $timestamps = false;
     protected $fillable = [
         'strPurchaseID',
-    	'dtDeliveryReceived',	
+    	'dtDeliveryReceived',
 
     ];
     public function purchase() {
@@ -21,4 +21,5 @@ class ReceivePurchase extends Model
     public function orders(){
         return $this->hasMany('App\Models\ReceivePurchaseDetail', 'strReceivePurchaseID','strReceivePurchaseID');
     }
+
 }

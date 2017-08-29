@@ -11,14 +11,17 @@ class MatSpec extends Model
     public $incrementing = false;
     public $timestamps = false;
     protected $fillable = [
+      'strVarianceCode',
     	'strProductID',
     	'strStatus',
     ];
     public function material(){
-        return $this->hasMany('App\Models\MatSpecDetail', 'strMaterialID','strMaterialID');
+        return $this->hasMany('App\Models\MatSpecDetail', 'strMatSpecID','strMatSpecID');
     }
     public function product() {
         return $this->belongsTo('App\Models\Product', 'strProductID', 'strProductID');
     }
-
+    public function quotejob(){
+        return $this->hasOne('App\Models\QuoteJobOrder', 'strMatSpecID', 'strMatSpecID');
+    }
 }

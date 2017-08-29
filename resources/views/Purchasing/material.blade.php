@@ -36,19 +36,17 @@
             <td class="hidden">{{$mtrl->strMaterialID}}</td>
             <td>{{$mtrl->strMaterialName}}</td>
             <td>
-
-              @foreach($mtrl->supplier as $supl)
-                <li width="35%" style="list-style-type:circle"> {{$supl->details2->strSupplierName}}</li>
+              @foreach($mtrl->materialsupplier as $supl)
+                <li width="35%" style="list-style-type:circle"> {{$supl->supplier->strSupplierName}}</li>
               @endforeach
             </td>
             <td>
-
               @foreach($mtrl->materialvariant as $mv)
-                <li width="35%" style="list-style-type:circle"> {{$mv->details->intVariantQty}}</li>
+                <li width="35%" style="list-style-type:circle"> {{$mv->details->intVariantQty}} {{$mv->details->unit->strUOMName}}</li>
               @endforeach
             </td>
             <td>{{$mtrl->intReorderLevel}}</td>
-            <td>{{$mtrl->intReorderQty}}{{$mtrl->unit->strUOMName}}</td>
+            <td>{{$mtrl->intReorderQty}} {{$mtrl->unit->strUOMName}}</td>
             <td>{{$mtrl->strMaterialDesc}}</td>
           </tr>
           @endforeach

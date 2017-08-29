@@ -16,7 +16,7 @@
                         <div class="form-group has-feedback">
                             <div class="form-group">
                             <label for="prodTypeName" class="control-label">Product Type<span style="color:red">*</span></label>
-                            <input type="text" class="form-control" id ="prodTypeName" style="width:100%;" required placeholder="Name">
+                            <input type="text" class="form-control validate letter" id ="prodTypeName" style="width:100%;" required placeholder="Name">
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             </div>
                         </div>

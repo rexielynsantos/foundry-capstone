@@ -21,4 +21,7 @@ class Supplier extends Model
      public function purchase(){
         return $this->hasOne('App\Models\Purchase', 'strSupplierID','strSupplierID');
     }
+    public function materialdetail() {
+        return $this->hasOne('App\Models\MaterialDetail', 'strSupplierID', 'strSupplierID');
+    }
 }

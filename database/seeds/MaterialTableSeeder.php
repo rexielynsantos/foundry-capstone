@@ -16,7 +16,7 @@ class MaterialTableSeeder extends Seeder
           'strMaterialName' => 'Zircon Sand', 
           'intReorderLevel' => 24, 
           'intReorderQty' => 100, 
-          'strUOMID' => 'U00003', 
+          'strUOMID' => 'U00002', 
           'strMaterialDesc' => 'investment casting special zircon sand',
           'strStatus' => 'Active'
       ]);
@@ -34,7 +34,7 @@ class MaterialTableSeeder extends Seeder
           'strMaterialName' => 'Silica Sand', 
           'intReorderLevel' => 50, 
           'intReorderQty' => 200, 
-          'strUOMID' => 'U00003', 
+          'strUOMID' => 'U00002', 
           'strMaterialDesc' => 'metal casting minerals',
           'strStatus' => 'Active'
       ]);

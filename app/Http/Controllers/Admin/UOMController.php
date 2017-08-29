@@ -104,7 +104,11 @@ class UOMController extends Controller
 
   public function statusUOM(Request $request)
   {
+
     $status = Unit::where('strUOMName', '=', $request->input('uom_name'))->get();
+
+    $status = Unit::where('strUOMName', '=', $request->input('uomtype_name'))->get();
+
 
 
     return response()->json($status);

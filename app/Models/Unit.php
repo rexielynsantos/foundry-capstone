@@ -16,6 +16,7 @@ class Unit extends Model
     	'strUOMDesc',	
     	'strStatus'
     ];
+    
     public function productvariant() {
         return $this->hasOne('App\Models\ProductVariant', 'strProductVariantID', 'strProductVariantID');
     }
@@ -25,9 +26,14 @@ class Unit extends Model
     public function material() {
         return $this->hasOne('App\Models\Material', 'strMaterialID', 'strMaterialID');
     }
+      public function product() {
+        return $this->hasOne('App\Models\Product', 'strProductID', 'strProductID');
+    }
     public function unittype() {
         return $this->belongsTo('App\Models\UnitType', 'strUOMTypeID', 'strUOMTypeID');
     }
+   
+
 
 
 }

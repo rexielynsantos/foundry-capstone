@@ -16,7 +16,7 @@ class CreateJobTitleTable extends Migration
         Schema::create('tbljobtitle', function (Blueprint $table) {
         $table->string('strJobTitleID')->primary();
         $table->string('strJobTitleName')->unique();
-        $table->string('strJobTitleDesc');
+        $table->text('strJobTitleDesc')->nullable();
         $table->string('strStatus');
       });
     }

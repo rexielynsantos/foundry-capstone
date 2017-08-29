@@ -37,7 +37,7 @@
                 </li>
               </ul>
             </li>
-            <li><a href="/maintenance/productType"><i class="fa fa-circle-o"></i> Product Types</a></li>
+            
             <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> Measurements
                 <span class="pull-right-container">
@@ -52,13 +52,34 @@
                 </li>
               </ul>
             </li>
-            <li><a href="/maintenance/productVariant"><i class="fa fa-circle-o"></i> Product Variants </a></li>
+            
             <li><a href="/maintenance/supplier"><i class="fa fa-circle-o"></i> Suppliers</a></li>
-            <li><a href="/maintenance/materialVariants"><i class="fa fa-circle-o"></i> Material Variants</a></li>
-
-            <li><a href="/maintenance/material"><i class="fa fa-circle-o"></i> Materials</a></li>
-           <li> <a href="/transaction/jobOrder-monitoring"><i class="fa fa-circle-o"></i> Product Specification </a>
+             <li class="treeview">
+              <a href="#"><i class="fa fa-circle-o"></i> Raw Materials
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="/maintenance/materialVariants"><i class="fa fa-circle-o"></i> Material Variants</a></li>
+                <li><a href="/maintenance/material"><i class="fa fa-circle-o"></i> Materials</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#"><i class="fa fa-circle-o"></i> Products
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="/maintenance/productType"><i class="fa fa-circle-o"></i> Product Types</a></li>
+                <li><a href="/maintenance/productVariant"><i class="fa fa-circle-o"></i> Product Variants </a></li>
+                <li> <a href="/transaction/jobOrder-monitoring"><i class="fa fa-circle-o"></i> Product Variance </a>
             <li><a href="/maintenance/product"><i class="fa fa-circle-o"></i> Products</a></li>
+              </ul>
+            </li>
+    
+           
             <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> Employees
                 <span class="pull-right-container">
@@ -71,7 +92,7 @@
                 <li><a href="/maintenance/employee"><i class="fa fa-plus"></i> Employee</a></li>
               </ul>
             </li>
-            <li class="treeview">
+   <!--          <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> Workflow
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -79,10 +100,10 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="/maintenance/module"><i class="fa fa-plus"></i> Module</a></li>
-                <li><a href="/maintenance/userRole"><i class="fa fa-plus"></i> User Role</a></li>
+               
                 <li><a href="/maintenance/workflow"><i class="fa fa-plus"></i> Workflow</a> </li>
               </ul>
-            </li>
+            </li> -->
 
           </ul>
         </li>
@@ -101,11 +122,11 @@
             <img src="../images/production-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Production</span>
           </a>
         </li>
-         <li class="treeview">
+     <!--     <li class="treeview">
           <a href="/transaction/workflowManagement">
             <img src="../images/orders.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Workflow</span>
           </a>
-        </li>
+        </li> -->
 
         <li class="treeview">
           <a href="#">
@@ -134,6 +155,7 @@
           <ul class="treeview-menu">
             <li><a href="/maintenance/paymentTerms"><i class="glyphicon glyphicon-object-align-bottom"></i> Payment Terms </a></li>
             <li><a href="/maintenance/dataReactivation"><i class="glyphicon glyphicon-object-align-bottom"></i> Data Reactivation </a></li>
+             <li><a href="/maintenance/userRole"><i class="fa fa-plus"></i> User Role</a></li>
 
           </ul>
         </li>

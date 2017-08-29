@@ -14,7 +14,7 @@
                 <div class="form-group has-feedback">
                   <div class="form-group">
                     <label for="variantQty" class="control-label">Variant<span style="color:red">*</span></label>
-                    <input type="number" class="form-control validate number" placeholder="0" id ="variantQty" required
+                    <input type="number" class="form-control validate number" min=1 placeholder="0" id ="variantQty" required
                     data-error="Variant Value is required.">
                     <div class="help-block with-errors"></div>
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>

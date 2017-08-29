@@ -95,7 +95,11 @@ class UOMTypeController extends Controller
         'strStatus' => 'Active',
       ]);
 
+
       $uomtype = UnitType::where('strUOMTypeName', $request->uomtype_name)->first();
+
+      $uomtype = UnitType::where('strUOMTypeName', $request->stage_name)->first();
+
       return $uomtype;
 
   }

@@ -16,7 +16,7 @@ class UnitTableSeeder extends Seeder
         'strUOMName' => 'm',
         'strUOMDesc' => 'meters',
         'strUOMTypeID' => 'UT00001',
-        'strStatus' => 'Active',
+        'strStatus' => 'Inactive',
       ]);
         DB::table('tbluom')->insert([
         'strUOMID' => 'U00002',

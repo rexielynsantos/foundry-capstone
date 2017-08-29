@@ -19,7 +19,7 @@ class CreateProductTable extends Migration
         $table->string('strProductTypeID');
         $table->string('strProductImagePath')->nullable();
         $table->string('strTempImage')->nullable();
-        $table->text('strProductDesc');
+        $table->text('strProductDesc')->nullable();
         $table->string('strStatus');
         $table->foreign('strProductTypeID')
               ->references('strProductTypeID')->on('tblproducttype')

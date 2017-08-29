@@ -16,7 +16,7 @@ class CreateStageTable extends Migration
       Schema::create('tblstage', function (Blueprint $table) {
         $table->string('strStageID')->primary();
         $table->string('strStageName')->unique();
-        $table->string('strStageDesc');
+        $table->text('strStageDesc')->nullable();
         $table->string('strStatus');
       });
     }

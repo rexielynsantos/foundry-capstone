@@ -24,7 +24,7 @@ class SubStageRequest extends FormRequest
     public function rules()
     {
         return [
-            'substage_name' => 'required|min:2|max:35',
+            'substage_name' => 'required|min:1|max:35',
             'substage_desc'   => 'min:2|max:255',
         ];
     }

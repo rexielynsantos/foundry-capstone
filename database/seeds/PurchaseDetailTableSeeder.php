@@ -14,41 +14,15 @@ class PurchaseDetailTableSeeder extends Seeder
       DB::table('tblpurchasedetail')->insert([
           'strPurchaseID' => 'P00001',
           'strMaterialID' => 'MAT00001',
-          'dblReorderQty' => 100,
-          'dblAddlQty' =>50,
-          'strUOMID' => 'U00001',
-          'dblAmount' =>23.89, 
-          'strRemarks' => 'kainis'
       ]);
       DB::table('tblpurchasedetail')->insert([
           'strPurchaseID' => 'P00001',
           'strMaterialID' => 'MAT00002',
-          'dblReorderQty' => 200,
-          'dblAddlQty' =>100,
-          'strUOMID' => 'U00001',
       ]);
-      DB::table('tblpurchasedetail')->insert([
-          'strPurchaseID' => 'P00002',
-          'strMaterialID' => 'MAT00003',
-          'dblReorderQty' => 200,
-          'dblAddlQty' =>100,
-          'strUOMID' => 'U00001',
-      ]);
-      DB::table('tblpurchasedetail')->insert([
-          'strPurchaseID' => 'P00003',
-          'strMaterialID' => 'MAT00004',
-          'dblReorderQty' => 200,
-          'dblAddlQty' =>100,
-          'strUOMID' => 'U00001',
-      ]);
-      DB::table('tblpurchasedetail')->insert([
-          'strPurchaseID' => 'P00003',
-          'strMaterialID' => 'MAT00003',
-          'dblReorderQty' => 200,
-          'dblAddlQty' =>100,
-          'strUOMID' => 'U00001',
-          'dblAmount' =>50.89, 
-          'strRemarks' => 'kainis'
-      ]);
+      // DB::table('tblpurchasedetail')->insert([
+      //     'strPurchaseID' => 'P00001',
+      //     'strMaterialID' => 'MAT00003',
+      // ]);
+     
     }
 }

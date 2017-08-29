@@ -180,54 +180,108 @@ Route::post('/maintenance/material-activate','Admin\MaterialController@activateM
 Route::post('/maintenance/material-active','Admin\MaterialController@activeMaterial');
 Route::post('/maintenance/material-status','Admin\MaterialController@statusMaterial');
 Route::get('/maintenance/variant-alls','Admin\MaterialController@getAllVariant');
+Route::get('/maintenance/uom-alls','Admin\MaterialController@getAllUOM');
 
 Route::get('/maintenance/dataReactivation', function () {
     return view('Reactivation.dataReactivation');
 });
+Route::get('/transaction/estimate', function () {
+    return view('Transaction.estimate');
+});
 
+Route::get('/transaction/estimate-add', function () {
+    return view('Transaction.estimate-add');
+});
 
-
-Route::get('/transaction/estimate','Admin\EstimateController@viewEstimate');
-Route::get('/transaction/estimate-add','Admin\EstimateController@viewAddEstimate');
+Route::get('/transaction/estimate-table','Admin\EstimateController@viewEstimate');
+Route::get('/transaction/estimate-add-quote','Admin\EstimateController@viewAddEstimate');
+Route::post('/transaction/quoteRequest-edit','Admin\EstimateController@editQuote');
 Route::post('/transaction/cart','Admin\EstimateController@addCart');
 Route::post('/transaction/submitOrder','Admin\EstimateController@submitOrder');
+Route::post('/transaction/quoteSubmit','Admin\EstimateController@tofinal');
+Route::post('/transaction/estimate-final-read','Admin\EstimateController@finalRead');
+Route::post('/transaction/estimate-read','Admin\EstimateController@finalRead');
+Route::post('/transaction/modalInfos','Admin\EstimateController@modalInfo');
+Route::post('/transaction/estimate-modalTable','Admin\EstimateController@modalTableInfo');
+Route::get('/transaction/estimate-variance','Admin\EstimateController@varianceCode');
+Route::get('/transaction/getProducts','Admin\EstimateController@getProduct');
+Route::post('/transaction/update-quote','Admin\EstimateController@updateQuote');
 
 Route::post('/transaction/estimate-add','Admin\EstimateController@addEstimate');
 Route::post('/transaction/estimate-get','Admin\EstimateController@getEstimate');
 Route::post('/transaction/estimate-approve','Admin\EstimateController@approveEstimate');
 
-Route::get('/transaction/joborder','Admin\JobOrderController@viewJobOrder');
+Route::get('/transaction/joborders','Admin\JobOrderController@viewJobOrder');
 Route::get('/transaction/jobOrder-add','Admin\JobOrderController@viewAddJobOrder');
+Route::post('/transaction/submitGenerate','Admin\JobOrderController@addJobOrder');
+Route::post('/transaction/joborder-material','Admin\JobOrderController@joborderMaterial');
+
+Route::post('/transaction/getJoborders','Admin\MatRequisitController@getJoborder');
+Route::get('/transaction/matReq-employee','Admin\MatRequisitController@getEmployee');
+Route::get('/transaction/matReq-material','Admin\MatRequisitController@getMaterial');
+Route::post('/transaction/matReq-modal','Admin\MatRequisitController@matReqModal');
+Route::post('/transaction/matReq-matVar','Admin\MatRequisitController@matVar');
 
 Route::get('/transaction/jobOrder-monitoring','Admin\MaterialSpecController@viewMatSpec');
 Route::post('/Specification/ProductType','Admin\MaterialSpecController@showProductType');
+Route::post('/transaction/matspec-add','Admin\MaterialSpecController@addMatSpec');
+Route::post('/transaction/matspec-edit','Admin\MaterialSpecController@editMatSpec');
+Route::post('/transaction/matspec-update','Admin\MaterialSpecController@updateMatSpec');
+Route::post('/transaction/matspec-delete','Admin\MaterialSpecController@deleteMatSpec');
+Route::post('/transaction/matSpecCart','Admin\PurchaseAddController@addCart');
 Route::get('/transaction/material-all','Admin\JobOrderController@getAllMaterial');
 
 Route::get('/transaction/jobtickets','Admin\JobTicketController@viewJobTicket');
 Route::get('/transaction/substage-get','Admin\JobTicketController@getSubStage');
+Route::get('/transaction/jobtickets-productGet','Admin\JobTicketController@getProducts');
 Route::post('/transaction/jobtickets-add','Admin\JobTicketController@addJobTicket');
+Route::post('/transaction/jobtickets-update','Admin\JobTicketController@updateJobTicket');
+Route::post('/transaction/jobtickets-edit','Admin\JobTicketController@editJobTicket');
 Route::post('/transaction/jobtickets-stage','Admin\JobTicketController@getStage');
 Route::post('/transaction/jobtickets-products','Admin\JobTicketController@getProduct');
 
-Route::get('/transaction/purchaseOrder','Admin\PurchaseController@viewPurchase');
-Route::get('/transaction/material-all','Admin\PurchaseController@getAllMaterial');
-
-
+Route::get('/transaction/purchaseOrder','Admin\PurchaseAddController@viewPurchase');
+Route::get('/transaction/mat-all','Admin\PurchaseAddController@getAllMaterial');
+Route::get('/transaction/matvar-all','Admin\PurchaseAddController@getAllMaterialVariant');
 Route::get('/transaction/purchase-add','Admin\PurchaseAddController@viewaddPurchase');
+Route::post('/transaction/purchaseorder-add','Admin\PurchaseAddController@addPurchaseOrder');
 Route::post('/transaction/Supplier','Admin\PurchaseAddController@showSupplierDetails');
 Route::post('/transaction/GetDetails','Admin\PurchaseAddController@GetDetails');
 Route::post('/transaction/purchaseCart','Admin\PurchaseAddController@addCart');
+Route::post('/transaction/purchase-final-read','Admin\PurchaseAddController@purchaseFinal');
+Route::post('/transaction/purchase-table-read','Admin\PurchaseAddController@finalRead');
 
-Route::post('/transaction/purchaseorder-add','Admin\PurchaseAddController@addPurchaseOrder');
+
+
+Route::get('/transaction/inspection','Admin\ProductInspectionController@viewInspection');
+Route::post('/transaction/inspection-add','Admin\ProductInspectionController@addInspection');
+Route::post('/transaction/inspection-edit','Admin\ProductInspectionController@editInspection');
+Route::post('/transaction/inspection-update','Admin\ProductInspectionController@updateInspection');
 
 
 Route::get('/transaction/receive','Admin\ReceiveMaterialsController@viewReceivePurchase');
+Route::get('/transaction/receive-add','Admin\ReceiveMaterialsController@viewReceiveAddPurchase');
+Route::get('/transaction/receive-supplier','Admin\ReceiveMaterialsController@getSupplier');
+Route::get('/transaction/matvariant-all','Admin\ReceiveMaterialsController@getAllMaterialVariant');
+Route::post('/transaction/receiveCart','Admin\ReceiveMaterialsController@addCart');
+Route::post('/transaction/receiving-add','Admin\ReceiveMaterialsController@addReceiving');
 
-Route::get('/transaction/receive-add','Admin\ReceiveAddMaterialsController@viewReceiveAddPurchase');
-Route::get('/transaction/material-all','Admin\ReceiveAddMaterialsControlelr@getAllMaterial');
+Route::get('/transaction/stocks','Admin\StocksController@viewStocks');
+Route::post('/transaction/materials-all','Admin\StocksController@getStockDetails');
+Route::post('/transaction/receive-records','Admin\StocksController@getReceivingRecords');
 
-Route::post('/transaction/receiveCart','Admin\ReceiveAddMaterialsController@addCart');
 
+
+
+
+// Route::get('/transaction/material-all','Admin\ReceiveAddMaterialsControlelr@getAllMaterial');
+// Route::post('/transaction/receiveCart','Admin\ReceiveAddMaterialsController@addCart');
+
+Route::get('htmltopdfview',array('as'=>'htmltopdfview','uses'=>'Admin\PurchaseAddController@htmltopdfview'));
+Route::get('htmltopdfviewEst',array('as'=>'htmltopdfviewEst','uses'=>'Admin\EstimateController@htmltopdfview'));
+Route::get('htmltopdfviewJobTicket',array('as'=>'htmltopdfviewJobTicket','uses'=>'Admin\JobTicketController@htmltopdfview'));
+Route::get('htmltopdfviewReceivePurchase',array('as'=>'htmltopdfviewReceivePurchase','uses'=>'Admin\ReceivePurchaseController@htmltopdfview'));
+Route::get('htmltopdfviewJobInspection',array('as'=>'htmltopdfviewJobInspection','uses'=>'Admin\JobInspectionController@htmltopdfview'));
 
 
 
@@ -235,29 +289,38 @@ Route::get('/transaction/inspectPurchase', function () {
     return view('Transaction.inspectPurchase');
 });
 
-Route::get('/transaction/stocks', function () {
-    return view('Transaction.stockcard');
-});
 
 Route::get('/transaction/estimate-final', function () {
     return view('Transaction.estimate-final');
 });
 
+
+Route::get('/transaction/materialrequisition-add', function () {
+    return view('Transaction.materialrequisition-add');
+});
+
+
+Route::get('/transaction/estimate-job', function () {
+    return view('Transaction.estimate-job');
+});
+
+Route::get('/transaction/order-allocation', function () {
+    return view('Transaction.order-allocation');
+});
+
+Route::get('/transaction/manage-order', function () {
+    return view('Transaction.manage-order');
+});
+
 Route::get('/transaction/purchase-final', function () {
     return view('Transaction.purchase-final');
 });
 
-
-
-Route::get('/transaction/purchase-final', function () {
-    return view('Transaction.purchase-final');
-});
-
-Route::get('/transaction/inspection', function () {
-    return view('Transaction.inspection');
-});
 Route::get('/transaction/production-monitoring', function () {
     return view('Transaction.production-monitoring');
+});
+Route::get('/transaction/production-progress', function () {
+    return view('Transaction.production-progress');
 });
 Route::get('/transaction/estimate-addDetail', function () {
     return view('Transaction.estimate-addDetail');

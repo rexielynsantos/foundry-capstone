@@ -16,7 +16,7 @@ class CreateProductTypeTable extends Migration
       Schema::create('tblproducttype', function (Blueprint $table) {
         $table->string('strProductTypeID')->primary();
         $table->string('strProductTypeName')->unique();
-        $table->string('strProductTypeDesc');
+        $table->text('strProductTypeDesc')->nullable();
         $table->string('strStatus');
       });
     }

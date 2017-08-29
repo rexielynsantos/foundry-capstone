@@ -16,7 +16,7 @@ class CreateUserActionTable extends Migration
       Schema::create('tbluseraction', function (Blueprint $table) {
         $table->string('strUserActionID')->primary();
         $table->string('strUserActionName')->unique();
-        $table->string('strUserActionDesc');
+        $table->text('strUserActionDesc')->nullable();
         $table->string('strModuleID');
         $table->string('strStatus');
         $table->foreign('strModuleID')

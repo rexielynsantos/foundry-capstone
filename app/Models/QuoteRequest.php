@@ -21,7 +21,7 @@ class QuoteRequest extends Model
 
     ];
     public function product(){
-        return $this->hasMany('App\Models\QuoteProduct', 'strQuoteRequestID','strQuoteRequestID');
+        return $this->hasMany('App\Models\QuoteProductVariant', 'strQuoteRequestID','strQuoteRequestID');
     }
     public function purchase(){
         return $this->hasOne('App\Models\Purchase', 'strQuoteRequestID');

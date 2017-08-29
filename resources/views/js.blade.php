@@ -26,3 +26,4 @@
 <script src="/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script src="/dist/js/app.min.js"></script>
 <script src="/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="/plugins/datepicker/bootstrap-datepicker.min.js"></script>

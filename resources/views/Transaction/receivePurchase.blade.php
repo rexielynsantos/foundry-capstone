@@ -57,54 +57,53 @@
                 </div>	
               </div>
             </div>
-            <!-- /.box-header -->
+
             <div class="box-body no-padding">
  
-              <div class="table-responsive mailbox-messages">
-                <table class="table table-hover table-striped">
-                  <thead style="background-color:#7B8FAD;color:white">
-                    <th> PO No.   </th>
+
+                <table id="receiveingTable" class="display">
+                  <thead>
+                    <th> Reference PO No.  </th>
                     <th> Supplier </th>
                     <th> Orders </th>
                     <th> Quantity Delivered</th>
-                    <th> Quantity Left</th>
+                 
                     <th> Date</th>
                   </thead>
                   <tbody>
                   @foreach($rp as $r)
                    <tr>
                     <td>{{$r->strPurchaseID}} </td>
-                    <td class="mailbox-name"><a href="read-mail.html">{{$r->purchase->supplier->strSupplierName}}</a></td>
+                    <td>{{$r->purchase->supplier->strSupplierName}}</a></td>
                     
-                    <td style="background-color:#FFC2AA">
-                    @foreach ($r->orders as $var)
-                     <ul width="35%"> {{$var->details->details->strMaterialName}}</ul>
+                    <td>
+                  @foreach($r->orders as $mat)
+                  <li width="35%"> {{$mat->details->strMaterialName}}</li>
+                   <ul>
+                     @foreach($mat->materialvariant as $vars)
+                        <li width="35%" style="list-style-type:circle"> {{$vars->details->intVariantQty}}{{$vars->details->unit->strUOMName}}</li>
                       @endforeach
-                     </td>
+                    </ul>
+                  @endforeach
+                  </td>
 
-                    <td style="background-color:#FFC2AA">
-                    @foreach ($r->orders as $var)
-                     <ul width="35%" style="list-style-type:circle"> {{$var->intQtyReceived}}</ul>
+
+                  <td>{{$r->dtDeliveryReceived}} </td>
+                 <!--  <td>100   </td> -->
+
+                   <!--   <td>
+                      @foreach ($r->orders as $var)
+                      <ul width="35%" style="list-style-type:circle"> {{$var->intQtyLeft}}</ul>
                       @endforeach
-                     </td>
+                     </td> -->
 
-                     <td style="background-color:#FFC2AA">
-                    @foreach ($r->orders as $var)
-                     <ul width="35%" style="list-style-type:circle"> {{$var->intQtyLeft}}</ul>
-                      @endforeach
-                     </td>
-
-                    <td>{{$r->dtDeliveryReceived}} </td>
+                    
                   </tr>
                   @endforeach
                   </tbody>
                 </table>
-                <!-- /.table -->
-              </div>
-              <!-- /.mail-box-messages -->
+          
             </div>
-            <!-- /.box-body -->
-
           </div>
           <!-- /. box -->
         </div>
@@ -112,7 +111,6 @@
       </div>
       <!-- /.row -->
     </section>
-    <!-- /.content -->
 
 </form>
   <div class="modal fade" style="margin-top:50px" id="receivemModal" role="dialog">
@@ -207,6 +205,12 @@
 @push('scripts')
  <script type="text/javascript" src="{{URL::asset('js/logic/estimate.js')}}"></script>
 <script>
+$('#receiveingTable').DataTable(
+  {
+    "searching": false,
+    "ordering": false,
+    "paging": false,
+  });
   $(function () {
     //Enable iCheck plugin for checkboxes
     //iCheck for checkbox and radio inputs

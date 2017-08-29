@@ -15,7 +15,7 @@ class ProductController extends Controller
 {
     public function getAllVariant()
     {
-      $variant = ProductVariant::with('unit')->where('strStatus', 'Active')->get();
+      $variant = ProductVariant::where('strStatus', 'Active')->get();
 
       return response()->json($variant);
     }
@@ -30,25 +30,14 @@ class ProductController extends Controller
       return view('Production.product')
       ->with('product', $product)
       ->with('type', $type);
-  	}
-  	public function addProduct(Request $request){
+    }
+    public function addProduct(Request $request){
       $id = str_random(10);
-      $imageName = "";
-      $tempID="";
-      if($request->hasFile('prod_image'))
-        {
-          $tempID = $id.'.'.$request->prod_image->getClientOriginalExtension();
-          $imageName = $request->file('prod_image')->storeAs(
-              'public/product', $tempID
-          );
-        }
 
       Product::insert([
         'strProductID' => $id,
         'strProductName' => $request->input('product_name'),
         'strProductTypeID' => $request->input('ptype_id'),
-        'strProductImagePath' => $imageName,
-        'strTempImage' => $tempID,
         'strProductDesc' => $request->input('product_desc'),
         'strStatus' => 'Active'
         ]);
@@ -63,27 +52,14 @@ class ProductController extends Controller
       }
 
       $product = Product::with(['productvariant.details3', 'producttype'])->where('strProductID', $id)->first();
-
+      
       return $product;
     }
     public function editProduct(Request $request)
     {
-
-
-      $product = DB::table('tblproduct')
-                ->where('strProductID', $request->product_id);
-
-      Product::with(['productvariant.details3', 'producttype'])->where('strProductID', $request->product_id)
-                ->first();
-
-      ProductDetail::where('strProductID', $request->product_id)->get();
-
-      return response()->json(['product' => $product, 'var' => $var]);
-
     
     $product = Product::with(['productvariant.details3', 'producttype'])->where('strProductID', $request->product_id)->first();
     return $product;
-
     }
     public function updateProduct(Request $request)
     {

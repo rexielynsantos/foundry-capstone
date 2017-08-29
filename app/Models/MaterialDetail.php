@@ -9,13 +9,17 @@ class MaterialDetail extends Model
     protected $table = 'tblmaterialdetail';
     public $incrementing = false;
     public $timestamps = false;
-    
     protected $fillable = [
-    	'strMaterialID',
-    	'strMaterialVariantID',
+      'strMaterialID',
+      'strMaterialVariantID',
     ];
-   
+
     public function details(){
-        return $this->hasOne('App\Models\MaterialVariant','strMaterialVariantID','strMaterialVariantID');
+        return $this->belongsTo('App\Models\MaterialVariant','strMaterialVariantID','strMaterialVariantID');
     }
+    public function purchase() {
+        return $this->hasOne('App\Models\PurchaseDetail', 'strMaterialVariantID');
+    }
+
+    
 }

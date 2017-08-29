@@ -16,11 +16,12 @@ class JobTicketDetail extends Model
         'dblJobFinished',
         'timeStarted',
         'timeFinished'
-
-
     ];
    
     public function details(){
         return $this->hasOne('App\Models\Product','strProductID','strProductID');
+    }
+    public function prodinspection(){
+        return $this->hasOne('App\Models\ProductInspection', 'strEmployeeID');
     }
 }

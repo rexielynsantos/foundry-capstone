@@ -12,11 +12,14 @@ class PurchaseDetail extends Model
     protected $fillable = [
 	    'strPurchaseID',
 	    'strMaterialID',
-	    'dblReorderQty',
-	    'dblAddlQty',	
-	    'strUOMID',
+        // 'dblTotalQty',	
     ];
+
     public function details(){
         return $this->hasOne('App\Models\Material','strMaterialID','strMaterialID');
     }
+    public function materialvariant(){
+        return $this->hasMany('App\Models\PurchMatVariantDetail', 'strMaterialID','strMaterialID');
+    }
+   
 }

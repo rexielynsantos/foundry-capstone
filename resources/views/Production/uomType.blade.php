@@ -1,5 +1,5 @@
 @extends('master')
-@section('pageTitle', 'UOM Type')
+@section('pageTitle', 'Unit Type')
 @section('content')
 
 <h3 style="color:black;font-family: 'Abel', sans-serif;font-size: 200%;">Unit Type </h3>

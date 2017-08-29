@@ -12,7 +12,7 @@ class QuoteProduct extends Model
     protected $fillable = [
 	    'strQuoteRequestID',
 	    'strProductID',
-	    'strRemarks',
+	    'strRemarks'
     ];
     public function details4(){
         return $this->hasOne('App\Models\Product','strProductID','strProductID');

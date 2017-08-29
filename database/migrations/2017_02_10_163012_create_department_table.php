@@ -16,7 +16,7 @@ class CreateDepartmentTable extends Migration
       Schema::create('tbldepartment', function (Blueprint $table) {
         $table->string('strDepartmentID')->primary();
         $table->string('strDepartmentName')->unique();
-        $table->string('strDepartmentDesc');
+        $table->text('strDepartmentDesc')->nullable();
         $table->string('strStatus');
       });
     }

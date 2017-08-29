@@ -9,15 +9,15 @@ class MatSpecDetail extends Model
     protected $table = 'tblmatspecdetail';
     public $incrementing = false;
     public $timestamps = false;
-    
+
     protected $fillable = [
-    	'strMaterialID',
-    	'strMatSpecID',
-    	'dblMaterialQuantity',
-    	'strUOMID',
+        'strMatSpecID',
+    	  'strMaterialID',
+        'dblMaterialQuantity'
     ];
-   
-    public function matdetails(){
-        return $this->hasOne('App\Models\Material','strMaterialID','strMaterialID');
+
+    public function details(){
+              return $this->hasOne('App\Models\Material','strMaterialID','strMaterialID');
     }
+
 }

@@ -58,10 +58,10 @@
                     <div class="form-group has-feedback">
                       <div class="form-group">
                        <label for="substgName" class="control-label">SubStage<span style="color:red">*</span></label>
-                        <input type="text" class="form-control" id ="substgName" style="border:1px solid #A9A9A9"
+                        <input type="text" class="form-control validate letter" id ="substgName" style="border:1px solid #A9A9A9"
                         name ="substgName" required data-error="Substage name is required."
                         data-minlength-error="Invalid input length."
-                        data-minlength="2"
+                        data-minlength="1"
                         maxlength="35" placeholder="Name">
                         <div class="help-block with-errors"></div>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -75,7 +75,7 @@
                         <label for="substgDesc" class="control-label">Description</label>
                         <textarea class="form-control" style="resize: none;border:1px solid #A9A9A9" rows="5" id ="substgDesc"
                           data-error="Invalid input length."
-                          data-minlength="2"
+                          data-minlength="1"
                           maxlength="255" placeholder="Description"></textarea>
                         <div class="help-block with-errors"></div>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>

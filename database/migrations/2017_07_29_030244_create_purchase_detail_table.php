@@ -16,16 +16,18 @@ class CreatePurchaseDetailTable extends Migration
         Schema::create('tblpurchasedetail', function (Blueprint $table) {
         $table->string('strPurchaseID');
         $table->string('strMaterialID');
-        $table->double('dblReorderQty');
-        $table->double('dblAddlQty');
-        $table->string('strUOMID');
+        // $table->string('strMaterialVariantID');
+        // $table->double('dblAddlQty');
 
-        $table->double('dblAmount'); //amount
-        $table->string('strRemarks');
+        // $table->foreign('strMaterialVariantID')
+        //       ->references('strMaterialVariantID')->on('tblmaterialdetail');
+        $table->foreign('strMaterialID')
+          ->references('strMaterialID')->on('tblmaterial');
         $table->foreign('strPurchaseID')
                   ->references('strPurchaseID')->on('tblpurchase');
-        $table->foreign('strMaterialID')
-                  ->references('strMaterialID')->on('tblmaterial');
+        
+
+
         });
     }
 

@@ -2,16 +2,13 @@
 @section('pageTitle', 'Quote Request')
 @section('content')
 
-<!-- <h3 style="color:black;font-family: 'Abel', sans-serif;font-size: 180%;">Order Estimate </h3> -->
-<form class="" id="estimate_form" role="form" data-toggle="validator">
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Quote No. 123455
+        Quote No. <input type="text" id="testval" name="testval" disabled style="border:none;"value="{{ Session::get('quotenum') }}">
        <!--  <small>13 new messages</small> -->
       </h1>
-
 
     </section>
 
@@ -23,55 +20,75 @@
               <div class="col-md-12">
                 <label class="pull-right"> {{date('Y-m-d')}} </label>
               </div>
+          </div>
+          <div class="row">
+            <!--logo here-->
+            <div class="col-md-4">
+              <img src="../images/mainlogo.png" width="90" height="90" style="margin-left: 30px;">
+
             </div>
+            <div class="col-md-4">
+              <center>
+              <p style="font-weight: bold;font-size:13pt;" class="companyTitle"> Precision Foundry of the Philippines Inc. </p>
+              <p class="companyAddress">  #86 Fortune Avenue, Brgy. Fortune, Marikina City, PHILIPPINES </p>
+              <p class="companyTelNo">  Tel No. 998-2581 </p>
+              </center>
+            </div>  
+
+            </div>
+           <!--  <div class="col-md-4">
+              <center>
+              <p style="font-weight: bold;font-size:13pt;" class="companyTitle"> Precision Foundry of the Philippines Inc. </p>
+              <p class="companyAddress">  #86 Fortune Avenue, Brgy. Fortune, Marikina City, PHILIPPINES </p>
+              <p class="companyTelNo">  Tel No. 998-2581 </p>
+              </center>
+            </div>
+ -->
+          </div>
 
         <b>
-         Toyota Philippines <br>
-         24A Malaya St. Maginhawa <br>
-         Pasig City 
+         {{ Session::get('compname') }}<br>
+         {{ Session::get('street') }} {{ Session::get('brgy') }}<br>
+         {{ Session::get('city') }}
          </b>
 
          <br><br>
 
-         Attention: Sean Puyod (Customer Contact Person) <br> <br>
+         Attention: {{ Session::get('contactperson') }}<br> <br>
 
-         We are pleased to bla bla bla bla eto yung nasa text area  We are pleased to bla bla bla bla eto yung nasa text area We are pleased to bla bla bla bla eto yung <br>
-         We are pleased to bla bla bla bla eto yung nasa text area  We are pleased to bla bla bla bla eto yung nasa text area We are pleased to bla bla bla bla eto yung <br>
-         We are pleased to bla bla bla bla eto yung nasa text area  We are pleased to bla bla bla bla eto yung nasa text area We are pleased to bla bla bla bla eto yung <br>
-         We are pleased to bla bla bla bla eto yung nasa text area  We are pleased to bla bla bla bla eto yung nasa text area We are pleased to bla bla bla bla eto yung <br>
-         We are pleased to bla bla bla bla eto yung nasa text area  We are pleased to bla bla bla bla eto yung nasa text area We are pleased to bla bla bla bla eto yung <br>
+         <br>
 
-<hr>
-         <table>
-          <tr>
-            <th width = "30%"> Description </th>
-            <th width = "30%"> Variants </th>
-            <th width = "20%"> Unit Cost </th>
-            <th width = "10%"> Quantity </th>
-            <th width = "10%"> Amount </th>
-          </tr>
-          <tr>  
-            <td> Bracket Wheel Mount </td>
-            <td> 300pcs </td>
-            <td> 12.00 </td>
-            <td> <input type="number"> </td>
-            <td> 2312412 </td>
-          </tr>
-         </table>
+<hr>    <div class="row">
+          <div class="col-md-12">
+           <table id="estimateFinalTable" class="display">
+             <thead>
+               <tr>
+                 <th width = "30%"> Description </th>
+                 <th width = "30%"> Variants </th>
+                 <th width = "20%"> Quantity</th>
+               </tr>
+             </thead>
+             <tbody>
+
+             </tbody>
+           </table>
+          </div>
         </div>
-
-            
+        </div>
+        <br>
+        <a href="/transaction/estimate" class="btn btn-primary pull-right" style="width:3cm; height:1cm;">Go Back</a>
       </div>
+
+
   </section>
 
-</form>
 
 
 
 
 @push('scripts')
- <script type="text/javascript" src="{{URL::asset('js/tables/quote-Table.js')}}"></script>
-  <script type="text/javascript" src="{{URL::asset('js/logic/estimate-add.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/tables/estimatefinal-table.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/logic/estimate-final.js')}}"></script>
 
 <script>
 

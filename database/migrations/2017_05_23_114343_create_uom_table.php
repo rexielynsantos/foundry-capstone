@@ -16,7 +16,7 @@ class CreateUOMTable extends Migration
       Schema::create('tbluom', function (Blueprint $table) {
         $table->string('strUOMID')->primary();
         $table->string('strUOMName')->unique();
-        $table->string('strUOMDesc');
+        $table->text('strUOMDesc')->nullable();
         $table->string('strUOMTypeID');
         $table->string('strStatus');
         $table->foreign('strUOMTypeID')

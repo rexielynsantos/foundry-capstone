@@ -16,7 +16,7 @@ class CreateSubstageTable extends Migration
       Schema::create('tblsubstage', function (Blueprint $table) {
         $table->string('strSubStageID')->primary();
         $table->string('strSubStageName')->unique();
-        $table->string('strSubStageDesc');
+        $table->text('strSubStageDesc')->nullable();
         $table->string('strStatus');
       });
     }

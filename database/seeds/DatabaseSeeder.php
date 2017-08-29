@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(JobtitleTableSeeder::class);
         $this->call(EmployeeTableSeeder::class);
         $this->call(UserActionTableSeeder::class);
-        // $this->call(PaymentTermTableSeeder::class);
+        $this->call(PaymentTermTableSeeder::class);
         $this->call(UnitTableSeeder::class);
         $this->call(ProductVariantSeeder::class);
         $this->call(SupplierTableSeeder::class);
@@ -34,16 +34,27 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductDetailTableSeeder::class);
         $this->call(ProductVariantDetailTableSeeder::class);
         $this->call(MaterialTableSeeder::class);
-        $this->call(MaterialSupplierTableSeeder::class);
-        $this->call(QuoteProductTableSeeder::class);
+        // $this->call(MaterialSupplierTableSeeder::class);
+        // $this->call(QuoteProductTableSeeder::class);
         $this->call(JobTicketTableSeeder::class);
-        // $this->call(JobTicketDetailTableSeeder::class);
+        $this->call(JobTicketDetailTableSeeder::class);
+        $this->call(MaterialVariantTableSeeder::class);
+        $this->call(MaterialDetailTableSeeder::class);
+        $this->call(MaterialSupplierTableSeeder::class);
+         // $this->call(PurchaseDetailTableSeeder::class);
+         
+         // $this->call(UserTableSeeder::class);
+        
+         $this->call(MaterialSpecTableSeeder::class);
+         $this->call(MaterialSpecDetailTableSeeder::class);
          $this->call(PurchaseTableSeeder::class);
          $this->call(PurchaseDetailTableSeeder::class);
+         $this->call(PurchMatVariantTableSeeder::class);
          $this->call(ReceivePurchaseTableSeeder::class);
          $this->call(ReceivePurchaseDetailTableSeeder::class);
-         $this->call(UserTableSeeder::class);
-         $this->call(MaterialVariantTableSeeder::class);
+         $this->call(ReceivePurchMatVariantDetailTableSeeder::class);
+         // $this->call(StockTableSeeder::class);
+
 
 
     }

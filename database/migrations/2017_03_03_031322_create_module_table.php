@@ -16,7 +16,7 @@ class CreateModuleTable extends Migration
       Schema::create('tblmodule', function (Blueprint $table) {
         $table->string('strModuleID')->primary();
         $table->string('strModuleName')->unique();
-        $table->string('strModuleDesc');
+        $table->text('strModuleDesc')->nullable();
         $table->string('strDepartmentID');
         $table->string('strStatus');
         $table->foreign('strDepartmentID')

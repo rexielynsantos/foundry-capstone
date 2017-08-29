@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMaterialSupplierTable extends Migration
+class CreateMatspecDetailTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,19 @@ class CreateMaterialSupplierTable extends Migration
      */
     public function up()
     {
-        Schema::create('tblmaterialsupplier', function (Blueprint $table)
-        {   
-            $table ->string('strSupplierID');
-            $table ->string('strMaterialID');
-            $table ->double('dblMaterialCost');
-            $table->foreign('strSupplierID')
-                  ->references('strSupplierID')->on('tblsupplier')
+        Schema::create('tblmatspecdetail', function (Blueprint $table) {
+        $table->string('strMatSpecID');
+        $table->string('strMaterialID');
+        $table->double('dblMaterialQuantity');
+
+        $table->foreign('strMatSpecID')
+                 ->references('strMatSpecID')->on('tblmatspec')
                   ->onUpdate('cascade');
-                  // ->onDelete('restrict');
-            $table->foreign('strMaterialID')
+        $table->foreign('strMaterialID')
                   ->references('strMaterialID')->on('tblmaterial')
                   ->onUpdate('cascade');
                   // ->onDelete('restrict');
+
         });
     }
 
@@ -36,6 +36,6 @@ class CreateMaterialSupplierTable extends Migration
      */
     public function down()
     {
-        Schema::dropIFExists('tblmaterialsupplier');
+        Schema::dropIfExists('tblmatspecdetail');
     }
 }

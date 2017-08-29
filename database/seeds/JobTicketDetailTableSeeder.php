@@ -14,8 +14,9 @@ class JobTicketDetailTableSeeder extends Seeder
         DB::table('tbljobticketdetail')->insert([
           'strJobTicketID' => 'JT00001',
           'strProductID' => 'PROD00001',
- 
-  
+          'timeStarted' => '01:00:00',
+
+
       ]);
     }
 }

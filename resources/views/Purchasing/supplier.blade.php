@@ -56,7 +56,7 @@
                   <div class="form-group has-feedback">
                     <div class="form-group">
                       <label for="supplierName" class="control-label">Supplier Name<span style="color:red">*</span></label>
-                      <input type="text" class="form-control validate" id ="supplierName" required
+                      <input type="text" class="form-control validate letter" id ="supplierName" required
                       data-error="Supplier name is required."
                       data-minlength-error="Minimum length 2."
                       data-minlength="2"
@@ -74,7 +74,7 @@
                   <div class="form-group has-feedback">
                     <div class="form-group">
                       <!-- <label for="street" class="control-label">Supplier Name<span style="color:red">*</span></label> -->
-                      <input type="text" class="form-control validate" id ="street" style="border:1px solid #A9A9A9" placeholder="No/Street">
+                      <input type="text" class="form-control validate letter" id ="street" style="border:1px solid #A9A9A9" placeholder="No/Street">
                       <div class="help-block with-errors"></div>
                       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </div>
@@ -84,7 +84,7 @@
                   <div class="form-group has-feedback">
                     <div class="form-group">
                       <!-- <label for="street" class="control-label">Supplier Name<span style="color:red">*</span></label> -->
-                      <input type="text" class="form-control validate" id ="brgy" style="border:1px solid #A9A9A9" placeholder="Brgy/Subd">
+                      <input type="text" class="form-control validate letter" id ="brgy" style="border:1px solid #A9A9A9" placeholder="Brgy/Subd">
                       <div class="help-block with-errors"></div>
                       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </div>
@@ -94,7 +94,7 @@
                   <div class="form-group has-feedback">
                     <div class="form-group">
                       <!-- <label for="street" class="control-label">Supplier Name<span style="color:red">*</span></label> -->
-                      <input type="text" class="form-control validate" id ="city" style="border:1px solid #A9A9A9" placeholder="City">
+                      <input type="text" class="form-control validate letter" id ="city" style="border:1px solid #A9A9A9" placeholder="City">
                       <div class="help-block with-errors"></div>
                       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </div>
@@ -107,7 +107,7 @@
                   <div class="form-group has-feedback">
                     <div class="form-group">
                       <label>Description</label>
-                      <textarea class="form-control" style="resize: none;" rows="5" id ="supplierDesc"
+                      <textarea class="form-control validate" style="resize: none;" rows="5" id ="supplierDesc"
                       data-error="Invalid input length."
                       data-minlength="2"
                       maxlength="255" style="border:1px solid #A9A9A9"></textarea>

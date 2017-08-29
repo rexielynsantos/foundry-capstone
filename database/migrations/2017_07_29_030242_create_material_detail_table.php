@@ -14,12 +14,16 @@ class CreateMaterialDetailTable extends Migration
     public function up()
     {
         Schema::create('tblmaterialdetail', function (Blueprint $table) {
-        $table->string('strMaterialID');
+         $table->string('strMaterialID');
          $table->string('strMaterialVariantID');
          $table->foreign('strMaterialID')
-              ->references('strMaterialID')->on('tblmaterial');
-        $table->foreign('strMaterialVariantID')
-              ->references('strMaterialVariantID')->on('tblmaterialvariant');
+               ->references('strMaterialID')->on('tblmaterial')
+               ->onUpdate('cascade');
+         $table->foreign('strMaterialVariantID')
+              ->references('strMaterialVariantID')->on('tblmaterialvariant')
+              ->onUpdate('cascade');
+
+
         });
     }
 
@@ -33,4 +37,3 @@ class CreateMaterialDetailTable extends Migration
         Schema::dropIfExists('tblmaterialdetail');
     }
 }
-    
