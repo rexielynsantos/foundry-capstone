@@ -25,5 +25,12 @@ class UserTableSeeder extends Seeder
           'password' => 'seaning',
 
       ]);
+        DB::table('users')->insert([
+          'id' => 3,
+          'name' => 'Polene',
+          'email' => 'afablepolene@gmail.com',
+          'password' => '111111',
+
+      ]);
     }
 }

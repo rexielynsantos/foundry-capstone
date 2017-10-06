@@ -35,5 +35,6 @@ class PaymentTermTableSeeder extends Seeder
           'strPaymentTermDesc' => 'Payment should be done on the day it will be delivered',
           'strStatus' => 'Active'
       ]);
+      
     }
 }

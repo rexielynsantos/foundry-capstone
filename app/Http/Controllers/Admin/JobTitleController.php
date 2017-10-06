@@ -8,65 +8,108 @@ use App\Http\Controllers\Controller;
 use App\Models\JobTitle;
 use DB;
 use Response;
+
 class JobTitleController extends Controller
 {
+
+  public function getJobTitleMax(){
+    $id = DB::table('tbljobtitle')
+          ->select('strJobTitleID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strJobTitleID', 'desc')
+          ->first();
+    
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strJobTitleID;
+
+      $arrID = str_split($idd);
+    
+       
+    
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+    
+         if($boolAdd)
+         {
+    
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+    
+         $arrNew[$ctr] = $new;
+       }//for
+    
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'JT00001';
+     }
+    return response()->json($somenew);
+  }
+
   public function viewJobTitle()
   {
-    $product = DB::table('tbljobtitle')
-                ->where('tbljobtitle.strStatus', '=' , 'Active')
-                ->get();
+    $product = JobTitle::where('strStatus', 'Active')->get();
       // return Response::json($product);
       return view('Users.jobTitle')
       ->with('jobTitle',$product);
   }
   public function addJobTitle(JobTitleRequest $request)
   {
-    try {
-      DB::beginTransaction();
-      $id = str_random(10);
-      DB::table('tbljobtitle')->insert([
+      $id = $request->input('id');
+      JobTitle::insert([
         'strJobTitleID' => $id,
         'strJobTitleName' => $request->input('jobtitle_name'),
         'strJobTitleDesc' => $request->input('jobtitle_desc'),
+        'created_at' => $request->input('created_at'),
         'strStatus' => 'Active',
       ]);
-    DB::commit();
-    $product = DB::table('tbljobtitle')
-                ->where('tbljobtitle.strJobTitleID', '=' , $id)
-                ->get();
-    return Response::json($product);
-    } catch (\Illuminate\Database\QueryException $e) {
-      DB::rollback();
-      return 'error';
-    }
+
+    $jobTitle = JobTitle::where('strJobTitleID', $id)->first();
+    return $jobTitle;
 
   }
   public function editJobTitle(Request $request)
   {
-    $product = DB::table('tbljobtitle')
-                ->where('tbljobtitle.strJobTitleID', '=' , $request->input('jobtitle_id'))
-                ->get();
-    return Response::json($product);
+    $jobTitle = JobTitle::where('strJobTitleID', $request->jobtitle_id)->first();
+    return $jobTitle;
   }
   public function updateJobTitle(JobTitleRequest $request)
   {
-    try {
-      DB::beginTransaction();
-      DB::table('tbljobtitle')
-    ->where('tbljobtitle.strJobTitleID', '=', $request->input('jobtitle_id'))
+      
+    JobTitle::where('strJobTitleID', $request->jobtitle_id)
     ->update([
       'strJobTitleName' => $request->input('jobtitle_name'),
       'strJobTitleDesc' => $request->input('jobtitle_desc'),
     ]);
-    DB::commit();
-    $jobTitle = DB::table('tbljobtitle')
-                ->where('tbljobtitle.strJobTitleID', '=' , $request->input('jobtitle_id'))
-                ->get();
-    return Response::json($jobTitle);
-    } catch (\Illuminate\Database\QueryException $e) {
-      DB::rollback();
-      return 'error';
-    }
+
+    $jobTitle = JobTitle::where('strJobTitleID', $request->jobtitle_id)->first();
+    return $jobTitle;
 
   }
 

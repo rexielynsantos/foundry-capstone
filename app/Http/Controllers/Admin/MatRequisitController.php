@@ -9,10 +9,19 @@ use Response;
 
 class MatRequisitController extends Controller
 {
+
+  public function viewMaterialRequisit()
+  {
+    $matreqView = DB::table('tblmaterialrequisition')
+                ->get();
+
+      return Response::json($matreqView);
+  }
+
   public function getJoborder(Request $request)
   {
     $jobOrders = DB::table('tblquotejoborder')
-      ->where('tblquotejoborder.strJobOrderID', $request->input('job_id'))
+      // ->where('tblquotejoborder.strJobOrderID', $request->input('job_id'))
       ->get();
 
     return Response::json($jobOrders);
@@ -39,9 +48,9 @@ class MatRequisitController extends Controller
   public function matReqModal(Request $request)
   {
     $modalinfo = DB::table('tblmatspecdetail')
-      ->leftjoin('tblquotejoborder', 'tblmatspecdetail.strMatspecID', 'tblmatspecdetail.strMatspecID')
+      ->leftjoin('tblquoteproductvariant', 'tblquoteproductvariant.strVarianceCode', 'tblmatspecdetail.strMatspecID')
+      ->leftjoin('tblquotejoborder', 'tblquotejoborder.strProductID', 'tblquoteproductvariant.strProductID')
       ->leftjoin('tblproduct', 'tblproduct.strProductID', 'tblquotejoborder.strProductID')
-      ->leftjoin('tblmatspec', 'tblmatspec.strMatspecID', 'tblmatspecdetail.strMatspecID')
       ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', 'tblmatspecdetail.strMaterialID')
       ->where('tblquotejoborder.strJobOrderID', $request->input('job_id'))
       ->get();
@@ -59,4 +68,32 @@ class MatRequisitController extends Controller
 
     return Response::json($matVariant);
   }
+
+  public function addMatReq(Request $request)
+  {
+    // dd($request->all());
+    $id = str_random(10);
+
+    $emp = DB::table('tblemployee')
+      ->where('tblemployee.strEmployeeID', $request->input('emp_name'))
+      ->first()
+      ->strEmployeeID;
+
+      // dd($emp);
+
+    $matreq = DB::table('tblmaterialrequisition')
+      ->insert([
+        'strMaterialRequisitionID' => $id,
+        'strJobOrderID' => $request->input('job_id'),
+        'strEmployeeID' => $request->input('emp_name'),
+        'dtNeeded' => $request->input('date'),
+      ]);
+
+    $matreqView = DB::table('tblmaterialrequisition')
+                ->where('tblmaterialrequisition.strMaterialRequisitionID', '=' , $id)
+                ->get();
+
+      return Response::json($matreqView);
+  }
+
 }

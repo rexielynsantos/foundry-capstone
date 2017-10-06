@@ -49,7 +49,7 @@
                     </div>
                       </div>
                       <div class="col-md-4">
-                    
+
                           <div class="col-md-12">
                             <div class="form-group">
                           <label>Need Date:</label>
@@ -62,7 +62,7 @@
                           </div>
                             </div>
                           </div>
-              
+
                       </div>
                   </div>
                   <hr>
@@ -136,7 +136,7 @@
               </div>
             </div>
             <div class="modal-footer">
-                <button type="reset" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i> &nbsp;Clear</button>
+                <!-- <button type="reset" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i> &nbsp;Clear</button> -->
                 <button type="submit" class="btn bg-blue btn-flat pull-right"><i class="glyphicon glyphicon-ok"></i> &nbsp;Save</button>
             </div>
             </form>
@@ -176,8 +176,6 @@
                   <thead>
                     <th> Req No. </th>
                     <th> SO No. </th>
-                    <th> Material Code </th>
-                    <th> Description </th>
                     <th> Requested By </th>
                     <th> Need Date </th>
                   </thead>

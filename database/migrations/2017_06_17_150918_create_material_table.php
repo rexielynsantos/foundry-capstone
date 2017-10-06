@@ -19,9 +19,10 @@ class CreateMaterialTable extends Migration
         $table->integer('intReorderLevel');
         $table->integer('intReorderQty');
         $table->string('strUOMID');
+        $table->double('dblBasePrice');
         $table->text('strMaterialDesc')->nullable();
         $table->string('strStatus');
-      
+        $table->timestamps();
       });
     }
 

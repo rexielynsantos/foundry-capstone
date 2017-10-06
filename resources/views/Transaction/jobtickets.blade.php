@@ -6,19 +6,13 @@
 
 
     <section class="content-header">
-      <h1>
-        Production
-    <!--     <small>13 new Requests</small> -->
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Production</a></li>
-        <li class="active">Add New</li>
-      </ol>
+       
     </section>
 
     <!-- Main content -->
 
   <section class="content">
+     <a id="btnAddTicket" data-toggle="modal" data-target="#ticketmodal"  class="btn btn-primary margin-bottom pull-right"><i class="fa fa-plus"></i>&nbsp;&nbsp;New Job Ticket</a>
 
   <div class="modal fade" style="margin-top:50px" id="endticketmodal" role="dialog">
     <form class="" id="jt_form" role="form" data-toggle="validator">
@@ -64,62 +58,16 @@
     </form>
   </div>
       <div class="row">
-        <div class="col-md-2">
-          <a id="btnAddTicket" data-toggle="modal" data-target="#ticketmodal"  class="btn btn-primary btn-block margin-bottom"><i class="fa fa-plus"></i></a>
 
-          <div class="box box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">Transactions</h3>
 
-              <div class="box-tools">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body no-padding">
-              <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#">Job Ticket
-                 </a></li>
-                <li><a href="/transaction/inspection">Inspection </a></li>
-                <li><a href="/transaction/production-monitoring">Production Monitoring </a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!-- /.col -->
-        <div class="col-md-10">
+        <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Jobs</h3>
-
-              <div class="box-tools pull-right">
-                <div class="has-feedback">
-                  <input type="text" class="form-control input-sm" placeholder="Search...">
-                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                </div>
-              </div>
             </div>
-            <!-- /.box-header -->
+     
             <div class="box-body no-padding">
-              <div class="mailbox-controls">
-                <!-- Check all button -->
-                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                </button>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                </div>
-                <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                <!-- <div class="pull-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div> -->
-                  <!-- /.btn-group -->
-                <!-- </div> -->
-                <!-- /.pull-right -->
-              </div>
+              
               <div class="table-responsive mailbox-messages">
                 <table id="jobTicketTable" class="table table-hover table-striped">
                   <thead>
@@ -215,6 +163,21 @@
             </div>
             <div class ="row">
               <div class="col-md-3">
+                <div class="row">
+                 <div class="col-md-12">
+                   <div class="form-group has-feedback">
+                      <div class="form-group">
+                        <label for="joborderRef" class="control-label">Job Order No. <span style="color:red">*</span></label>
+                        <select class="form-control select2" id = "joborderRef" style="width: 100%;" required>
+                          <option value="first" selected disabled>Select Job Order</option>
+                          @foreach($joborder as $jo)
+                          <option value="{{$jo->strJobOrdID}}">{{$jo->strJobOrdID}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="row">
                  <div class="col-md-12">
                    <div class="form-group has-feedback">

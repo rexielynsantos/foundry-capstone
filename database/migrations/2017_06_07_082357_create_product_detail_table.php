@@ -19,12 +19,12 @@ class CreateProductDetailTable extends Migration
             $table ->string('strProductID');
             $table->foreign('strProductVariantID')
                   ->references('strProductVariantID')->on('tblproductvariant')
-                  ->onUpdate('cascade');
-                  // ->onDelete('restrict');
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
             $table->foreign('strProductID')
                   ->references('strProductID')->on('tblproduct')
-                  ->onUpdate('cascade');
-                  // ->onDelete('restrict');
+                  ->onUpdate('cascade')
+                  ->onDelete('restrict');
         });
     }
 

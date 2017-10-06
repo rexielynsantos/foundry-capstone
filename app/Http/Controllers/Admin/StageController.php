@@ -14,6 +14,66 @@ use Response;
 
 class StageController extends Controller
 {
+  public function getStageMax(){
+    $id = DB::table('tblstage')
+          ->select('strStageID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strStageID', 'desc')
+          ->first();
+
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strStageID;
+
+      $arrID = str_split($idd);
+
+
+
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+
+         if($boolAdd)
+         {
+
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+
+         $arrNew[$ctr] = $new;
+       }//for
+
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'ST00001';
+     }
+    return response()->json($somenew);
+  }
+
   public function viewStage()
   {
     $stage = Stage::with('substage.details1')->where('strStatus','Active')->get();
@@ -25,11 +85,13 @@ class StageController extends Controller
   }
   public function addStage(StageRequest $request)
   {
-     $id = str_random(10);
+     $id = $request->input('id');
      Stage::insert([
       'strStageID' => $id,
       'strStageName' => $request->stage_name,
       'strStageDesc' => $request->stage_desc,
+      'dbltimeRequired' => $request->process_time,
+      'created_at' => $request->input('created_at'),
       'strStatus' => 'Active'
 
       ]);
@@ -59,6 +121,7 @@ class StageController extends Controller
    $stage = Stage::where('strStageID', $request->stage_id)
    ->update([
       'strStageName' => $request->stage_name,
+      'dbltimeRequired' => $request->process_time,
       'strStageDesc' => $request->stage_desc,
       'strStatus' => 'Active'
     ]);

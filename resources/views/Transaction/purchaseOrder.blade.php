@@ -18,6 +18,7 @@
       <div class="col-md-3">
         <a id="btnAddpurchase" class="btn btn-block btn-social btn-instagram"><i class="fa fa-edit"></i> New Purchase Order </a>
         <a id="btnAddReceive" class="btn btn-block btn-social btn-linkedin"><i class="fa fa-truck"></i> Receive Delivery </a>
+        <a href="transaction/returnItems" class="btn btn-block btn-social btn-linkedin"><i class="fa fa-truck"></i> Return Items </a>
         <a href="/transaction/stocks" class="btn btn-block btn-social btn-bitbucket"><i class="fa fa-industry"></i> Monitor Stocks </a>
       </div>
       <!-- /.col -->

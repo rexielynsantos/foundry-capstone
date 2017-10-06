@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Quotation;
 use App\Models\QuoteRequest;
 use App\Models\MatSpec;
 use App\Models\QuoteProductVariant;
@@ -17,71 +18,16 @@ use PDF;
 
 class EstimateController extends Controller
 {
-    public function viewEstimate()
+
+    public function viewQuote()
     {
-    $estimate = DB::table('tblquoterequest')
-      ->get();
-
-      return Response::json($estimate);
-      // return view('Transaction.estimate')
-      // ->with('estimate',$estimate);
-    }
-
-    public function editQuote(Request $request)
-    {
-      $editQuote = DB::table('tblquoterequest')
-        ->where('tblquoterequest.strQuoteRequestID', $request->input('quote_id'))
-        ->first();
-
-      $editQuoteProduct = DB::table('tblquoteproductvariant')
-        ->where('tblquoteproductvariant.strQuoteRequestID', $request->input('quote_id'))
+      $quote = DB::table('tblquotation')
+        ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblquotation.strCustomerID')
+        ->leftjoin('tblcustcontact', 'tblcustcontact.strCustomerID', 'tblcustomer.strCustomerID')
         ->get();
 
-        $editProductData = $editQuoteProduct->toArray();
-
-        Session::put('strQuoteRequestID',$editQuote->strQuoteRequestID);
-        Session::put('strCompanyName',$editQuote->strCompanyName);
-        Session::put('strCustStreet',$editQuote->strCustStreet);
-        Session::put('strCustBrgy',$editQuote->strCustBrgy);
-        Session::put('strCustCity',$editQuote->strCustCity);
-        Session::put('strCustContactPerson',$editQuote->strCustContactPerson);
-        Session::put('strCustEmail',$editQuote->strCustEmail);
-        Session::put('strCustContactNo',$editQuote->strCustContactNo);
-
-        // $i = 0;
-        foreach ($editProductData as $sessionData) {
-          Session::push('strProductID', $sessionData->strProductID);
-          Session::push('strProductVariantID', $sessionData->strProductVariantID);
-          Session::push('intOrderQty', $sessionData->intOrderQty);
-          Session::push('strRemarks', $sessionData->strRemarks);
-          // $i = $i + 1;
-        }
-    }
-
-    public function updateQuote(Request $request)
-    {
-
-    }
-
-    public function viewAddEstimate()
-    {
-     $estimate = QuoteRequest::with('product.details4')->where('strStatus','Approved')->get();
-     $product = Product::where('strStatus', 'Active')->get();
-
-     Session::forget('strQuoteRequestID');
-     Session::forget('strCompanyName');
-     Session::forget('strCustStreet');
-     Session::forget('strCustBrgy');
-     Session::forget('strCustCity');
-     Session::forget('strCustContactPerson');
-     Session::forget('strCustEmail');
-     Session::forget('strCustContactNo');
-
-
-      // return Response::json($product);
-     return view('Transaction.estimate-add');
-    //  ->with('estimate',$estimate)
-    //  ->with('prodd', $product);
+      return view('Transaction.estimate')
+      ->with('quote', $quote);
     }
 
     public function addCart(Request $request)
@@ -91,17 +37,18 @@ class EstimateController extends Controller
         ->where('tblproduct.strProductName', $request->prodct_data)
         ->get();
 
+        // dd($prodd);
+
 			return Response::json($prodd);
     }
 
-    public function submitOrder(Request $request)
+    public function varianceInfo(Request $request)
     {
-      $prodVar = DB::table('tblproductvariant')
-        ->leftjoin('tblproductdetail', 'tblproductdetail.strProductVariantID', '=', 'tblproductvariant.strProductVariantID')
-        ->leftjoin('tblproduct', 'tblproduct.strProductID', '=', 'tblproductdetail.strProductID')
-        ->leftjoin('tbluom', 'tbluom.strUOMID', '=', 'tblproductvariant.strUOMID')
-        ->where('tblproduct.strProductName', $request->prodName)
-        // ->where('tblproduct.strProductName', $request->prodName)
+      $prodVar = DB::table('tblmatspec')
+        ->leftjoin('tblmatspecdetail', 'tblmatspecdetail.strMatSpecID', 'tblmatspec.strMatSpecID')
+        ->leftjoin('tblproduct', 'tblproduct.strProductID', 'tblmatspec.strProductID')
+        ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', 'tblmatspecdetail.strMaterialID')
+        ->where('tblmatspec.strVarianceCode', $request->varianceCode)
         ->get();
 
 			return Response::json($prodVar);
@@ -126,35 +73,21 @@ class EstimateController extends Controller
         'strStatus' => 'Pending'
      		]);
 
-// GET VARIANT ID
-     $uomNme = $request->input('uom_name');
-     $counter = 0;
-     foreach ($request->input('var_qty') as $intVarQty) {
-       $vari = DB::table('tblproductvariant')
-         ->select('strProductVariantID')
-         ->leftjoin('tbluom', 'tbluom.strUOMID', '=', 'tblproductvariant.strUOMID')
-         ->where('tblproductvariant.intVariantQty', $intVarQty)
-         ->where('tbluom.strUOMName', $uomNme[$counter])
-         ->first()
-         ->strProductVariantID;
-
-       $arr[] = $vari;
-       $counter = $counter + 1;
-     }
-
-
 //INSERT TO TBLQUOTEPRODUCTVARIANT
      $ctrr = 0;
      $qty = $request->input('qty');
      $rmrks = $request->input('remrks');
+     $variance = $request->input('variance_code');
+     $cost = $request->input('cost');
      foreach ($request->input('prod_id') as $prdctd) {
        QuoteProductVariant::insert([
          'strQuoteRequestID' => $id,
          'strProductID' => $prdctd[0],
-         'strProductVariantID' => $arr[$ctrr],
+         'strVarianceCode' => $variance[$ctrr],
+         'dblRequestCost' => $cost[$ctrr],
          'intOrderQty' => $qty[$ctrr][0],
          'strRemarks' => $rmrks[$ctrr],
-         'strStatus' => 'Pending'
+         'strQuoteStatus' => 'Pending'
        ]);
        $ctrr = $ctrr + 1;
      }
@@ -176,8 +109,6 @@ class EstimateController extends Controller
 
     $readFinal = DB::table('tblquoteproductvariant')
       ->leftjoin('tblproduct', 'tblproduct.strProductID', 'tblquoteproductvariant.strProductID')
-      ->leftjoin('tblproductvariant', 'tblproductvariant.strProductVariantID', 'tblquoteproductvariant.strProductVariantID')
-      ->leftjoin('tbluom', 'tbluom.strUOMID', 'tblproductvariant.strUOMID')
       ->where('tblquoteproductvariant.strQuoteRequestID', $request->quote_id)
       ->get();
 
@@ -189,8 +120,6 @@ class EstimateController extends Controller
         $modalInfo = DB::table('tblquoterequest')
           ->leftjoin('tblquoteproductvariant', 'tblquoteproductvariant.strQuoteRequestID', 'tblquoterequest.strQuoteRequestID')
           ->leftjoin('tblproduct', 'tblproduct.strProductID', 'tblquoteproductvariant.strProductID')
-          ->leftjoin('tblproductvariant', 'tblproductvariant.strProductVariantID', 'tblquoteproductvariant.strProductVariantID')
-          ->leftjoin('tbluom', 'tbluom.strUOMID', 'tblproductvariant.strUOMID')
           ->where('tblquoterequest.strQuoteRequestID', '=',  $request->quote_id)
           ->get();
 
@@ -200,13 +129,11 @@ class EstimateController extends Controller
   public function modalTableInfo(Request $request)
   {
     // dd($request->all());
-    $modalTableInfo = DB::table('tblquoterequest')
-      ->leftjoin('tblquoteproductvariant', 'tblquoteproductvariant.strQuoteRequestID', 'tblquoterequest.strQuoteRequestID')
+    $modalTableInfo = DB::table('tblquoteproductvariant')
+      ->leftjoin('tblquoterequest', 'tblquoteproductvariant.strQuoteRequestID', 'tblquoterequest.strQuoteRequestID')
       ->leftjoin('tblproduct', 'tblproduct.strProductID', 'tblquoteproductvariant.strProductID')
-      ->leftjoin('tblproductvariant', 'tblproductvariant.strProductVariantID', 'tblquoteproductvariant.strProductVariantID')
-      ->leftjoin('tbluom', 'tbluom.strUOMID', 'tblproductvariant.strUOMID')
-      ->where('tblquoterequest.strQuoteRequestID', '=',  $request->quote_id)
-      ->where('tblquoteproductvariant.strStatus', '=', 'Pending')
+      ->where('tblquoteproductvariant.strQuoteRequestID', '=',  $request->quote_id)
+      // ->where('tblquoteproductvariant.strStatus', '=', 'Pending')
       ->get();
 
   return Response::json($modalTableInfo);
@@ -220,10 +147,13 @@ class EstimateController extends Controller
     return Response::json($varianceCode);
   }
 
-  public function getProduct()
+  public function getProduct(Request $request)
   {
-    $product = Product::where('strStatus','Active')->get();
-    dd($product);
+
+    $product = DB::table('tblproduct')
+      ->where('tblproduct.strStatus','Active')
+      ->get();
+    // dd($product);
     return Response::json($product);
   }
 
@@ -254,6 +184,59 @@ class EstimateController extends Controller
                 ]);
     }
   }
+  public function pdfEstimate(Request $request){
+      $po = QuoteRequest::with(['custpurchase.customer.contact', 'custpurchase.quotation.quoteprodvariant.details4'])
+        ->where('tbljoborder.strJobOrdID', $request->input('id'))
+        ->first();
+      
 
+      return $po;
+    }
+  // private function incID($id)
+  // 	{
+  //
+  // 		$arrID = str_split($id);
+  //
+  // 		$new = "";
+  // 		$somenew = "";
+  // 		$arrNew = [];
+  // 		$boolAdd = TRUE;
+  //
+  // 		for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+  // 		{
+  // 			$new = $arrID[$ctr];
+  //
+  // 			if($boolAdd)
+  // 			{
+  //
+  // 				if(is_numeric($new) || $new == '0')
+  // 				{
+  // 					if($new == '9')
+  // 					{
+  // 						$new = '0';
+  // 						$arrNew[$ctr] = $new;
+  // 					}
+  // 					else
+  // 					{
+  // 						$new = $new + 1;
+  // 						$arrNew[$ctr] = $new;
+  // 						$boolAdd = FALSE;
+  // 					}//else
+  // 				}//if(is_numeric($new))
+  // 				else
+  // 				{
+  // 					$arrNew[$ctr] = $new;
+  // 				}//else
+  // 			}//if ($boolAdd)
+  //
+  // 			$arrNew[$ctr] = $new;
+  // 		}//for
+  //
+  // 		for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+  // 		{
+  // 			$somenew = $somenew . $arrNew[$ctr2] ;
+  // 		}
+  // 		return $somenew;
+  // 	}
 
 }

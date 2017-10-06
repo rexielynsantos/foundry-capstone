@@ -18,12 +18,12 @@ class CreateStageDetailTable extends Migration
         $table->string('strSubStageID');
         $table->foreign('strStageID')
               ->references('strStageID')->on('tblstage')
-              ->onUpdate('cascade');
-              // ->onDelete('restrict');
+              ->onUpdate('cascade')
+              ->onDelete('restrict');
         $table->foreign('strSubStageID')
               ->references('strSubStageID')->on('tblsubstage')
-              ->onUpdate('cascade');
-              // ->onDelete('restrict');
+              ->onUpdate('cascade')
+              ->onDelete('restrict');
         });
     }
 

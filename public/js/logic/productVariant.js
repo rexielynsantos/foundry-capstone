@@ -86,67 +86,81 @@ $(document).ready(function(){
     });
     e.preventDefault();
     $.ajax({
-      type: "POST",
-      url: urlCode,
-      data: {
-          type_data: typeArr,
-          variant_qty: $('#variantQty').val(),
-          variant_uomid: $('#variantUnit').val(),
-          variant_desc: $('#variantDesc').val(),
-          variant_id: tempID
-      },
-      success: function(result) {
-        // console.log(result);
-        if(urlCode == '/maintenance/productVariant-update'){
-          table.rows('tr.active').remove().draw();
-          noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Product Variant successfully updated!</center></h4>',
-            });
-        }else{
-          noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Product Variant successfully added!</center></h4>',
-            });
-        }
+      type: "GET",
+      url: '/maintenance/productVariant-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+        $.ajax({
+          type: "POST",
+          url: urlCode,
+          data: {
+              id: data,
+              type_data: typeArr,
+              variant_qty: $('#variantQty').val(),
+              variant_uomid: $('#variantUnit').val(),
+              variant_desc: $('#variantDesc').val(),
+              created_at: today,
+              variant_id: tempID
+          },
+          success: function(result) {
+            // console.log(result);
+            if(urlCode == '/maintenance/productVariant-update'){
+              table.rows('tr.active').remove().draw();
+              noty({
+                  type: 'success',
+                  layout: 'bottomRight',
+                  timeout: 3000,
+                  text: '<h4><center>Product Variant successfully updated!</center></h4>',
+                });
+            }else{
+              noty({
+                  type: 'success',
+                  layout: 'bottomRight',
+                  timeout: 3000,
+                  text: '<h4><center>Product Variant successfully added!</center></h4>',
+                });
+            }
 
-       var x='';
-        for (var index = 0; index < result.producttype.length; index++) {
-          var element = result.producttype[index].details.strProductTypeName;
-          x += '<li style="list-style-type:circle">'+element+'</li>'
-        }
+           var x='';
+            for (var index = 0; index < result.producttype.length; index++) {
+              var element = result.producttype[index].details.strProductTypeName;
+              x += '<li style="list-style-type:circle">'+element+'</li>'
+            }
 
-        table.row.add([
-          result.strProductVariantID,
-          result.intVariantQty +" "+ result.unit.strUOMName,
-          x,
-          result.strProductVariantDesc,
-          ]
-        ).draw(false);
+            table.row.add([
+              result.strProductVariantID,
+              result.intVariantQty +" "+ result.unit.strUOMName,
+              x,
+              result.strProductVariantDesc,
+              ]
+            ).draw(false);
 
-        $('#varModal').modal('toggle');
-        $('#btnEditProductVariant').hide()
-        $('#btnDeleteProductVariants').hide()
-        $('#btnAddProductVariant').show()
-        typeArr = [];
+            $('#varModal').modal('toggle');
+            $('#btnEditProductVariant').hide()
+            $('#btnDeleteProductVariants').hide()
+            $('#btnAddProductVariant').show()
+            typeArr = [];
 
-      },
-      error: function(result){
-        var errors = result.responseJSON;
-          if(errors == undefined){
-            noty({
-              type: 'error',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Variant already exists!</center></h4>',
-            });
+          },
+          error: function(result){
+            var errors = result.responseJSON;
+              if(errors == undefined){
+                noty({
+                  type: 'error',
+                  layout: 'bottomRight',
+                  timeout: 3000,
+                  text: '<h4><center>Variant already exists!</center></h4>',
+                });
+              }
           }
+        })
+      },
+      error: function(data){
+        alert('ERROR IN MAX ID');
       }
-    });
+    })
+    
   });
 
 

@@ -10,9 +10,9 @@ class QuoteProductVariant extends Model
     public $incrementing = false;
     public $timestamps = false;
     protected $fillable = [
-      'strQuoteRequestID',
+      'strQuoteID',
 	    'strProductID',
-	    'strProductVariantID',
+	    // 'strProductVariantID',
       'strVarianceCode',
       'dblRequestCost',
       'intOrderQty',
@@ -22,9 +22,12 @@ class QuoteProductVariant extends Model
     public function details6(){
         return $this->hasOne('App\Models\ProductVariant','strProductVariantID','strProductVariantID');
     }
-     public function details4(){
+    public function details4(){
         return $this->hasOne('App\Models\Product','strProductID','strProductID');
     }
+    // public function quotation(){
+    //   return $this->hasOne('App\Models\Quotation', 'strQuoteID', 'strQuoteID');
+    // }
     // public function jobproduct(){
     //     return $this->hasOne('App\Models\QuoteJobOrder','strProductID','strProductID');
     // }

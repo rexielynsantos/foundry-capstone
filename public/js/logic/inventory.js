@@ -12,11 +12,10 @@ $(document).ready(function(){
 
 
 
-$('#btnViewStocks').click(function()
+$('#materialStocks').change(function()
 	{
 
-    
-
+    // table.clear();
 	
 	var valu = $('#materialStocks').val();
 
@@ -38,7 +37,7 @@ $('#btnViewStocks').click(function()
           document.getElementById('selectMatReorderqty').innerHTML = data[0].intReorderQty+data[0].unit.strUOMName;
           document.getElementById('selectMatStatus').innerHTML = data[0].strStatus;
          
-          for (var index = 0; index < data[0].materialvariant.length; index++) {
+          for (var index = 0; index < data[0].materialsupplier.length; index++) {
             var element = data[0].materialsupplier[index].supplier.strSupplierName;
             x += '<li style="list-style-type:circle">'+element+'</li>'
 
@@ -70,28 +69,6 @@ $('#btnViewStocks').click(function()
           document.getElementById('selectMatVariants').innerHTML = "";
       
 });
-
-// $('#btndeliveries').click(function()
-// {
-//   var deltable = $('#deliveryTable').DataTable();
-//   var valu = $('#materialStocks').val();
-
-
-
-//     $.ajax({
-//         url: '/transaction/receiving-records',
-//         type: "POST",
-//         data: {
-//             material_id : valu
-//         },
-//         success: function(data) {
-//           //DITO MAKUKUHA YUNG MGA DELIVERIES PER MATERIAL
-//           console.log(data);
-   
-//         }
-
-//    });
-// });
 
 
 });

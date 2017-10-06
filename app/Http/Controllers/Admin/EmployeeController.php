@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\EmployeeRequest;
 use App\Http\Controllers\Controller;
@@ -13,9 +14,70 @@ use DB;
 use Response;
 class EmployeeController extends Controller
 {
+
+  public function getEmployeeMax(){
+    $id = DB::table('tblemployee')
+          ->select('strEmployeeID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strEmployeeID', 'desc')
+          ->first();
+    
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strEmployeeID;
+
+      $arrID = str_split($idd);
+    
+       
+    
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+    
+         if($boolAdd)
+         {
+    
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+    
+         $arrNew[$ctr] = $new;
+       }//for
+    
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'EMP00001';
+     }
+    return response()->json($somenew);
+  }
+
   public function viewEmployee(){
 
-    $employee = Employee::where('strStatus', 'Active')->get();
+    $employee = Employee::with(['jobtitle','department'])->where('strStatus', 'Active')->get();
     $department = Department::where('strStatus', 'Active')->get();
     $jobTitle = JobTitle::where('strStatus', 'Active')->get();
 
@@ -28,7 +90,7 @@ class EmployeeController extends Controller
 
   public function addEmployee(EmployeeRequest $request)
   {
-      $id = str_random(10);
+      $id = Input::get('emp_id');
       $imageName = "";
       $tempID="";
       if($request->hasFile('emp_image'))
@@ -51,15 +113,16 @@ class EmployeeController extends Controller
       'strEmployeeImagePath' => $imageName,
       'strTempImage' => $tempID,
       'strStatus' => 'Active',
+      'created_at' => Input::get('created_at'),
     ]);
 
-      $employee = Employee::where('strEmployeeID', $id)->with(['jobtitle','department'])->first();
+      $employee = Employee::with(['jobtitle','department'])->where('strEmployeeID', $id)->first();
       return $employee;
     }
 
     public function editEmployee(Request $request)
     {
-      $employee = Employee::where('strEmployeeID', $request->emp_id)->get();
+      $employee = Employee::with(['jobtitle','department'])->where('strEmployeeID', $request->emp_id)->first();
       return $employee;
     }
 
@@ -67,8 +130,7 @@ class EmployeeController extends Controller
     {
        // try {
        //   DB::beginTransaction();
-         DB::table('tblemployee')
-      ->where('tblemployee.strEmployeeID', '=', $request->input('emp_id'))
+      Employee::where('strEmployeeID', $request->emp_id)
       ->update([
         'strEmployeeLast' => $request->input('emp_last'),
         'strEmployeeFirst' => $request->input('emp_first'),
@@ -102,15 +164,16 @@ class EmployeeController extends Controller
             ]);
         }
       // DB::commit();
-      $employee = DB::table('tblemployee')
-                ->leftjoin('tbldepartment','tbldepartment.strDepartmentID','=','tblemployee.strDepartmentID')
-                ->leftjoin('tbljobtitle','tbljobtitle.strJobTitleID','=','tblemployee.strJobTitleID')
-                ->select('tblemployee.*','tbldepartment.strDepartmentName',
-                         'tbljobtitle.strJobTitleName')
-                ->where('tblemployee.strEmployeeID', $request->input('emp_id'))
-                ->get();
+      // $employee = DB::table('tblemployee')
+      //           ->leftjoin('tbldepartment','tbldepartment.strDepartmentID','=','tblemployee.strDepartmentID')
+      //           ->leftjoin('tbljobtitle','tbljobtitle.strJobTitleID','=','tblemployee.strJobTitleID')
+      //           ->select('tblemployee.*','tbldepartment.strDepartmentName',
+      //                    'tbljobtitle.strJobTitleName')
+      //           ->where('tblemployee.strEmployeeID', $request->input('emp_id'))
+      //           ->get();
+      $employee = Employee::with(['jobtitle','department'])->where('strEmployeeID', $request->emp_id)->first();
 
-      return Response::json($employee);
+      return $employee;
     }
 
     public function deleteEmployee(Request $request)

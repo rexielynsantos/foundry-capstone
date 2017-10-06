@@ -19,6 +19,7 @@ class SupplierTableSeeder extends Seeder
         'strSupCity' => 'Pasay',
         'strSupplierDesc' => 'refettling needs',
         'strStatus' => 'Active',
+        'created_at' => '2000-01-01 01:00:00',
       ]);
         DB::table('tblsupplier')->insert([
         'strSupplierID' => 'SUP00002',
@@ -28,6 +29,7 @@ class SupplierTableSeeder extends Seeder
         'strSupCity' => 'Caniogan',
         'strSupplierDesc' => 'refettling needs',
         'strStatus' => 'Active',
+        'created_at' => '2000-01-01 02:00:00',
       ]);
     }
 }

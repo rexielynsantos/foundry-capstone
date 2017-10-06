@@ -17,21 +17,28 @@ Route::group(
   ['middleware' => ['auth'] ],
   function(){
 
-    Route::get('/', function () {
-        return view('Dashboard.dashboard');
-    });
+    // Route::get('/', function () {
+    //     return view('Dashboard.dashboard');
+    // });
+
+Route::get('/','Admin\DashboardController@viewDashboard');
+
 Route::get('/maintenance/product','Admin\ProductController@viewProduct');
 Route::get('/maintenance/product-reactivate','Admin\ProductController@reactivateProduct');
 Route::get('/maintenance/variant-all','Admin\ProductController@getAllVariant');
+Route::get('/maintenance/product-max','Admin\ProductController@getProductMax');
 Route::post('/maintenance/product-add','Admin\ProductController@addProduct');
 Route::post('/maintenance/product-edit','Admin\ProductController@editProduct');
 Route::post('/maintenance/product-update','Admin\ProductController@updateProduct');
 Route::post('/maintenance/product-delete','Admin\ProductController@deleteProduct');
 Route::post('/maintenance/product-activate','Admin\ProductController@activateProduct');
+Route::post('/maintenance/product-active','Admin\ProductController@activeProduct');
+Route::post('/maintenance/product-status','Admin\ProductController@statusProduct');
 
 Route::get('/maintenance/productVariant','Admin\ProductVariantController@viewProductVariant');
 Route::get('/maintenance/productVariant-reactivate','Admin\ProductVariantController@reactivateProductVariant');
 Route::get('/maintenance/type-all','Admin\ProductVariantController@getAllType');
+Route::get('/maintenance/productVariant-max','Admin\ProductVariantController@getProductVariantMax');
 Route::post('/maintenance/productVariant-add','Admin\ProductVariantController@addProductVariant');
 Route::post('/maintenance/productVariant-edit','Admin\ProductVariantController@editProductVariant');
 Route::post('/maintenance/productVariant-update','Admin\ProductVariantController@updateProductVariant');
@@ -39,17 +46,21 @@ Route::post('/maintenance/productVariant-delete','Admin\ProductVariantController
 Route::post('/maintenance/productVariant-activate','Admin\ProductVariantController@activateProductVariant');
 
 Route::get('/maintenance/materialVariants','Admin\MaterialVariantController@viewMaterialVariant');
+Route::get('/maintenance/materialVariants-max','Admin\MaterialVariantController@getMaterialVariantMax');
 // Route::get('/maintenance/materialVariant-reactivate','Admin\MaterialVariantController@reactivateMaterialVariant');
 Route::post('/maintenance/materialVariant-add','Admin\MaterialVariantController@addMaterialVariant');
 Route::post('/maintenance/materialVariant-edit','Admin\MaterialVariantController@editMaterialVariant');
 Route::post('/maintenance/materialVariant-update','Admin\MaterialVariantController@updateMaterialVariant');
 Route::post('/maintenance/materialVariant-delete','Admin\MaterialVariantController@deleteMaterialVariant');
+Route::post('/maintenance/materialVariant-active','Admin\MaterialVariantController@activeMaterialVariant');
+Route::post('/maintenance/materialVariant-status','Admin\MaterialVariantController@statusMaterialVariant');
 // Route::post('/maintenance/productVariant-activate','Admin\MaterialVariantController@activateMaterialVariant');
 
 
 Route::get('/maintenance/productType','Admin\ProductTypeController@viewProductType');
 Route::get('/maintenance/productType-reactivate','Admin\ProductTypeController@reactivateProductType');
 Route::get('/maintenance/productType-all','Admin\ProductTypeController@getAllStage');
+Route::get('/maintenance/productType-max','Admin\ProductTypeController@getProductTypeMax');
 Route::post('/maintenance/productType-add','Admin\ProductTypeController@addProductType');
 Route::post('/maintenance/productType-edit','Admin\ProductTypeController@editProductType');
 Route::post('/maintenance/productType-update','Admin\ProductTypeController@updateProductType');
@@ -59,6 +70,7 @@ Route::post('/maintenance/productType-active','Admin\ProductTypeController@activ
 Route::post('/maintenance/productType-status','Admin\ProductTypeController@statusProductType');
 
 Route::get('/maintenance/uom','Admin\UOMController@viewUOM');
+Route::get('/maintenance/uom-max','Admin\UOMController@getMax');
 Route::get('/maintenance/uom-reactivate','Admin\UOMController@reactivateUOM');
 Route::post('/maintenance/uom-add','Admin\UOMController@addUOM');
 Route::post('/maintenance/uom-edit', 'Admin\UOMController@editUOM');
@@ -80,6 +92,7 @@ Route::post('/maintenance/uomType-status','Admin\UOMTypeController@statusUOMType
 
 Route::get('/maintenance/jobTitle','Admin\JobTitleController@viewJobTitle');
 Route::get('/maintenance/jobTitle-reactivate','Admin\JobTitleController@reactivateJobTitle');
+Route::get('/maintenance/jobTitle-max','Admin\JobTitleController@getJobTitleMax');
 Route::post('/maintenance/jobTitle-add','Admin\JobTitleController@addJobTitle');
 Route::post('/maintenance/jobTitle-edit','Admin\JobTitleController@editJobTitle');
 Route::post('/maintenance/jobTitle-update','Admin\JobTitleController@updateJobTitle');
@@ -90,6 +103,7 @@ Route::post('/maintenance/jobTitle-status','Admin\JobTitleController@statusJobTi
 
 Route::get('/maintenance/department','Admin\DepartmentController@viewDepartment');
 Route::get('/maintenance/department-reactivate','Admin\DepartmentController@reactivateDepartment');
+Route::get('/maintenance/department-max','Admin\DepartmentController@getDepartmentMax');
 Route::post('/maintenance/department-add','Admin\DepartmentController@addDepartment');
 Route::post('/maintenance/department-edit','Admin\DepartmentController@editDepartment');
 Route::post('/maintenance/department-update','Admin\DepartmentController@updateDepartment');
@@ -99,6 +113,7 @@ Route::post('/maintenance/department-active','Admin\DepartmentController@activeD
 Route::post('/maintenance/department-status','Admin\DepartmentController@statusDepartment');
 
 Route::get('/maintenance/employee','Admin\EmployeeController@viewEmployee');
+Route::get('/maintenance/employee-max','Admin\EmployeeController@getEmployeeMax');
 Route::post('/maintenance/employee-add','Admin\EmployeeController@addEmployee');
 Route::post('/maintenance/employee-edit','Admin\EmployeeController@editEmployee');
 Route::post('/maintenance/employee-update','Admin\EmployeeController@updateEmployee');
@@ -119,6 +134,7 @@ Route::post('/maintenance/paymentTerms-activate','Admin\PaymentTermController@ac
 Route::get('/maintenance/stage','Admin\StageController@viewStage');
 Route::get('/maintenance/stage-reactivate','Admin\StageController@reactivateStage');
 Route::get('/maintenance/substage-all','Admin\StageController@getAllSubstage');
+Route::get('/maintenance/stage-max','Admin\StageController@getStageMax');
 Route::post('/maintenance/stage-add','Admin\StageController@addStage');
 Route::post('/maintenance/stage-edit','Admin\StageController@editStage');
 Route::post('/maintenance/stage-update','Admin\StageController@updateStage');
@@ -129,6 +145,7 @@ Route::post('/maintenance/stage-status','Admin\StageController@statusStage');
 
 Route::get('/maintenance/substage','Admin\SubStageController@viewSubStage');
 Route::get('/maintenance/substage-reactivate','Admin\SubStageController@reactivateSubStage');
+Route::get('/maintenance/substage-max','Admin\SubStageController@getSubStageMax');
 Route::post('/maintenance/substage-add','Admin\SubStageController@addSubStage');
 Route::post('/maintenance/substage-edit','Admin\SubStageController@editSubStage');
 Route::post('/maintenance/substage-update','Admin\SubStageController@updateSubStage');
@@ -138,6 +155,7 @@ Route::post('/maintenance/substage-active','Admin\SubstageController@activeSubst
 Route::post('/maintenance/substage-status','Admin\SubstageController@statusSubstage');
 
 Route::get('/maintenance/module','Admin\ModuleController@viewModule');
+Route::get('/maintenance/module-max','Admin\ModuleController@getModuleMax');
 Route::get('/maintenance/module-reactivate','Admin\ModuleController@reactivateModule');
 Route::post('/maintenance/module-add','Admin\ModuleController@addModule');
 Route::post('/maintenance/module-edit','Admin\ModuleController@editModule');
@@ -159,6 +177,7 @@ Route::post('/maintenance/userRole-status','Admin\UserRoleController@statusUserR
 
 Route::get('/maintenance/supplier','Admin\SupplierController@viewSupplier');
 Route::get('/maintenance/supplier-reactivate', 'Admin\SupplierController@reactivateSupplier');
+Route::get('/maintenance/supplier-max','Admin\SupplierController@getSupplierMax');
 Route::post('/maintenance/supplier-add','Admin\SupplierController@addSupplier');
 Route::post('/maintenance/supplier-edit','Admin\SupplierController@editSupplier');
 Route::post('/maintenance/supplier-update','Admin\SupplierController@updateSupplier');
@@ -170,6 +189,7 @@ Route::post('/maintenance/supplier-status','Admin\SupplierController@statusSuppl
 Route::get('/maintenance/material','Admin\MaterialController@viewMaterial');
 Route::get('/maintenance/material-reactivate','Admin\MaterialController@reactivateMaterial');
 Route::get('/maintenance/supplier-all','Admin\MaterialController@getAllSupplier');
+Route::get('/maintenance/material-max','Admin\MaterialController@getMaterialMax');
 Route::post('/transaction/material-dependVariant','Admin\MaterialController@getSelectedVariant');
 Route::post('/transaction/materialCart','Admin\MaterialController@addCart');
 Route::post('/maintenance/material-add','Admin\MaterialController@addMaterial');
@@ -182,22 +202,97 @@ Route::post('/maintenance/material-status','Admin\MaterialController@statusMater
 Route::get('/maintenance/variant-alls','Admin\MaterialController@getAllVariant');
 Route::get('/maintenance/uom-alls','Admin\MaterialController@getAllUOM');
 
+Route::get('/transaction/customers','Admin\CustomerController@customerView');
+Route::post('/transaction/customers-add','Admin\CustomerController@addCustomer');
+Route::get('/maintenance/customer-get','Admin\CustomerController@viewCustomer');
+Route::get('/transaction/customer-list','Admin\CustomerController@viewCustomerr');
+Route::get('/maintenance/customer-product-get','Admin\CustomerController@viewCustomerProduct');
+Route::post('/maintenance/customer-variance-get','Admin\CustomerController@viewCustomerVariance');
+Route::get('/maintenance/costing-uom-get','Admin\CustomerController@uomInfo');
+Route::get('/transaction/product-costing-list','Admin\CustomerController@viewCosting');
+Route::post('/transaction/product-costing-list-pdf','Admin\CustomerController@pdfCosting');
+Route::get('/transaction/estimate-add','Admin\CustomerController@viewCustomerrr');
+Route::post('/transaction/costing-submit','Admin\CustomerController@addCosting');
+Route::post('/transaction/costing-approve','Admin\CustomerController@approveCosting');
+Route::post('/transaction/costing-disapprove','Admin\CustomerController@disapproveCosting');
+Route::post('/transaction/customers-viewProfile','Admin\CustomerController@viewProfile');
+Route::post('/transaction/customer-orderHistory','Admin\CustomerController@orderHistory');
+Route::post('/transaction/customers-contactPersons','Admin\CustomerController@viewCustomerContacts');
+Route::post('/transaction/customers-edit','Admin\CustomerController@editCustomer');
+Route::post('/transaction/customers-update','Admin\CustomerController@updateCustomer');
+Route::post('/transaction/variance-info','Admin\CustomerController@varianceInfo');
+Route::post('/transaction/quotation-new','Admin\CustomerController@newQuote');
+Route::post('/transaction/quotation-add','Admin\CustomerController@addQuote');
+Route::post('/transaction/customerPurchase-add','Admin\PurchaseController@addPurchase');
+Route::post('/transaction/purchase-customerName-get','Admin\PurchaseController@customerName');
+Route::get('/transaction/customerPurchases','Admin\PurchaseController@viewCustomerPurchases');
+Route::get('/transaction/customerPurchases-view','Admin\PurchaseController@customerPurchases');
+Route::post('/transaction/selectedQuote','Admin\PurchaseController@selectedQuote');
+Route::post('/transaction/costing-view-summary','Admin\CustomerController@viewSummary');
+Route::post('/transaction/view-summaryOfCost','Admin\CustomerController@viewCostingSummary');
+Route::post('/transaction/view-summaryMaterials','Admin\CustomerController@viewMaterialCosting');
+
+Route::get('/transaction/joborder-new','Admin\NewJobOrderController@newJobOrder');
+Route::get('/transaction/joborders','Admin\NewJobOrderController@viewJobOrder');
+Route::post('/transaction/joborders-pdf','Admin\NewJobOrderController@pdfJobOrder');
+Route::get('/transaction/joborders-get','Admin\NewJobOrderController@jobOrders');
+Route::get('/transaction/joborder-max','Admin\NewJobOrderController@getJobOrderMax');
+Route::post('/transaction/joborder-refpo','Admin\NewJobOrderController@getRefPO');
+Route::post('/transaction/joborder-add','Admin\NewJobOrderController@addJobOrder');
+
 Route::get('/maintenance/dataReactivation', function () {
     return view('Reactivation.dataReactivation');
 });
-Route::get('/transaction/estimate', function () {
-    return view('Transaction.estimate');
+
+Route::get('/transaction/customer-profile', function () {
+    return view('Transaction.customer-profile');
 });
 
-Route::get('/transaction/estimate-add', function () {
-    return view('Transaction.estimate-add');
+Route::get('transaction/customers-editView', function () {
+    return view('Transaction.customer');
 });
 
+Route::get('/transaction/order-costing', function () {
+    return view('Transaction.order-costing');
+});
+
+Route::get('/transaction/order-costing-max','Admin\CustomerController@getCostingMax');
+Route::get('/transaction/estimate-add-max','Admin\CustomerController@getQuotationMax');
+Route::get('/transaction/customerPurchase-new-max','Admin\PurchaseController@getCustPurchaseMax');
+// Route::get('/transaction/order-costing','Admin\CustomerController@newCosting');
+
+Route::get('/transaction/order-costing-summary', function () {
+    return view('Transaction.order-costing-summary');
+});
+
+Route::get('/transaction/customerPurchase-new', function () {
+    return view('Transaction.customer-purchase');
+});
+
+Route::get('/transaction/returnItems', function () {
+    return view('Transaction.return-items');
+});
+
+Route::get('/queries/queries', function () {
+    return view('Queries.query');
+});
+
+
+
+Route::get('/utilities/terms-condition','Admin\TermsConditionController@viewTerms');
+Route::get('/utilities/terms-condition-max','Admin\TermsConditionController@getTermsMax');
+Route::post('/utilities/terms-condition-add','Admin\TermsConditionController@addTerms');
+Route::post('/utilities/terms-condition-edit','Admin\TermsConditionController@editTerms');
+Route::post('/utilities/terms-condition-update','Admin\TermsConditionController@updateTerms');
+Route::post('/utilities/terms-condition-delete','Admin\TermsConditionController@deleteTerms');
+
+Route::get('/transaction/estimate','Admin\EstimateController@viewQuote');
 Route::get('/transaction/estimate-table','Admin\EstimateController@viewEstimate');
 Route::get('/transaction/estimate-add-quote','Admin\EstimateController@viewAddEstimate');
-Route::post('/transaction/quoteRequest-edit','Admin\EstimateController@editQuote');
+Route::post('/transaction/quoteRequest-view','Admin\EstimateController@editQuote');
 Route::post('/transaction/cart','Admin\EstimateController@addCart');
-Route::post('/transaction/submitOrder','Admin\EstimateController@submitOrder');
+Route::post('/transaction/estimate-variance-add','Admin\EstimateController@varianceInfo');
+Route::post('/transaction/estimate-pdf','Admin\EstimateController@pdfEstimate');
 Route::post('/transaction/quoteSubmit','Admin\EstimateController@tofinal');
 Route::post('/transaction/estimate-final-read','Admin\EstimateController@finalRead');
 Route::post('/transaction/estimate-read','Admin\EstimateController@finalRead');
@@ -207,28 +302,37 @@ Route::get('/transaction/estimate-variance','Admin\EstimateController@varianceCo
 Route::get('/transaction/getProducts','Admin\EstimateController@getProduct');
 Route::post('/transaction/update-quote','Admin\EstimateController@updateQuote');
 
-Route::post('/transaction/estimate-add','Admin\EstimateController@addEstimate');
+// Route::post('/transaction/estimate-add','Admin\EstimateController@addEstimate');
 Route::post('/transaction/estimate-get','Admin\EstimateController@getEstimate');
 Route::post('/transaction/estimate-approve','Admin\EstimateController@approveEstimate');
 
-Route::get('/transaction/joborders','Admin\JobOrderController@viewJobOrder');
+Route::get('/transaction/joborders-table','Admin\JobOrderController@viewJobOrder');
 Route::get('/transaction/jobOrder-add','Admin\JobOrderController@viewAddJobOrder');
 Route::post('/transaction/submitGenerate','Admin\JobOrderController@addJobOrder');
 Route::post('/transaction/joborder-material','Admin\JobOrderController@joborderMaterial');
+Route::post('/transaction/jobOrder-approve','Admin\JobOrderController@approveJob');
 
+Route::get('/transaction/matReq-view','Admin\MatRequisitController@viewMaterialRequisit');
 Route::post('/transaction/getJoborders','Admin\MatRequisitController@getJoborder');
 Route::get('/transaction/matReq-employee','Admin\MatRequisitController@getEmployee');
 Route::get('/transaction/matReq-material','Admin\MatRequisitController@getMaterial');
 Route::post('/transaction/matReq-modal','Admin\MatRequisitController@matReqModal');
 Route::post('/transaction/matReq-matVar','Admin\MatRequisitController@matVar');
+Route::post('/transaction/matReq-add','Admin\MatRequisitController@addMatReq');
 
 Route::get('/transaction/jobOrder-monitoring','Admin\MaterialSpecController@viewMatSpec');
+Route::get('/transaction/matspec-max','Admin\MaterialSpecController@getMatSpecMax');
 Route::post('/Specification/ProductType','Admin\MaterialSpecController@showProductType');
 Route::post('/transaction/matspec-add','Admin\MaterialSpecController@addMatSpec');
 Route::post('/transaction/matspec-edit','Admin\MaterialSpecController@editMatSpec');
 Route::post('/transaction/matspec-update','Admin\MaterialSpecController@updateMatSpec');
 Route::post('/transaction/matspec-delete','Admin\MaterialSpecController@deleteMatSpec');
+Route::post('/transaction/matspec-active','Admin\MaterialSpecController@activeMatSpec');
+Route::post('/transaction/matspec-status','Admin\MaterialSpecController@statusMatSpec');
 Route::post('/transaction/matSpecCart','Admin\PurchaseAddController@addCart');
+Route::get('/transaction/purchase-products-get','Admin\PurchaseController@getProducts');
+Route::get('/transaction/purchase-quote-get','Admin\PurchaseController@getQuote');
+Route::post('/transaction/purchase-products-cart','Admin\PurchaseController@addProducts');
 Route::get('/transaction/material-all','Admin\JobOrderController@getAllMaterial');
 
 Route::get('/transaction/jobtickets','Admin\JobTicketController@viewJobTicket');
@@ -242,8 +346,9 @@ Route::post('/transaction/jobtickets-products','Admin\JobTicketController@getPro
 
 Route::get('/transaction/purchaseOrder','Admin\PurchaseAddController@viewPurchase');
 Route::get('/transaction/mat-all','Admin\PurchaseAddController@getAllMaterial');
-Route::get('/transaction/matvar-all','Admin\PurchaseAddController@getAllMaterialVariant');
+Route::post('/transaction/matvar-all','Admin\PurchaseAddController@getAllMaterialVariant');
 Route::get('/transaction/purchase-add','Admin\PurchaseAddController@viewaddPurchase');
+Route::post('/transaction/purchase-matvar','Admin\PurchaseAddController@matvari');
 Route::post('/transaction/purchaseorder-add','Admin\PurchaseAddController@addPurchaseOrder');
 Route::post('/transaction/Supplier','Admin\PurchaseAddController@showSupplierDetails');
 Route::post('/transaction/GetDetails','Admin\PurchaseAddController@GetDetails');
@@ -257,6 +362,17 @@ Route::get('/transaction/inspection','Admin\ProductInspectionController@viewInsp
 Route::post('/transaction/inspection-add','Admin\ProductInspectionController@addInspection');
 Route::post('/transaction/inspection-edit','Admin\ProductInspectionController@editInspection');
 Route::post('/transaction/inspection-update','Admin\ProductInspectionController@updateInspection');
+
+Route::get('/transaction/production-monitoring','Admin\ProductionMonitoringController@viewMonitoring');
+Route::post('/transaction/monitoring-add','Admin\ProductionMonitoringController@addMonitoring');
+Route::post('/transaction/monitoring-edit','Admin\ProductionMonitoringController@editMonitoring');
+Route::post('/transaction/monitoring-update','Admin\ProductionMonitoringController@updateMonitoring');
+Route::post('/transaction/monitoring-stage','Admin\ProductionMonitoringController@getStage');
+Route::post('/transaction/monitoring-jobProduct','Admin\ProductionMonitoringController@getJob');
+
+Route::get('/transaction/post-monitoring', function () {
+    return view('Transaction.postmonitoring');
+});
 
 
 Route::get('/transaction/receive','Admin\ReceiveMaterialsController@viewReceivePurchase');
@@ -316,9 +432,6 @@ Route::get('/transaction/purchase-final', function () {
     return view('Transaction.purchase-final');
 });
 
-Route::get('/transaction/production-monitoring', function () {
-    return view('Transaction.production-monitoring');
-});
 Route::get('/transaction/production-progress', function () {
     return view('Transaction.production-progress');
 });

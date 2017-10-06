@@ -16,17 +16,78 @@ use DB;
 use Response;
 class MaterialController extends Controller
   {
+
+    public function getMaterialMax(){
+    $id = DB::table('tblmaterial')
+          ->select('strMaterialID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strMaterialID', 'desc')
+          ->first();
+    
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strMaterialID;
+
+      $arrID = str_split($idd);
+    
+       
+    
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+    
+         if($boolAdd)
+         {
+    
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+    
+         $arrNew[$ctr] = $new;
+       }//for
+    
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'MAT00001';
+     }
+    return response()->json($somenew);
+  }
+
     public function getAllVariant()
     { 
       $variant = MaterialVariant::with('unit')->  where('strStatus', 'Active')->get();
 
       return response()->json($variant);
     }
+    public function getAllSupplier()
+    {
+      $supli = Supplier::where('strStatus','Active')->get();
 
-    public function getAllSupplier(){
-    $supli = Supplier::where('strStatus','Active')->get();
-
-    return response()->json($supli);
+      return response()->json($supli);
     }
     public function getAllUOM()
     {
@@ -39,7 +100,6 @@ class MaterialController extends Controller
       $material = Material::with(['materialsupplier.supplier','materialvariant.details'])->where('strStatus', 'Active')->get();
         return view('Purchasing.material')
         ->with('matr',$material);
-
     }
   //   public function getSelectedVariant(Request $request)
   //   {
@@ -64,96 +124,101 @@ class MaterialController extends Controller
   //     }
     public function addMaterial(Request $request)
     {
-      $id = str_random(10);
+      $id = $request->input('id');
       Material::insert([
         'strMaterialID' => $id,
         'strMaterialName' => $request->input('material_name'),
         'intReorderLevel' => $request->input('reorder_level'),
         'intReorderQty' => $request->input('reorder_qty'),
         'strUOMID' => $request->input('uom_id'),
+        'dblBasePrice' => $request->input('base_price'),
         'strMaterialDesc' => $request->input('material_desc'),
+        'created_at' => $request->input('created_at'),
         'strStatus' => 'Active'
         ]);
 
-      $cost = $request->input('cost_data');
-      $variant = $request->input('variant_data');
-      $ctr=0;
-
-      if($request->input('supplier_data') != ''){
-        foreach($request->input('supplier_data') as $supplier){
+      
+        // $ctr = 0;
+        foreach($request->input('variant_data') as $variant){
           MaterialDetail::insert([
             'strMaterialID' => $id,
-            'strMaterialVariantID' => $variant[$ctr],
+            'strMaterialVariantID' => $variant,
           ]);
+          // $ctr = $ctr + 1;
+        }
+        // $ctr=0;
+
+      // if($request->input('supplier_data') != ''){
+        foreach($request->input('supplier_data') as $supplier){
           MaterialSupplier::insert([
             'strMaterialID' => $id,
-            'strSupplierID' => $supplier[0],
+            'strSupplierID' => $supplier,
           ]);
-          $ctr = $ctr + 1;
+          // $ctr = $ctr + 1;
         }
-      }
+      // }
 
 
-      $material = Material::with(['materialvariant.supplier','materialvariant.details.unit', 'unit'])->where('strMaterialID', $id)->first();
+      $material = Material::with(['materialsupplier.supplier','materialvariant.details.unit', 'unit'])->where('strMaterialID', $id)->first();
       return $material;
     }
     public function editMaterial(Request $request)
     {
-      $material = Material::with(['materialvariant.supplier','materialvariant.details.unit', 'unit'])->where('strMaterialID', $request->material_id)->first();
+      $material = Material::with(['materialsupplier.supplier','materialvariant.details.unit', 'unit'])->where('strMaterialID', $request->material_id)->first();
 
       return $material;
     }
 
-  //   public function updateMaterial(Request $request)
-  //   {
-  //      Material::where('strMaterialID', $request->material_id)
-  //       ->update([
-  //           'strMaterialID' => $request->material_id,
-  //           'strMaterialName' => $request->input('material_name'),
-  //           'intReorderLevel' => $request->input('reorder_level'),
-  //           'intReorderQty' => $request->input('reorder_qty'),
-  //           'strUOMID' => $request->input('uom_id'),
-  //           'strMaterialDesc' => $request->input('material_desc'),
-  //           'strStatus' => 'Active'
-  //       ]);
+    public function updateMaterial(Request $request)
+    {
+       Material::where('strMaterialID', $request->material_id)
+        ->update([
+            'strMaterialID' => $request->material_id,
+            'strMaterialName' => $request->input('material_name'),
+            'intReorderLevel' => $request->input('reorder_level'),
+            'intReorderQty' => $request->input('reorder_qty'),
+            'strUOMID' => $request->input('uom_id'),
+            'dblBasePrice' => $request->input('base_price'),
+            'strMaterialDesc' => $request->input('material_desc'),
+            'strStatus' => 'Active'
+        ]);
 
-  //     // MaterialSupplier::where('strMaterialID', $request->material_id)
-  //     //   ->delete();
-  //     MaterialDetail::where('strMaterialID', $request->material_id)
-  //     ->delete();
+      MaterialSupplier::where('strMaterialID', $request->material_id)
+        ->delete();
+      MaterialDetail::where('strMaterialID', $request->material_id)
+      ->delete();
 
-  //       // if($request->input('supplier_data') != ''){
-  //       //   foreach($request->input('supplier_data') as $supplier){
-  //       //     MaterialSupplier::insert([
-  //       //       'strMaterialID' => $request->material_id,
-  //       //       'strSupplierID' => $supplier
-  //       //     ]);
-  //       //   }
-  //       // }
-  //       $supplier = $request->input('supplier_data');
-  //       if($request->input('variant_data') != ''){
-  //         foreach($request->input('variant_data') as $variant){
-  //           MaterialDetail::insert([
-  //             'strMaterialID' => $request->material_id,
-  //             'strMaterialVariantID' => $variant,
-  //             'strSupplierID' => $supplier
-  //           ]);
-  //         }
-  //       }
-  //   $material = Material::with(['materialvariant.supplier','materialvariant.details', 'unit'])->where('tblmaterial.strMaterialID', $request->material_id)
-  //           ->first();
-  //   return response()->json($material);
+        foreach($request->input('variant_data') as $variant){
+          MaterialDetail::insert([
+            'strMaterialID' => $request->material_id,
+            'strMaterialVariantID' => $variant,
+          ]);
+          // $ctr = $ctr + 1;
+        }
+        // $ctr=0;
 
-  // }
-  //   public function deleteMaterial(Request $request)
-  //   {
-  //     foreach ($request->input('material_id') as $materialID) {
-  //      Material::where('tblmaterial.strMaterialID', '=', $materialID)
-  //       ->update([
-  //         'strStatus' => 'Inactive',
-  //       ]);
-  //     }
-  //   }
+      // if($request->input('supplier_data') != ''){
+        foreach($request->input('supplier_data') as $supplier){
+          MaterialSupplier::insert([
+            'strMaterialID' => $request->material_id,
+            'strSupplierID' => $supplier,
+          ]);
+          // $ctr = $ctr + 1;
+        }
+    $material = Material::with(['materialsupplier.supplier','materialvariant.details.unit', 'unit'])->where('tblmaterial.strMaterialID', $request->material_id)
+            ->first();
+    return response()->json($material);
+
+  }
+    public function deleteMaterial(Request $request)
+    {
+      foreach ($request->input('material_id') as $materialID) {
+       Material::where('tblmaterial.strMaterialID', '=', $materialID)
+        ->update([
+          'strStatus' => 'Inactive',
+        ]);
+      }
+    }
 
 
   //   public function reactivateMaterial()
@@ -178,5 +243,26 @@ class MaterialController extends Controller
   //       ]);
   //     }
   //   }
+
+    public function statusMaterial(Request $request)
+  {
+    $status = Material::where('strMaterialName', '=', $request->input('material_name'))->get();
+
+
+    return response()->json($status);
+  }
+
+  public function activeMaterial(Request $request)
+  {
+      Material::where('strMaterialName', '=', $request->input('material_name'))
+
+      ->update([
+        'strStatus' => 'Active',
+      ]);
+
+      $material = Material::with(['materialsupplier.supplier','materialvariant.details.unit', 'unit'])->where('strMaterialName', $request->material_name)->first();
+      return $material;
+
+  }
 
 }

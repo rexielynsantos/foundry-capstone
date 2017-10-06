@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJobTicketDetailTable extends Migration
+class CreateJobticketDetailTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,9 +16,10 @@ class CreateJobTicketDetailTable extends Migration
         Schema::create('tbljobticketdetail', function (Blueprint $table) {
         $table->string('strJobTicketID');
         $table->string('strProductID');
+        $table->string('strCastingID'); //generated to per product
         $table->double('dblJobFinished')->nullable();
         $table->time('timeStarted');
-        $table->time('timeFinished')->nullable();
+        $table->time('timeFinished')->nullable(); 
         $table->foreign('strJobTicketID')
                   ->references('strJobTicketID')->on('tbljobticket');
         $table->foreign('strProductID')

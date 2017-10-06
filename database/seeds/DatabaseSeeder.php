@@ -11,16 +11,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+       
+        $this->call(UserTableSeeder::class);
         $this->call(ProductTypeTableSeeder::class);
         $this->call(DepartmentTableSeeder::class);
-        $this->call(UOMTypeTableSeeder::class);
         $this->call(StageTableSeeder::class);
         $this->call(ModuleTableSeeder::class);
         $this->call(WorkflowTableSeeder::class);
         $this->call(SubStageTableSeeder::class);
         $this->call(ProductTypeDetailTableSeeder::class);
-        $this->call(QuoteRequestTableSeeder::class);
+        // $this->call(QuoteRequestTableSeeder::class);
         $this->call(JobtitleTableSeeder::class);
         $this->call(EmployeeTableSeeder::class);
         $this->call(UserActionTableSeeder::class);
@@ -34,26 +34,29 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductDetailTableSeeder::class);
         $this->call(ProductVariantDetailTableSeeder::class);
         $this->call(MaterialTableSeeder::class);
-        // $this->call(MaterialSupplierTableSeeder::class);
         // $this->call(QuoteProductTableSeeder::class);
-        $this->call(JobTicketTableSeeder::class);
-        $this->call(JobTicketDetailTableSeeder::class);
-        $this->call(MaterialVariantTableSeeder::class);
-        $this->call(MaterialDetailTableSeeder::class);
-        $this->call(MaterialSupplierTableSeeder::class);
+        // $this->call(JobTicketTableSeeder::class);
+        // $this->call(JobTicketDetailTableSeeder::class);
+         $this->call(MaterialVariantTableSeeder::class);
+         $this->call(MaterialDetailTableSeeder::class);
+         $this->call(MaterialSupplierTableSeeder::class);
          // $this->call(PurchaseDetailTableSeeder::class);
-         
-         // $this->call(UserTableSeeder::class);
-        
          $this->call(MaterialSpecTableSeeder::class);
          $this->call(MaterialSpecDetailTableSeeder::class);
          $this->call(PurchaseTableSeeder::class);
          $this->call(PurchaseDetailTableSeeder::class);
          $this->call(PurchMatVariantTableSeeder::class);
-         $this->call(ReceivePurchaseTableSeeder::class);
-         $this->call(ReceivePurchaseDetailTableSeeder::class);
-         $this->call(ReceivePurchMatVariantDetailTableSeeder::class);
-         // $this->call(StockTableSeeder::class);
+         // $this->call(ReceivePurchaseTableSeeder::class);
+         // $this->call(ReceivePurchaseDetailTableSeeder::class);
+         // $this->call(ReceivePurchMatVariantDetailTableSeeder::class);
+         $this->call(TermsConditionTableSeeder::class);
+         $this->call(CustomerTableSeeder::class);
+         $this->call(CustomerContactTableSeeder::class);
+         $this->call(CostingTableSeeder::class);
+         $this->call(QuotationTableSeeder::class);
+         $this->call(CustPurchaseTableSeeder::class);
+         $this->call(JobOrderTableSeeder::class);
+
 
 
 

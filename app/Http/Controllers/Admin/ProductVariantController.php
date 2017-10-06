@@ -15,6 +15,66 @@ use Response;
 class ProductVariantController extends Controller
 {
 
+    public function getProductVariantMax(){
+    $id = DB::table('tblproductvariant')
+          ->select('strProductVariantID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strProductVariantID', 'desc')
+          ->first();
+    
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strProductVariantID;
+
+      $arrID = str_split($idd);
+    
+       
+    
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+    
+         if($boolAdd)
+         {
+    
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+    
+         $arrNew[$ctr] = $new;
+       }//for
+    
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'VAR00001';
+     }
+    return response()->json($somenew);
+  }
+
     public function getAllType(){
       $type = ProductType::where('strStatus', 'Active')->get();
 
@@ -36,13 +96,14 @@ class ProductVariantController extends Controller
     }
 
     public function addProductVariant(Request $request){
-      $id = str_random(10);
+      $id = $request->input('id');
 
       ProductVariant::insert([
         'strProductVariantID' => $id,
          'intVariantQty' => $request->input('variant_qty'),
         'strUOMID' => $request->input('variant_uomid'),
         'strProductVariantDesc' => $request->input('variant_desc'),
+        'created_at' => $request->input('created_at'),
         'strStatus' => 'Active'
         ]);
 

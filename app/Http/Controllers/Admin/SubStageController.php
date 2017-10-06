@@ -11,7 +11,68 @@ use Response;
 
 class SubStageController extends Controller
 {
-    public function viewSubStage()
+
+  public function getSubStageMax(){
+    $id = DB::table('tblsubstage')
+          ->select('strSubStageID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strSubStageID', 'desc')
+          ->first();
+
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strSubStageID;
+
+      $arrID = str_split($idd);
+
+
+
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+
+         if($boolAdd)
+         {
+
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+
+         $arrNew[$ctr] = $new;
+       }//for
+
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'SUBST00001';
+     }
+    return response()->json($somenew);
+  }
+
+  public function viewSubStage()
   {
     $product = SubStage::where('strStatus','Active')->get();
 
@@ -21,11 +82,13 @@ class SubStageController extends Controller
   }
   public function addSubStage(SubStageRequest $request)
   {
-     $id = str_random(10);
+     $id = $request->input('id');
      SubStage::insert([
       'strSubStageID' => $id,
       'strSubStageName' => $request->input('substage_name'),
+      'dbltimeRequired' => $request->input('process_time'),
       'strSubStageDesc' => $request->input('substage_desc'),
+      'created_at' => $request->input('created_at'),
       'strStatus' => 'Active',
       ]);
      $sub_stage = SubStage::where('strSubStageID', $id)->get();
@@ -64,6 +127,7 @@ class SubStageController extends Controller
     SubStage::where('strSubStageID', $request->substage_id)
     ->update([
       'strSubStageName' => $request->input('substage_name'),
+      'dbltimeRequired' => $request->input('process_time'),
       'strSubStageDesc' => $request->input('substage_desc'),
       ]);
     $sub_stage = SubStage::where('strSubStageID', $request->substage_id)->get();

@@ -18,6 +18,7 @@ class CreateProductTypeTable extends Migration
         $table->string('strProductTypeName')->unique();
         $table->text('strProductTypeDesc')->nullable();
         $table->string('strStatus');
+        $table->timestamps();
       });
     }
 

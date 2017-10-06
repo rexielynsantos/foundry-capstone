@@ -31,7 +31,7 @@ $("#btnEdituom").click(function(){
         // CHANGE ADD THIS DEPENDS ON INPUT FIELDS
         $('#uomName').val(data[0].strUOMName);
         $('#uomDesc').val(data[0].strUOMDesc);
-        $('#uomTypeSelect').val(data[0].strUOMTypeID).change();
+        // $('#uomTypeSelect').val(data[0].strUOMTypeID).change();
         // URL OF EDIT
         tempID = data[0].strUOMID;
         document.getElementById('uom_form').action = "{{URL::to('/maintenance/uom-update')}}";
@@ -47,74 +47,89 @@ $("#btnEdituom").click(function(){
     table.column(0).visible(false);
     e.preventDefault();
     $.ajax({
-      type: "POST",
-      url: urlCode,
-      data: {
-          uom_name: $('#uomName').val(),
-          uom_desc: $('#uomDesc').val(),
-          uomtype_id: $('#uomTypeSelect').val(),
-          uom_id: tempID
-      },
-      success: function(result) {
-        if(urlCode == '/maintenance/uom-update'){
-          table.rows('tr.active').remove().draw();
-          noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Unit of Measurement successfully updated!</center></h4>',
-            });
-        }else{
-            noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Unit of Measurement successfully added!</center></h4>',
+      type: "GET",
+      url: '/maintenance/uom-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+        $.ajax({
+          type: "POST",
+          url: urlCode,
+          data: {
+              id: data,
+              uom_name: $('#uomName').val(),
+              uom_desc: $('#uomDesc').val(),
+              created_at: today,
+              // uomtype_id: $('#uomTypeSelect').val(),
+              uom_id: tempID
+          },
+          success: function(result) {
+            if(urlCode == '/maintenance/uom-update'){
+              table.rows('tr.active').remove().draw();
+              noty({
+                  type: 'success',
+                  layout: 'bottomRight',
+                  timeout: 3000,
+                  text: '<h4><center>Unit of Measurement successfully updated!</center></h4>',
+                });
+            }else{
+                noty({
+                  type: 'success',
+                  layout: 'bottomRight',
+                  timeout: 3000,
+                  text: '<h4><center>Unit of Measurement successfully added!</center></h4>',
+                });
+              }
+              console.log(result);
+            table.row.add([
+              result[0].strUOMID,
+              result[0].strUOMName,
+              result[0].strUOMDesc,
+              // result[0].unittype.strUOMTypeName,
+              ]
+            ).draw(false);
+
+            $('#uomName').val('')
+            $('#uomDesc').val('')
+            // $('#uomTypeSelect').val('')
+            $('#add_uom_modal').modal('toggle');
+            $('#btnEdituom').hide()
+            $('#btnDeleteuoms').hide()
+            $('#btnAdduom').show()
+          },
+          error: function(result){
+            $.ajax({
+                url: '/maintenance/uom-status',
+                type: 'POST',
+                data: {
+                    uom_name: $('#uomName').val(),
+                },
+                success: function(dataa)
+                {
+                  var errors = result.responseJSON;
+                    if(errors == undefined){
+                      if(dataa[0].strStatus == 'Active'){
+                        noty({
+                          type: 'error',
+                          layout: 'bottomRight',
+                          timeout: 3000,
+                          text: '<h4><center>Unit name already exist!</center></h4>',
+                        });
+                      }
+                      else if(dataa[0].strStatus == 'Inactive'){
+                        $('#UOMReactivateModal').modal();
+                      }
+                    }
+                }
             });
           }
-        table.row.add([
-          result[0].strUOMID,
-          result[0].strUOMName,
-          result[0].strUOMDesc,
-          result[0].unittype.strUOMTypeName,
-          ]
-        ).draw(false);
-
-        $('#uomName').val('')
-        $('#uomDesc').val('')
-        $('#uomTypeSelect').val('')
-        $('#add_uom_modal').modal('toggle');
-        $('#btnEdituom').hide()
-        $('#btnDeleteuoms').hide()
-        $('#btnAdduom').show()
-      },
-      error: function(result){
-        $.ajax({
-            url: '/maintenance/uom-status',
-            type: 'POST',
-            data: {
-                uom_name: $('#uomName').val(),
-            },
-            success: function(data)
-            {
-              var errors = result.responseJSON;
-                if(errors == undefined){
-                  if(data[0].strStatus == 'Active'){
-                    noty({
-                      type: 'error',
-                      layout: 'bottomRight',
-                      timeout: 3000,
-                      text: '<h4><center>Unit name already exist!</center></h4>',
-                    });
-                  }
-                  else if(data[0].strStatus == 'Inactive'){
-                    $('#UOMReactivateModal').modal();
-                  }
-                }
-            }
         });
+      },
+      error: function(data){
+        alert('ERROR IN MAX ID');
       }
-    });
+    })
+
   })
 
 
@@ -174,7 +189,7 @@ $('#btnReactivateUOM').click(function(){
         result.strUOMID,
         result.strUOMName,
         result.strUOMDesc,
-        result.unittype.strUOMTypeName,
+        // result.unittype.strUOMTypeName,
         ]
       ).draw(false);
     },

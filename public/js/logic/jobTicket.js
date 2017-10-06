@@ -15,9 +15,9 @@ $(document).ready(function(){
 
   var clear = 0;
   var jtable =  $('#jobTicketTable').DataTable({
-    "searching": false,
+    "searching": true,
     "ordering": false,
-    "paging": false,
+    "paging": true,
   });
   var table =  $('#jobtixTable').DataTable({
     "searching": false,
@@ -316,7 +316,8 @@ $(document).ready(function(){
           time_data: times,
           emp_id: $('#personnel').val(),
           stage_id: $('#stage').val(),
-          substage_id: $('#substage').val()
+          substage_id: $('#substage').val(),
+          joborder_id: $('#joborderRef').val()
       },
       success: function(result) {
           noty({
@@ -363,6 +364,7 @@ $(document).ready(function(){
         $('#personnel').val('')
         $('#stage').val('')
         $('#substage').val('')
+        $('#joborderRef').val('')
         oTable.fnClearTable();
         oTable.fnDraw();
         $('#ticketmodal').modal('toggle');

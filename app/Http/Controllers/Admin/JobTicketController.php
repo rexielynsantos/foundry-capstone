@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
 use App\Models\JobTicket;
+use App\Models\JobOrder;
 use App\Models\JobTicketDetail;
 use App\Models\Product;
 use App\Models\Stage;
@@ -20,18 +21,20 @@ class JobTicketController extends Controller
 {
     public function viewJobTicket()
     {
-      $job_tix = JobTicket::with(['product.details', 'employee', 'stage', 'substage'])->get();
+      $job_tix = JobTicket::with(['product.details', 'employee', 'stage', 'substage', 'joborder'])->get();
       $product = Product::where('strStatus', 'Active')->get();
       $stage = Stage::with('substage.details1')->where('strStatus','Active')->get();
       $substage = SubStage::where('strStatus','Active')->get();
       $emp = Employee::where('strStatus','Active')->get();
+      $joborder = JobOrder::get();
 
       return view('Transaction.jobtickets')
   	  ->with('jobticket', $job_tix)
   	  ->with('stage', $stage)
   	  ->with('substage', $substage)
   	  ->with('emp', $emp)
-  	  ->with('prodd', $product);
+  	  ->with('prodd', $product)
+      ->with('joborder', $joborder);
     }
 
     public function addJobTicket(Request $request){
@@ -42,6 +45,7 @@ class JobTicketController extends Controller
           'strEmployeeID' => $request->input('emp_id'),
           'strStageID' => $request->input('stage_id'),
           'strSubStageID' => $request->input('substage_id'),
+          'strJobOrdID' => $request->input('joborder_id'),
        		]);
       }
       if($request->input('substage_id') == ''){
@@ -78,12 +82,12 @@ class JobTicketController extends Controller
         }
       }
 
-      $jobticket = JobTicket::with(['product.details', 'employee', 'stage', 'substage'])->where('strJobTicketID', $id)->first();
+      $jobticket = JobTicket::with(['product.details', 'employee', 'stage', 'substage', 'joborder'])->where('strJobTicketID', $id)->first();
       return $jobticket;
     }
 
     public function editJobTicket(Request $request){
-      $jobticket = JobTicket::with(['product.details', 'employee', 'stage', 'substage'])->where('strJobTicketID', $request->input('jt_id'))->first();
+      $jobticket = JobTicket::with(['product.details', 'employee', 'stage', 'substage', 'joborder'])->where('strJobTicketID', $request->input('jt_id'))->first();
       return $jobticket;
     }
     
@@ -127,7 +131,7 @@ class JobTicketController extends Controller
             $ctr = $ctr + 1;
          }
  
-       $jobticket = JobTicket::with(['product.details', 'employee', 'stage', 'substage'])->where('tbljobticket.strJobTicketID', '=', $id)->first();
+       $jobticket = JobTicket::with(['product.details', 'employee', 'stage', 'substage', 'joborder'])->where('tbljobticket.strJobTicketID', '=', $id)->first();
        return $jobticket;
     }
 

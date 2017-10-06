@@ -87,7 +87,7 @@ $('#btnDeleteMats').click(function(){
     },
     success: function(result) {
       tblname.rows('tr.active').remove().draw();
-      $('#DeptDeleteModal').modal('toggle');
+      // $('#DeptDeleteModal').modal('toggle');
       $('#btnAddMat').show();
       $('#btnEditMat').hide();
       $('#btnDeleteMats').hide();
@@ -96,7 +96,7 @@ $('#btnDeleteMats').click(function(){
           type: 'error',
           layout: 'bottomRight',
           timeout: 3000,
-          text: '<h4><center>Department(s) successfully deactivated!</center></h4>',
+          text: '<h4><center>Product Variance(s) successfully deactivated!</center></h4>',
         });
     },
     error: function(result) {
@@ -141,7 +141,7 @@ $("#addCart").click(function(){
               table1.row.add([
                 data[0].strMaterialID,
                 data[0].strMaterialName,
-                "<input type='number' id='"+data[0].strMaterialName.replace(/ /g,'')+"' placeholder='0'>",
+                "<input type='number' min=1 id='"+data[0].strMaterialName.replace(/ /g,'')+"' placeholder='0'>",
                 data[0].unit.strUOMName,
                 btnn
               ]).draw(true);
@@ -184,71 +184,95 @@ $(document).on('submit', '#matspec_form', function(e){
   // alert(matArr)
   // alert($('#productSelection').val())
   e.preventDefault();
-    $.ajax({
-      type: "POST",
-      url: urlCode,
-      data: {
-        mat_data : matArr,
-        product_id : $('#productSelection').val(),
-        variance_code : $('#varianceCode').val(),
-        mat_qty : qty,
-        tmp_id : tempID
-      },
-      success: function(result) {
-        // console.log(result);
-        if(urlCode == '/transaction/matspec-update'){
-          table.rows('tr.active').remove().draw();
-          noty({
-            type: 'success',
-            layout: 'bottomRight',
-            timeout: 3000,
-            text: '<h4><center> successfully updated!</center></h4>',
-          });
-        }else{
-          noty({
-            type: 'success',
-            layout: 'bottomRight',
-            timeout: 3000,
-            text: '<h4><center> successfully added!</center></h4>',
-          });
-        }
-        // table.row.add([
-        //
-        // ]).draw(false);
-
-        varArr = [];
-        qty = [];
-        urlCode = '';
-        table1.clear().draw();
-        $('#matModal').modal('toggle');
-      },
-      error: function(result){
+  $.ajax({
+      type: "GET",
+      url: '/transaction/matspec-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
         $.ajax({
-            url: '/transaction',
-            type: 'POST',
-            data: {
-
-            },
-            success: function(data)
-            {
-              var errors = result.responseJSON;
-                if(errors == undefined){
-                  if(data[0].strStatus == 'Active'){
-                    noty({
-                      type: 'error',
-                      layout: 'bottomRight',
-                      timeout: 3000,
-                      text: '<h4><center>Already exist!</center></h4>',
-                    });
-                  }
-                  else if(data[0].strStatus == 'Inactive'){
-                    $('#matModal').modal();
-                  }
-                }
+          type: "POST",
+          url: urlCode,
+          data: {
+            id: data,
+            mat_data : matArr,
+            product_id : $('#productSelection').val(),
+            variance_code : $('#varianceCode').val(),
+            mat_qty : qty,
+            created_at: today,
+            tmp_id : tempID
+          },
+          success: function(result) {
+            // console.log(result);
+            if(urlCode == '/transaction/matspec-update'){
+              table.rows('tr.active').remove().draw();
+              noty({
+                type: 'success',
+                layout: 'bottomRight',
+                timeout: 3000,
+                text: '<h4><center>Product Variance successfully updated!</center></h4>',
+              });
+            }else{
+              noty({
+                type: 'success',
+                layout: 'bottomRight',
+                timeout: 3000,
+                text: '<h4><center>Product Variance successfully added!</center></h4>',
+              });
             }
-        });
-      }
-    });
+
+            var mat = "";
+            for (var index = 0; index < result.material.length; index++) {
+              mat += '<li style="list-style-type:circle">'+result.material[index].details.strMaterialName+' - '+result.material[index].dblMaterialQuantity+result.material[index].details.unit.strUOMName+ '</li>';
+            }
+
+            table.row.add([
+              result.strMatSpecID,
+              result.strVarianceCode,
+              result.product.strProductName,
+              result.product.producttype.strProductTypeName,
+              mat,
+            ]).draw(false);
+
+            varArr = [];
+            qty = [];
+            urlCode = '';
+            table1.clear().draw();
+            $('#matModal').modal('toggle');
+          },
+          error: function(result){
+            $.ajax({
+                url: '/maintenance/matspec-status',
+                type: 'POST',
+                data: {
+                  variance_code: $('#varianceCode').val()
+                },
+                success: function(data)
+                {
+                  var errors = result.responseJSON;
+                    if(errors == undefined){
+                      if(data[0].strStatus == 'Active'){
+                        noty({
+                          type: 'error',
+                          layout: 'bottomRight',
+                          timeout: 3000,
+                          text: '<h4><center>Already exist!</center></h4>',
+                        });
+                      }
+                      else if(data[0].strStatus == 'Inactive'){
+                        $('#matModal').modal();
+                      }
+                    }
+                }
+            });
+          }
+        })
+          },
+          error: function(data){
+            alert('ERROR IN MAX ID');
+          }
+      })
+    
 })
 
 });
@@ -265,4 +289,39 @@ function removeProd(id){
     var table = $('#materialTable').DataTable();
     table.row($(this).parents('tr')).remove().draw()
   });
+
+  $('#btnReactivateMatSpec').click(function(){
+  $.ajax({
+    url: '/maintenance/matspec-active',
+    type: 'POST',
+    data: {
+        variance_code: $('#varianceCode').val()
+    },
+    success: function(result) {
+      $('#matModal').modal('toggle');
+      $('#MatSpecReactivateModal').modal('toggle');
+      noty({
+          type: 'success',
+          layout: 'bottomRight',
+          timeout: 3000,
+          text: '<h4><center>Product Variance successfully reactivated!</center></h4>',
+        });
+      var mat = "";
+        for (var index = 0; index < result.material.length; index++) {
+          mat += '<li style="list-style-type:circle">'+result.material[index].details.strMaterialName+' - '+result.material[index].dblMaterialQuantity+result.material[index].details.unit.strUOMName+ '</li>';
+        }
+
+        table.row.add([
+          result.strMatSpecID,
+          result.strVarianceCode,
+          result.product.strProductName,
+          result.product.producttype.strProductTypeName,
+          mat,
+        ]).draw(false);
+    },
+    error: function(result) {
+        alert('error');
+    }
+  });
+});
 }

@@ -9,7 +9,7 @@ class Department extends Model
     protected $table = 'tbldepartment';
     protected $primaryKey = 'strDepartmentID';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
     	'strDepartmentName',
     	'strDepartmentDesc',

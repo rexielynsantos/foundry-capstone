@@ -21,4 +21,15 @@ class ProductAllocation extends Model
     // public function orders(){
     //     return $this->hasMany('App\Models\ReceivePurchaseDetail', 'strReceivePurchaseID','strReceivePurchaseID');
     // }
+    public function stage(){
+        return $this->hasMany('App\Models\Stage','strStageID','strStageID');
+    }
+
+    public function joborder(){
+        return $this->belongsTo('App\Models\QuoteJobOrder', 'strJobOrderID', 'strJobOrderID');
+    }
+
+    public function detail(){
+        return $this->hasMany('App\Models\ProductAllocationDetail','strProdAllocationID','strProdAllocationID');
+    }
 }

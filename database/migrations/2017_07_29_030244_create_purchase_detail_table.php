@@ -16,11 +16,6 @@ class CreatePurchaseDetailTable extends Migration
         Schema::create('tblpurchasedetail', function (Blueprint $table) {
         $table->string('strPurchaseID');
         $table->string('strMaterialID');
-        // $table->string('strMaterialVariantID');
-        // $table->double('dblAddlQty');
-
-        // $table->foreign('strMaterialVariantID')
-        //       ->references('strMaterialVariantID')->on('tblmaterialdetail');
         $table->foreign('strMaterialID')
           ->references('strMaterialID')->on('tblmaterial');
         $table->foreign('strPurchaseID')

@@ -8,9 +8,71 @@ use App\Http\Controllers\Controller;
 use App\Models\ProductType;
 use App\Models\ProductTypeDetail;
 use App\Models\Stage;
+use DB;
 
 class ProductTypeController extends Controller
 {
+
+  public function getProductTypeMax(){
+    $id = DB::table('tblproducttype')
+          ->select('strProductTypeID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strProductTypeID', 'desc')
+          ->first();
+    
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strProductTypeID;
+
+      $arrID = str_split($idd);
+    
+       
+    
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+    
+         if($boolAdd)
+         {
+    
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+    
+         $arrNew[$ctr] = $new;
+       }//for
+    
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'TYPE00001';
+     }
+    return response()->json($somenew);
+  }
+  
   public function viewProductType()
   {
 
@@ -23,12 +85,13 @@ class ProductTypeController extends Controller
 
   public function addProductType(ProductTypeRequest $request)
   {
-    $id = str_random(10);
+    $id = $request->input('id');
 
     ProductType::insert([
       'strProductTypeID' => $id,
       'strProductTypeName' => $request->input('ptype_name'),
       'strProductTypeDesc' => $request->input('ptype_desc'),
+      'created_at' => $request->input('created_at'),
       'strStatus' => 'Active'
     ]);
 

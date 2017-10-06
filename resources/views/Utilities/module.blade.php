@@ -100,9 +100,9 @@
             </form>
           </div>
           <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
       </div>
+        <!-- /.modal-dialog -->
+    </div>
       <div class="modal fade" id="ModuleDeleteModal" role="dialog">
         <div class="col-md-6 col-md-offset-3  ">
           <div class="modal-content">
@@ -114,7 +114,7 @@
             </center>
             </div>
 
-            < <div class="modal-footer">
+            <div class="modal-footer">
                 <button class="btn bg-white btn-flat pull-right" data-dismiss="modal">No</button>
                 <button id="btnDeleteModule" type="button" class="btn bg-blue btn-flat pull-right">Yes</button>
             </div>

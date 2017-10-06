@@ -69,22 +69,12 @@
                       <th class="hidden"> ID </th>
                       <th> Need Date  </th>
                       <th> Material </th>
+                      <th> Variant </th>
+                      <td> Used for </td>
                       <th> Quantity </th>
                       <th> Date Accquired </th>
                     </thead>
                     <tbody>
-                      <tr>                    
-                        <td> 2017-08-28 </td>
-                        <td> Zircon Sand </td>
-                        <td> 100 </td>
-                        <td> 2017-08-28 </td>
-                      </tr>
-                      <tr>                    
-                        <td> 2017-08-27 </td>
-                        <td> Zircon Sand </td>
-                        <td> 250 </td>
-                        <td> 2017-08-28 </td>
-                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -112,7 +102,7 @@
 
        <div class="row">
         <div class="col-md-4">
-           <a href="../transaction/purchaseOrder" class="btn btn-block btn-social btn-github">  <i class="fa fa-arrow-left"></i> Back to Main </a> <br>
+           <a href="../transaction/purchaseOrder" class="btn btn-block btn-social btn-instagram">  <i class="fa fa-arrow-left"></i> Back to Main </a> <br>
 
           <div class="box box-solid">
             <div class="box-header with-border">
@@ -141,13 +131,6 @@
               </div>
 
               <hr>
-
-              <div class="row">
-                <div class="col-md-12">
-                <!--   <button type="reset" class="btn bg-white btn-flat pull-right">Update</button> -->
-                  <button type="button" id="btnViewStocks" class="btn bg-primary btn-flat pull-right">View</button>
-                </div>
-              </div>
 
             </div>
           </div>

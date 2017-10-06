@@ -82,7 +82,14 @@
                 </div>
               </div>
               <div>
-                <input type="text" id="emp_id" name="emp_id" hidden>
+                <div class="form-group has-feedback">
+                  <div class="form-group">
+                    <input type="text" class="form-control hidden" id="emp_id" name="emp_id">
+                    <input type="text" class="form-control hidden" id="created_at" name="created_at">
+                    <div class="help-block with-errors"></div>
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  </div>
+                </div>
               </div>
 
                 <div class="row">

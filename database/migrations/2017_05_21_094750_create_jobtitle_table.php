@@ -18,6 +18,8 @@ class CreateJobTitleTable extends Migration
         $table->string('strJobTitleName')->unique();
         $table->text('strJobTitleDesc')->nullable();
         $table->string('strStatus');
+        $table->timestamps();
+        
       });
     }
 

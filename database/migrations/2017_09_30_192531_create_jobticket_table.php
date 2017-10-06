@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,12 +18,15 @@ class CreateJobticketTable extends Migration
         $table->string('strEmployeeID');
         $table->string('strStageID');
         $table->string('strSubStageID')->nullable();
+        $table->string('strJobOrdID');
         $table->foreign('strStageID')
                   ->references('strStageID')->on('tblstage');
         $table->foreign('strSubStageID')
                   ->references('strSubStageID')->on('tblsubstage');
         $table->foreign('strEmployeeID')
           ->references('strEmployeeID')->on('tblemployee');
+        $table->foreign('strJobOrdID')
+                  ->references('strJobOrdID')->on('tbljoborder');
         });
     }
 

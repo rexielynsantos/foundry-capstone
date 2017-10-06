@@ -9,6 +9,8 @@
 <script src="/plugins/fileinput/fileinput.js"></script>
 <script src="/plugins/fileinput/fileinput.min.js"></script>
 <script src="/plugins/fileinput/explorer/theme.js"></script>
+<script src="/plugins/chartjs/Chart.js"></script>
+<script src="/plugins/chartjs/Chart.min.js"></script>
 <!-- <script src="/plugins/fileinput/sortable.js"></script> -->
 <script src="/locales/fr.js"></script>
 <script src="/locales/es.js"></script>

@@ -12,6 +12,67 @@ use Response;
 
 class MaterialVariantController extends Controller
 {
+
+    public function getMaterialVariantMax(){
+    $id = DB::table('tblmaterialvariant')
+          ->select('strMaterialVariantID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strMaterialVariantID', 'desc')
+          ->first();
+    
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strMaterialVariantID;
+
+      $arrID = str_split($idd);
+    
+       
+    
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+    
+         if($boolAdd)
+         {
+    
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+    
+         $arrNew[$ctr] = $new;
+       }//for
+    
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'MVAR00001';
+     }
+    return response()->json($somenew);
+  }
+
     public function viewMaterialVariant()
     {
 
@@ -24,13 +85,14 @@ class MaterialVariantController extends Controller
       ->with('unit', $unit);
     }
     public function addMaterialVariant(Request $request){
-      $id = str_random(10);
+      $id = $request->input('id');
 
       MaterialVariant::insert([
         'strMaterialVariantID' => $id,
          'intVariantQty' => $request->input('variant_qty'),
         'strUOMID' => $request->input('variant_uomid'),
         'strMaterialVariantDesc' => $request->input('variant_desc'),
+        'created_at' => $request->input('created_at'),
         'strStatus' => 'Active'
         ]);
 
@@ -72,6 +134,27 @@ class MaterialVariantController extends Controller
       ]);
     }
   }
+
+  // public function statusMaterialVariant(Request $request)
+  // {
+  //   $status = MaterialVariant::where('strStageName', '=', $request->input('stage_name'))->get();
+
+
+  //   return response()->json($status);
+  // }
+
+  // public function activeMaterialVariant(Request $request)
+  // {
+  //     MaterialVariant::where('strStageName', '=', $request->input('stage_name'))
+
+  //     ->update([
+  //       'strStatus' => 'Active',
+  //     ]);
+
+  //     $mv = MaterialVariant::with('substage.details1')->where('strStageName', $request->stage_name)->first();
+  //     return $mv;
+
+  // }
 
   // public function reactivateProductVariant()
   // {

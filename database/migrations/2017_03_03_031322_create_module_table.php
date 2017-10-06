@@ -19,6 +19,7 @@ class CreateModuleTable extends Migration
         $table->text('strModuleDesc')->nullable();
         $table->string('strDepartmentID');
         $table->string('strStatus');
+        $table->timestamps();
         $table->foreign('strDepartmentID')
               ->references('strDepartmentID')->on('tbldepartment')
               ->onUpdate('cascade')

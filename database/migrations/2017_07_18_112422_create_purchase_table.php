@@ -18,7 +18,11 @@ class CreatePurchaseTable extends Migration
         $table->string('strSupplierID');
         $table->string('strSupplierContactPerson');
         $table->string('strPaymentTermID');
+        $table->date('dateCreated');
         $table->string('strPStatus');
+        $table->boolean('isFinalize');
+        $table->boolean('isDelivered');
+        $table->timestamps();
         $table->foreign('strSupplierID')
           ->references('strSupplierID')->on('tblsupplier');
         $table->foreign('strPaymentTermID')

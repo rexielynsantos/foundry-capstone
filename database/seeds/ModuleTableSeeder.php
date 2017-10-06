@@ -16,14 +16,16 @@ class ModuleTableSeeder extends Seeder
           'strModuleName' => 'Job Order Processing',
           'strModuleDesc' => 'Job Order',
           'strDepartmentID' => 'DEPT00001',
-          'strStatus' => 'Active'
+          'strStatus' => 'Active',
+          'created_at' => '2000-01-01 01:00:00',
       ]);
       DB::table('tblmodule')->insert([
           'strModuleID' => 'MOD00002',
           'strModuleName' => 'Sales Order Processing',
           'strModuleDesc' => 'Sales Order',
           'strDepartmentID' => 'DEPT00002',
-          'strStatus' => 'Active'
+          'strStatus' => 'Active',
+          'created_at' => '2000-01-01 01:00:00',
       ]);
     }
 }

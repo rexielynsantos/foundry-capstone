@@ -17,6 +17,7 @@ class MaterialVariantTableSeeder extends Seeder
           'strUOMID' => 'U00003',
           'strMaterialVariantDesc' => 'asdf',
           'strStatus' => 'Active',
+          'created_at' => '2000-01-01 01:00:00',
       ]);
         DB::table('tblmaterialvariant')->insert([
           'strMaterialVariantID' => 'MVAR00002',
@@ -24,6 +25,7 @@ class MaterialVariantTableSeeder extends Seeder
           'strUOMID' => 'U00003',
           'strMaterialVariantDesc' => 'asdf',
           'strStatus' => 'Active',
+          'created_at' => '2000-01-01 02:00:00',
       ]);
         DB::table('tblmaterialvariant')->insert([
           'strMaterialVariantID' => 'MVAR00003',
@@ -31,6 +33,7 @@ class MaterialVariantTableSeeder extends Seeder
           'strUOMID' => 'U00003',
           'strMaterialVariantDesc' => 'asdf',
           'strStatus' => 'Active',
+          'created_at' => '2000-01-01 03:00:00',
       ]);
         DB::table('tblmaterialvariant')->insert([
           'strMaterialVariantID' => 'MVAR00004',
@@ -38,6 +41,7 @@ class MaterialVariantTableSeeder extends Seeder
           'strUOMID' => 'U00003',
           'strMaterialVariantDesc' => 'asdf',
           'strStatus' => 'Active',
+          'created_at' => '2000-01-01 04:00:00',
       ]);
     }
 }

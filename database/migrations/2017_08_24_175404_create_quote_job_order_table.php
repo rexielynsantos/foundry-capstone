@@ -17,15 +17,11 @@ class CreateQuoteJobOrderTable extends Migration
         $table->string('strJobOrderID')->primary();
         $table->string('strQuoteRequestID');
         $table->string('strProductID');
-        $table->string('strMatSpecID');
         $table->foreign('strQuoteRequestID')
               ->references('strQuoteRequestID')->on('tblquoterequest')
               ->onUpdate('cascade');
         $table->foreign('strProductID')
               ->references('strProductID')->on('tblquoteproductvariant')
-              ->onUpdate('cascade');
-        $table->foreign('strMatSpecID')
-              ->references( 'strMatSpecID')->on('tblmatspec')
               ->onUpdate('cascade');
         });
     }

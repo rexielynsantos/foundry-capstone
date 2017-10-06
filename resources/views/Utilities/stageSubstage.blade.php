@@ -16,10 +16,10 @@
                         <div class="form-group has-feedback">
                             <div class="form-group">
                             <label for="stageName" class="control-label">Stage Name<span style="color:red">*</span></label>
-                            <input type="text" class="form-control validate letter" id ="stageName" style="resize: none;border:1px solid #A9A9A9;width:100%" required data-error="Stage name is required."
-                            data-minlength-error="Minimum length 2."
-                            data-minlength="2"
-                            maxlength="35">
+                            <input type="text" class="form-control validate letter" id ="stageName" style="resize: none;width:100%" required data-error="Stage name is required."
+                            data-minlength-error="Invalid Stage Name."
+                            data-minlength="1"
+                            maxlength="50">
                             <div class="help-block with-errors"></div>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             </div>
@@ -30,17 +30,28 @@
 
                     <div class="row">
 
-                        <div class="col-md-12" style="margin: 2px;">
+                        <div class="col-md-6">
                             <div class="form-group has-feedback">
                                 <div class="form-group">
-                                <br>
                                 <label for="stageSubstage" class="control-label">SubStage<span style="color:red">*</span></label><br>
-                                    <select class="form-control select2" id = "stageSubstage" multiple = "multiple" data-placeholder = "Select substage(s)" style="width:100%;resize: none;border:1px solid #A9A9A9" required>
+                                    <select class="form-control select2" id = "stageSubstage" multiple = "multiple" data-placeholder = "Select substage(s)" style="width:100%;resize: none;" required>
                                     </select>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group has-feedback">
+                                <div class="form-group">
+                                <label for="timeRequired" class="control-label">Process Time(in hours)</label>
+                                <input type="number" class="form-control validate number" id ="timeRequired" style="width:100%; resize:none;" max="24">
+                                <div class="help-block with-errors"></div>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-12">
                         <div class="form-group has-feedback">

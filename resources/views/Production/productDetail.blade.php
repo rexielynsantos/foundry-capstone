@@ -12,10 +12,10 @@
            <form class="" id="product_form" name="product_form" role="form" data-toggle="validator">
             <div class="modal-body">
               <div class="row"> 
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <input id="kv-explorer" type="file" id="prodImage" multiple>
-                </div>
-                <div class="col-md-6">
+                </div> -->
+                <div class="col-md-12">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group has-feedback">
@@ -25,7 +25,7 @@
                         data-error="Product name is required."
                         data-minlength-error="Minimum length 2."
                         data-minlength="2"
-                        maxlength="35" style="resize: none;border:1px solid #A9A9A9">
+                        maxlength="50">
                         <div class="help-block with-errors"></div>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         </div>
@@ -47,26 +47,12 @@
                       </div>
                     </div>
                   </div>
-
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group has-feedback">
-                        <div class="form-group">
-                         <label for="variantSelect" class="control-label">Variants<span style="color:red">*</span></label>
-                           <select id="variantSelect" name="variantSelect" class="form-control select2" multiple="multiple" data-placeholder="Select Variants" style="width: 100%;border:1px solid #A9A9A9" >
-                           </select>
-                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                          <!--  <small> <a href="../maintenance/productVariant"> + Add New Variant </a></small>  --> 
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group has-feedback">
                         <div class="form-group">
                           <label for="prodDesc" class="control-label">Description</label>
-                          <textarea class="form-control" style="resize: none;border:1px solid #A9A9A9" rows="2" id ="prodDesc"
+                          <textarea class="form-control" rows="2" id ="prodDesc"
                             data-error="Invalid input length."
                             data-minlength="2"
                             maxlength="255" placeholder="Description"></textarea>

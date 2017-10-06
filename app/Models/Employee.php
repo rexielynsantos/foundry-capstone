@@ -9,7 +9,7 @@ class Employee extends Model
     protected $table = 'tblemployee';
     protected $primaryKey = 'strEmployeeID';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
 	    'strEmployeeLast',
 	    'strEmployeeFirst',

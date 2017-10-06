@@ -21,7 +21,8 @@ class EmployeeTableSeeder extends Seeder
           'strJobTitleID' => 'JT00001',
           'strDepartmentID' => 'DEPT00001',
           'strEmployeeImagePath' => '',
-          'strStatus' => 'Active'
+          'strStatus' => 'Active',
+          'created_at' => '2000-01-01 01:00:00',
       ]);
       // DB::table('tblemployee')->insert([
       //     'strEmployeeID' => 'EMP00002',

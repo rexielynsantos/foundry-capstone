@@ -49,78 +49,92 @@ $(document).ready(function(){
   $(document).on('submit', '#mod_form', function(e){
     table.column(0).visible(false);
     e.preventDefault();
-      $.ajax({
-        type: "POST",
-        url: urlCode,
-        data: {
-            dept_id: $('#modDept').val(),
-            mod_desc: $('#modDesc').val(),
-            mod_name: $('#modName').val(),
-            mod_id: tempID
-        },
-        success: function(result) {
-          if(urlCode == '/maintenance/module-update'){
-            table.rows('tr.active').remove().draw();
-            noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Module successfully updated!</center></h4>',
-            });
-          }else{
-            noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Module successfully added!</center></h4>',
+    $.ajax({
+      type: "GET",
+      url: '/maintenance/module-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+        $.ajax({
+          type: "POST",
+          url: urlCode,
+          data: {
+              id: data,
+              dept_id: $('#modDept').val(),
+              mod_desc: $('#modDesc').val(),
+              mod_name: $('#modName').val(),
+              created_at: today,
+              mod_id: tempID
+          },
+          success: function(result) {
+            if(urlCode == '/maintenance/module-update'){
+              table.rows('tr.active').remove().draw();
+              noty({
+                type: 'success',
+                layout: 'bottomRight',
+                timeout: 3000,
+                text: '<h4><center>Module successfully updated!</center></h4>',
+              });
+            }else{
+              noty({
+                type: 'success',
+                layout: 'bottomRight',
+                timeout: 3000,
+                text: '<h4><center>Module successfully added!</center></h4>',
+              });
+            }
+
+
+            table.row.add([
+              result[0].strModuleID,
+              result[0].strModuleName,
+              result[0].strModuleDesc,
+              result[0].strDepartmentName,
+              result[0].strStatus,
+              ]
+            ).draw(false);
+
+            $('#add_module_modal').modal('toggle');
+            $('#modDept').val('').change();
+            $('#btnEditModule').hide()
+            $('#btnDeleteModules').hide()
+            $('#btnAddModule').show()
+
+
+          },
+          error: function(result){
+            $.ajax({
+                url: '/maintenance/module-status',
+                type: 'POST',
+                data: {
+                    mod_name: $('#modName').val()
+                },
+                success: function(data)
+                {
+                  var errors = result.responseJSON;
+                    if(errors == undefined){
+                      if(data[0].strStatus == 'Active'){
+                        noty({
+                          type: 'error',
+                          layout: 'bottomRight',
+                          timeout: 3000,
+                          text: '<h4><center>Module name already exist!</center></h4>',
+                        });
+                      }
+                      else if(data[0].strStatus == 'Inactive'){
+                        $('#ModuleReactivateModal').modal();
+                      }
+                    }
+                }
             });
           }
-
-
-          table.row.add([
-            result[0].strModuleID,
-            result[0].strModuleName,
-            result[0].strModuleDesc,
-            result[0].strDepartmentName,
-            result[0].strStatus,
-            ]
-          ).draw(false);
-
-          $('#add_module_modal').modal('toggle');
-          $('#modDept').val('').change();
-          $('#btnEditModule').hide()
-          $('#btnDeleteModules').hide()
-          $('#btnAddModule').show()
-
-
-        },
-        error: function(result){
-          $.ajax({
-              url: '/maintenance/module-status',
-              type: 'POST',
-              data: {
-                  mod_name: $('#modName').val()
-              },
-              success: function(data)
-              {
-                var errors = result.responseJSON;
-                  if(errors == undefined){
-                    if(data[0].strStatus == 'Active'){
-                      noty({
-                        type: 'error',
-                        layout: 'bottomRight',
-                        timeout: 3000,
-                        text: '<h4><center>Module name already exist!</center></h4>',
-                      });
-                    }
-                    else if(data[0].strStatus == 'Inactive'){
-                      $('#ModuleReactivateModal').modal();
-                    }
-                  }
-              }
-          });
-        }
-      });
+        })
+      },
+      error: function(data){
+        alert('ERROR IN MAX ID');
+      }
+    })
+      
   })
 
   $('#btnDeleteModule').click(function(){

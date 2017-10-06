@@ -21,6 +21,7 @@ class CreateSupplierTable extends Migration
         $table->string('strSupCity');
         $table->text('strSupplierDesc')->nullable();
         $table->string('strStatus');
+        $table->timestamps();
         });
     }
 

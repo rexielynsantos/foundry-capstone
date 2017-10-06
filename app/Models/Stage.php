@@ -9,7 +9,7 @@ class Stage extends Model
     protected $table = 'tblstage';
     protected $primaryKey = 'strStageID';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
     	'strStageName',
     	'strStageDesc',

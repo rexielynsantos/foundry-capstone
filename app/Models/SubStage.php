@@ -9,7 +9,7 @@ class SubStage extends Model
     protected $table = 'tblsubstage';
     protected $primaryKey = 'strSubStageID';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
     	'strSubStageName',
     	'strSubStageDesc',

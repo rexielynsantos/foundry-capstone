@@ -9,7 +9,7 @@ class ProductVariant extends Model
     protected $table = 'tblproductvariant';
     protected $primaryKey = 'strProductVariantID';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
     	'intVariantQty',
         'strUOMID',

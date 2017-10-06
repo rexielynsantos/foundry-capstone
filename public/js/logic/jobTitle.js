@@ -29,10 +29,10 @@ $("#btnEditJob").click(function(){
       success: function(data)
       {
         // CHANGE ADD THIS DEPENDS ON INPUT FIELDS
-       $('#JobTitleDesc').val(data[0].strJobTitleDesc);
-        $('#JobTitleName').val(data[0].strJobTitleName);
+       $('#JobTitleDesc').val(data.strJobTitleDesc);
+        $('#JobTitleName').val(data.strJobTitleName);
         // URL OF EDIT
-        tempID = data[0].strJobTitleID;
+        tempID = data.strJobTitleID;
         document.getElementById('JobTitle_form').action = "{{URL::to('/maintenance/jobTitle-update')}}";
         urlCode =  '/maintenance/jobTitle-update';
       },
@@ -46,74 +46,86 @@ $("#btnEditJob").click(function(){
   $(document).on('submit', '#JobTitle_form', function(e){
     table.column(0).visible(false);
     e.preventDefault();
-      $.ajax({
-        type: "POST",
-        url: urlCode,
-        data: {
-            jobtitle_desc: $('#JobTitleDesc').val(),
-            jobtitle_name: $('#JobTitleName').val(),
-            jobtitle_id: tempID
-        },
-        success: function(result) {
-          if(urlCode == '/maintenance/jobTitle-update'){
-            table.rows('tr.active').remove().draw();
-            noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Job Title successfully updated!</center></h4>',
+    $.ajax({
+      type: "GET",
+      url: '/maintenance/jobTitle-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+        $.ajax({
+          type: "POST",
+          url: urlCode,
+          data: {
+              id: data,
+              jobtitle_desc: $('#JobTitleDesc').val(),
+              jobtitle_name: $('#JobTitleName').val(),
+              created_at: today,
+              jobtitle_id: tempID
+          },
+          success: function(result) {
+            if(urlCode == '/maintenance/jobTitle-update'){
+              table.rows('tr.active').remove().draw();
+              noty({
+                type: 'success',
+                layout: 'bottomRight',
+                timeout: 3000,
+                text: '<h4><center>Job Title successfully updated!</center></h4>',
+              });
+            }
+            else{
+              noty({
+                type: 'success',
+                layout: 'bottomRight',
+                timeout: 3000,
+                text: '<h4><center>Job Title successfully added!</center></h4>',
+              });
+            }
+            table.row.add([
+              result.strJobTitleID,
+              result.strJobTitleName,
+              result.strJobTitleDesc,
+              ]
+            ).draw(false);
+
+            $('#JobTitleName').val('')
+            $('#JobTitleDesc').val('')
+            $('#JobTitleModal').modal('toggle');
+            $('#btnEditJob').hide()
+            $('#btnDeleteJo').hide()
+            $('#btnAddJob').show()
+          },
+          error: function(result){
+            $.ajax({
+                url: '/maintenance/jobTitle-status',
+                type: 'POST',
+                data: {
+                    jobtitle_name: $('#JobTitleName').val()
+                },
+                success: function(data)
+                {
+                  var errors = result.responseJSON;
+                    if(errors == undefined){
+                      if(data[0].strStatus == 'Active'){
+                        noty({
+                          type: 'error',
+                          layout: 'bottomRight',
+                          timeout: 3000,
+                          text: '<h4><center>Job Title already exist!</center></h4>',
+                        });
+                      }
+                      else if(data[0].strStatus == 'Inactive'){
+                        $('#JobTitleReactivateModal').modal();
+                      }
+                    }
+                }
             });
           }
-          else{
-            noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Job Title successfully added!</center></h4>',
-            });
-          }
-          table.row.add([
-            result[0].strJobTitleID,
-            result[0].strJobTitleName,
-            result[0].strJobTitleDesc,
-            ]
-          ).draw(false);
-
-          $('#JobTitleName').val('')
-          $('#JobTitleDesc').val('')
-          $('#JobTitleModal').modal('toggle');
-          $('#btnEditJob').hide()
-          $('#btnDeleteJo').hide()
-          $('#btnAddJob').show()
-        },
-        error: function(result){
-          $.ajax({
-              url: '/maintenance/jobTitle-status',
-              type: 'POST',
-              data: {
-                  jobtitle_name: $('#JobTitleName').val()
-              },
-              success: function(data)
-              {
-                var errors = result.responseJSON;
-                  if(errors == undefined){
-                    if(data[0].strStatus == 'Active'){
-                      noty({
-                        type: 'error',
-                        layout: 'bottomRight',
-                        timeout: 3000,
-                        text: '<h4><center>Job Title already exist!</center></h4>',
-                      });
-                    }
-                    else if(data[0].strStatus == 'Inactive'){
-                      $('#JobTitleReactivateModal').modal();
-                    }
-                  }
-              }
-          });
-        }
-      });
-
+        })
+      },
+      error: function(data){
+        alert('ERROR IN MAX ID');
+      }
+    })
   })
 
 

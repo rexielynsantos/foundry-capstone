@@ -11,12 +11,12 @@ var quoteID = $('#testval').val();
         quote_id : quoteID
     },
     success: function(data) {
-      console.log(data)
+      // console.log(data)
 
       for (var i = 0; i < data.length; i++) {
         table.row.add([
           data[i].strProductName,
-          data[i].intVariantQty+""+data[i].strUOMName,
+          data[i].strVarianceCode,
           data[i].intOrderQty+"pcs"
         ]).draw(true);
       }

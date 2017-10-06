@@ -31,40 +31,7 @@
               </div>
             </div>
            <div class="box-body">
-              <div class="row">
-                <div class="col-md-12">
-                   <div class="form-group">
-                          <label for="refSelect" class="control-label">Reference:
-                          </label>
-                          <select class="form-control select2" id="refSelect" style="width: 100%;" required>
-                            @foreach($purchase as $purch)
-                          <option value="first" selected disabled></option>
-                          <option value="{{$purch->strPurchaseID}}">{{$purch->strPurchaseID}}</option>
-                          @endforeach
-                          </select>
-                        <!--   <span class="glyphicon form-control-feedback" aria-hidden="true"></span> -->
-                        </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12">
-                        <div class="form-group">
-                          <label for="supplierSelect" class="control-label">Received from:
-                          </label>
-                          <select class="form-control select2" id="supplierSelect" style="width: 100%;" required>
-
-                          </select>
-                         <!--  <span class="glyphicon form-control-feedback" aria-hidden="true"></span> -->
-                        </div>
-                   <!-- </div> -->
-
-                </div>
-              </div>
-
-
-
-              <div class="row">
+            <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
                 <label>Delivery Date:</label>
@@ -75,11 +42,43 @@
                   </div>
                   <input type="text" class="form-control pull-right" id="to">
                 </div>
-                <!-- /.input group -->
               </div>
                 </div>
               </div>
 
+              <div class="row">
+                <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="supplierSelect" class="control-label">Received from:
+                          </label>
+                          <select class="form-control select2" id="supplierSelect" style="width: 100%;" required>
+                            <option value="first" selected disabled>Search..</option>
+                          </select>
+                         <!--  <span class="glyphicon form-control-feedback" aria-hidden="true"></span> -->
+                        </div>
+                   <!-- </div> -->
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                   <div class="form-group">
+                          <label for="refSelect" class="control-label">Reference PO:
+                          </label>
+                          <select class="form-control select2" id="refSelect" style="width: 100%;" required>
+                            @foreach($purchase as $purch)
+                          <option value="first" selected disabled>Search..</option>
+                          <option value="{{$purch->strPurchaseID}}">{{$purch->strPurchaseID}}</option>
+                          @endforeach
+                          </select>
+                        <!--   <span class="glyphicon form-control-feedback" aria-hidden="true"></span> -->
+                        </div>
+                </div>
+              </div>
+
+
+
+              
               <hr>
 
               <div class="row">
@@ -96,7 +95,7 @@
           <div class="nav-tabs-custom">
             <ul id="mytabs" class="nav nav-tabs">
               <li class="active"><a href="#tab_1" data-toggle="tab">Step 1: Receiving</a></li>
-              <li><a href="#tab_2" data-toggle="tab">Step 2: Inspection</a></li>
+            
             </ul>
 
             <div class="tab-content">
@@ -105,30 +104,24 @@
                 <div class="row">
                    <label style="margin-left:15px"> Material Name </label>
                 </div>
-                <div class="row">
-                  <div class="col-md-9">
-                    <div class="form-group">
-                       <select id="matReceiveSelect" name="matReceiveSelect" class="form-control select2" multiple="multiple" data-placeholder="Select Materials" style="width: 100%;border:1px solid #3434343">
-                       </select>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                        <button type="button" id="addCarts" style="height: 33px" class="btn btn-primary btn-flat">Add</button>
-                  </div>
-                 </div>
+       
                <hr>
                <div class="row">
                  <div class="col-md-12">
                    <table id="receiveMatsTable" class="table table-bordered">
                         <thead>
-                        <th class="hidden"> ID</th>
-                          <th width="40%"> Material</th>
-                          <th width="40%"> Variant</th>
-                          <th width="30%"> Quantity Received </th>
-                         <!--  <th width="30%"> U/M </th> -->
-                          <th width="30%"> Action </th>
+                          <th width="40%"> Quantity Ordered </th>
+                          <th width="40%"> Material </th>
+                          <th width="30%"> Order ID </th>
+                          <th width="30%"> Quantity Received</th>
                         </thead>
                         <tbody>
+                          <tr> 
+                            <td> 23pcs</td>
+                            <td> Sand (500 kg) </td>
+                            <td> PO-00001 x 14 pcs. </td>
+                            <td> <input type="number" class="form-control"> </td>
+                          </tr>
 
                         </tbody>
                    </table>
@@ -137,42 +130,12 @@
                 <div class="row">
                   <div class="col-md-12">
                     <button type="reset" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i></button>
-                    <button type="button" id="changetabbutton" class="btn bg-blue btn-flat pull-right"><i class="glyphicon glyphicon-ok"></i></button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="tab-pane" id="tab_2">
-              <table id ="invInspectTable" class="display">
-                <thead>
-
-                  <th> Remaining Items </th>
-                  <th> Action </th>
-                </thead>
-
-                <tbody>
-                  <tr>
-                    <td> Buhangin - 50 pcs </td>
-                    <td> <select class="form-control select2">
-                          <option> Supplier Return </option>
-                          <option> Waiting for Delivery </option>
-                          </select>
-                    </td>
-                  </tr>
-
-                </tbody>
-              </table>
-
-            <hr>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <button type="reset" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i></button>
                     <button type="submit" class="btn bg-blue btn-flat pull-right">Submit</button>
                   </div>
                 </div>
-
               </div>
+
+
 
             </div>
           </div>

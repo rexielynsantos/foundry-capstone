@@ -16,14 +16,16 @@ class ProductVarianceTableSeeder extends Seeder
           'strProductVarianceQty' => '55',
           'strUOMID' => 'UOM00001',
           'strProductVarianceDesc' => 'for bullets',
-          'strStatus' => 'Active'
+          'strStatus' => 'Active',
+          'created_at' => '2000-01-01 01:00:00',
       ]);
       DB::table('tblproductvariance')->insert([
           'strProductVarianceID' => 'PV00002',
           'strProductVarianceQty' => '7',
           'strUOMID' => 'UOM00002',
           'strProductVarianceDesc' => 'for ammunition',
-          'strStatus' => 'Active'
+          'strStatus' => 'Active',
+          'created_at' => '2000-01-01 02:00:00',
       ]);
     }
 }

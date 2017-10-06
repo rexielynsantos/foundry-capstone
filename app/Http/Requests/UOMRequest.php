@@ -24,7 +24,7 @@ class UOMRequest extends FormRequest
     public function rules()
     {
         return [
-            'uom_name' => 'required|min:2|max:35',
+            'uom_name' => 'required|min:1|max:35',
             'uom_desc'   => 'min:2|max:255',
         ];
     }

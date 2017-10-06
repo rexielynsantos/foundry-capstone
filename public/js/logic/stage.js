@@ -49,6 +49,7 @@ $(document).ready(function(){
         {
           console.log(data);
           $('#stageName').val(data.strStageName);
+          $('#timeRequired').val(data[0].dbltimeRequired)
           $('#stageDesc').val(data.strStageDesc);
 
             $("#stageSubstage option").each(function()
@@ -82,84 +83,100 @@ $(document).ready(function(){
     });
     e.preventDefault();
     $.ajax({
-      type: "POST",
-      url: urlCode,
-      data: {
-          substage_data: substageArr,
-          stage_name: $('#stageName').val(),
-          stage_desc: $('#stageDesc').val(),
-          stage_id: tempID
-      },
-      success: function(result) {
-        if(urlCode == '/maintenance/stage-update'){
-          table.rows('tr.active').remove().draw();
-          noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Stage successfully updated!</center></h4>',
-            });
-        }else{
-          noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Stage successfully added!</center></h4>',
-            });
-        }
-
-        //para mag fit sa data table
-        var x='';
-        for (var index = 0; index < result.substage.length; index++) {
-          var element = result.substage[index].details1.strSubStageName;
-          x += '<li style="list-style-type:circle">'+element+'</li>'
-        }
-
-
-        table.row.add([
-          result.strStageID,
-          result.strStageName,
-          x,
-          result.strStageDesc,
-          ]
-        ).draw(false);
-
-        substageArr = [];
-
-        $('#Stagemodal').modal('toggle');
-        $('#btnEditStage').hide()
-        $('#btnDeleteStages').hide()
-        $('#btnAddStage').show()
-
-      },
-      error: function(result){
+      type: "GET",
+      url: '/maintenance/stage-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
         $.ajax({
-            url: '/maintenance/stage-status',
-            type: 'POST',
-            data: {
-                stage_name: $('#stageName').val()
-            },
-            success: function(data)
-            {
-              var errors = result.responseJSON;
-                if(errors == undefined){
-                  if(data[0].strStatus == 'Active'){
-                    noty({
-                      type: 'error',
-                      layout: 'bottomRight',
-                      timeout: 3000,
-                      text: '<h4><center>Stage name already exist!</center></h4>',
-                    });
-                  }
-                  else if(data[0].strStatus == 'Inactive'){
-                    $('#StageReactivateModal').modal();
-                  }
-                }
+          type: "POST",
+          url: urlCode,
+          data: {
+              id: data,
+              substage_data: substageArr,
+              stage_name: $('#stageName').val(),
+              stage_desc: $('#stageDesc').val(),
+              created_at: today,
+              stage_id: tempID,
+              process_time: $('#timeRequired').val()
+          },
+          success: function(result) {
+            console.log(result);
+            if(urlCode == '/maintenance/stage-update'){
+              table.rows('tr.active').remove().draw();
+              noty({
+                  type: 'success',
+                  layout: 'bottomRight',
+                  timeout: 3000,
+                  text: '<h4><center>Stage successfully updated!</center></h4>',
+                });
+            }else{
+              noty({
+                  type: 'success',
+                  layout: 'bottomRight',
+                  timeout: 3000,
+                  text: '<h4><center>Stage successfully added!</center></h4>',
+                });
             }
-        });
 
+            //para mag fit sa data table
+            var x='';
+            for (var index = 0; index < result.substage.length; index++) {
+              var element = result.substage[index].details1.strSubStageName;
+              x += '<li style="list-style-type:circle">'+element+'</li>'
+            }
+
+
+            table.row.add([
+              result.strStageID,
+              result.strStageName,
+              x,
+              result.dbltimeRequired,
+              result.strStageDesc,
+              ]
+            ).draw(false);
+
+            substageArr = [];
+
+            $('#Stagemodal').modal('toggle');
+            $('#btnEditStage').hide()
+            $('#btnDeleteStages').hide()
+            $('#btnAddStage').show()
+
+          },
+          error: function(result){
+            $.ajax({
+                url: '/maintenance/stage-status',
+                type: 'POST',
+                data: {
+                    stage_name: $('#stageName').val()
+                },
+                success: function(data)
+                {
+                  var errors = result.responseJSON;
+                    if(errors == undefined){
+                      if(data[0].strStatus == 'Active'){
+                        noty({
+                          type: 'error',
+                          layout: 'bottomRight',
+                          timeout: 3000,
+                          text: '<h4><center>Stage name already exist!</center></h4>',
+                        });
+                      }
+                      else if(data[0].strStatus == 'Inactive'){
+                        $('#StageReactivateModal').modal();
+                      }
+                    }
+                }
+            });
+
+          }
+        });
+      },
+      error: function(data){
+        alert('ERROR IN MAX ID');
       }
-    });
+    })
   });
 
 

@@ -18,6 +18,7 @@ class CreateDepartmentTable extends Migration
         $table->string('strDepartmentName')->unique();
         $table->text('strDepartmentDesc')->nullable();
         $table->string('strStatus');
+        $table->timestamps();
       });
     }
 

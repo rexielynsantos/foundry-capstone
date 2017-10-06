@@ -13,7 +13,7 @@
       <button class="btn btn-app pull-right" id="btnAddMat" data-toggle="modal" data-target="#matModal">
         <i class="fa fa-plus"></i> Add New
       </button>
-      <button class="btn btn-app pull-right btn" id="btnDeleteMats" data-toggle="modal" data-target="#MatDeleteModal" style="display: none;">
+      <button class="btn btn-app pull-right btn" id="btnDeleteMats" style="display: none;">
         <i class="fa fa-trash-o"></i> Deactivate
       </button>
       <button class="btn btn-app pull-right" id="btnEditMat" data-toggle="modal" data-target="#matModal" style="display: none;">
@@ -52,6 +52,26 @@
   		</div>
 	</div>
 		<hr>
+
+  <div class="modal fade" id="MatSpecReactivateModal" role="dialog">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center>
+              <h4 class="modal-title">
+                Product Variance is deactivated. Do you want to reactivate?
+              </h4>
+          </center>
+          </div>
+
+          <div class="modal-footer">
+              <button class="btn bg-white btn-flat pull-right" data-dismiss="modal">No</button>
+              <button id="btnReactivateMatSpec" type="button" class="btn bg-blue btn-flat pull-right">Yes</button>
+          </div>
+        </div>
+        </div>
+    </div>
+
 
 	</div>
 

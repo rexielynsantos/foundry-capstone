@@ -10,50 +10,12 @@ var table =$('#purchasesTable').DataTable(
     "ordering": false,
     "paging": false,
   });
-// $('#hiddenDiv').hide(); 
-  function getMaterials(){
-    $.ajax({
-        url: '/transaction/mat-all',
-        type: 'GET',
-        success: function(data)
-        {
-          $("#matSelect").empty();
-           for (var i = 0; i < data.length; i++) {
-            var varDropdown = document.getElementById("matSelect");
-            var opt = document.createElement("option");
-            opt.text = data[i].strMaterialName;
-            varDropdown.add(opt);
-      }
-        }
-    });
-  }
-  function getMaterialVars(){
-    $("#matvarSelect").empty();
-    $.ajax({
-        url: '/transaction/matvar-all',
-        type: 'GET',
-        success: function(data)
-        {
-          // console.log(data)
-          var table = document.getElementById('addMaterialsTable');
-          var total = table.rows.length;
-          for(var i=0; i<total; i++){
-            var index = i + 1;
-              if(i > 0){
-                  var drpdwnId= "matvarSelect"+i;
-                  $("#"+drpdwnId).empty();
-                  for (var k = 0; k < data.length; k++) {
-                    var getDropdown = document.getElementById(drpdwnId);
-                    var opt = document.createElement("option");
-                    opt.text = data[k].intVariantQty+data[k].strUOMName;
-                    getDropdown.add(opt);
-                  }
-              }
-          }
-      }
-    });
-  }
-
+// $('#hiddenDiv').hide();
+$('#orderDate').datepicker({
+     format: 'yyyy-mm-dd',
+     autoclose: true
+   });
+$("#orderDate").datepicker('setDate', new Date());
 
   $("#btnAddpurchase").click(function(){
   location.href = './purchase-add'
@@ -81,13 +43,11 @@ $("#supplierselection").change(function()
           supplier_id : valu
         },
         success: function(data) {
-
-             // $('#street').val(data[0].strSupplierID);
-              // console.log(data);
-             $('#street').val(data[0].strSupStreet);
-             $('#brgy').val(data[0].strSupBrgy);
-             $('#city').val(data[0].strSupCity);
-
+          console.log(data);
+          $('#supplierAdd').val(data.strSupStreet+' '+data.strSupBrgy+' '+data.strSupCity);
+          var sup = document.getElementById("supplierselection");
+          var supSelected = sup.options[sup.selectedIndex].text;
+          $('#supplierTo').val(supSelected);
         }
   });
 });
@@ -108,7 +68,7 @@ $('#supplierAdd').val(address);
 
 });
 
-var table = $('#addMaterialsTable').DataTable(
+var table = $('#addMaterialsTablee').DataTable(
   {
      "searching": false,
      "ordering": false,
@@ -121,6 +81,7 @@ var table = $('#addMaterialsTable').DataTable(
  getMaterials();
 $("#addCart").click(function(){
     var matVal = $('#matSelect').val();
+    var matID = [];
 
     table.column(0).visible(false);
     for (var j = 0; j < matVal.length; j++) {
@@ -131,65 +92,64 @@ $("#addCart").click(function(){
             mat_data : matVal[j]
           },
           success: function(data) {
+            $('#totCost').val('0')
             // console.log(data);
-            getMaterialVars();
-
-            var oTable = $('#addMaterialsTable').dataTable();
-            var tblrows = oTable.fnGetData().length;
-            var row = tblrows+1;
+            // getMaterialVars();
             var btnn = "<button type='button' id = 'btnTrash'  class='deleteRow btn btn-danger' name='"+data[0].strMaterialName+"' onclick='removeProd(this.name)'><i class='fa fa-trash'></i></button>";
-            $('#matSelect option:selected').remove();
+              $('#matSelect option:selected').remove();
               table.row.add([
                 data[0].strMaterialID,
                 data[0].strMaterialName,
-                '<select id="matvarSelect'+row+'" class="form-control select2"></select>',
+                '<select id="matvarSelect'+data[0].strMaterialID+'" class="form-control select2"></select>',
                 data[0].intReorderQty,
-                  '<input type="number" id="matqty'+row+'" placeholder="0">',
-
+                '<input type="number" id="basePrice'+data[0].strMaterialID+'" value="'+data[0].dblBasePrice+'" class="form-control" readonly style="border:none; background:white;" placeholder="0">',
+                '<input type="number" id="matqty'+data[0].strMaterialID+'" onkeyup="computeTotalCost()" placeholder="0">',
                 data[0].unit.strUOMName,
-                 '<input type="text" class="number" id="matcost'+row+'" placeholder="0">',
-                // data[0].intReorderQty + 3,
+                '<input type="text" class="number" id="matcost'+data[0].strMaterialID+'" placeholder="0">',
                 btnn
-
               ]).draw(true);
-              // $("#matSelect").val(null).change();
-              // $('matqty').val('');
 
-          }
+              var oTable = $('#addMaterialsTablee').dataTable();
+              var tblrows = oTable.fnGetData().length;
+              var matID =  oTable.fnGetData();
+              for (var i = 0; i < tblrows; i++) {
 
+                var totalCost = matID[i][3] * $('#basePrice'+matID[i][0]).val()
+                $('#matcost'+matID[i][0]).val(totalCost)
+
+                totalCost = ''
+              }
+              for (var j = 0; j < tblrows; j++) {
+                var totalCosting = parseInt($('#totCost').val()) + parseInt($('#matcost'+matID[j][0]).val())
+                $('#totCost').val(totalCosting)
+              }
+              getMaterialVars();
+        }
     });
   }
-  });
-
-// $('#addMaterialsTable tbody').on( 'click', btnTrash, function () {
-//   var data = table.row( $(this).parents('tr') ).data();
-//   var row = $(this).parent().parents('tr');
-//   table.row(row).remove().draw();
-//   $(`<option value=`+data[0]+`>`+data[1]+`</option>`).appendTo("#matSelect");
-// });
-
+});
 
 $(document).on('submit', '#purchase_form', function(e){
+  e.preventDefault();
   table.column(0).visible(false);
+  var current = new Date();
+  var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
   var qty = [];
   var cost = [];
   var varia = [];
   var uomArr = [];
-  var oTable = $('#addMaterialsTable').dataTable();
+  var oTable = $('#addMaterialsTablee').dataTable();
   var tblrowd = oTable.fnGetData().length;
   materialArr =  oTable.fnGetData();
 
   // var regex = /(\d+)/g;
 
   for(var i = 0; i<tblrowd; i++){
-    var x = i+1;
-    qty[i] = $("#matqty"+x).val();
-    cost[i] = $("#matcost"+x).val();
-    varia[i] = $("#matvarSelect"+x).val().replace(/\D/g, "");
-    uomArr[i] = $("#matvarSelect"+x).val().replace(/[^a-z]/gi, "");
+    qty[i] = $("#matqty"+materialArr[i][0]).val();
+    cost[i] = $("#matcost"+materialArr[i][0]).val();
+    varia[i] = $("#matvarSelect"+materialArr[i][0]).val().replace(/\D/g, "");
+    uomArr[i] = $("#matvarSelect"+materialArr[i][0]).val().replace(/[^a-z]/gi, "");
   }
-
-   e.preventDefault();
 
     $.ajax({
       type: "POST",
@@ -199,11 +159,12 @@ $(document).on('submit', '#purchase_form', function(e){
         sup_id : $('#supplierselection').val(),
         sup_contact : $('#contactPerson').val(),
         pterm_id : $('#paymentTermSelect').val(),
+        date_created : $('#orderDate').val(),
         mat_var : varia,
         mat_qty : qty,
         mat_cost : cost,
-        uom : uomArr
-
+        uom : uomArr,
+        created_at: today,
       },
 
       success: function(result) {
@@ -214,7 +175,7 @@ $(document).on('submit', '#purchase_form', function(e){
               timeout: 3000,
               text: '<h4><center>You successfully sent a Purchase Request!</center></h4>',
             });
-            window.location.href = '/transaction/purchase-final';
+            // window.location.href = '/transaction/purchase-final';
         // console.log(data);
       }
 
@@ -231,8 +192,79 @@ function removeProd(id){
   getDropdown.add(opt);
 
 //Delete selected row
-  $("#addMaterialsTable").on('click', '.deleteRow', function(e){
-    var table = $('#addMaterialsTable').DataTable();
+  $("#addMaterialsTablee").on('click', '.deleteRow', function(e){
+    var table = $('#addMaterialsTablee').DataTable();
     table.row($(this).parents('tr')).remove().draw();
   });
+}
+
+function getMaterials(){
+  $.ajax({
+      url: '/transaction/mat-all',
+      type: 'GET',
+      success: function(data)
+      {
+        $("#matSelect").empty();
+        var varDropdown = document.getElementById("matSelect");
+         for (var i = 0; i < data.length; i++) {
+
+          var opt = document.createElement("option");
+          opt.text = data[i].strMaterialName;
+          varDropdown.add(opt);
+    }
+      }
+  });
+}
+function getMaterialVars(){
+  var oTable = $('#addMaterialsTablee').dataTable();
+  var tblrows = oTable.fnGetData().length;
+  var matID =  oTable.fnGetData();
+
+  for (var x = 0; x < tblrows; x++) {
+    $.ajax({
+        url: '/transaction/matvar-all',
+        type: 'POST',
+        data: {
+          material_id : matID[x][0]
+        },
+        success: function(data)
+        {
+          // console.log(data)
+          var oTable = $('#addMaterialsTablee').dataTable();
+          var tblrows = oTable.fnGetData().length;
+          var matID =  oTable.fnGetData();
+
+          for(var i=0; i<tblrows; i++){
+            var drpdwnId= "matvarSelect"+matID[i][0];
+            $("#"+drpdwnId).empty();
+            for (var k = 0; k < data.length; k++) {
+              var getDropdownn = document.getElementById(drpdwnId);
+              var opt = document.createElement("option");
+              opt.text = data[k].intVariantQty+''+data[k].strUOMName;
+              getDropdownn.add(opt);
+            }
+          }
+      }
+    });
+  }
+}
+
+function computeTotalCost(){
+  $('#totCost').val('0')
+  var oTable = $('#addMaterialsTablee').dataTable();
+  var tblrows = oTable.fnGetData().length;
+  var matID =  oTable.fnGetData();
+
+  for (var i = 0; i < tblrows; i++) {
+  var tempCost = matID[i][3] + $('#matqty'+matID[i][0]).val()
+  var totalCost = tempCost * $('#basePrice'+matID[i][0]).val()
+  $('#matcost'+matID[i][0]).val(totalCost)
+
+  tempCost = ''
+  totalCost = ''
+  }
+  for (var j = 0; j < tblrows; j++) {
+    var totalCosting = parseInt($('#totCost').val()) + parseInt($('#matcost'+matID[j][0]).val())
+    $('#totCost').val(totalCosting)
+  }
 }

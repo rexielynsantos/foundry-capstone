@@ -26,7 +26,6 @@
            <!--      <th>Image</th> -->
                 <th>Product Name</th>
                 <th>Type</th>
-                <th>Variants</th>
                 <th> Descriptions </th>
             </tr>
         </thead>
@@ -44,11 +43,6 @@
                 </td> -->
                 <td>{{$produ->strProductName}}</td>
                 <td>{{$produ->producttype->strProductTypeName}}</td>
-                <td>
-                @foreach($produ->productvariant as $var)
-                <li width="35%" style="list-style-type:circle"> {{$var->details3->intVariantQty}}{{$var->details3->unit->strUOMName}}</li>
-                @endforeach
-              </td>
               <td>{{$produ->strProductDesc}}</td>
             </tr>
 
@@ -80,6 +74,26 @@
           </div>
           </div>
       </div>
+
+      <div class="modal fade" id="ProductReactivateModal" role="dialog">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center>
+              <h4 class="modal-title">
+                Product is deactivated. Do you want to reactivate?
+              </h4>
+          </center>
+          </div>
+
+          <div class="modal-footer">
+              <button class="btn bg-white btn-flat pull-right" data-dismiss="modal">No</button>
+              <button id="btnReactivateProduct" type="button" class="btn bg-blue btn-flat pull-right">Yes</button>
+          </div>
+        </div>
+        </div>
+    </div>
+
   </div>
 </div>
 

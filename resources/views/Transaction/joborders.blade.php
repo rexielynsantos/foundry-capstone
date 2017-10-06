@@ -1,48 +1,46 @@
 @extends('master')
-@section('pageTitle', 'Job Orders')
+@section('pageTitle','Job Orders')
 @section('content')
 
+<section class="content">
 
-<h3 style="color:black;font-family: 'Abel', sans-serif;font-size: 200%;">Job Orders </h3>
-
-<div class="box box-default">
-  <div class="box-body">
-
+  <div class="row">
     <div class="col-md-12">
-      <table id="jobOrdersTable" name="jobOrdersTable" class="table table-bordered">
-        <thead>
-        		<th> Job Order No. </th>
-            <th> Reference </th>
-        		<th> Job Description </th>
-            <th> Material</th>
-            <th> Qty</th>
-            <th> Remarks</th>
-            <th> Action</th>
-        </thead>
-        <tbody>
-          @foreach ($joborder as $jobordertable)
-            <tr>
-              <td> {{$jobordertable->strJobOrderID}}</td>
-              <td> {{$jobordertable->strQuoteRequestID}}</td>
-              <td> {{$jobordertable->strProductName}} </td>
-              <td> {{$jobordertable->strVarianceCode}} </td>
-              <td> {{$jobordertable->intOrderQty}}pcs </td>
-              <td> {{$jobordertable->strRemarks}}</td>
-              <td><button type="button" name="PDF">PDF</button><br>
-                <button type="button" id ="{{$jobordertable->strJobOrderID}}" onclick="matReq(this.id)" name="Material Requisiton">Material Requisiton</button><br>
-                <button type="button" name="Production Head">Production Head</button></td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
 
+          <div class="box box-widget widget-user-2">
+
+            <div class="widget-user-header" style="background-color: #00a65a;">
+              <div class="widget-user-image">
+              <img src="../images/mainlogo.png" alt="User Avatar">
+
+              </div>
+
+              <h3 class="widget-user-username">Job Orders</h3>
+              <h5 class="widget-user-desc"><p style="color:white">Precision Foundry of the Philippines Inc.</p>
+            </div>
+            <div class="box-footer">
+              <table id="custTransTable" border="0" class="table table-bordered" style="color:black;">
+                <thead>
+                  <th width="10%">JO No. </th>
+                  <th width="20%">Reference</th>
+                  <th width="20%">Customer</th>
+                  <th width="%">Date Received</th>
+                  <th width="%">Delivery Date</th>
+                  <th width="%">Classification</th>
+                  <th width="11%">Action</th>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
     </div>
   </div>
-</div>
+</section>
 
-@push('scripts')
- <script type="text/javascript" src="{{URL::asset('js/logic/joborder.js')}}"></script>
-
-@endpush
+ @push('scripts')
+    <script type="text/javascript" src="{{URL::asset('js/logic/newjoborder.js')}}"></script>
+  @endpush
 
 @stop

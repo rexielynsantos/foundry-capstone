@@ -25,7 +25,6 @@
             <th class="hidden">ID</th>
         		<th>Unit</th>
             <th>Description</th>
-            <th>Unit Type</th>
 
         	</tr>
         </thead>
@@ -35,7 +34,6 @@
             <td class="hidden">{{$uom->strUOMID}}</td>
             <td>{{$uom->strUOMName}}</td>
             <td>{{$uom->strUOMDesc}}</td>
-            <td>{{$uom->unittype->strUOMTypeName}}</td>
 
           </tr>
           @endforeach
@@ -56,7 +54,7 @@
             <form class="" id="uom_form" role="form" data-toggle="validator">
             <div class="modal-body">
                 <!-- D2 UNG FORM -->
-                <div class="form-group has-feedback">
+                <!-- <div class="form-group has-feedback">
                   <div class="form-group">
                     <label for="uomTypeSelect" class="control-label">Unit Type<span style="color:red">*</span></label>
                     <select class="form-control select2" id = "uomTypeSelect" style="width: 100%;" required>
@@ -67,7 +65,7 @@
                     </select>
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   </div>
-                </div>
+                </div> -->
                 <div class="form-group has-feedback">
                   <div class="form-group">
                     <label for="uomName" class="control-label">Unit<span style="color:red">*</span></label>

@@ -17,6 +17,7 @@ class ProductVariantSeeder extends Seeder
           'strUOMID' => 'U00001',
           'strProductVariantDesc' => 'asdf',
           'strStatus' => 'Active',
+          'created_at' => '2000-01-01 01:00:00',
       ]);
         DB::table('tblproductvariant')->insert([
           'strProductVariantID' => 'VAR00002',
@@ -24,6 +25,7 @@ class ProductVariantSeeder extends Seeder
           'strUOMID' => 'U00002',
           'strProductVariantDesc' => 'asdf',
           'strStatus' => 'Active',
+          'created_at' => '2000-01-01 02:00:00',
       ]);
     }
 }

@@ -12,12 +12,15 @@ class ReceivePurchaseDetail extends Model
     protected $fillable = [
         'strReceivePurchaseID',
     	'strMaterialID',
+        'quantityReceived',
+        'qtyReturned',
+        'isActive'
+
+
     ];
     public function details(){
         return $this->hasOne('App\Models\Material','strMaterialID', 'strMaterialID');
     }
-    public function materialvariant(){
-        return $this->hasMany('App\Models\ReceiveMatVariantDetail', 'strMaterialID','strMaterialID');
-    }
+  
 
 }

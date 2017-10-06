@@ -3,7 +3,7 @@
 @section('content')
 	 <div class="modal fade" style="margin-top:50px" id="jobModal" role="dialog">
         <div class="col-md-8 col-md-offset-2">
-          <div class="modal-content">
+        <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
@@ -29,7 +29,9 @@
                         <label for="jobOrderNo" class="control-label">Use in: <span style="color:red">*</span></label>
                         <select class="form-control select2" id = "joborderNo" style="width: 100%;" required>
                           <option value="first" selected disabled>Select Job Order No. </option>
-                         
+                          @foreach($joborder as $jo)
+                            <option value="{{$jo->strJobOrderID}}">{{$jo->strJobOrderID}}</option>
+                          @endforeach
                         </select>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                       </div>
@@ -41,7 +43,9 @@
                         <label for="stageName" class="control-label">Stage</label>
                         <select class="form-control select2" id = "stageName" style="width: 100%;" required>
                           <option value="first" selected disabled>Select Stage </option>
-                         
+                          @foreach($stage as $s)
+                            <option value="{{$s->strStageID}}">{{$s->strStageName}}</option>
+                          @endforeach
                         </select>
                       </div>
                     </div>
@@ -98,7 +102,7 @@
      
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Pro duction Monitoring</a></li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Production Monitoring</a></li>
 
       </ol>
     </section>
@@ -117,7 +121,17 @@
                 <div class="form-group">
                 <label> Choose Stage to Monitor </label>
                   <select class="form-control select2" id = "stage" style="width: 100%;padding-left: 10px" required>
-                    <option selected disabled> Waxing  </option>
+                  <option value="first" selected disabled>Choose Stage</option>
+                    @foreach($jobticket as $j)
+                      <option value="{{$j->strStageID}}">{{$j->stage->strStageName}}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                <label> Choose Substage to Monitor </label>
+                  <select class="form-control select2" id = "substage" style="width: 100%;padding-left: 10px" required>
                   </select>
                 </div>
               </div>
@@ -126,49 +140,25 @@
 
 
               <div class="table-responsive mailbox-messages">
-                <table class="table table-hover table-striped">
+                <table id="monitoringTable" class="table table-hover table-striped">
               <tr colspan="7"> <b> FINISHED PARTS </b></tr> 
-
                   <thead>
-
+                    <th class="hidden">ID</th>
+                    <th class="hidden">Part ID</th>
                     <th> Part Name </th>
-                    <th> Primary Coating  </th>
-                    <th> Subsequent Coating </th>
-                    <th> Primary Coating  </th>
-                    <th> Dewaxing </th>
-                    <th> Leaching </th>
+                    <th>Quantity</th>
                     <th> Action</th>
-   
                   </thead>
                   <tbody>
-                   <tr>
-                    <td><a href="#" data-toggle="modal" data-target="#viewProduct"">Pako</a></td>
-                    <td>56 </td>
-                     <td>150 </td>
-                    <td>50 </td>
-                    <td>150</td>
-                    <td>150</td>
-                    <td> <button class="btn btn-primary" id="btnuse" data-toggle="modal" data-target="#jobModal"> Use </button> </td>
-                  </tr>
-                  <tr>
-                    <td class="mailbox-name"><a href="read-mail.html">Baril</a></td>
-                    <td>68 </td>
-                     <td>150 </td>
-                    <td>50 </td>
-                    <td>150</td>
-                    <td>150</td>
-                   <td> <button class="btn btn-primary" id="btnuse" data-toggle="modal" data-target="#jobModal"> Use </button> </td>
-                  </tr>
-          
-                   <tr>
-                    <td class="mailbox-name"><a href="read-mail.html">Beng beng</a></td>
-                    <td>12 </td>
-                     <td>150 </td>
-                    <td>50 </td>
-                    <td>150</td>
-                    <td>150</td>
-                    <td> <button class="btn btn-primary" id="btnuse" data-toggle="modal" data-target="#jobModal"> Use </button> </td>
-                  </tr>
+                    @foreach($detail as $jt)
+                      <tr>
+                        <td class="hidden">{{$jt -> strJobTicketID}}</td>
+                        <td class="hidden">{{$jt -> strProductID}}</td>
+                        <td><a href="#" data-toggle="modal" data-target="#viewProduct"> {{$jt -> details -> strProductName}}</a></td>
+                        <td>100</td>
+                        <td> <button class="btn btn-primary" id="btnuse" data-toggle="modal" data-target="#jobModal"> Use </button> </td>
+                      </tr>
+                    @endforeach
                   </tbody>
                 </table>
                 <!-- /.table -->
@@ -179,14 +169,14 @@
             <div class="box-footer no-padding">
               <div class="mailbox-controls">
                
-                <div class="pull-right">
+                <!-- <div class="pull-right">
                   1-50/200
                   <div class="btn-group">
                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div>
-                  <!-- /.btn-group -->
-                </div>
+                  </div> -->
+                  <!-- /.btn-group
+                </div> -->
                 <!-- /.pull-right -->
               </div>
             </div>
@@ -203,7 +193,7 @@
 
 
 @push('scripts')
- <script type="text/javascript" src="{{URL::asset('js/logic/estimate.js')}}"></script>
+ <script type="text/javascript" src="{{URL::asset('js/logic/monitoring.js')}}"></script>
 <script>
   $(function () {
     //Enable iCheck plugin for checkboxes

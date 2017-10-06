@@ -49,15 +49,23 @@ $("#btnEditSupplier").click(function(){
   $(document).on('submit', '#supplier_form', function(e){
     table.column(0).visible(false);
     e.preventDefault();
-      $.ajax({
+    $.ajax({
+      type: "GET",
+      url: '/maintenance/supplier-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+        $.ajax({
         type: "POST",
         url: urlCode,
         data: {
+            id:data,
             supplier_name: $('#supplierName').val(),
             supplier_street: $('#street').val(),
             supplier_brgy: $('#brgy').val(),
             supplier_city: $('#city').val(),
             supplier_desc: $('#supplierDesc').val(),
+            created_at: today,
             supplier_id: tempID
         },
         success: function(result) {
@@ -81,10 +89,10 @@ $("#btnEditSupplier").click(function(){
             });
           }
           table.row.add([
-            result[0].strSupplierID,
-            result[0].strSupplierName,
-            result[0].strSupStreet+" "+result[0].strSupBrgy+" "+result[0].strSupCity,
-            result[0].strSupplierDesc,
+            result.strSupplierID,
+            result.strSupplierName,
+            result.strSupStreet+" "+result.strSupBrgy+","+result.strSupCity,
+            result.strSupplierDesc,
             ]
           ).draw(false);
           //reset form
@@ -120,8 +128,12 @@ $("#btnEditSupplier").click(function(){
               }
           });
         }
-      });
-
+      })
+      },
+      error: function(data){
+        alert('ERROR IN MAX ID');
+      }
+    })
   })
 
 

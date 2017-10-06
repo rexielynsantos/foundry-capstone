@@ -9,7 +9,7 @@ class CreateReceivePurchaseTable extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+ * @return void
      */
     public function up()
     {
@@ -17,6 +17,8 @@ class CreateReceivePurchaseTable extends Migration
         $table->string('strReceivePurchaseID')->primary();
         $table->string('strPurchaseID');
         $table->date('dtDeliveryReceived');
+        $table->timestamps();
+        $table->boolean('isActive')->default(1);
         $table->foreign('strPurchaseID')
           ->references('strPurchaseID')->on('tblpurchase');
         });

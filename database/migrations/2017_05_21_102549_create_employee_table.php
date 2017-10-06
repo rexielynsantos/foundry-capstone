@@ -25,14 +25,15 @@ class CreateEmployeeTable extends Migration
         $table->string('strEmployeeImagePath')->nullable();
         $table->string('strTempImage')->nullable();
         $table->string('strStatus');
+        $table->timestamps();
         $table->foreign('strJobTitleID')
               ->references('strJobTitleID')->on('tbljobtitle')
-              ->onUpdate('cascade');
-              // ->onDelete('restrict');
+              ->onUpdate('cascade')
+              ->onDelete('restrict');
         $table->foreign('strDepartmentID')
               ->references('strDepartmentID')->on('tbldepartment')
-              ->onUpdate('cascade');
-              // ->onDelete('restrict');
+              ->onUpdate('cascade')
+              ->onDelete('restrict');
       });
     }
 

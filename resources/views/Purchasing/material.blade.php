@@ -27,7 +27,8 @@
             <th>Variant(s)</th>
             <th>Re-order Level</th>
             <th>Re-order Quantity</th>
-            <th>Description</th>
+            <th>Base Price</th>
+            <th width ="10%">Description</th>
           </tr>
         </thead>
         <tbody>
@@ -47,6 +48,7 @@
             </td>
             <td>{{$mtrl->intReorderLevel}}</td>
             <td>{{$mtrl->intReorderQty}} {{$mtrl->unit->strUOMName}}</td>
+            <td>{{$mtrl->dblBasePrice}}</td>
             <td>{{$mtrl->strMaterialDesc}}</td>
           </tr>
           @endforeach

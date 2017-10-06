@@ -1,12 +1,12 @@
 @extends('master')
-@section('pageTitle', 'Manage Orders')
+@section('pageTitle', 'Order Progress')
 @section('content')
 	
 
 <form class="" id="purchase_form" role="form" data-toggle="validator">
   <section class="content-header">
     <h1>
-    Manage Orders
+    
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"> {{date('Y-m-d')}} </a></li>
@@ -14,57 +14,79 @@
   </section>
 
   <section class="content">
+   
     <div class="row">
-      <div class="col-md-3">
-        <a id="btnAddpurchase" class="btn btn-block btn-social btn-instagram"><i class="fa fa-edit"></i> Manage Order </a>
-        <a href="/transaction/receive-add" class="btn btn-block btn-social btn-linkedin"><i class="fa fa-truck"></i> View Material Stocks </a>
-        <a href="/transaction/stocks" class="btn btn-block btn-social btn-bitbucket"><i class="fa fa-industry"></i> View Product Stocks </a>
-      </div>
-      <!-- /.col -->
-      <div class="col-md-9">
+      <div class="col-md-12">
         <div class="box box-danger">
           <div class="box-header with-border">
-            <h3 class="box-title">View Orders</h3>
+            <h3 class="box-title">On-Process Orders</h3>
 
 
           </div>
           <!-- /.box-header -->
-          <div class="box-body">
 
-              <table id="purchasesTable" class="display">
+          <div class="box-body">
+             <div class="row">
+               <div class="col-md-4">
+                 <div class="form-group">
+                     <label> Job Order Search</label>
+                      <select class="form-control select2" id = "stage" style="width: 100%;padding-left: 10px" required>
+                      <option value="first" selected disabled>Search..</option>
+                      </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                 <div class="form-group">
+                     <label> Customer Search</label>
+                      <select class="form-control select2" id = "stage" style="width: 100%;padding-left: 10px" required>
+                      <option value="first" selected disabled>Search..</option>
+                      </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                 <div class="form-group">
+                     <label> Product Search</label>
+                      <select class="form-control select2" id = "stage" style="width: 100%;padding-left: 10px" required>
+                      <option value="first" selected disabled>Search..</option>
+                      </select>
+                  </div>
+                </div>
+               </div>
+
+              <table id="joborderProgressTable" class="table table-bordered">
                 <thead>
                   <th> PO No. </th>
-                  <th> Job Orders </th>
-                  <th width="30%">Customer </th>
+                  <th> JO No. </th>
+                  <th width="20%">Customer </th>
+                  <th width="30%">Ordered Products </th>
                   <th> Order Date </th>
                   <th> Status </th>
                   <th> Actions </th>
                 </thead>
                 <tbody>
-                  <td>SO12345</td>
+                  <td>SO-00001</td>
+                  <td>JO-00001</td>
+                  <td>Honda Philippines</td>
                   <td>
                      <div class="progress">
                       <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                        <span>40%</span>
+                        <span>[Product Name]60%</span>
                       </div>
                     </div>
                     <div class="progress">
                       <div class="progress-bar progress-bar-blue" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                        <span>40%</span>
+                        <span>[Product Name]60%</span>
                       </div>
                     </div>
                     <div class="progress">  
                       <div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
-                        <span>40%</span>
+                        <span>[Product Name]80%</span>
                       </div>
                     </div>
                   </td>
-                  <td>Toyota Philippines</td>
                   <td>12-06-17</td>
-                  <td>Released</td>
-                  <td> <button> <i class="fa fa-eye"> </i> </button>
-                  <button> <i class="fa fa-edit"> </i> </button>
-                  <button> <i class="fa fa-trash"> </i> </button></td>
+                  <td>On-Process</td>
+                  <td> <button class="btn btn-primary"> <i class="fa fa-eye"> </i> </button></td>
                 </tbody>
               </table>
           </div>

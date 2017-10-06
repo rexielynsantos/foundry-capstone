@@ -12,8 +12,7 @@ class QuoteJobOrder extends Model
     public $timestamps = false;
     protected $fillable = [
 	    'strQuoteRequestID',
-	    'strProductID',
-        'strMatSpecID'
+	    'strProductID'
     ];
     public function quotedetails(){
         return $this->belongsTo('App\Models\QuoteRequest','strQuoteRequestID','strQuoteRequestID');
@@ -21,8 +20,8 @@ class QuoteJobOrder extends Model
     public function product(){
         return $this->belongsTo('App\Models\QuoteProductVariant','strQuoteRequestID','strQuoteRequestID');
     }
-    public function matspec() {
-        return $this->belongsTo('App\Models\MatSpec', 'strMatSpecID', 'strMatSpecID');
-    }
+    // public function matspec() {
+    //     return $this->belongsTo('App\Models\MatSpec', 'strMatSpecID', 'strMatSpecID');
+    // }
 
 }

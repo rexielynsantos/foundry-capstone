@@ -17,12 +17,14 @@ class CreateUOMTable extends Migration
         $table->string('strUOMID')->primary();
         $table->string('strUOMName')->unique();
         $table->text('strUOMDesc')->nullable();
-        $table->string('strUOMTypeID');
+        // $table->string('strUOMTypeID');
         $table->string('strStatus');
-        $table->foreign('strUOMTypeID')
-              ->references('strUOMTypeID')->on('tbluomtype')
-              ->onUpdate('cascade')
-              ->onDelete('restrict');
+        $table->timestamps();
+
+        // $table->foreign('strUOMTypeID')
+        //       ->references('strUOMTypeID')->on('tbluomtype')
+        //       ->onUpdate('cascade')
+        //       ->onDelete('restrict');
       });
     
     }

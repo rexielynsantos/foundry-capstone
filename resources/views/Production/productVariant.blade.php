@@ -24,7 +24,7 @@
         	<tr>
             <th class="hidden">ID</th>
         		<th>Variant</th>
-            <th>Used in</th>
+            <th>Limited to</th>
             <th>Description</th>
 
         	</tr>

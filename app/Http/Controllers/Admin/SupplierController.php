@@ -10,7 +10,66 @@ use Response;
 
 class SupplierController extends Controller
 {
-    public function viewSupplier()
+
+  public function getSupplierMax(){
+    $id = DB::table('tblsupplier')
+          ->select('strSupplierID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strSupplierID', 'desc')
+          ->first();
+    
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strSupplierID;
+
+      $arrID = str_split($idd);
+    
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+    
+         if($boolAdd)
+         {
+    
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+    
+         $arrNew[$ctr] = $new;
+       }//for
+    
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'SUP00001';
+     }
+    return response()->json($somenew);
+  }
+
+  public function viewSupplier()
   {
     $product = Supplier::where('strStatus','Active')->get();
 
@@ -21,8 +80,7 @@ class SupplierController extends Controller
 
 	 public function addSupplier(Request $request)
 	  {
-
-      $id = str_random(10);
+      $id = $request->input('id');
       Supplier::insert([
         'strSupplierID' => $id,
         'strSupplierName' => $request->supplier_name,
@@ -31,10 +89,9 @@ class SupplierController extends Controller
         'strSupCity' => $request->supplier_city,
         'strSupplierDesc' => $request->supplier_desc,
         'strStatus' => 'Active',
+        'created_at' => $request->input('created_at'),
       ]);
-    // DB::commit();
-    $supplier =Supplier::where('strStatus','Active')->get();
-    // return Response::json($supplier);
+    $supplier =Supplier::where('strSupplierID',$id)->first();
     return $supplier;
 
   }
@@ -54,7 +111,7 @@ class SupplierController extends Controller
         'strSupCity' => $request->supplier_city,
         'strSupplierDesc' => $request->supplier_desc,
       ]);
-    $supplier = Supplier::where('strSupplierID', $request->supplier_id)->get();
+    $supplier = Supplier::where('strSupplierID', $request->supplier_id)->first();
     return $supplier;
 
   }

@@ -9,13 +9,14 @@ class Purchase extends Model
     protected $table = 'tblpurchase';
     protected $primaryKey = 'strPurchaseID';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
-    	'strSupplierID',	
-        'strSupplierContactPerson',
+    	'strSupplierID',
+      'strSupplierContactPerson',
     	'strPaymentTermID',
-        'strPStatus'
-
+      'strPStatus',
+      'isFinalize',
+      'isDelivered'
     ];
 
     public function supplier() {

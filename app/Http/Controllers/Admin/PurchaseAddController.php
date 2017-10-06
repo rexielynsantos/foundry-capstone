@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 // use App\Http\Requests\PurchaseRequest;
+// use App\Mail\Purchase;
 use App\Http\Controllers\Controller;
 use App\Models\Unit;
 use App\Models\Supplier;
@@ -30,21 +31,28 @@ class PurchaseAddController extends Controller
       return $material;
          }
 
-    public function getAllMaterialVariant(){
+    public function getAllMaterialVariant(Request $request){
 
        $matVar = DB::table('tblmaterialdetail')
         ->leftjoin('tblmaterialvariant', 'tblmaterialvariant.strMaterialVariantID', '=', 'tblmaterialdetail.strMaterialVariantID')
-        ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', '=', 'tblmaterialdetail.strMaterialID')
         ->leftjoin('tbluom', 'tblmaterialvariant.strUOMID', '=', 'tbluom.strUOMID')
-        ->select('tblmaterial.*','tblmaterialdetail.strMaterialID')
-        ->select('tblmaterialvariant.*','tblmaterialdetail.strMaterialVariantID')
-        ->select('tblmaterialvariant.*','tbluom.strUOMName')
-                // ->where('tblmaterialdetail.strMaterialID', '=' , 'tblmaterial.strMaterialID')
+        ->where('tblmaterialdetail.strMaterialID', $request->material_id)
         ->get();
 
       return $matVar;
 
     }
+
+    public function matvari(Request $request)
+  {
+    dd($request->all());
+    $matVariant = DB::table('tblmaterialdetail')
+      ->leftjoin('tblmaterialvariant', 'tblmaterialvariant.strMaterialVariantID', 'tblmaterialdetail.strMaterialVariantID')
+      ->where('tblmaterialdetail.strMaterialID', $request->input('mat_id'))
+      ->get();
+
+    return Response::json($matVariant);
+  }
 
     public function viewPurchase() {
     $purchase = Purchase::with('material.details','material.materialvariant','supplier', 'paymentterm')->get();
@@ -55,7 +63,7 @@ class PurchaseAddController extends Controller
       // return Response::json($purchase);
       return view('Transaction.purchaseOrder')
       ->with('purchase',$purchase);
-      // ->with('pur', $pur);  
+      // ->with('pur', $pur);
     }
 
     public function viewAddPurchase(Request $request)
@@ -91,7 +99,7 @@ class PurchaseAddController extends Controller
 
     $suppl = DB::table('tblsupplier')
     ->where('strSupplierID', $request->supplier_id)
-    ->get();
+    ->first();
 
     return Response::json($suppl);
     }
@@ -109,22 +117,29 @@ class PurchaseAddController extends Controller
      public function addCart(Request $request)
     {
 
-      $matt = Material::with(['unit'])->where('strMaterialName',  $request->mat_data)->get();
+      // foreach ($request->mat_data as $matcart) {
+        $matt = Material::with(['unit'])->where('strMaterialName',  $request->mat_data)->get();
+      // }
       return response()->json($matt);
 
     }
     public function addPurchaseOrder(Request $request)
     {
+      // dd($request->all());
       $supplier = Supplier::where('strStatus', 'Active')->get();
        $paymentterm = PaymentTerm::where('strStatus', 'Active')->get();
-      // dd($request->all());
+
       $id = str_random(10);
       Purchase::insert([
         'strPurchaseID' => $id,
         'strSupplierID' => $request->input('sup_id'),
         'strSupplierContactPerson' => $request->input('sup_contact'),
         'strPaymentTermID' => $request->input('pterm_id'),
-        'strStatus' => 'Pending'
+        'dateCreated' => $request->input('date_created'),
+        'strPStatus' => 'Pending',
+        'isFinalize' => '1',
+        'isDelivered' => '1',
+        'created_at' => $request->input('created_at')
         ]);
 
 
@@ -161,7 +176,7 @@ class PurchaseAddController extends Controller
               'strMaterialID' => $material[0],
               'strMaterialVariantID' => $arr[$ctr],
               'dblAddlQty' => $qty[$ctr],
-              'dblMaterialCost' => $cost[$ctr],P
+              'dblMaterialCost' => $cost[$ctr],
             ]);
             $ctr = $ctr + 1;
           }

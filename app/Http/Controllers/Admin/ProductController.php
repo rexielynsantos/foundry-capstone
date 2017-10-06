@@ -13,17 +13,71 @@ use Response;
 
 class ProductController extends Controller
 {
-    public function getAllVariant()
-    {
-      $variant = ProductVariant::where('strStatus', 'Active')->get();
 
-      return response()->json($variant);
-    }
+    public function getProductMax(){
+    $id = DB::table('tblproduct')
+          ->select('strProductID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strProductID', 'desc')
+          ->first();
+    
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strProductID;
+
+      $arrID = str_split($idd);
+    
+       
+    
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+    
+         if($boolAdd)
+         {
+    
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+    
+         $arrNew[$ctr] = $new;
+       }//for
+    
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'PROD00001';
+     }
+    return response()->json($somenew);
+  }
+
     public function viewProduct()
     {
 
-      $product = Product::with('productvariant.details3')
-      ->where('strStatus', 'Active')->get();
+      $product = Product::with('producttype')->where('strStatus', 'Active')->get();
 
       $type = ProductType::where('strStatus', 'Active')->get();
 
@@ -32,33 +86,34 @@ class ProductController extends Controller
       ->with('type', $type);
     }
     public function addProduct(Request $request){
-      $id = str_random(10);
+      $id = $request->input('id');
 
       Product::insert([
         'strProductID' => $id,
         'strProductName' => $request->input('product_name'),
         'strProductTypeID' => $request->input('ptype_id'),
         'strProductDesc' => $request->input('product_desc'),
+        'created_at' => $request->input('created_at'),
         'strStatus' => 'Active'
         ]);
 
-      if($request->input('variant_data') != ''){
-        foreach($request->input('variant_data') as $var){
-         ProductDetail::insert([
-            'strProductID' => $id,
-            'strProductVariantID' => $var
-          ]);
-        }
-      }
+      // if($request->input('variant_data') != ''){
+      //   foreach($request->input('variant_data') as $var){
+      //    ProductDetail::insert([
+      //       'strProductID' => $id,
+      //       'strProductVariantID' => $var
+      //     ]);
+      //   }
+      // }
 
-      $product = Product::with(['productvariant.details3', 'producttype'])->where('strProductID', $id)->first();
+      $product = Product::with(['producttype'])->where('strProductID', $id)->first();
       
       return $product;
     }
     public function editProduct(Request $request)
     {
     
-    $product = Product::with(['productvariant.details3', 'producttype'])->where('strProductID', $request->product_id)->first();
+    $product = Product::with(['producttype'])->where('strProductID', $request->product_id)->first();
     return $product;
     }
     public function updateProduct(Request $request)
@@ -72,18 +127,18 @@ class ProductController extends Controller
           'strStatus' => 'Active'
         ]);
 
-      ProductDetail::where('strProductID', $request->product_id)
-        ->delete();
+      // ProductDetail::where('strProductID', $request->product_id)
+      //   ->delete();
 
-      if($request->input('variant_data') != ''){
-        foreach($request->input('variant_data') as $variant){
-          ProductDetail::insert([
-            'strProductID' => $request->product_id,
-            'strProductVariantID' => $variant
-          ]);
-        }
-      }
-      $product = Product::with(['supplier.details3', 'producttype'])->where('tblproduct.strProductID', $request->product_id)->first();
+      // if($request->input('variant_data') != ''){
+      //   foreach($request->input('variant_data') as $variant){
+      //     ProductDetail::insert([
+      //       'strProductID' => $request->product_id,
+      //       'strProductVariantID' => $variant
+      //     ]);
+      //   }
+      // }
+      $product = Product::with(['producttype'])->where('tblproduct.strProductID', $request->product_id)->first();
       return $product;
     }
     public function deleteProduct(Request $request)
@@ -95,6 +150,27 @@ class ProductController extends Controller
         'strStatus' => 'Inactive',
       ]);
     }
+  }
+
+  public function statusProduct(Request $request)
+  {
+    $product = Product::where('strProductName', '=', $request->input('product_name'))->get();
+
+
+    return response()->json($product);
+  }
+
+  public function activeProduct(Request $request)
+  {
+      Product::where('strProductName', '=', $request->input('product_name'))
+
+      ->update([
+        'strStatus' => 'Active',
+      ]);
+
+      $product = Product::with(['producttype'])->where('strProductName', $request->product_name)->first();
+      return $product;
+
   }
 
 

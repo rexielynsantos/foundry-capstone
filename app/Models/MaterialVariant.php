@@ -9,7 +9,7 @@ class MaterialVariant extends Model
     protected $table = 'tblmaterialvariant';
     protected $primaryKey = 'strMaterialVariantID';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
     	'intVariantQty',
         'strUOMID',

@@ -16,9 +16,69 @@ use App\Models\Product;
 class MaterialSpecController extends Controller
 {
 
+  public function getMatSpecMax(){
+    $id = DB::table('tblmatspec')
+          ->select('strMatSpecID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strMatSpecID', 'desc')
+          ->first();
+    
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strMatSpecID;
+
+      $arrID = str_split($idd);
+    
+       
+    
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+    
+         if($boolAdd)
+         {
+    
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+    
+         $arrNew[$ctr] = $new;
+       }//for
+    
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'MS00001';
+     }
+    return response()->json($somenew);
+  }
+
 	public function viewMatSpec()
     {
-       $matspec = MatSpec::with('material.details')->where('strStatus','Active')->get();
+       $matspec = MatSpec::with('material.details.unit', 'product.producttype')->where('strStatus','Active')->get();
       $unit = Unit::where('strStatus', 'Active')->get();
       $mat = Material::where('strStatus','Active')->get();
       $prodct = Product::where('strStatus', 'Active')->get();
@@ -51,11 +111,12 @@ public function addCart(Request $request)
     }
     public function addMatSpec(Request $request)
     {
-      $id = str_random(10);
+      $id = $request->input('id');
       MatSpec::insert([
         'strMatSpecID' => $id,
 				'strVarianceCode' => $request->input('variance_code'),
         'strProductID' => $request->input('product_id'),
+        'created_at' => $request->input('created_at'),
         'strStatus' => 'Active'
         ]);
 
@@ -65,19 +126,19 @@ public function addCart(Request $request)
         foreach($request->input('mat_data') as $prvr){
           MatSpecDetail::insert([
             'strMatSpecID' => $id,
-            'strMaterialID' => $prvr[0],
+            'strMaterialID' => $prvr,
             'dblMaterialQuantity' => $qty[$ctr]
           ]);
           $ctr = $ctr + 1;
         }
       }
 
-      $prdvrc = MatSpec::with(['material.details'],['product'])->where('strMatSpecID', $id)->first();
+      $prdvrc = MatSpec::with(['material.details.unit', 'product.producttype'])->where('strMatSpecID', $id)->first();
       return $prdvrc;
     }
     public function editMatSpec(Request $request)
     {
-    $mattt = MatSpec::with(['material.details'],['product'])
+    $mattt = MatSpec::with(['material.details', 'product'])
 		->where('strMatSpecID', '=', $request->matspec_id)
 		->first();
     return $mattt;
@@ -112,7 +173,7 @@ public function addCart(Request $request)
          }
        }
 
-       $prdvrc = MatSpec::with(['material.details'],['product'])->where('strMatSpecID', $id)->first();
+       $prdvrc = MatSpec::with(['material.details.unit', 'product.producttype'])->where('strMatSpecID', $id)->first();
        return $prdvrc;
 		}
 
@@ -126,5 +187,26 @@ public function addCart(Request $request)
 	      ]);
 	    }
 	  }
+
+    public function statusMatSpec(Request $request)
+  {
+    $status = MatSpec::where('strVarianceCode', '=', $request->input('variance_code'))->get();
+
+
+    return response()->json($status);
+  }
+
+  public function activeMatSpec(Request $request)
+  {
+      MatSpec::where('strVarianceCode', '=', $request->input('variance_code'))
+
+      ->update([
+        'strStatus' => 'Active',
+      ]);
+
+      $matspec = MatSpec::with(['material.details.unit', 'product.producttype'])->where('strVarianceCode', $request->variance_code)->first();
+      return $matspec;
+
+  }
 
 }

@@ -83,82 +83,96 @@ $(document).ready(function(){
     });
     e.preventDefault();
     $.ajax({
-      type: "POST",
-      url: urlCode,
-      data: {
-          stage_data: stageArr,
-          ptype_name: $('#prodTypeName').val(),
-          ptype_desc: $('#prodTypeDesc').val(),
-          ptype_id: tempID
-      },
-      success: function(result) {
-        if(urlCode == '/maintenance/productType-update'){
-          table.rows('tr.active').remove().draw();
-          noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Product Type successfully updated!</center></h4>',
-            });
-        }else{
-          noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Product Type successfully added!</center></h4>',
-            });
-        }
-
-        // LIST
-        var x='';
-        for (var index = 0; index < result.stage.length; index++) {
-          var element = result.stage[index].details.strStageName;
-          x += '<li style="list-style-type:circle">'+element+'</li>'
-        }
-
-        table.row.add([
-          result.strProductTypeID,
-          result.strProductTypeName,
-          x,
-          result.strProductTypeDesc,
-          ]
-        ).draw(false);
-
-        $('#add_productType_modal').modal('toggle');
-        $('#hideDiv').trigger('click');
-        $('#btnEditProductType').hide()
-        $('#btnDeleteProductTypes').hide()
-        $('#btnAddProductType').show()
-        stageArr = [];
-
-      },
-      error: function(result){
+      type: "GET",
+      url: '/maintenance/productType-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
         $.ajax({
-            url: '/maintenance/productType-status',
-            type: 'POST',
-            data: {
-                ptype_name: $('#prodTypeName').val(),
-            },
-            success: function(data)
-            {
-              var errors = result.responseJSON;
-                if(errors == undefined){
-                  if(data[0].strStatus == 'Active'){
-                    noty({
-                      type: 'error',
-                      layout: 'bottomRight',
-                      timeout: 3000,
-                      text: '<h4><center>Type name already exist!</center></h4>',
-                    });
-                  }
-                  else if(data[0].strStatus == 'Inactive'){
-                    $('#ProdTypeReactivateModal').modal();
-                  }
-                }
+          type: "POST",
+          url: urlCode,
+          data: {
+              id: data,
+              stage_data: stageArr,
+              ptype_name: $('#prodTypeName').val(),
+              ptype_desc: $('#prodTypeDesc').val(),
+              created_at: today,
+              ptype_id: tempID
+          },
+          success: function(result) {
+            if(urlCode == '/maintenance/productType-update'){
+              table.rows('tr.active').remove().draw();
+              noty({
+                  type: 'success',
+                  layout: 'bottomRight',
+                  timeout: 3000,
+                  text: '<h4><center>Product Type successfully updated!</center></h4>',
+                });
+            }else{
+              noty({
+                  type: 'success',
+                  layout: 'bottomRight',
+                  timeout: 3000,
+                  text: '<h4><center>Product Type successfully added!</center></h4>',
+                });
             }
-        });
+
+            // LIST
+            var x='';
+            for (var index = 0; index < result.stage.length; index++) {
+              var element = result.stage[index].details.strStageName;
+              x += '<li style="list-style-type:circle">'+element+'</li>'
+            }
+
+            table.row.add([
+              result.strProductTypeID,
+              result.strProductTypeName,
+              x,
+              result.strProductTypeDesc,
+              ]
+            ).draw(false);
+
+            $('#add_productType_modal').modal('toggle');
+            $('#hideDiv').trigger('click');
+            $('#btnEditProductType').hide()
+            $('#btnDeleteProductTypes').hide()
+            $('#btnAddProductType').show()
+            stageArr = [];
+
+          },
+          error: function(result){
+            $.ajax({
+                url: '/maintenance/productType-status',
+                type: 'POST',
+                data: {
+                    ptype_name: $('#prodTypeName').val(),
+                },
+                success: function(data)
+                {
+                  var errors = result.responseJSON;
+                    if(errors == undefined){
+                      if(data[0].strStatus == 'Active'){
+                        noty({
+                          type: 'error',
+                          layout: 'bottomRight',
+                          timeout: 3000,
+                          text: '<h4><center>Type name already exist!</center></h4>',
+                        });
+                      }
+                      else if(data[0].strStatus == 'Inactive'){
+                        $('#ProdTypeReactivateModal').modal();
+                      }
+                    }
+                }
+            });
+          }
+        })
+      },
+      error: function(data){
+        alert('ERROR IN MAX ID');
       }
-    });
+    })
+    
   });
 
 

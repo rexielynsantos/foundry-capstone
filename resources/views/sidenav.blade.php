@@ -45,10 +45,9 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/maintenance/uomType"><i class="fa fa-plus"></i> Unit Type </a></li>
+                <!-- <li><a href="/maintenance/uomType"><i class="fa fa-plus"></i> Unit Type </a></li> -->
                 <li class="treeview">
                   <a href="/maintenance/uom"><i class="fa fa-plus"></i> Unit </a>
-        
                 </li>
               </ul>
             </li>
@@ -104,21 +103,91 @@
                 <li><a href="/maintenance/workflow"><i class="fa fa-plus"></i> Workflow</a> </li>
               </ul>
             </li> -->
-
+ 
           </ul>
         </li>
-        <li class="treeview">
+   <!--      <li class="treeview">
           <a href="/transaction/estimate">
             <img src="../images/new-order.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Order Processing</span>
           </a>
+        </li> -->
+         <li class="treeview">
+          <a href="/transaction/customers">
+            <img src="../images/customer-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Customer</span>
+          </a>
         </li>
+         <li class="treeview">
+          <a href="/transaction/order-costing">
+            <img src="../images/costing-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Product Costing</span>
+          </a>
+        </li>
+
+        <li class="treeview">
+          <a href="/transaction/estimate-add">
+            <img src="../images/quotation-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Quotation</span>
+          </a>
+        </li>
+
+         <li class="treeview">
+          <a href="/transaction/customerPurchase-new">
+            <img src="../images/purchase-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Customer P.O. </span>
+          </a>
+        </li>
+
+         <li class="treeview">
+          <a href="/transaction/joborder-new">
+            <img src="../images/joborder-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Job Order</span>
+          </a>
+        </li>
+
+   <!--       <li class="treeview">
+        <a href="#">
+          <img src="../images/new-order.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Order Processing</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+
+
+        
+          <ul class="treeview-menu">
+            <li><a href="/transaction/customers"><i class="glyphicon glyphicon-object-align-bottom"></i> New Customer </a></li>
+          </ul>
+
+          <ul class="treeview-menu">
+            <li><a href="/transaction/order-costing"><i class="glyphicon glyphicon-object-align-bottom"></i> New Product Costing </a></li>
+          </ul>
+          <ul class="treeview-menu">
+            <li><a href="/transaction/product-costing-list"><i class="glyphicon glyphicon-object-align-bottom"></i> View Product Costings </a></li>
+          </ul>
+          <ul class="treeview-menu">
+            <li><a href="/transaction/estimate-add"><i class="glyphicon glyphicon-object-align-bottom"></i> New Quotation </a></li>
+          </ul>
+          <ul class="treeview-menu">
+            <li><a href="/transaction/estimate"><i class="glyphicon glyphicon-object-align-bottom"></i> View Quotations </a></li>
+          </ul>
+           <ul class="treeview-menu">
+            <li><a href="/transaction/customerPurchase-new"><i class="glyphicon glyphicon-object-align-bottom"></i> New Customer Purchase </a></li>
+          </ul>
+           <ul class="treeview-menu">
+            <li><a href="/transaction/customerPurchases"><i class="glyphicon glyphicon-object-align-bottom"></i> View Customer Purchases </a></li>
+          </ul>
+           <ul class="treeview-menu">
+            <li><a href="/transaction/joborder-new"><i class="glyphicon glyphicon-object-align-bottom"></i> New Job Order </a></li>
+          </ul>
+           <ul class="treeview-menu">
+            <li><a href="/transaction/customerPurchases"><i class="glyphicon glyphicon-object-align-bottom"></i> View Job Order </a></li>
+          </ul>
+
+
+        </li> -->
          <li class="treeview">
           <a href="/transaction/purchaseOrder">
             <img src="../images/inventory-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Inventory</span>
           </a>
         </li>
         <li class="treeview">
-          <a href="/transaction/jobtickets">
+          <a href="/transaction/production-monitoring">
             <img src="../images/production-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Production</span>
           </a>
         </li>
@@ -129,11 +198,8 @@
         </li> -->
 
         <li class="treeview">
-          <a href="#">
+          <a href="/queries/queries">
             <img src="../images/queries.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Queries</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
           </a>
 
         </li>
@@ -156,6 +222,8 @@
             <li><a href="/maintenance/paymentTerms"><i class="glyphicon glyphicon-object-align-bottom"></i> Payment Terms </a></li>
             <li><a href="/maintenance/dataReactivation"><i class="glyphicon glyphicon-object-align-bottom"></i> Data Reactivation </a></li>
              <li><a href="/maintenance/userRole"><i class="fa fa-plus"></i> User Role</a></li>
+             <li><a href="/utilities/terms-condition"><i class="glyphicon glyphicon-object-align-bottom"></i> Terms and Condition </a></li>
+             <li><a href="/maintenance/module"><i class="glyphicon glyphicon-object-align-bottom"></i> Module </a></li>
 
           </ul>
         </li>

@@ -62,6 +62,17 @@
                        </div>
                     </div>
                   </div>
+                  <div class="col-md-12">
+                    <div class="form-group has-feedback">
+                      <div class="form-group">
+                            <label for="basePrice" class="control-label">Base Price<span style="color:red">*</span></label>
+                             <input type="text" placeholder="0" min=1 class="form-control validate" id ="basePrice" required
+                        data-error="This field is required."
+                        maxlength="35" style="border:1px solid #A9A9A9">
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                       </div>
+                    </div>
+                  </div>
                 </div>
                 
               </div>
@@ -82,6 +93,7 @@
                   </div>
                 </div>
               </div>
+              <br>
                <div class="row">
                 <div class="col-md-12">
                   <div class="form-group has-feedback">
@@ -94,6 +106,7 @@
                   </div>
                 </div>
               </div>
+              <br>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group has-feedback">
@@ -110,24 +123,7 @@
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-md-12">
-                  <div id="hidee">
-                    <table id="matCostTable" class="table table-bordered">
-                      <thead>
-                        <th class="hidden"> ID </th>
-                        <th> Supplier Name </th>
-                        <th> Variant </th>
-                        <th> Cost </th>
-                        <th> Action </th>
-                      </thead>
-                      <tbody>
-
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+              
              </div>
             </div>
 

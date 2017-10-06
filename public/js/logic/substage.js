@@ -32,6 +32,7 @@ $("#btnEditSubstg").click(function(){
       {
         // CHANGE ADD THIS DEPENDS ON INPUT FIELDS
         $('#substgName').val(data[0].strSubStageName);
+        $('#timeRequired').val(data[0].dbltimeRequired)
         $('#substgDesc').val(data[0].strSubStageDesc);
         // console.log(data);
         // URL OF EDIT
@@ -48,13 +49,22 @@ $("#btnEditSubstg").click(function(){
   $(document).on('submit', '#substg_form', function(e){
     table.column(0).visible(false);
     e.preventDefault();
-      $.ajax({
+    $.ajax({
+      type: "GET",
+      url: '/maintenance/substage-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+        $.ajax({
         type: "POST",
         url: urlCode,
         data: {
+            id: data,
             substage_name: $('#substgName').val(),
             substage_desc: $('#substgDesc').val(),
-            substage_id: tempID
+            created_at: today,
+            substage_id: tempID,
+            process_time: $('#timeRequired').val()
         },
         success: function(result) {
           console.log(result);
@@ -77,6 +87,7 @@ $("#btnEditSubstg").click(function(){
           table.row.add([
             result[0].strSubStageID,
             result[0].strSubStageName,
+            result[0].dbltimeRequired,
             result[0].strSubStageDesc,
             ]
           ).draw(false);
@@ -113,7 +124,13 @@ $("#btnEditSubstg").click(function(){
               }
           });
         }
-      });
+      })
+      },
+      error: function(data){
+        alert('ERROR IN MAX ID');
+      }
+    })
+
 
   })
 

@@ -9,9 +9,9 @@ class Unit extends Model
     protected $table = 'tbluom';
     protected $primaryKey = 'strUOMID';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
-        'strUOMTypeID',
+        // 'strUOMTypeID',
     	'strUOMName',
     	'strUOMDesc',	
     	'strStatus'

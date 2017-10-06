@@ -9,7 +9,7 @@ class JobTitle extends Model
     protected $table = 'tbljobtitle';
     protected $primaryKey = 'strJobTitleID';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
 	    'strJobTitleName',
 	    'strJobTitleDesc',

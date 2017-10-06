@@ -21,9 +21,11 @@ class CreateProductTable extends Migration
         $table->string('strTempImage')->nullable();
         $table->text('strProductDesc')->nullable();
         $table->string('strStatus');
+        $table->timestamps();
         $table->foreign('strProductTypeID')
               ->references('strProductTypeID')->on('tblproducttype')
-              ->onUpdate('cascade');
+              ->onUpdate('cascade')
+              ->onDelete('restrict');
       });
     }
 

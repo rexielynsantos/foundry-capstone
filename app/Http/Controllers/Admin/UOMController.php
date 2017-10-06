@@ -11,6 +11,66 @@ use DB;
 use Response;
 class UOMController extends Controller
 {
+  public function getMax(){
+    $id = DB::table('tbluom')
+          ->select('strUOMID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strUOMID', 'desc')
+          ->first();
+    
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strUOMID;
+
+      $arrID = str_split($idd);
+    
+       
+    
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+    
+         if($boolAdd)
+         {
+    
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+    
+         $arrNew[$ctr] = $new;
+       }//for
+    
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'U00001';
+     }
+    return response()->json($somenew);
+  }
+
   public function viewUOM()
   {
     $uom = Unit::with('unittype')->where('strStatus', 'Active')->get();
@@ -22,28 +82,26 @@ class UOMController extends Controller
       ->with('productUOM',$uom)
       ->with('uomType',$uomType);
   }
+
   public function addUOM(UOMRequest $request)
   {
-    $id = str_random(10);
     Unit::insert([
-      'strUOMID' => $id,
+      'strUOMID' => $request->input('id'),
       'strUOMName' => $request->input('uom_name'),
       'strUOMDesc' => $request->input('uom_desc'),
-      'strUOMTypeID' => $request->input('uomtype_id'),
+      'created_at' => $request->input('created_at'),
       'strStatus' => 'Active',
     ]);
 
-    $product = Unit::with('unittype')->where('strStatus', 'Active')->get();
+    $product = Unit::where('strUOMID', $request->input('id'))->get();
     return Response::json($product);
   }
+
   public function editUOM(Request $request)
   {
-    $product = DB::table('tbluom')
-                ->leftjoin('tbluomtype','tbluomtype.strUOMTypeID','=','tbluom.strUOMTypeID')
-                ->select('tbluom.*','tbluomtype.strUOMTypeName')
-                ->where('tbluom.strUOMID', '=', $request->input('uom_id'))
-                ->get();
-    return Response::json($product);
+    $unit = Unit::where('strUOMID', $request->uom_id)->get();
+    // return $unit;
+    return Response::json($unit);
   }
 
   public function updateUOM(UOMRequest $request)
@@ -53,19 +111,15 @@ class UOMController extends Controller
     ->update([
       'strUOMName' => $request->input('uom_name'),
       'strUOMDesc' => $request->input('uom_desc'),
-      'strUOMTypeID' => $request->input('uomtype_id'),
     ]);
 
-    $productUOM = DB::table('tbluom')
-                ->leftjoin('tbluomtype','tbluomtype.strUOMTypeID','=','tbluom.strUOMTypeID')
-                ->select('tbluom.*','tbluomtype.strUOMTypeName')
-                ->where('tbluom.strUOMID', '=' , $request->input('uom_id'))
-                ->get();
+    $unit = Unit::where('strUOMID', $request->uom_id)->get();
     $uomType = DB::table('tbluomtype')
                 ->where('tbluomtype.strStatus', '=' , 'Active')
                 ->get();
-    return Response::json($productUOM);
+    return Response::json($unit);
   }
+
   public function deleteUOM(Request $request)
   {
     foreach ($request->input('uom_id') as $uomID) {
@@ -76,21 +130,20 @@ class UOMController extends Controller
       ]);
     }
   }
+
   public function reactivateUOM()
   {
-    $product = DB::table('tbluom')
-                ->leftjoin('tbluomtype','tbluomtype.strUOMTypeID','=','tbluom.strUOMTypeID')
-                ->select('tbluom.*','tbluomtype.strUOMTypeName')
-                ->where('tbluom.strStatus', '=' , 'Inactive')
-                ->get();
+    $unit = Unit::where('strStatus', 'Inactive')->get();
+
     $uomType = DB::table('tbluomtype')
                 ->where('tbluomtype.strStatus', '=' , 'Inactive')
                 ->get();
       // return Response::json($product);
       return view('Reactivation.uomReactivation')
-      ->with('productUOM',$product)
+      ->with('productUOM',$unit)
       ->with('uomType',$uomType);
   }
+
   public function activateUOM(Request $request)
   {
     foreach ($request->input('uom_id') as $actID) {
@@ -107,9 +160,7 @@ class UOMController extends Controller
 
     $status = Unit::where('strUOMName', '=', $request->input('uom_name'))->get();
 
-    $status = Unit::where('strUOMName', '=', $request->input('uomtype_name'))->get();
-
-
+    // $status = Unit::where('strUOMName', '=', $request->input('uomtype_name'))->get();
 
     return response()->json($status);
   }
@@ -124,7 +175,6 @@ class UOMController extends Controller
 
       $uomtype = Unit::with('unittype')->where('strUOMName', $request->uom_name)->first();
       return $uomtype;
-
   }
 
 }

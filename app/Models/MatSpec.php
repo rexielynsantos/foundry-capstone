@@ -9,7 +9,7 @@ class MatSpec extends Model
     protected $table = 'tblmatspec';
     protected $primaryKey = 'strMatSpecID';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
       'strVarianceCode',
     	'strProductID',

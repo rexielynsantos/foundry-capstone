@@ -14,23 +14,20 @@ class CreateQuoteProductVariantTable extends Migration
     public function up()
     {
         Schema::create('tblquoteproductvariant', function (Blueprint $table) {
-        $table->string('strQuoteRequestID');
+        $table->string('strQuoteID');
         $table->string('strProductID');
-        $table->string('strProductVariantID');
+        // $table->string('strProductVariantID');
         $table->string('strVarianceCode');
         $table->double('dblRequestCost');
         $table->integer('intOrderQty');
         $table->text('strRemarks');
-        $table->text('strStatus');
+        $table->text('strQuoteStatus');
         $table->foreign('strProductID')
                   ->references('strProductID')->on('tblproduct')
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
-        $table->foreign('strProductVariantID')
-                  ->references('strProductVariantID')->on('tblproductvariant')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
         });
+        
     }
 
     /**

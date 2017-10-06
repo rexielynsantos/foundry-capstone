@@ -18,8 +18,8 @@ class CreatePurchMaterialMatvariantDetailTable extends Migration
         $table->string('strMaterialVariantID');
         $table->double('dblAddlQty');
         $table->double('dblMaterialCost');
-        $table->foreign('strMaterialVariantID')
-              ->references('strMaterialVariantID')->on('tblmaterialdetail');     
+        // $table->foreign('strMaterialVariantID')
+        //       ->references('strMaterialVariantID')->on('tblmaterialdetail');     
 
 
         });

@@ -19,9 +19,11 @@ class CreateProductVariantTable extends Migration
         $table->string('strUOMID');
         $table->text('strProductVariantDesc')->nullable();
         $table->string('strStatus');
+        $table->timestamps();
         $table->foreign('strUOMID')
               ->references('strUOMID')->on('tbluom')
-              ->onUpdate('cascade');
+              ->onUpdate('cascade')
+              ->onDelete('restrict');
       });
     }
 

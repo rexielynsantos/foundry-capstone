@@ -9,7 +9,7 @@ class ProductType extends Model
     protected $table = 'tblproducttype';
     protected $primaryKey = 'strProductTypeID';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
     	'strProductTypeName',
     	'strProductTypeDesc',

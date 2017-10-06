@@ -24,9 +24,9 @@ class StageRequest extends FormRequest
     public function rules()
     {
         return [
-            'stage_name' => 'required|min:2|max:35',
+            'stage_name' => 'required|min:2|max:50',
             // 'substage_id' => 'required'
-            'stage_desc'   => 'min:2|max:255',
+            'stage_desc'   => 'min:0|max:255',
         ];
     }
     public function messages()

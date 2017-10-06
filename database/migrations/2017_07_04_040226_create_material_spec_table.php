@@ -20,7 +20,7 @@ class CreateMaterialSpecTable extends Migration
         $table->foreign('strProductID')
                   ->references('strProductID')->on('tblproduct');
         $table->string('strStatus');
-
+        $table->timestamps();
         });
     }
 

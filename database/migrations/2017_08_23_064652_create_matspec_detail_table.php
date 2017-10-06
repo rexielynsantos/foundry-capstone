@@ -26,7 +26,7 @@ class CreateMatspecDetailTable extends Migration
                   ->onUpdate('cascade');
                   // ->onDelete('restrict');
 
-        });
+        }); 
     }
 
     /**

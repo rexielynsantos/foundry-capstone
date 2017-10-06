@@ -25,6 +25,7 @@
         		<th class="hidden">ID</th>
             <th>Name</th>
             <th>SubStage(s)</th>
+            <th>Process Time</th>
             <th>Description</th>
         	</tr>
         </thead>
@@ -39,6 +40,7 @@
                 <li width="35%" style="list-style-type:circle"> {{$sub->details1->strSubStageName}}</li>
               @endforeach
             </td>
+            <td>{{$prod->dbltimeRequired}}</td>
             <td>{{$prod->strStageDesc}}</td>
           </tr>
           @endforeach

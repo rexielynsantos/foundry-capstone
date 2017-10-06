@@ -9,7 +9,7 @@ class Supplier extends Model
     protected $table = 'tblsupplier';
     protected $primaryKey = 'strSupplierID';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
     	'strSupplierName',
     	'strSupStreet',

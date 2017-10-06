@@ -17,8 +17,10 @@ class MaterialTableSeeder extends Seeder
           'intReorderLevel' => 24, 
           'intReorderQty' => 100, 
           'strUOMID' => 'U00002', 
+          'dblBasePrice' => '1000.00', 
           'strMaterialDesc' => 'investment casting special zircon sand',
-          'strStatus' => 'Active'
+          'strStatus' => 'Active',
+          'created_at' => '2000-01-01 01:00:00',
       ]);
       DB::table('tblmaterial')->insert([
           'strMaterialID' => 'MAT00002',
@@ -26,8 +28,10 @@ class MaterialTableSeeder extends Seeder
           'intReorderLevel' => 50, 
           'intReorderQty' => 200, 
           'strUOMID' => 'U00003', 
+          'dblBasePrice' => '1000.00', 
           'strMaterialDesc' => 'metal casting minerals',
-          'strStatus' => 'Active'
+          'strStatus' => 'Active',
+          'created_at' => '2000-01-01 02:00:00',
       ]);
       DB::table('tblmaterial')->insert([
           'strMaterialID' => 'MAT00003',
@@ -35,8 +39,10 @@ class MaterialTableSeeder extends Seeder
           'intReorderLevel' => 50, 
           'intReorderQty' => 200, 
           'strUOMID' => 'U00002', 
+          'dblBasePrice' => '1000.00', 
           'strMaterialDesc' => 'metal casting minerals',
-          'strStatus' => 'Active'
+          'strStatus' => 'Active',
+          'created_at' => '2000-01-01 03:00:00',
       ]);
       DB::table('tblmaterial')->insert([
           'strMaterialID' => 'MAT00004',
@@ -44,8 +50,10 @@ class MaterialTableSeeder extends Seeder
           'intReorderLevel' => 50, 
           'intReorderQty' => 200, 
           'strUOMID' => 'U00003', 
+          'dblBasePrice' => '1000.00', 
           'strMaterialDesc' => 'metal casting minerals',
-          'strStatus' => 'Active'
+          'strStatus' => 'Active',
+          'created_at' => '2000-01-01 04:00:00',
       ]);
       DB::table('tblmaterial')->insert([
           'strMaterialID' => 'MAT00005',
@@ -53,8 +61,10 @@ class MaterialTableSeeder extends Seeder
           'intReorderLevel' => 50, 
           'intReorderQty' => 200, 
           'strUOMID' => 'U00003', 
+          'dblBasePrice' => '1000.00', 
           'strMaterialDesc' => 'metal casting minerals',
-          'strStatus' => 'Active'
+          'strStatus' => 'Active',
+          'created_at' => '2000-01-01 05:00:00',
       ]);
 
     }

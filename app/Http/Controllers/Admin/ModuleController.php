@@ -10,6 +10,66 @@ use DB;
 use Response;
 class ModuleController extends Controller
 {
+  public function getModuleMax(){
+    $id = DB::table('tblmodule')
+          ->select('strModuleID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strModuleID', 'desc')
+          ->first();
+    
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strModuleID;
+
+      $arrID = str_split($idd);
+    
+       
+    
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+    
+         if($boolAdd)
+         {
+    
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+    
+         $arrNew[$ctr] = $new;
+       }//for
+    
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'MOD00001';
+     }
+    return response()->json($somenew);
+  }
+
   public function viewModule()
   {
     $product = DB::table('tblmodule')
@@ -30,13 +90,14 @@ class ModuleController extends Controller
       try {
         DB::beginTransaction();
         $array = ['Draft','For Review','For Revision','Revised','Approved','Expired'];
-      $id = str_random(10);
+      $id = $request->input('id');
 
       DB::table('tblmodule')->insert([
         'strModuleID' => $id,
         'strModuleName' => $request->input('mod_name'),
         'strModuleDesc' => $request->input('mod_desc'),
         'strDepartmentID' => $request->input('dept_id'),
+        'created_at' => $request->input('created_at'),
         'strStatus' => 'Active',
       ]);
 

@@ -31,10 +31,10 @@ $(document).ready(function(){
         success: function(data)
         {
           // CHANGE ADD THIS DEPENDS ON INPUT FIELDS
-          $('#DeptDesc').val(data[0].strDepartmentDesc);
-          $('#DeptName').val(data[0].strDepartmentName);
+          $('#DeptDesc').val(data.strDepartmentDesc);
+          $('#DeptName').val(data.strDepartmentName);
           // URL OF EDIT
-          tempID = data[0].strDepartmentID;
+          tempID = data.strDepartmentID;
           document.getElementById('Dept_form').action = "{{URL::to('/maintenance/department-update')}}";
           urlCode =  '/maintenance/department-update';
         },
@@ -48,71 +48,85 @@ $(document).ready(function(){
   $(document).on('submit', '#Dept_form', function(e){
     table.column(0).visible(false);
     e.preventDefault();
-      $.ajax({
-        type: "POST",
-        url: urlCode,
-        data: {
-            department_desc: $('#DeptDesc').val(),
-            department_name: $('#DeptName').val(),
-            department_id: tempID
-        },
-        success: function(result) {
-          if(urlCode == '/maintenance/department-update'){
-            table.rows('tr.active').remove().draw();
-            noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Department successfully updated!</center></h4>',
-            });
-          }else{
-            noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Department successfully added!</center></h4>',
+    $.ajax({
+      type: "GET",
+      url: '/maintenance/department-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+        $.ajax({
+          type: "POST",
+          url: urlCode,
+          data: {
+              id: data,
+              department_desc: $('#DeptDesc').val(),
+              department_name: $('#DeptName').val(),
+              created_at: today,
+              department_id: tempID
+          },
+          success: function(result) {
+            if(urlCode == '/maintenance/department-update'){
+              table.rows('tr.active').remove().draw();
+              noty({
+                type: 'success',
+                layout: 'bottomRight',
+                timeout: 3000,
+                text: '<h4><center>Department successfully updated!</center></h4>',
+              });
+            }else{
+              noty({
+                type: 'success',
+                layout: 'bottomRight',
+                timeout: 3000,
+                text: '<h4><center>Department successfully added!</center></h4>',
+              });
+            }
+            table.row.add([
+              result.strDepartmentID,
+              result.strDepartmentName,
+              result.strDepartmentDesc,
+              ]
+            ).draw(false);
+
+            $('#DeptName').val('');
+            $('#DeptModal').modal('toggle');
+            $('#btnEditDept').hide();
+            $('#btnDeleteDeprt').hide();
+            $('#btnAddDept').show();
+          },
+          error: function(result){
+            $.ajax({
+                url: '/maintenance/department-status',
+                type: 'POST',
+                data: {
+                    department_name: $('#DeptName').val()
+                },
+                success: function(data)
+                {
+                  var errors = result.responseJSON;
+                    if(errors == undefined){
+                      if(data[0].strStatus == 'Active'){
+                        noty({
+                          type: 'error',
+                          layout: 'bottomRight',
+                          timeout: 3000,
+                          text: '<h4><center>Department name already exist!</center></h4>',
+                        });
+                      }
+                      else if(data[0].strStatus == 'Inactive'){
+                        $('#DeptReactivateModal').modal();
+                      }
+                    }
+                }
             });
           }
-          table.row.add([
-            result[0].strDepartmentID,
-            result[0].strDepartmentName,
-            result[0].strDepartmentDesc,
-            ]
-          ).draw(false);
-
-          $('#DeptName').val('');
-          $('#DeptModal').modal('toggle');
-          $('#btnEditDept').hide();
-          $('#btnDeleteDeprt').hide();
-          $('#btnAddDept').show();
-        },
-        error: function(result){
-          $.ajax({
-              url: '/maintenance/department-status',
-              type: 'POST',
-              data: {
-                  department_name: $('#DeptName').val()
-              },
-              success: function(data)
-              {
-                var errors = result.responseJSON;
-                  if(errors == undefined){
-                    if(data[0].strStatus == 'Active'){
-                      noty({
-                        type: 'error',
-                        layout: 'bottomRight',
-                        timeout: 3000,
-                        text: '<h4><center>Department name already exist!</center></h4>',
-                      });
-                    }
-                    else if(data[0].strStatus == 'Inactive'){
-                      $('#DeptReactivateModal').modal();
-                    }
-                  }
-              }
-          });
-        }
-      });
+        })
+      },
+      error: function(data){
+        alert('ERROR IN MAX ID');
+      }
+    })
+      
   })
 
 

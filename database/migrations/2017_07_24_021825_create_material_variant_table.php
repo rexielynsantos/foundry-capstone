@@ -19,6 +19,7 @@ class CreateMaterialVariantTable extends Migration
         $table->string('strUOMID');
         $table->text('strMaterialVariantDesc')->nullable();
         $table->string('strStatus');
+        $table->timestamps();
         $table->foreign('strUOMID')
               ->references('strUOMID')->on('tbluom')
               ->onUpdate('cascade');

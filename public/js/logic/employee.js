@@ -9,6 +9,20 @@ $("#btnAddEmp").click(function(){
   $('#Emp_form').find('.form-control-feedback').remove();
   // $("#modDept").val(null).change();
   document.getElementById("Emp_form").reset();
+  $.ajax({
+      type: "GET",
+      url: '/maintenance/employee-max',
+      success: function(data){
+        console.log(data);
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+        $('#emp_id').val(data);
+        $('#created_at').val(today);
+      },
+      error: function(data){
+        alert('ERROR IN MAX ID');
+      }
+    })
   document.getElementById('Emp_form').action = "{{URL::to('/maintenance/employee-add')}}";
   urlCode =  '/maintenance/employee-add';
 })
@@ -21,7 +35,7 @@ $("#btnEditEmp").click(function(){
   document.getElementById("Emp_form").reset();
 
   var tblData = table.row('tr.active').data();
-  var id = tblData[0];
+  var id = tblData[1];
   $.ajax({
       url: '/maintenance/employee-edit',
       type: 'POST',
@@ -63,7 +77,6 @@ $("#btnEditEmp").click(function(){
     }
 
     var formAction = form.attr('action');
-
     $.ajax({
       type    : "POST",
       url     : urlCode,
@@ -92,7 +105,7 @@ $("#btnEditEmp").click(function(){
         table.row.add([
           `<image src="/storage/employee/`+result.strTempImage+`" style="width:50px;height:50px;" alt="No image"/>`,
           result.strEmployeeID,//EXAMPLE FOR VAR CONST
-          result.strEmployeeLast+" "+result.strEmployeeFirst+" "+result.strEmployeeMiddle,
+          result.strEmployeeLast+","+result.strEmployeeFirst+" "+result.strEmployeeMiddle,
           result.strEmployeeContact,
           result.strEmployeeEmail,
           result.jobtitle.strJobTitleName,//NAME ANG DIDISPLAY NOT ID

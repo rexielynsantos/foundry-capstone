@@ -16,16 +16,18 @@ class CreateReceivepurchaseDetailTable extends Migration
         Schema::create('tblreceivepurchasedetail', function (Blueprint $table) {
         $table->string('strReceivePurchaseID');
         $table->string('strMaterialID');
-        // $table->string('strMaterialVariantID');
-        // $table->integer('intQtyReceived');
-        // $table->string('strUOMID');
-        // $table->integer('intQtyLeft');
-        $table->foreign('strMaterialID')
-          ->references('strMaterialID')->on('tblpurchasedetail');
-        // $table->foreign('strMaterialVariantID')
-        //   ->references('strMaterialVariantID')->on('tblmaterialvariant');
-        // $table->foreign('strUOMID')
-        //   ->references('strUOMID')->on('tbluom');
+        $table->integer('quantityReceived');
+        $table->integer('qtyReturned')->default(0);
+        $table->boolean('isActive')->default(1);
+        $table->timestamps();
+        $table->foreign('strReceivePurchaseID')
+          ->references('strReceivePurchaseID')->on('tblreceivepurchase')
+          ->onUpdate('cascade')
+          ->onDelete('restrict');
+           $table->foreign('strMaterialID')
+          ->references('strMaterialID')->on('tblmaterial')
+          ->onUpdate('cascade')
+          ->onDelete('restrict');
          
         });
     }

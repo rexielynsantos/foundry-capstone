@@ -13,13 +13,18 @@ class ReceivePurchase extends Model
     protected $fillable = [
         'strPurchaseID',
     	'dtDeliveryReceived',
+        'isActive',
+
 
     ];
     public function purchase() {
         return $this->belongsTo('App\Models\Purchase', 'strPurchaseID', 'strPurchaseID');
     }
-    public function orders(){
+    public function detail(){
         return $this->hasMany('App\Models\ReceivePurchaseDetail', 'strReceivePurchaseID','strReceivePurchaseID');
+    }
+    public function order() {
+            return $this->hasMany('App\ReceivePurchaseOrder', 'strReceivePurchaseID');
     }
 
 }

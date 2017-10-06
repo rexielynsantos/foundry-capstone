@@ -17,6 +17,7 @@ class ProductTableSeeder extends Seeder
             'strProductTypeID' => 'TYPE00001',
             'strProductDesc' => 'description',
             'strStatus' => 'Active',
+            'created_at' => '2000-01-01 01:00:00',
         ]);
         DB::table('tblproduct')->insert([
             'strProductID' => 'PROD00002',
@@ -24,6 +25,7 @@ class ProductTableSeeder extends Seeder
             'strProductTypeID' => 'TYPE00002',
             'strProductDesc' => 'description',
             'strStatus' => 'Active',
+            'created_at' => '2000-01-01 02:00:00',
         ]);
         DB::table('tblproduct')->insert([
             'strProductID' => 'PROD00003',
@@ -31,6 +33,7 @@ class ProductTableSeeder extends Seeder
             'strProductTypeID' => 'TYPE00003',
             'strProductDesc' => 'description',
             'strStatus' => 'Active',
+            'created_at' => '2000-01-01 03:00:00',
         ]);
         DB::table('tblproduct')->insert([
             'strProductID' => 'PROD00004',
@@ -38,6 +41,7 @@ class ProductTableSeeder extends Seeder
             'strProductTypeID' => 'TYPE00003',
             'strProductDesc' => 'description',
             'strStatus' => 'Active',
+            'created_at' => '2000-01-01 04:00:00',
         ]);
     }
 }

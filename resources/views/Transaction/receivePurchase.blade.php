@@ -22,28 +22,10 @@
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-          <a href="../transaction/receive-add" class="btn btn-primary btn-block margin-bottom"><i class="fa fa-plus"></i></a>
-
-          <div class="box box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">Folders</h3>
-
-              <div class="box-tools">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body no-padding">
-              <ul class="nav nav-pills nav-stacked">
-                <li><a href="/transaction/purchaseOrder"><i class="fa fa-inbox"></i> Purchases
-                  <span class="label label-primary pull-right">12</span></a></li>
-                <li
-                  class="active"><a href="#"><i class="fa fa-envelope-o"></i> Receiving </a></li>
-                   <li><a href="#"><i class="fa fa-envelope-o"></i> Stock Monitoring </a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <a id="btnAddReceive" class="btn btn-block btn-social btn-linkedin"><i class="fa fa-truck"></i> New Receive Delivery </a>
+        <a href="/transaction/purchaseOrder" class="btn btn-block btn-social btn-instagram"><i class="fa fa-edit"></i> Go to Purchase Orders </a>
+        <a href="/transaction/stocks" class="btn btn-block btn-social btn-bitbucket"><i class="fa fa-industry"></i> Go to Stocks </a>
+      </div>
         <!-- /.col -->
         <div class="col-md-9">
           <div class="box box-primary">
@@ -63,12 +45,10 @@
 
                 <table id="receiveingTable" class="display">
                   <thead>
-                    <th> Reference PO No.  </th>
-                    <th> Supplier </th>
-                    <th> Orders </th>
-                    <th> Quantity Delivered</th>
-                 
-                    <th> Date</th>
+                    <th width="10%"> Reference PO No.  </th>
+                    <th width="20%"> Supplier </th>
+                    <th width="60%"> Orders </th>
+                    <th width="10%"> Date Received</th>
                   </thead>
                   <tbody>
                   @foreach($rp as $r)
@@ -81,7 +61,7 @@
                   <li width="35%"> {{$mat->details->strMaterialName}}</li>
                    <ul>
                      @foreach($mat->materialvariant as $vars)
-                        <li width="35%" style="list-style-type:circle"> {{$vars->details->intVariantQty}}{{$vars->details->unit->strUOMName}}</li>
+                        <li width="35%" style="list-style-type:circle"> {{$vars->details->intVariantQty}}{{$vars->details->unit->strUOMName}} - ({{$vars->intQtyReceived}}pcs received)</li>
                       @endforeach
                     </ul>
                   @endforeach
@@ -211,50 +191,12 @@ $('#receiveingTable').DataTable(
     "ordering": false,
     "paging": false,
   });
-  $(function () {
-    //Enable iCheck plugin for checkboxes
-    //iCheck for checkbox and radio inputs
-    $('.mailbox-messages input[type="checkbox"]').iCheck({
-      checkboxClass: 'icheckbox_flat-blue',
-      radioClass: 'iradio_flat-blue'
-    });
-
-    //Enable check and uncheck all functionality
-    $(".checkbox-toggle").click(function () {
-      var clicks = $(this).data('clicks');
-      if (clicks) {
-        //Uncheck all checkboxes
-        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-      } else {
-        //Check all checkboxes
-        $(".mailbox-messages input[type='checkbox']").iCheck("check");
-        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-      }
-      $(this).data("clicks", !clicks);
-    });
-
-    //Handle starring for glyphicon and font awesome
-    $(".mailbox-star").click(function (e) {
-      e.preventDefault();
-      //detect type
-      var $this = $(this).find("a > i");
-      var glyph = $this.hasClass("glyphicon");
-      var fa = $this.hasClass("fa");
-
-      //Switch states
-      if (glyph) {
-        $this.toggleClass("glyphicon-star");
-        $this.toggleClass("glyphicon-star-empty");
-      }
-
-      if (fa) {
-        $this.toggleClass("fa-star");
-        $this.toggleClass("fa-star-o");
-      }
-    });
-  });
 </script>
+
+
+
+ <script type="text/javascript" src="{{URL::asset('js/logic/receive-add.js')}}"></script>
+
 
 @endpush
 @stop

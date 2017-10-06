@@ -18,12 +18,12 @@ class CreateVariantTypeTable extends Migration
         $table->string('strProductVariantID');
         $table->foreign('strProductVariantID')
               ->references('strProductVariantID')->on('tblproductvariant')
-              ->onUpdate('cascade');
-              // ->onDelete('restrict');
+              ->onUpdate('cascade')
+              ->onDelete('restrict');
         $table->foreign('strProductTypeID')
               ->references('strProductTypeID')->on('tblproducttype')
-              ->onUpdate('cascade');
-              // ->onDelete('restrict');
+              ->onUpdate('cascade')
+              ->onDelete('restrict');
         });
     }
 

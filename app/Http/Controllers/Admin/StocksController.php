@@ -24,7 +24,7 @@ class StocksController extends Controller
   	{
 
     $stocks = Stock::get();
-    $material =Material::with(['unit','materialsupplier.supplier','materialvariant.details'])->get();
+    $material =Material::with(['materialsupplier.supplier','materialvariant.details.unit', 'unit'])->get();
    
       // return Response::json($stocks);
       return view('Transaction.stockcard')
@@ -65,7 +65,7 @@ class StocksController extends Controller
     {
       // dd($request->input('material_id'));
       $delivery = DB::table('tblmaterialrequisition')
-      ->leftjoin('tblpurchase', 'tblpurchase.strPurchaseID', 'tblreceivepurchase.strPurchaseID')
+      ->leftjoin('tbljoborder', 'tblpurchase.strPurchaseID', 'tblreceivepurchase.strPurchaseID')
       ->leftjoin('tblreceivepurchasedetail', 'tblreceivepurchasedetail.strReceivePurchaseID', 'tblreceivepurchase.strReceivePurchaseID')
       ->leftjoin('tblreceivematvariantdetail', 'tblreceivematvariantdetail.strMaterialID', 'tblreceivepurchasedetail.strMaterialID')
       ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', 'tblreceivepurchasedetail.strMaterialID')

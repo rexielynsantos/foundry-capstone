@@ -9,13 +9,14 @@ class Material extends Model
     protected $table = 'tblmaterial';
     protected $primaryKey = 'strMaterialID';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
     	'strMaterialName',
     	'strMaterialDesc',
         'intReorderLevel',
         'intReorderQty',
         'strUOMID',
+        'dblBasePrice',
     	'strStatus',
     ];
     // public function supplier(){

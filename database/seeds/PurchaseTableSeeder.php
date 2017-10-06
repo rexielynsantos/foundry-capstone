@@ -16,15 +16,12 @@ class PurchaseTableSeeder extends Seeder
           'strSupplierID' => 'SUP00001',
           'strSupplierContactPerson' => 'Kevin Salud',
           'strPaymentTermID' => 'PT00004',
-          'strPStatus' => 'Pending'
+          'dateCreated' => '2017-06-23',
+          'strPStatus' => 'Pending',
+          'isFinalize' => 1,
+          'isDelivered' => 1,
+           'created_at' => '2000-01-01 01:00:00',
       ]);
-      // DB::table('tblpurchase')->insert([
-      //     'strPurchaseID' => 'P00002',
-      //     'strSupplierID' => 'SUP00002',
-      //     'strSupplierContactPerson' => 'Maria Gabriella Rola',
-      //     'strPaymentTermID' => 'PT00003',
-      //     'strStatus' => 'Received'
-      // ]);
     }
 }
 

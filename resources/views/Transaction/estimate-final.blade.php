@@ -33,7 +33,7 @@
               <p class="companyAddress">  #86 Fortune Avenue, Brgy. Fortune, Marikina City, PHILIPPINES </p>
               <p class="companyTelNo">  Tel No. 998-2581 </p>
               </center>
-            </div>  
+            </div>
 
             </div>
            <!--  <div class="col-md-4">
@@ -64,7 +64,7 @@
              <thead>
                <tr>
                  <th width = "30%"> Description </th>
-                 <th width = "30%"> Variants </th>
+                 <th width = "30%"> Variance </th>
                  <th width = "20%"> Quantity</th>
                </tr>
              </thead>

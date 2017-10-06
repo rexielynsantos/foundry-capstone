@@ -13,8 +13,8 @@ class JobTicket extends Model
     protected $fillable = [
     	'strEmployeeID',
     	'strStageID',
-    	'strSubStageID'
-
+    	'strSubStageID',
+        'strJobOrdID'
     ];
 
     public function product(){
@@ -28,6 +28,9 @@ class JobTicket extends Model
     }
     public function substage() {
         return $this->belongsTo('App\Models\SubStage', 'strSubStageID', 'strSubStageID');
+    }
+    public function joborder() {
+        return $this->belongsTo('App\Models\JobOrder', 'strJobOrdID', 'strJobOrdID');
     }
 
 }
