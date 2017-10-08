@@ -514,7 +514,16 @@ class CustomerController extends Controller
   }
 
   public function pdfCosting(Request $request){
-    
+     $approvedViewCost = DB::table('tblcosting')
+        ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblcosting.strCustomerID')
+        ->leftjoin('tblproduct', 'tblproduct.strProductID', 'tblcosting.strProductID')
+        ->leftjoin('tblcostingmaterial', 'tblcostingmaterial.strCostingID', 'tblcosting.strCostingID')
+        ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', 'tblcostingmaterial.strMaterialID')
+        ->leftjoin('tbluom', 'tbluom.strUOMID', 'tblcostingmaterial.strUOMID')
+        ->where('strCostingStatus', 'Approved')
+        ->get();
+
+      return $approvedViewCost;
   }
 
 }

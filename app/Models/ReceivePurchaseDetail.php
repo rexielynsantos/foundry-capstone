@@ -8,7 +8,7 @@ class ReceivePurchaseDetail extends Model
 {
     protected $table = 'tblreceivepurchasedetail';
     public $incrementing = false;
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
         'strReceivePurchaseID',
     	'strMaterialID',
@@ -16,11 +16,10 @@ class ReceivePurchaseDetail extends Model
         'qtyReturned',
         'isActive'
 
-
     ];
     public function details(){
         return $this->hasOne('App\Models\Material','strMaterialID', 'strMaterialID');
     }
-  
+
 
 }

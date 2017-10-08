@@ -25,5 +25,19 @@ class JobtitleTableSeeder extends Seeder
           'strStatus' => 'Active',
           'created_at' => '2000-01-01 02:00:00',
       ]);
+      DB::table('tbljobtitle')->insert([
+          'strJobTitleID' => 'JT00003',
+          'strJobTitleName' => 'Production Head',
+          'strJobTitleDesc' => 'Production Department Head',
+          'strStatus' => 'Active',
+          'created_at' => '2000-01-01 02:00:00',
+      ]);
+       DB::table('tbljobtitle')->insert([
+          'strJobTitleID' => 'JT00004',
+          'strJobTitleName' => 'Purchasing Staff',
+          'strJobTitleDesc' => 'Purchasing Department Staff',
+          'strStatus' => 'Active',
+          'created_at' => '2000-01-01 02:00:00',
+      ]);
     }
 }

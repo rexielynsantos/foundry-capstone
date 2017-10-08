@@ -73,7 +73,7 @@
         <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">ORDERS THIS MONTH</h3>
+              <h3 class="box-title">NEW ORDERS</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -99,37 +99,19 @@
                 	<table id="custTransTable" border="0" class="table table-bordered" style="color:black;">
 		                <thead>
 		                  <th width="10%">S.O No.</th>
-		                  <th width="20%">Company Name</th>
-		                  <th width="20%">Ordered Product(s)</th>
+		                  <th width="20%">Customer Name</th>
+		                  <th width="20%">Order Date</th>
 		                </thead>
 		                <tbody>
-		                	<tr>
-		                		<td> SO-00001 </td>
-		                		<td> Jensen Gomez </td>
-		                		<td> Bracket Wheel Mount </td>
-		                	</tr>
-		                	<tr>
-		                		<td> SO-00002 </td>
-		                		<td> Reese Lansangan </td>
-		                		<td> Baril </td>
-		                	</tr>
-		                	<tr>
-		                		<td> SO-00003 </td>
-		                		<td> Bullet Dumas </td>
-		                		<td> M200 Trigger </td>
-		                	</tr>
-		                	<tr>
-		                		<td> SO-00004 </td>
-		                		<td> Moira Dela Torre </td>
-		                		<td> M200 Hammer </td>
-		                	</tr>
-		                	<tr>
-		                		<td> SO-00005 </td>
-		                		<td> Clara Benin </td>
-		                		<td> Artwork </td>
-		                	</tr>
-
-		                </tbody>
+		                	 @foreach($purch as $pu)
+                        <tr>
+                          <td>{{$pu->strCustPurchaseID}}</td>
+                          <td>{{$pu->strCompanyName}}</td>
+                          <td class="col-md-6">{{$pu->dtOrderDate}}</td>
+                         
+                        </tr>
+                        @endforeach		     
+                     </tbody>
 		              </table>
                 </div>
                 <!-- /.col -->

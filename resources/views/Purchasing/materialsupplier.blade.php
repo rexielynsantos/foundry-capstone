@@ -66,7 +66,7 @@
                     <div class="form-group has-feedback">
                       <div class="form-group">
                             <label for="basePrice" class="control-label">Base Price<span style="color:red">*</span></label>
-                             <input type="text" placeholder="0" min=1 class="form-control validate" id ="basePrice" required
+                             <input type="number" placeholder="0" min=1 class="form-control validate" id ="basePrice" required
                         data-error="This field is required."
                         maxlength="35" style="border:1px solid #A9A9A9">
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -98,8 +98,8 @@
                 <div class="col-md-12">
                   <div class="form-group has-feedback">
                     <div class="form-group">
-                    <label for="matVariant" class="control-label">Variant(s)<span style="color:red">*</span></label><br>
-                        <select required class="form-control select2" multiple = "multiple" data-placeholder = "Select Variant(s)" id = "matVariant" style="width:100%;">
+                    <label for="matVariant" class="control-label">Variant<span style="color:red">*</span></label><br>
+                        <select required class="form-control select2" id = "matVariant" style="width:100%;">
 
                         </select>
                     </div>

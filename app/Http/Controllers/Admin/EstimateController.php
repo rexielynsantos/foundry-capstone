@@ -24,10 +24,18 @@ class EstimateController extends Controller
       $quote = DB::table('tblquotation')
         ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblquotation.strCustomerID')
         ->leftjoin('tblcustcontact', 'tblcustcontact.strCustomerID', 'tblcustomer.strCustomerID')
+        ->where('tblquotation.strQuoteStatus', '=', "Pending")
         ->get();
 
+      $quoteApproved = DB::table('tblquotation')
+        ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblquotation.strCustomerID')
+        ->leftjoin('tblcustcontact', 'tblcustcontact.strCustomerID', 'tblcustomer.strCustomerID')
+        ->where('tblquotation.strQuoteStatus', '=', "Approved")
+        ->get();
+ 
       return view('Transaction.estimate')
-      ->with('quote', $quote);
+      ->with('quoteApproved', $quoteApproved)
+    ->with('quote', $quote);
     }
 
     public function addCart(Request $request)
@@ -185,10 +193,19 @@ class EstimateController extends Controller
     }
   }
   public function pdfEstimate(Request $request){
-      $po = QuoteRequest::with(['custpurchase.customer.contact', 'custpurchase.quotation.quoteprodvariant.details4'])
-        ->where('tbljoborder.strJobOrdID', $request->input('id'))
-        ->first();
+      // $po = QuoteRequest::with(['custpurchase.customer.contact', 'custpurchase.quotation.quoteprodvariant.details4'])
+      //   ->where('tbljoborder.strJobOrdID', $request->input('id'))
+      //   ->first();
       
+      $po = DB::table('tblquotation')
+            ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblquotation.strCustomerID')
+            ->leftjoin('tblcustcontact', 'tblcustcontact.strCustomerID', 'tblcustomer.strCustomerID')
+            ->leftjoin('tblcosting', 'tblcosting.strCostingID', 'tblquotation.strCostingID')
+            ->leftjoin('tbltermscondition', 'tbltermscondition.strTermID', 'tblquotation.strTermID')
+            ->leftjoin('tblquoteproductvariant', 'tblquoteproductvariant.strQuoteID', 'tblquotation.strQuoteID')
+            ->leftjoin('tblproduct', 'tblproduct.strProductID', 'tblquoteproductvariant.strProductID')
+            ->where('tblquotation.strQuoteID', '=', $request->input('id'))
+            ->get();
 
       return $po;
     }

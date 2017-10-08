@@ -22,9 +22,9 @@
         <thead>
           <tr>
             <th class="hidden">ID</th>
-            <th>Name</th>
+            <th>Item Name</th>
             <th>Supplier(s)</th>
-            <th>Variant(s)</th>
+            <!-- <th>Variant(s)</th> -->
             <th>Re-order Level</th>
             <th>Re-order Quantity</th>
             <th>Base Price</th>
@@ -35,17 +35,15 @@
           @foreach($matr as $mtrl)
           <tr>
             <td class="hidden">{{$mtrl->strMaterialID}}</td>
-            <td>{{$mtrl->strMaterialName}}</td>
+             <td>{{$mtrl->strMaterialName}} - (  {{$mtrl->variant->intVariantQty}} {{$mtrl->variant->unit->strUOMName}})</td>
             <td>
               @foreach($mtrl->materialsupplier as $supl)
                 <li width="35%" style="list-style-type:circle"> {{$supl->supplier->strSupplierName}}</li>
               @endforeach
             </td>
-            <td>
-              @foreach($mtrl->materialvariant as $mv)
-                <li width="35%" style="list-style-type:circle"> {{$mv->details->intVariantQty}} {{$mv->details->unit->strUOMName}}</li>
-              @endforeach
-            </td>
+              
+           
+            
             <td>{{$mtrl->intReorderLevel}}</td>
             <td>{{$mtrl->intReorderQty}} {{$mtrl->unit->strUOMName}}</td>
             <td>{{$mtrl->dblBasePrice}}</td>

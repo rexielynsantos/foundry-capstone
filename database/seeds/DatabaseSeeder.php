@@ -54,6 +54,7 @@ class DatabaseSeeder extends Seeder
          $this->call(CustomerContactTableSeeder::class);
          $this->call(CostingTableSeeder::class);
          $this->call(QuotationTableSeeder::class);
+         $this->call(QuoteProductVariantTableSeeder::class);
          $this->call(CustPurchaseTableSeeder::class);
          $this->call(JobOrderTableSeeder::class);
 

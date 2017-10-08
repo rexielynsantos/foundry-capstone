@@ -9,7 +9,7 @@ use DB;
 use Response;
 use App\Models\ReceivePurchase;
 use App\Models\ReceivePurchaseDetail;
-use App\Models\ReceiveMatVariantDetail;
+use App\Models\ReceivepurchaseOrder;
 use App\Models\Purchase;
 use App\Models\Supplier;
 use App\Models\PurchaseDetail;
@@ -20,7 +20,7 @@ class ReceiveMaterialsController extends Controller
     public function viewReceivePurchase()
     {
 
-     $rp =    $receivepurchase = ReceivePurchase::with(['orders.details', 'orders.materialvariant'])
+     $rp =    $receivepurchase = ReceivePurchase::with(['order.details'])
      ->get();
      return view('Transaction.receivePurchase')
      ->with('rp', $rp);
@@ -28,12 +28,12 @@ class ReceiveMaterialsController extends Controller
     public function viewReceiveAddPurchase()
     {
 
-  	 $purchase = Purchase::with('material.details')->where('strPStatus', '=', 'Pending')
+  	 $supp = Supplier::where('strStatus', 'Active')
   	 	->get();
 
 
      return view('Transaction.receive-add')
-     ->with('purchase', $purchase);
+     ->with('supp', $supp);
 
     }
     public function getAllMaterialVariant(){
@@ -51,22 +51,27 @@ class ReceiveMaterialsController extends Controller
       return $matVar;
 
     }
-    public function getSupplier(Request $request)
+    public function getPOInfo(Request $request)
     {
-      $supplier = DB::table('tblsupplier')
-                ->leftjoin('tblpurchase', 'tblpurchase.strSupplierID', '=', 'tblsupplier.strSupplierID')
-                ->select('tblsupplier.*')
-                ->where('tblpurchase.strPurchaseID', '=', $request->purchase_id)
+      $material = DB::table('tblpurchase')
+                // ->leftjoin('tblpurchasedetail', 'tblpurchasedetail.strPurchaseID', '=', 'tblpurchase.strPurchaseID')
+                ->leftjoin('tblpurchmatvariantdetail', 'tblpurchmatvariantdetail.strPurchaseID', '=', 'tblpurchase.strPurchaseID')
+                ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', '=', 'tblpurchmatvariantdetail.strMaterialID')
+                ->where('tblpurchase.strPurchaseID',  $request->po_id)
                 ->get();
 
-      $material = DB::table('tblmaterial')
-                ->leftjoin('tblpurchasedetail', 'tblpurchasedetail.strMaterialID', '=', 'tblmaterial.strMaterialID')
-                ->select('tblmaterial.*')
-                ->where('tblpurchasedetail.strPurchaseID', '=', $request->purchase_id)
-                ->get();
-
-      return Response::json(['supplier'=> $supplier, 'material' => $material]);
+      return Response::json($material);
     }
+
+    public function getPO(Request $request)
+    {
+      $referencePO = DB::table('tblpurchase')
+              ->where('strSupplierID', $request->supplier_id)
+              ->get();
+
+      return Response::json($referencePO);
+    }
+
     public function addCart(Request $request)
     {
 
@@ -82,63 +87,45 @@ class ReceiveMaterialsController extends Controller
     public function addReceiving(Request $request)
     {
       // dd($request->all());
-      // $purchase = Purchase::with('material.details')->where('strStatus', '=', 'Pending')
-      // ->get();
-
-      $purchase = Purchase::with('material.details')->where('strPStatus', '=', 'Pending')
-      ->get();
 
       $id = str_random(10);
       ReceivePurchase::insert([
         'strReceivePurchaseID' => $id,
         'strPurchaseID' => $request->input('purchase_id'),
         'dtDeliveryReceived' => $request->input('date_delivered'),
+        'created_at'=> $request->input('created_at'),
+        'isActive' => 1,
         ]);
 
 
         if($request->input('mat_data') != ''){
+          $ct = 0;
+          $qty = $request->input('mat_qty');
           foreach($request->input('mat_data') as $material){
             ReceivePurchaseDetail::insert([
               'strReceivePurchaseID' => $id,
-              'strMaterialID' => $material[0],
+              'strMaterialID' => $material,
+              'quantityReceived' => $qty[$ct],
+              'qtyReturned' => 0,
+              'isActive' => 1,
+              'created_at'=> $request->input('created_at')
             ]);
-          }
 
-          $uomNme = $request->input('uom');
-          $counter = 0;
-          foreach ($request->input('mat_var') as $matVar) {
-            $vari = DB::table('tblmaterialvariant')
-              ->select('strMaterialVariantID')
-              ->leftjoin('tbluom', 'tbluom.strUOMID', '=', 'tblmaterialvariant.strUOMID')
-              ->where('tblmaterialvariant.intVariantQty', $matVar)
-              ->where('tbluom.strUOMName', $uomNme[$counter])
-              ->first()
-              ->strMaterialVariantID;
-
-            $arr[] = $vari;
-            $counter = $counter + 1;
-          }
-
-        // $qty = $request->input('mat_qty');
-        $qty = $request->input('mat_qty');
-        $ctr = 0;
-
-          foreach($request->input('mat_data') as $material){
-            DB::table('tblreceivematvariantdetail')
-              ->insert([
-              'strMaterialID' => $material[0],
-              'strMaterialVariantID' => $arr[$ctr],
-              'intQtyReceived' => $qty[$ctr],
-              // 'strUOMID' => $uomNme[$ctr],
+            ReceivepurchaseOrder::insert([
+              'strReceivePurchaseID' => $id,
+              'strPurchaseID' => $request->input('purchase_id')
             ]);
-            $ctr = $ctr + 1;
-          }
 
+            $ct = $ct + 1;
+          }
         }
 
+        $supp = Supplier::where('strStatus', 'Active')
+      ->get();
 
-    $receivepurchase = ReceivePurchase::with(['orders.details', 'orders.materialvariant'])->where('strReceivePurchaseID',$id)->first();
-    return View('Transaction.receive-add')->with('receivepurchase', $receivepurchase)->with('purchase', $purchase);
+
+    $receivepurchase = ReceivePurchase::with(['order.details', 'purchase', 'purchase.supplier'])->where('strReceivePurchaseID',$id)->first();
+    return View('Transaction.receive-add')->with('receivepurchase', $receivepurchase)->with('supp', $supp);
 
     }
 

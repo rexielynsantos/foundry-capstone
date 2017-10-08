@@ -18,7 +18,7 @@
       <div class="col-md-3">
         <a id="btnAddpurchase" class="btn btn-block btn-social btn-instagram"><i class="fa fa-edit"></i> New Purchase Order </a>
         <a id="btnAddReceive" class="btn btn-block btn-social btn-linkedin"><i class="fa fa-truck"></i> Receive Delivery </a>
-        <a href="transaction/returnItems" class="btn btn-block btn-social btn-linkedin"><i class="fa fa-truck"></i> Return Items </a>
+        <a href="/transaction/returnItems" class="btn btn-block btn-social btn-linkedin"><i class="fa fa-truck"></i> Return Items </a>
         <a href="/transaction/stocks" class="btn btn-block btn-social btn-bitbucket"><i class="fa fa-industry"></i> Monitor Stocks </a>
       </div>
       <!-- /.col -->
@@ -52,13 +52,6 @@
                    <td>
                   @foreach($purch->material as $mat)
                   <li width="35%"> {{$mat->details->strMaterialName}}</li>
-                   
-                    <ul>
-                     @foreach($mat->materialvariant as $vars)
-                        <li width="35%" style="list-style-type:circle"> {{$vars->details->intVariantQty}}{{$vars->details->unit->strUOMName}}</li>
-                      @endforeach
-                    </ul>
-                   
                   @endforeach
                   </td>
 
@@ -200,6 +193,6 @@
 
 @push('scripts')
  <script type="text/javascript" src="{{URL::asset('js/logic/purchase.js')}}"></script>
- <script type="text/javascript" src="{{URL::asset('js/logic/receive-add.js')}}"></script>
+ <!-- <script type="text/javascript" src="{{URL::asset('js/logic/receive-add.js')}}"></script> -->
 @endpush
 @stop

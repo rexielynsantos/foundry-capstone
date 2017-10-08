@@ -12,30 +12,20 @@ class PurchMatVariantTableSeeder extends Seeder
     public function run()
     {
         DB::table('tblpurchmatvariantdetail')->insert([
+          'strPurchaseID' => 'P00001',
           'strMaterialID' => 'MAT00001',
           'strMaterialVariantID' => 'MVAR00001',
           'dblAddlQty' => 100,
+          'totalQty' => 250,
           'dblMaterialCost' => 1000.34,
 
         ]);
         DB::table('tblpurchmatvariantdetail')->insert([
-          'strMaterialID' => 'MAT00001',
-          'strMaterialVariantID' => 'MVAR00002',
-          'dblAddlQty' => 100,
-          'dblMaterialCost' => 1000.34,
-
-        ]);
-        DB::table('tblpurchmatvariantdetail')->insert([
+          'strPurchaseID' => 'P00001',
           'strMaterialID' => 'MAT00002',
           'strMaterialVariantID' => 'MVAR00002',
           'dblAddlQty' => 100,
-          'dblMaterialCost' => 1000.34,
-
-        ]);
-        DB::table('tblpurchmatvariantdetail')->insert([
-          'strMaterialID' => 'MAT00002',
-          'strMaterialVariantID' => 'MVAR00001',
-          'dblAddlQty' => 100,
+          'totalQty' => 250,
           'dblMaterialCost' => 1000.34,
 
         ]);

@@ -39,5 +39,12 @@ class DepartmentTableSeeder extends Seeder
           'strStatus' => 'Active',
           'created_at' => '2000-01-01 04:00:00',
       ]);
+      DB::table('tbldepartment')->insert([
+          'strDepartmentID' => 'DEPT00005',
+          'strDepartmentName' => 'Purchasing',
+          'strDepartmentDesc' => 'In charge with purchasing',
+          'strStatus' => 'Active',
+          'created_at' => '2000-01-01 04:00:00',
+      ]);
     }
 }

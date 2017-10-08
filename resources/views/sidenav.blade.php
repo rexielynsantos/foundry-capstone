@@ -112,12 +112,12 @@
           </a>
         </li> -->
          <li class="treeview">
-          <a href="/transaction/customers">
+          <a href="/transaction/customer-list">
             <img src="../images/customer-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Customer</span>
           </a>
         </li>
          <li class="treeview">
-          <a href="/transaction/order-costing">
+          <a href="/transaction/product-costing-list">
             <img src="../images/costing-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Product Costing</span>
           </a>
         </li>

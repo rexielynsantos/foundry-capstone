@@ -12,13 +12,9 @@
     <section class="content">
 
      <div class="row">
-      <div class="col-md-3">
-        <a href="../transaction/product-costing-list"  class="btn btn-block btn-social btn-tumblr"><i class="fa fa-rouble"></i> Product Costings </a>
-        <a href="../transaction/materialrequisition-add" class="btn btn-block btn-social btn-linkedin"><i class="fa fa-opencart"></i> Material Requisitions </a>
-        <a href="../transaction/joborders" class="btn btn-block btn-social btn-bitbucket"><i class="fa fa-tasks"></i> Job Orders </a>
-      </div>
+   
 
-    <div class="col-md-9">
+    <div class="col-md-12">
 
           <div class="box box-widget widget-user-2">
 
@@ -68,8 +64,12 @@
                                 <td>{{ $qt->strCompanyName }}</td>
                                 <td>{{ $qt->strCustCity }}</td>
                                 <td>{{ $qt->strContactPersonName }}</td>
-                                <td>Approved</td>
-                                <td></td>
+                                <td>{{ $qt->strQuoteStatus }}</td>
+                                <td>
+                                  <button type="button" id="{{$qt->strQuoteID}}" onclick="approveModal(this.id)" class="btn btn-success"><i class="fa fa-check"></i></button>
+                                  <button type="button" id="{{$qt->strQuoteID}}" onclick="disapproveModal(this.id)" class="btn btn-danger"><i class="fa fa-close"></i></button>
+                                  <button type="button" id="{{$qt->strQuoteID}}" class="btn btn-primary"><i class="fa fa-eye"></i></button>
+                                </td>
                               </tr>
                               @endforeach
                             </tbody>
@@ -86,15 +86,19 @@
                               <th> Actions </th>
                             </thead>
                             <tbody>
+                              @foreach ($quoteApproved as $qta)
                               <tr>
-                                <td> QR00003 </td>
-                                <td> Wacker Neuson </td>
-                                <td> Pasay</td>
-                                <td> 2017-09-14 </td>
-                                <td> Approved </td>
-                                <td> <button type="button" id="pdfestimate" class="btn btn-primary btn-flat" ><i class="fa fa-print"></i> </button> </td>
-                                <td> <a type="button"  class="btn btn-success"><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Send to Customer</a> </td>
+                                <td>{{ $qta->strQuoteID }}</td>
+                                <td>{{ $qta->strCompanyName }}</td>
+                                <td>{{ $qta->strCustCity }}</td>
+                                <td>{{ $qta->strContactPersonName }}</td>
+                                <td>{{ $qta->strQuoteStatus }}</td>
+                                <td>
+                                  <button type="button" id="pdfestimate" class="btn btn-primary btn-flat" ><i class="fa fa-print"></i> </button>
+                                  <a type="button"  class="btn btn-success"><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Send to Customer</a>
+                                </td>
                               </tr>
+                              @endforeach
                             </tbody>
                           </table>
                       </div>

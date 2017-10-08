@@ -9,7 +9,7 @@ class CustPurchaseTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+  public function run()
     {
         DB::table('tblcustpurchase')->insert([
           'strCustPurchaseID' => 'SO-00001',

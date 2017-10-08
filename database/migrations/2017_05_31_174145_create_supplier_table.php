@@ -19,6 +19,7 @@ class CreateSupplierTable extends Migration
         $table->string('strSupStreet');
         $table->string('strSupBrgy');
         $table->string('strSupCity');
+        $table->string('strSupEmail');
         $table->text('strSupplierDesc')->nullable();
         $table->string('strStatus');
         $table->timestamps();

@@ -15,8 +15,8 @@ class CostingMaterialTableSeeder extends Seeder
           'strCostingID' => 'PC00001',
           'strMaterialID' => 'MAT00001',
           'strUOMID' => 'U00002',
-		  'dblMatCost' => 100.00,
-		  'dblUsage' => 0.0034,
+		      'dblMatCost' => 100.00,
+		      'dblUsage' => 0.0034,
 	      'dblFinalCost' => 0.34,
       ]);
     }

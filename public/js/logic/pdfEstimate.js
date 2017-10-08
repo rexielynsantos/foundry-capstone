@@ -1,7 +1,13 @@
+$(document).ready(function(){
+var tbl = $('#tblApprovedQuotes').DataTable({
+  "searching": false,
+  "ordering": false,
+  "paging": false,
+});
 $('#tblApprovedQuotes tbody').on('click', '#pdfestimate', function () {
-var tbl = $('#tblApprovedQuotes').DataTable();
+
 var tbldata = tbl.row( $(this).closest('tr') ).data();
-// alert(data[0]);
+// alert(tbldata[0]);
 
 $.ajax({
   type: "POST",
@@ -12,10 +18,10 @@ $.ajax({
   success: function(data){
     // alert(data.custpurchase.customer.strCompanyName);
 console.log(data);
-var companyName = data.custpurchase.customer.strCompanyName;
-var custStreet = data.custpurchase.customer.strCustStreet;
-var custCity = data.custpurchase.customer.strCustCity;
-var contactPerson = data.custpurchase.customer.contact[0].strContactPersonName;
+// var companyName = data.custpurchase.customer.strCompanyName;
+// var custStreet = data.custpurchase.customer.strCustStreet;
+// var custCity = data.custpurchase.customer.strCustCity;
+// var contactPerson = data.custpurchase.customer.contact[0].strContactPersonName;
 
 var frame1 = $('<iframe />');
 frame1[0].name = "frame1";
@@ -26,138 +32,103 @@ frameDoc.document.open();
 //Create a new HTML document.
 frameDoc.document.write('<html><head>');
 
-frameDoc.document.write('<section class="content">');
-frameDoc.document.write('<div class="box box-default">');
-frameDoc.document.write('<div class="box-body">');
-frameDoc.document.write('<div class="row">');
-frameDoc.document.write('<div class="col-md-6">');
-frameDoc.document.write('<img src="../images/mainlogo.png" width="70" height="70" style="margin-left: 30px;">');
-frameDoc.document.write('</div>');
-frameDoc.document.write('<div class="col-md-6">');
-frameDoc.document.write('<h2 align="center">Precision Foundry of the Philippines Inc.</h2>');
-frameDoc.document.write('<h3 align="center">#86 Fortune Avenue, Brgy. Fortune, Marikina City, Philippines</h3>');
-frameDoc.document.write('<h3 align="center">Tel No. 998-2581</h3>');
-frameDoc.document.write('<p align="center" style="text-decoration: underline; font-weight:bold;">CUSTOMER JOB ORDER</p>');
-frameDoc.document.write('</head><body>');
+var current = new Date();
+var mo = current.getMonth()+1;
+var dd = current.getDate();
+var mon = ["A", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+// if(mo < 10){ mo = '0' + mo; }
+// if(dd < 10){ dd = '0' + dd; }
+var today = mon[mo] + ' ' + dd + ', ' + current.getFullYear();
 frameDoc.document.write('<table align="center" width="100%">');
 frameDoc.document.write('<tr>');
-frameDoc.document.write('<td></td>');
-frameDoc.document.write('<td><p align="right" style="font-size: 16px; font-family: arial;">Job Order No.: '+tbldata[0]+'</p></td>');
+frameDoc.document.write('<td rowspan=3><img src="../images/mainlogo.png" width="130" height="130" style="margin-left: 30px;"></td>');
+frameDoc.document.write('<td><p style="font-weight:bold;font-size:30px;" align="center">Precision Foundry of the Philippines Inc.</p></td>');
 frameDoc.document.write('</tr>');
-frameDoc.document.write('<tr>');
-frameDoc.document.write('<td><p align="left" style="font-size: 16px; font-family: arial;">CUSTOMER: '+companyName+'</p></td>');
-frameDoc.document.write('<td><p align="right" style="font-size: 16px; font-family: arial;">P.O. #: '+data.strCustPurchaseID+'</p></td>');
-frameDoc.document.write('</tr>');
-frameDoc.document.write('<tr>');
-frameDoc.document.write('<td><p style="font-size: 16px; font-family: arial;">Date Received: '+data.custpurchase.dtOrderDate+'</p></td>');
-frameDoc.document.write('<td><p align="right" style="font-size: 16px; font-family: arial;">Delivery Date: ' +data.custpurchase.dtDeliveryDate+'</p></td>');
-frameDoc.document.write('</tr>');
-frameDoc.document.write('<tr><td></td></tr>');
-frameDoc.document.write('<tr><td></td></tr>');
-frameDoc.document.write('<tr><td></td></tr>');
-if(data.boolIsRepeatOrder == 1){
-  frameDoc.document.write('<tr>');
-  frameDoc.document.write('<td></td>');
-  frameDoc.document.write('<td><p align="right" style="font-size: 16px; font-family: arial;">Repeat Order: x</p></td>');
-  frameDoc.document.write('</tr>');
-  frameDoc.document.write('<tr>');
-  frameDoc.document.write('<td></td>');
-  frameDoc.document.write('<td><p align="right" style="font-size: 16px; font-family: arial;">New Product: </p></td>');
-  frameDoc.document.write('</tr>');
-}
-else{
-  frameDoc.document.write('<tr>');
-  frameDoc.document.write('<td></td>');
-  frameDoc.document.write('<td><p align="right" style="font-size: 16px; font-family: arial;">Repeat Order: </p></td>');
-  frameDoc.document.write('</tr>');
-  frameDoc.document.write('<tr>');
-  frameDoc.document.write('<td></td>');
-  frameDoc.document.write('<td><p align="right" style="font-size: 16px; font-family: arial;">New Product: x</p></td>');
-  frameDoc.document.write('</tr>');
-}
+frameDoc.document.write('<tr><td><p style="font-weight:bold;font-size:20px;" align="center">ISO 9001 2008</p></td></tr>');
+frameDoc.document.write('<tr><td><p style="font-weight:bold;font-size:15px;" align="center">'+ today +'</p></td></tr>');
 frameDoc.document.write('</table>');
-frameDoc.document.write('</div></div></div></section>');
-frameDoc.document.write('<br><br><table style="width: 100%;" align="center">');
+frameDoc.document.write('</head><body>');
+frameDoc.document.write('<br>');
+frameDoc.document.write('<label style="margin-left:60px;">'+ data[0].strCompanyName +'</label><br>');
+frameDoc.document.write('<label style="margin-left:60px;">'+ data[0].strCustStreet+" "+data[0].strCustBrgy +'</label><br>');
+frameDoc.document.write('<label style="margin-left:60px;">'+ data[0].strCustCity +'</label><br>');
+frameDoc.document.write('<br>');
+
+frameDoc.document.write('<table>');
 frameDoc.document.write('<tr>');
-frameDoc.document.write('<th> JOB DESCRIPTIONS </th>');
-frameDoc.document.write('<th> QTY </th>');
-frameDoc.document.write('<th> U/M </th>');
+frameDoc.document.write('<td><p style="margin-left:60px;">Attention: </p></td>');
+frameDoc.document.write('<td>'+ data[0].strContactPersonName +' </td>');
 frameDoc.document.write('</tr>');
-for(var i = 0; i < data.custpurchase.quotation.quoteprodvariant.length; i++){
-  frameDoc.document.write('<tr>');
-  frameDoc.document.write('<td align="center">'+ data.custpurchase.quotation.quoteprodvariant[i].details4.strProductName +' </td>');
-  frameDoc.document.write('<td align="center"> pcs </td>');
-  frameDoc.document.write('<td align="center">'+ data.custpurchase.quotation.quoteprodvariant[i].intOrderQty +  '</td>');
-  frameDoc.document.write('</tr>');
-}
-frameDoc.document.write('</table>');
-frameDoc.document.write('<br><br>');
-frameDoc.document.write('<table width="100%" align="center">');
 frameDoc.document.write('<tr>');
-frameDoc.document.write('<td width="40%">Remarks: </td>');
-frameDoc.document.write('<td width="60%" align="left">'+data.strJobRemarks+'</td>');
+frameDoc.document.write('<td><p style="margin-left:60px;"></p></td>');
+frameDoc.document.write('<td>Purchasing Officer</td>');
 frameDoc.document.write('</tr>');
 frameDoc.document.write('</table>');
 frameDoc.document.write('<br>');
-frameDoc.document.write('<table width="100%" align="center">');
-frameDoc.document.write('<tr>');
-frameDoc.document.write('<td width="30%">Prepared By: </td>');
-frameDoc.document.write('<td width="40%" align="center">__________________</td>');
-frameDoc.document.write('<td width="30%" align="center" style="text-decoration: underline;">'+data.created_at+'</td>');
-frameDoc.document.write('</tr>');
-frameDoc.document.write('<tr>');
-frameDoc.document.write('<td width="30%"></td>');
-frameDoc.document.write('<td width="40%"></td>');
-frameDoc.document.write('<td width="30%" align="center">Date</td>');
-frameDoc.document.write('</tr>');
-frameDoc.document.write('<tr><td></td></tr>');
-frameDoc.document.write('<tr><td></td></tr>');
-frameDoc.document.write('<tr>');
-frameDoc.document.write('<td width="30%">Approved By: </td>');
-frameDoc.document.write('<td width="40%" align="center">___________________</td>');
-frameDoc.document.write('<td width="30%" align="center">___________________</td>');
-frameDoc.document.write('</tr>');
-frameDoc.document.write('<tr>');
-frameDoc.document.write('<td width="30%"></td>');
-frameDoc.document.write('<td width="40%" align="center">Mr. Veronico F. Reyes</td>');
-frameDoc.document.write('<td width="30%" align="center">Date</td>');
-frameDoc.document.write('</tr>');
-frameDoc.document.write('<tr>');
-frameDoc.document.write('<td width="30%"></td>');
-frameDoc.document.write('<td width="40%" align="center">EVP & General Manager</td>');
-frameDoc.document.write('<td></td>');
-frameDoc.document.write('</tr>');
-// frameDoc.document.write('<tr><td></td></tr>');
-// frameDoc.document.write('<tr><td></td></tr>');
-frameDoc.document.write('</table>');
-frameDoc.document.write('<br><br>');
-frameDoc.document.write('<table width="100%" align="center">');
-frameDoc.document.write('<tr>');
-frameDoc.document.write('<td width="20%" align="left">Job Received By: </td>');
-frameDoc.document.write('<td width="30%" align="center">Date</td>');
-frameDoc.document.write('<td width="20%"></td>');
-frameDoc.document.write('<td width="30%" align="center">Date</td>');
-frameDoc.document.write('</tr>');
-frameDoc.document.write('<tr>');
-frameDoc.document.write('<td width="20%" align="left">Wax Shop: </td>');
-frameDoc.document.write('<td width="30%" align="center">______________________________</td>');
-frameDoc.document.write('<td width="20%" align="left">Fettling Shop: </td>');
-frameDoc.document.write('<td width="30%" align="center">______________________________</td>');
-frameDoc.document.write('</tr>');
-frameDoc.document.write('<tr>');
-frameDoc.document.write('<td width="20%" align="left">Mold Shop: </td>');
-frameDoc.document.write('<td width="30%" align="center">______________________________</td>');
-frameDoc.document.write('<td width="20%" align="left">QA/QC: </td>');
-frameDoc.document.write('<td width="30%" align="center">______________________________</td>');
-frameDoc.document.write('</tr>');
-frameDoc.document.write('<tr>');
-frameDoc.document.write('<td width="20%" align="left">Melting Dept.: </td>');
-frameDoc.document.write('<td width="30%" align="center">______________________________</td>');
-frameDoc.document.write('<td width="20%" align="left">Admin. Dept.: </td>');
-frameDoc.document.write('<td width="30%" align="center">______________________________</td>');
-frameDoc.document.write('</tr>');
 
+frameDoc.document.write('<p style="margin-left:60px;">Dear '+ data[0].strContactPersonName +',</p>');
+frameDoc.document.write('<p style="margin-left:60px;margin-right:60px;">We are pleased to submit our quotation for the supply of labor and materials in the investment casting and rubber mold for the following part/s:</p>');
+
+frameDoc.document.write('<table width="80%" align="center">');
+frameDoc.document.write('<tr>');
+frameDoc.document.write('<td align="center" style="font-weight:bold;"><p>DESCRIPTION</p></td>')
+frameDoc.document.write('<td align="center" style="font-weight:bold;">MATERIALS</td>')
+frameDoc.document.write('<td align="center" style="font-weight:bold;"><p>UNIT COST</p></td>')
+frameDoc.document.write('</tr>');
+for(var i = 0; i < data.length; i++){
+  frameDoc.document.write('<tr>');
+  frameDoc.document.write('<td align="center" style="font-weight:bold;">'+ data[i].strProductName +'</td>')
+  frameDoc.document.write('<td align="center" style="font-weight:bold;">'+ data[i].strVarianceCode +'</td>')
+  frameDoc.document.write('<td align="center" style="font-weight:bold;">'+ data[i].dblRequestCost +'</td>')
+  frameDoc.document.write('</tr>');
+}
 frameDoc.document.write('</table>');
+
+frameDoc.document.write('<br>');
+frameDoc.document.write('<p style="margin-left:90px;margin-right:60px;">Note: We will send you the tooling cost for Net and Tray once the fabricator responded to our quote request.</p>');
+frameDoc.document.write('<p style="margin-left:60px;margin-right:60px;">The following are our terms and conditions in conjunction with the order:</p>');
+
+frameDoc.document.write('<p style="margin-left:90px;margin-right:60px;">'+ data[0].strNote +'</p>');
+
+frameDoc.document.write('<p style="margin-left:60px;margin-right:60px;">Thank you for giving us the opportunity to provide you with this quotation. We hope you find the above price acceptable.</p>');
+
+frameDoc.document.write('<table width="100%" align="center">');
+frameDoc.document.write('<tr>');
+frameDoc.document.write('<td width="65%"></td>');
+frameDoc.document.write('<td align="left">Very truly yours,</td>');
+frameDoc.document.write('</tr>');
+frameDoc.document.write('<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>');
+frameDoc.document.write('<tr>');
+frameDoc.document.write('<td width="65%"></td>');
+frameDoc.document.write('<td align="left">Veronica F. Reyes</td>');
+frameDoc.document.write('</tr>');
+frameDoc.document.write('<tr>');
+frameDoc.document.write('<td width="65%"></td>');
+frameDoc.document.write('<td align="left">EVP & General Manager</td>');
+frameDoc.document.write('</tr>');
+frameDoc.document.write('</table>');
+
+frameDoc.document.write('<br><br><br>');
+
+frameDoc.document.write('<table align="center">');
+frameDoc.document.write('<tr>');
+frameDoc.document.write('<td style="font-weight:bold;">FACTORY:</td>');
+frameDoc.document.write('<td style="font-weight:bold;">#86 Fortune Avenue, Brgy. Fortune, Marikina City</td>');
+frameDoc.document.write('</tr>');
+frameDoc.document.write('<tr>');
+frameDoc.document.write('<td style="font-weight:bold;"></td>');
+frameDoc.document.write('<td style="font-weight:bold;">Telefax: 998-2582</td>');
+frameDoc.document.write('</tr>');
+frameDoc.document.write('<tr>');
+frameDoc.document.write('<td style="font-weight:bold;"></td>');
+frameDoc.document.write('<td style="font-weight:bold;">Tel. No.: 998-2581</td>');
+frameDoc.document.write('</tr>');
+frameDoc.document.write('<tr>');
+frameDoc.document.write('<td style="font-weight:bold;"></td>');
+frameDoc.document.write('<td style="font-weight:bold;">www.precisionfoundry.org</td>');
+frameDoc.document.write('</tr>');
+frameDoc.document.write('</table>');
+
 frameDoc.document.write('</body></html>');
 frameDoc.document.close();
 setTimeout(function () {
@@ -178,3 +149,4 @@ setTimeout(function () {
 
 
 });
+})

@@ -5,7 +5,7 @@
 <section class="content">
   <div class="row">
       <div class="col-md-12">
-          <a href="/transaction/returnItems" type="button" class="btn bg-primary btn-flat margin pull-right"><i class="fa fa-plus"> </i>&nbsp;&nbsp;Add New Record</a>
+          <a href="/transaction/returnitems-new" type="button" class="btn bg-primary btn-flat margin pull-right"><i class="fa fa-plus"> </i>&nbsp;&nbsp;Add New Record</a>
       </div>
   </div>
 

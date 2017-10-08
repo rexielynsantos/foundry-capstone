@@ -24,6 +24,7 @@
             <th class="hidden">ID</th>
             <th>Name</th>
             <th>Address</th>
+            <th>E-mail Address</th>
             <th>Description</th>
           </tr>
         </thead>
@@ -33,6 +34,7 @@
             <td class="hidden">{{$supl->strSupplierID}}</td>
             <td>{{$supl->strSupplierName}}</td>
             <td>{{$supl->strSupStreet}} {{$supl->strSupBrgy}},{{$supl->strSupCity}}</td>
+            <td>{{$supl->strSupEmail}}</td>
             <td>{{$supl->strSupplierDesc}}</td>
           </tr>
           @endforeach
@@ -58,6 +60,22 @@
                       <label for="supplierName" class="control-label">Supplier Name<span style="color:red">*</span></label>
                       <input type="text" class="form-control validate letter" id ="supplierName" required
                       data-error="Supplier name is required."
+                      data-minlength-error="Minimum length 2."
+                      data-minlength="2"
+                      maxlength="35" style="border:1px solid #A9A9A9">
+                      <div class="help-block with-errors"></div>
+                      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group has-feedback">
+                    <div class="form-group">
+                      <label for="emailAdd" class="control-label">Email Address<span style="color:red">*</span></label>
+                      <input type="email" class="form-control" id ="emailAdd" required
+                      data-error="This field is required."
                       data-minlength-error="Minimum length 2."
                       data-minlength="2"
                       maxlength="35" style="border:1px solid #A9A9A9">

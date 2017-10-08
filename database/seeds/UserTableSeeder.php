@@ -13,24 +13,11 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->insert([
           'id' => 1,
-          'name' => 'Rexielyn Santos',
+          'name' => 'Administrator',
           'email' => 'rexielynsantos@gmail.com',
-          'password' => 'rexrex',
+          'password' => 'admin',
 
       ]);
-        DB::table('users')->insert([
-          'id' => 2,
-          'name' => 'Sean Karel',
-          'email' => 'seankarel@gmail.com',
-          'password' => 'seaning',
-
-      ]);
-        DB::table('users')->insert([
-          'id' => 3,
-          'name' => 'Polene',
-          'email' => 'afablepolene@gmail.com',
-          'password' => '111111',
-
-      ]);
+        
     }
 }

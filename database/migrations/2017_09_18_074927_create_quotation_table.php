@@ -18,6 +18,7 @@ class CreateQuotationTable extends Migration
         $table->string('strCustomerID');
         $table->string('strTermID');
         $table->string('strCostingID');
+        $table->string('strQuoteStatus');
         $table->text('strQuoteDescription')->nullable();
         $table->timestamps();
         $table->foreign('strCustomerID')

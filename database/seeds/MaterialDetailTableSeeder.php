@@ -16,16 +16,16 @@ class MaterialDetailTableSeeder extends Seeder
             'strMaterialVariantID' => 'MVAR00001'
         ]);
         DB::table('tblmaterialdetail')->insert([
-            'strMaterialID' => 'MAT00001',
-            'strMaterialVariantID' => 'MVAR00002'
-        ]);
-        DB::table('tblmaterialdetail')->insert([
             'strMaterialID' => 'MAT00002',
             'strMaterialVariantID' => 'MVAR00002'
         ]);
         DB::table('tblmaterialdetail')->insert([
             'strMaterialID' => 'MAT00003',
-            'strMaterialVariantID' => 'MVAR00001'
+            'strMaterialVariantID' => 'MVAR00002'
+        ]);
+        DB::table('tblmaterialdetail')->insert([
+            'strMaterialID' => 'MAT00004',
+            'strMaterialVariantID' => 'MVAR00004'
         ]);
     }
 }

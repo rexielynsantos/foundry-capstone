@@ -273,11 +273,16 @@ Route::get('/transaction/returnItems', function () {
     return view('Transaction.return-items');
 });
 
+Route::get('/transaction/returnitems-new', function () {
+    return view('Transaction.returnItems-new');
+});
+
+
 Route::get('/queries/queries', function () {
     return view('Queries.query');
 });
 
-
+Route::get('/transaction/query-table1-info','Admin\QueryController@viewTable1Info');
 
 Route::get('/utilities/terms-condition','Admin\TermsConditionController@viewTerms');
 Route::get('/utilities/terms-condition-max','Admin\TermsConditionController@getTermsMax');
@@ -356,7 +361,10 @@ Route::post('/transaction/purchaseCart','Admin\PurchaseAddController@addCart');
 Route::post('/transaction/purchase-final-read','Admin\PurchaseAddController@purchaseFinal');
 Route::post('/transaction/purchase-table-read','Admin\PurchaseAddController@finalRead');
 
-
+Route::get('/transaction/supplier-dropdown','Admin\ReturnController@suppliers');
+Route::post('/transaction/receive-dropdown','Admin\ReturnController@receive');
+Route::post('/transaction/receive-infos','Admin\ReturnController@receiveInfos');
+Route::post('/transaction/return-submit','Admin\StocksController@addReturn');
 
 Route::get('/transaction/inspection','Admin\ProductInspectionController@viewInspection');
 Route::post('/transaction/inspection-add','Admin\ProductInspectionController@addInspection');
@@ -377,7 +385,8 @@ Route::get('/transaction/post-monitoring', function () {
 
 Route::get('/transaction/receive','Admin\ReceiveMaterialsController@viewReceivePurchase');
 Route::get('/transaction/receive-add','Admin\ReceiveMaterialsController@viewReceiveAddPurchase');
-Route::get('/transaction/receive-supplier','Admin\ReceiveMaterialsController@getSupplier');
+Route::post('/transaction/receive-po','Admin\ReceiveMaterialsController@getPOInfo');
+Route::post('/transaction/receive-supplier','Admin\ReceiveMaterialsController@getPO');
 Route::get('/transaction/matvariant-all','Admin\ReceiveMaterialsController@getAllMaterialVariant');
 Route::post('/transaction/receiveCart','Admin\ReceiveMaterialsController@addCart');
 Route::post('/transaction/receiving-add','Admin\ReceiveMaterialsController@addReceiving');
@@ -385,9 +394,6 @@ Route::post('/transaction/receiving-add','Admin\ReceiveMaterialsController@addRe
 Route::get('/transaction/stocks','Admin\StocksController@viewStocks');
 Route::post('/transaction/materials-all','Admin\StocksController@getStockDetails');
 Route::post('/transaction/receive-records','Admin\StocksController@getReceivingRecords');
-
-
-
 
 
 // Route::get('/transaction/material-all','Admin\ReceiveAddMaterialsControlelr@getAllMaterial');

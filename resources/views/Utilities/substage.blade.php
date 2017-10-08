@@ -26,7 +26,7 @@
         	<tr>
             <th class="hidden">ID</th>
         		<th>Name</th>
-            <th>Process Time</th>
+            <th>Process Time(in hours)</th>
         		<th>Description</th>
         	</tr>
         </thead>
@@ -34,8 +34,8 @@
           @foreach($substage as $s)
           <tr>
             <td class="hidden">{{$s->strSubStageID}}</td>
-            <td>{{$s->strSubStageName}}</td>
-            <td>{{$s->dbltimeRequired}}</td>
+            <td width="25%">{{$s->strSubStageName}}</td>
+            <td width="20%">{{$s->dbltimeRequired}} hr(s)</td>
             <td>{{$s->strSubStageDesc}}</td>
           </tr>
           @endforeach
@@ -75,7 +75,10 @@
                     <div class="form-group has-feedback">
                         <div class="form-group">
                         <label for="timeRequired" class="control-label">Process Time(in hours)<span style="color:red">*</span></label>
-                        <input type="number" class="form-control validate number" id ="timeRequired" max="24" required>
+                        <input type="text" class="form-control validate number" id ="timeRequired"
+                        required
+                        max="24"
+                        data-error="Maximum hour is 24">
                         <div class="help-block with-errors"></div>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         </div>

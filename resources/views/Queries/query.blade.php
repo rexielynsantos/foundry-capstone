@@ -28,10 +28,10 @@
                                   <span class="input-group-addon"><i class="fa fa-search"></i></span>
                                   <select id="querySearch" name="querySearch" class="select2 form-control">
                                       <option value=""></option>
-                                      <option value="1">Most availed products</option>
-                                      <option value="2">Most ordered supplies</option>
-                                      <option value="3">Most jobs done by personnel</option>
-                                      <option value="4">Most Active Customer</option>
+                                      <option value="table1">Most availed products</option>
+                                      <option value="table2">Most ordered supplies</option>
+                                      <option value="table3">Most jobs done by personnel</option>
+                                      <option value="table4">Most Active Customer</option>
                                   </select>
                               </div>
                           </div>
@@ -39,9 +39,9 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" id="table1" style="display:none">
                     <div class="col-md-12">
-                        <table id="list1" class="table table-striped table-bordered responsive">
+                        <table id="MostProducts" class="table table-striped table-bordered responsive">
                             <thead>
                                 <tr>
                                     <th>Product</th>
@@ -50,9 +50,54 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                             </tbody>
                         </table>
+
+                    </div>
+                </div>
+								<div class="row" id="table2" style="display:none">
+                    <div class="col-md-12">
+											<table id="MostSupplies" class="table table-striped table-bordered responsive">
+													<thead>
+															<tr>
+																	<th>Supply</th>
+																	<th>Description</th>
+																	<th class="text-right">No. of times availed</th>
+															</tr>
+													</thead>
+													<tbody>
+													</tbody>
+											</table>
+                    </div>
+                </div>
+								<div class="row" id="table3" style="display:none">
+                    <div class="col-md-12">
+											<table id="MostJobs" class="table table-striped table-bordered responsive">
+													<thead>
+															<tr>
+																	<th>Job</th>
+																	<th>Description</th>
+																	<th class="text-right">No. of times done</th>
+															</tr>
+													</thead>
+													<tbody>
+													</tbody>
+											</table>
+                    </div>
+                </div>
+								<div class="row" id="table4" style="display:none">
+                    <div class="col-md-12">
+											<table id="MostActiveCustomer" class="table table-striped table-bordered responsive">
+													<thead>
+															<tr>
+																	<th>Customer</th>
+																	<th class="text-right">No. of orders</th>
+															</tr>
+													</thead>
+													<tbody>
+													</tbody>
+											</table>
                     </div>
                 </div>
             </div>
@@ -65,11 +110,7 @@
 
 </section>
 @push('scripts')
-	<script type="text/javascript" src="{{URL::asset('js/logic/customer.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('js/tables/customer-table.js')}}"></script>
-<script>
-$('#custTransTable').DataTable();
-</script>
+	<script type="text/javascript" src="{{URL::asset('js/logic/query.js')}}"></script>
 @endpush
 
 @stop

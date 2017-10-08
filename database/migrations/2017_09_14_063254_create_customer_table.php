@@ -15,12 +15,12 @@ class CreateCustomerTable extends Migration
     {
         Schema::create('tblcustomer', function (Blueprint $table) {
         $table->string('strCustomerID')->primary();
-        $table->string('strCompanyName');
+        $table->string('strCompanyName')->unique();
         $table->string('strCustStreet');
         $table->string('strCustBrgy');
         $table->string('strCustCity');
-        $table->string('strCustTelNo');
-        $table->string('strCustEmail');
+        $table->string('strCustTelNo')->unique();
+        $table->string('strCustEmail')->unique();
         $table->string('strStatus');
         $table->timestamps();
       });

@@ -34,6 +34,7 @@ $("#btnEditSupplier").click(function(){
         $('#street').val(data[0].strSupStreet);
         $('#brgy').val(data[0].strSupBrgy);
         $('#city').val(data[0].strSupCity);
+        $('#emailAdd').val(data[0].strSupEmail);
         $('#supplierDesc').val(data[0].strSupplierDesc);
         // URL OF EDIT
         tempID = data[0].strSupplierID;
@@ -64,6 +65,7 @@ $("#btnEditSupplier").click(function(){
             supplier_street: $('#street').val(),
             supplier_brgy: $('#brgy').val(),
             supplier_city: $('#city').val(),
+            supplier_email: $('#emailAdd').val(),
             supplier_desc: $('#supplierDesc').val(),
             created_at: today,
             supplier_id: tempID
@@ -92,6 +94,7 @@ $("#btnEditSupplier").click(function(){
             result.strSupplierID,
             result.strSupplierName,
             result.strSupStreet+" "+result.strSupBrgy+","+result.strSupCity,
+            result.strSupEmail,
             result.strSupplierDesc,
             ]
           ).draw(false);
@@ -194,6 +197,7 @@ $("#btnEditSupplier").click(function(){
           result.strSupplierID,
           result.strSupplierName,
           result.strSupStreet+" "+result.strSupBrgy+" "+result.strSupCity,
+          result.strSupEmail,
           result.strSupplierDesc,
           ]
         ).draw(false);

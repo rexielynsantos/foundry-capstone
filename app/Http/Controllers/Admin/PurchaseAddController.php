@@ -24,7 +24,7 @@ use PDF;
 class PurchaseAddController extends Controller
 {
     public function getAllMaterial(){
-      $material = Material::with(['materialvariant.details'])->get();
+      $material = Material::with(['variant', 'variant.unit'])->get();
       // $materialvariant = MaterialVariant::get();
 
       // return response()->json(['material' => $variant, 'mater' => $type]);
@@ -55,7 +55,7 @@ class PurchaseAddController extends Controller
   }
 
     public function viewPurchase() {
-    $purchase = Purchase::with('material.details','material.materialvariant','supplier', 'paymentterm')->get();
+    $purchase = Purchase::with('material.details', 'supplier', 'paymentterm')->get();
 
     // $pur = DB::table('tblmaterialvariant')
     //       ->leftjoin('tblpurchmatvariantdetail', 'tblpurchmatvariantdetail.strMaterialVariantID', 'tblmaterialvariant.strMaterialVariantID')
@@ -168,14 +168,17 @@ class PurchaseAddController extends Controller
 
         $qty = $request->input('mat_qty');
         $cost = $request->input('mat_cost');
+        $totQty= $request->input('total_qty');
         $ctr = 0;
 
           foreach($request->input('mat_data') as $material){
             DB::table('tblpurchmatvariantdetail')
               ->insert([
+              'strPurchaseID' => $id,
               'strMaterialID' => $material[0],
               'strMaterialVariantID' => $arr[$ctr],
               'dblAddlQty' => $qty[$ctr],
+              'totalQty' => $totQty[$ctr],
               'dblMaterialCost' => $cost[$ctr],
             ]);
             $ctr = $ctr + 1;
@@ -189,7 +192,7 @@ class PurchaseAddController extends Controller
         Session::put('purchaseID', $id);
 
 
-    $purchase = Purchase::with('material.details','material.materialvariant','supplier', 'paymentterm')->where('strPurchaseID',$id)->first();
+    $purchase = Purchase::with('material.details','variant.unit','supplier', 'paymentterm', 'unit')->where('strPurchaseID',$id)->first();
     return View('Transaction.purchase-add')
     ->with('purchase', $purchase)
     ->with('supplier', $supplier)

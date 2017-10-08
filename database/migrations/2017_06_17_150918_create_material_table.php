@@ -15,7 +15,8 @@ class CreateMaterialTable extends Migration
     {
       Schema::create('tblmaterial', function (Blueprint $table) {
         $table->string('strMaterialID')->primary();
-        $table->string('strMaterialName')->unique();
+        $table->string('strMaterialName');
+        $table->string('strMaterialVariantID');
         $table->integer('intReorderLevel');
         $table->integer('intReorderQty');
         $table->string('strUOMID');

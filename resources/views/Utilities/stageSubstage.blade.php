@@ -9,7 +9,7 @@
                 </center>
             </div>
 
-            <form class="" id="stage_form" role="form" data-toggle="validator">
+            <form class="" id="stage_form" role="form" data-toggle="validator" autocomplete="off" accept-charset="utf-8">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -44,7 +44,9 @@
                             <div class="form-group has-feedback">
                                 <div class="form-group">
                                 <label for="timeRequired" class="control-label">Process Time(in hours)</label>
-                                <input type="number" class="form-control validate number" id ="timeRequired" style="width:100%; resize:none;" max="24">
+                                <input type="text" class="form-control validate number" id ="timeRequired" style="width:100%; resize:none;"
+                                max="24"
+                                data-error="Maximum hour is 24">
                                 <div class="help-block with-errors"></div>
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                                 </div>

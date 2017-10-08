@@ -12,6 +12,7 @@ class Material extends Model
     public $timestamps = true;
     protected $fillable = [
     	'strMaterialName',
+        'strMaterialVariantID',
     	'strMaterialDesc',
         'intReorderLevel',
         'intReorderQty',
@@ -25,9 +26,12 @@ class Material extends Model
     public function unit() {
         return $this->belongsTo('App\Models\Unit', 'strUOMID', 'strUOMID');
     }
-    public function materialvariant(){
-        return $this->hasMany('App\Models\MaterialDetail', 'strMaterialID','strMaterialID');
+    public function variant() {
+        return $this->belongsTo('App\Models\MaterialVariant', 'strMaterialVariantID', 'strMaterialVariantID');
     }
+    // public function materialvariant(){
+    //     return $this->hasMany('App\Models\MaterialDetail', 'strMaterialID','strMaterialID');
+    // }
     public function materialsupplier(){
         return $this->hasMany('App\Models\MaterialSupplier', 'strMaterialID','strMaterialID');
     }

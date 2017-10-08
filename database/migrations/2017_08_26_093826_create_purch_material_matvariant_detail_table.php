@@ -14,12 +14,14 @@ class CreatePurchMaterialMatvariantDetailTable extends Migration
     public function up()
     {
         Schema::create('tblpurchmatvariantdetail', function (Blueprint $table) {
+        $table->string('strPurchaseID');
         $table->string('strMaterialID');
         $table->string('strMaterialVariantID');
         $table->double('dblAddlQty');
+        $table->double('totalQty');
         $table->double('dblMaterialCost');
         // $table->foreign('strMaterialVariantID')
-        //       ->references('strMaterialVariantID')->on('tblmaterialdetail');     
+        //       ->references('strMaterialVariantID')->on('tblmaterialdetail');
 
 
         });

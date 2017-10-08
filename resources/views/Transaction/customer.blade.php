@@ -15,7 +15,7 @@
 
               <h3 class="widget-user-username">New Customer</h3>
               <h5 class="widget-user-desc"><p style="color:white">Precision Foundry of the Philippines Inc.</p>
-              	 <a href="/transaction/customer-list" class="btn btn-social btn-instagram"><i class="fa fa-users"></i> View Customers </a>
+              	 
             </div>
             <div class="box-footer">
               <div class="col-md-12">

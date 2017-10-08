@@ -87,6 +87,7 @@ class SupplierController extends Controller
         'strSupStreet' => $request->supplier_street,
         'strSupBrgy' => $request->supplier_brgy,
         'strSupCity' => $request->supplier_city,
+        'strSupEmail' => $request->supplier_email,
         'strSupplierDesc' => $request->supplier_desc,
         'strStatus' => 'Active',
         'created_at' => $request->input('created_at'),
@@ -109,6 +110,7 @@ class SupplierController extends Controller
         'strSupStreet' => $request->supplier_street,
         'strSupBrgy' => $request->supplier_brgy,
         'strSupCity' => $request->supplier_city,
+        'strSupEmail' => $request->supplier_email,
         'strSupplierDesc' => $request->supplier_desc,
       ]);
     $supplier = Supplier::where('strSupplierID', $request->supplier_id)->first();

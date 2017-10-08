@@ -29,6 +29,16 @@ $("#orderDate").datepicker('setDate', new Date());
     document.getElementById('purchase_form').action = "{{URL::to('/transaction/purchaseorder-add')}}";
   });
 
+  $("#btnAddReceive").click(function(){
+  location.href = './receive-add'
+    $("#receive_form").find('.has-error').removeClass("has-error");
+    $("#receive_form").find('.has-success').removeClass("has-success");
+    $('#receive_form').find('.form-control-feedback').remove();
+
+    document.getElementById("receive_form").reset();
+    document.getElementById('receive_form').action = "{{URL::to('/transaction/receiving-add')}}";
+  });
+
 
 
 
@@ -138,6 +148,7 @@ $(document).on('submit', '#purchase_form', function(e){
   var cost = [];
   var varia = [];
   var uomArr = [];
+  var totalQty = []
   var oTable = $('#addMaterialsTablee').dataTable();
   var tblrowd = oTable.fnGetData().length;
   materialArr =  oTable.fnGetData();
@@ -149,7 +160,9 @@ $(document).on('submit', '#purchase_form', function(e){
     cost[i] = $("#matcost"+materialArr[i][0]).val();
     varia[i] = $("#matvarSelect"+materialArr[i][0]).val().replace(/\D/g, "");
     uomArr[i] = $("#matvarSelect"+materialArr[i][0]).val().replace(/[^a-z]/gi, "");
+    totalQty[i] = parseInt(materialArr[i][3]) + parseInt($("#matqty"+materialArr[i][0]).val());
   }
+  // alert(totalQty)
 
     $.ajax({
       type: "POST",
@@ -164,6 +177,7 @@ $(document).on('submit', '#purchase_form', function(e){
         mat_qty : qty,
         mat_cost : cost,
         uom : uomArr,
+        total_qty : totalQty,
         created_at: today,
       },
 
@@ -209,7 +223,7 @@ function getMaterials(){
          for (var i = 0; i < data.length; i++) {
 
           var opt = document.createElement("option");
-          opt.text = data[i].strMaterialName;
+          opt.text = data[i].strMaterialName +" "+ "-"+" "+"("+  data[i].variant.intVariantQty+ data[i].variant.unit.strUOMName+""+")";
           varDropdown.add(opt);
     }
       }

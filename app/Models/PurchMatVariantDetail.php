@@ -13,8 +13,9 @@ class PurchMatVariantDetail extends Model
 	    'strMaterialID',
         'strMaterialVariantID',
 	    'dblAddlQty',
+      'totalQty',
         'dblMaterialCost',
-        // 'dblTotalQty',	
+        // 'dblTotalQty',
     ];
 
     public function details() {

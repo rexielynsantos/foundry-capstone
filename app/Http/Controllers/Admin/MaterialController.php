@@ -97,7 +97,7 @@ class MaterialController extends Controller
     }
     public function viewMaterial()
     {
-      $material = Material::with(['materialsupplier.supplier','materialvariant.details'])->where('strStatus', 'Active')->get();
+      $material = Material::with(['materialsupplier.supplier'])->where('strStatus', 'Active')->get();
         return view('Purchasing.material')
         ->with('matr',$material);
     }
@@ -128,6 +128,7 @@ class MaterialController extends Controller
       Material::insert([
         'strMaterialID' => $id,
         'strMaterialName' => $request->input('material_name'),
+        'strMaterialVariantID' => $request->input('variant_data'),
         'intReorderLevel' => $request->input('reorder_level'),
         'intReorderQty' => $request->input('reorder_qty'),
         'strUOMID' => $request->input('uom_id'),
@@ -139,13 +140,13 @@ class MaterialController extends Controller
 
       
         // $ctr = 0;
-        foreach($request->input('variant_data') as $variant){
-          MaterialDetail::insert([
-            'strMaterialID' => $id,
-            'strMaterialVariantID' => $variant,
-          ]);
-          // $ctr = $ctr + 1;
-        }
+        // foreach($request->input('variant_data') as $variant){
+        //   MaterialDetail::insert([
+        //     'strMaterialID' => $id,
+        //     'strMaterialVariantID' => $variant,
+        //   ]);
+          
+        // }
         // $ctr=0;
 
       // if($request->input('supplier_data') != ''){
@@ -159,12 +160,12 @@ class MaterialController extends Controller
       // }
 
 
-      $material = Material::with(['materialsupplier.supplier','materialvariant.details.unit', 'unit'])->where('strMaterialID', $id)->first();
+      $material = Material::with(['materialsupplier.supplier','variant', 'unit'])->where('strMaterialID', $id)->first();
       return $material;
     }
     public function editMaterial(Request $request)
     {
-      $material = Material::with(['materialsupplier.supplier','materialvariant.details.unit', 'unit'])->where('strMaterialID', $request->material_id)->first();
+      $material = Material::with(['materialsupplier.supplier','variant', 'unit'])->where('strMaterialID', $request->material_id)->first();
 
       return $material;
     }
@@ -175,6 +176,7 @@ class MaterialController extends Controller
         ->update([
             'strMaterialID' => $request->material_id,
             'strMaterialName' => $request->input('material_name'),
+            'strMaterialVariantID' => $request->input('variant_data'),
             'intReorderLevel' => $request->input('reorder_level'),
             'intReorderQty' => $request->input('reorder_qty'),
             'strUOMID' => $request->input('uom_id'),
@@ -185,16 +187,16 @@ class MaterialController extends Controller
 
       MaterialSupplier::where('strMaterialID', $request->material_id)
         ->delete();
-      MaterialDetail::where('strMaterialID', $request->material_id)
-      ->delete();
+      // MaterialDetail::where('strMaterialID', $request->material_id)
+      // ->delete();
 
-        foreach($request->input('variant_data') as $variant){
-          MaterialDetail::insert([
-            'strMaterialID' => $request->material_id,
-            'strMaterialVariantID' => $variant,
-          ]);
+        // foreach($request->input('variant_data') as $variant){
+        //   MaterialDetail::insert([
+        //     'strMaterialID' => $request->material_id,
+        //     'strMaterialVariantID' => $variant,
+        //   ]);
           // $ctr = $ctr + 1;
-        }
+        // }
         // $ctr=0;
 
       // if($request->input('supplier_data') != ''){
@@ -205,7 +207,7 @@ class MaterialController extends Controller
           ]);
           // $ctr = $ctr + 1;
         }
-    $material = Material::with(['materialsupplier.supplier','materialvariant.details.unit', 'unit'])->where('tblmaterial.strMaterialID', $request->material_id)
+    $material = Material::with(['materialsupplier.supplier', 'unit'])->where('tblmaterial.strMaterialID', $request->material_id)
             ->first();
     return response()->json($material);
 

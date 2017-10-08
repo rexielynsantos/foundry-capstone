@@ -15,6 +15,7 @@ class Supplier extends Model
     	'strSupStreet',
         'strSupBrgy',
         'strSupCity',
+        'strSupEmail',
     	'strSupplierDesc',	
     	'strStatus'
     ];

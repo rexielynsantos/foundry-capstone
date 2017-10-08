@@ -19,6 +19,10 @@ class DashboardController extends Controller
                 ->count();
     $supplier = DB::table('tblsupplier')
                 ->count();
+    $purch = DB::table('tblcustpurchase')
+              ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblcustpurchase.strCustomerID')
+               ->select('tblcustpurchase.*','tblcustomer.strCompanyName')
+              ->get(); 
 
     
    
@@ -27,6 +31,7 @@ class DashboardController extends Controller
       ->with('products',$products)
       ->with('orders',$orders)
       ->with('customer',$customer)
+      ->with('purch', $purch)
       ->with('supplier',$supplier);
   }
 }
