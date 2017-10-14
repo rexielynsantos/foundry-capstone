@@ -76,16 +76,7 @@
                 </div>
               </div>
 
-
-
-
               <hr>
-
-              <div class="row">
-                <div class="col-md-12">
-                  <button type="button" class="btn btn-success btn-flat pull-right"><i class="fa fa-arrow-right"></i></button>
-                </div>
-              </div>
 
             </div>
           </div>
@@ -96,7 +87,7 @@
             <div class="col-md-12">
             <h4 style="color:grey"> Receiving Details </h4>
             </div>
-            
+
           <div class="box-body">
                <hr>
                <div class="row">
@@ -122,7 +113,7 @@
                 </div>
           </div>
         </div>
-            
+
         </div>
     </div>
   </section>

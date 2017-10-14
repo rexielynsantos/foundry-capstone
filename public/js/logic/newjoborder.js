@@ -89,8 +89,9 @@ $(document).ready(function(){
          for(var i = 0; i < data.quotation.quoteprodvariant.length; i++){
           table.row.add([
             data.quotation.quoteprodvariant[i].details4.strProductName,
-            "pcs",
             data.quotation.quoteprodvariant[i].intOrderQty,
+            "pcs",
+            
           ]).draw(true);
          }
        },

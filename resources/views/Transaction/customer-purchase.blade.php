@@ -14,10 +14,10 @@
                  <img src="../images/mainlogo.png" alt="User Avatar">
               </div>
 
-              <h3 class="widget-user-username" style="color:black">Customer Purchase</h3>
+              <h3 class="widget-user-username" style="color:black">Sales Order</h3>
               <h5 class="widget-user-desc"><a href="#" style="color:black"> <label id="maxCustPurchase"></label></a></h5>
               <h5 class="widget-user-desc"><a href="#" style="color:black"> All fields with <span style="color:red">*</span> are required</a></h5>
-              <a href="/transaction/customerPurchases" style="margin-left:70px"  class="btn btn-social btn-instagram"><i class="fa fa-shopping-cart"></i> View Purchases </a>
+              <a href="/transaction/customerPurchases" style="margin-left:70px"  class="btn btn-social btn-instagram"><i class="fa fa-shopping-cart"></i> View Orders </a>
 
             </div>
       <div class="row">

@@ -132,7 +132,7 @@ $(document).on('submit', '#receive_form', function(e){
                   timeout: 3000,
                   text: '<h4><center>You successfully updated Received Deliveries!</center></h4>',
                 });
-
+            window.location.href= '/transaction/receive-add'
           }
 
         })
@@ -142,8 +142,8 @@ $(document).on('submit', '#receive_form', function(e){
       }
     })
 
-    
 
+    $.ajax({
     type: "GET",
     url: '/transaction/receiving-max',
     success: function(data){
@@ -165,16 +165,17 @@ $(document).on('submit', '#receive_form', function(e){
 
       success: function(result) {
         // alert("HNGG")
-        noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>You successfully updated Received Deliveries!</center></h4>',
-            });
-        tablee.clear();
-        tablee.draw();
-        $('#refSelect').val('');
-        $('#supplierSelect').val('');
+        // noty({
+        //       type: 'success',
+        //       layout: 'bottomRight',
+        //       timeout: 3000,
+        //       text: '<h4><center>You successfully updated Received Deliveries!</center></h4>',
+        //     });
+        // tablee.clear();
+        // tablee.draw();
+        // $('#refSelect').val('');
+        // $('#supplierSelect').val('');
+        window.location.href= '/transaction/receive-add'
       }
     })
     },

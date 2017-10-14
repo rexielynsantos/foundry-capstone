@@ -133,10 +133,10 @@
 
 </section>
 @push('scripts')
-  <script type="text/javascript" src="{{URL::asset('js/logic/pdfCustomer.js')}}"></script>
-	<script type="text/javascript" src="{{URL::asset('js/logic/pdf.js')}}"></script>
+  <!-- <script type="text/javascript" src="{{URL::asset('js/logic/pdfCustomer.js')}}"></script>
+	<script type="text/javascript" src="{{URL::asset('js/logic/pdf.js')}}"></script> -->
 	<script type="text/javascript" src="{{URL::asset('js/logic/customer-contact.js')}}"></script>
-	<script type="text/javascript" src="{{URL::asset('js/tables/customer-table.js')}}"></script>
+	<!-- <script type="text/javascript" src="{{URL::asset('js/tables/customer-table.js')}}"></script> -->
 
 @endpush
 

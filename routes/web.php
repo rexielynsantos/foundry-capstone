@@ -292,6 +292,7 @@ Route::get('/transaction/query-table4-info','Admin\QueryController@viewTable4Inf
 
 Route::get('/reports','Admin\ReportsController@viewReport');
 Route::get('/transaction/reports-table1-info','Admin\ReportsController@viewTable1Info');
+Route::get('/transaction/reports-table2-info','Admin\ReportsController@viewTable2Info');
 
 Route::get('/utilities/terms-condition','Admin\TermsConditionController@viewTerms');
 Route::get('/utilities/terms-condition-max','Admin\TermsConditionController@getTermsMax');

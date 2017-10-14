@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Purchase;
-use App\Models\PurchaseDetail;
+use App\Models\Customer;
+use App\Models\CustPurchase;
+use App\Models\Quotation;
 use App\Models\QuoteProductVariant;
 use DB;
 use Response;
@@ -90,14 +91,18 @@ class PurchaseController extends Controller
 
   public function viewCustomerPurchases()
   {
-    return view('Transaction.customerPurchases');
+    $prchs = CustPurchase::with(['customer', 'quotation.quoteprodvariant.details4'])->get();
+
+    // dd($prchs);
+    return view('Transaction.customerPurchases')->with('prchs', $prchs);
   }
 
   public function customerPurchases()
   {
-    $prchs = DB::table('tblcustpurchase')
-      ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblcustpurchase.strCustomerID')
-      ->get();
+
+    $prchs = CustPurchase::with(['customer', 'quotation.quoteprodvariant.details4'])->get();
+
+    // $prchs = CustPurchase::with('quotation.quoteprodvariant.details4','customer')->get();
 
     return Response::json($prchs);
   }

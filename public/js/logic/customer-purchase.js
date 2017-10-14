@@ -57,7 +57,7 @@ $(document).ready(function(){
     success: function(data){
         console.log(data);
       $('#maxCustPurchase').text(data);
-      $('#purchaseID').val(data);
+      // $('#purchaseID').val(data);
     },
     error: function(data){
         alert('ERROR IN MAX ID');
@@ -70,7 +70,7 @@ $(document).ready(function(){
       success: function(data)
       {
         $("#quoteRefer").empty();
-        $(`<option value='0' selected>--Select Quote--</option>`).appendTo("#quoteRefer");
+        $(`<option value='0' selected>Select Quote</option>`).appendTo("#quoteRefer");
         for(var i = 0; i < data.length; i++)
         {
           $(`<option>`+data[i].strQuoteID+`</option>`).appendTo("#quoteRefer");
@@ -170,7 +170,7 @@ $("#quoteRefer").change(function(){
      });
   });
 
-  $('#addvar').click(function(){
+  $('#addvar').click(function(){  
     var varianceText = $('#varianceTextID').val()
     var varianceValuee = $('#prodVarSelect').val()
     // alert(varianceText)

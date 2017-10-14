@@ -9,7 +9,7 @@ $(document).ready(function(){
   var urlCode = ''
 
 // $(#telNo).inputmask("(02) 999 9999");
- 
+
   if ($('#checkCustomerID').val() != '') {
     urlCode = '/transaction/customers-update'
     $.ajax({
@@ -123,6 +123,7 @@ $(document).ready(function(){
 });
 
 function viewProfile(id){
+  // alert(id)
   $.ajax({
     type: "POST",
     url: '/transaction/customers-viewProfile',

@@ -229,7 +229,7 @@
           <ul class="treeview-menu">
             <li><a href="/maintenance/paymentTerms"><i class="fa fa-plus"></i> Payment Terms </a></li>
             <li><a href="/maintenance/dataReactivation"><i class="fa fa-plus"></i> Data Reactivation </a></li>
-             <li><a href="/maintenance/userRole"><i class="fa fa-plus"></i> User Role</a></li>
+             <!-- <li><a href="/maintenance/userRole"><i class="fa fa-plus"></i> User Role</a></li> -->
              <li><a href="/utilities/terms-condition"><i class="fa fa-plus"></i> Terms and Condition </a></li>
              <li><a href="/maintenance/module"><i class="fa fa-plus"></i> Module </a></li>
 

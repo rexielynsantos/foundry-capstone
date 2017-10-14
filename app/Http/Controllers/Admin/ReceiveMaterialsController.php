@@ -58,6 +58,8 @@ class ReceiveMaterialsController extends Controller
                 ->leftjoin('tblpurchmatvariantdetail', 'tblpurchmatvariantdetail.strPurchaseID', '=', 'tblpurchase.strPurchaseID')
                 ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', '=', 'tblpurchmatvariantdetail.strMaterialID')
                 ->where('tblpurchase.strPurchaseID',  $request->po_id)
+                ->where('tblpurchase.strPStatus', 'Pending')
+                ->orWhere('tblpurchase.strPStatus', 'Partial Delivered')
                 ->get();
 
       return Response::json($material);
@@ -111,13 +113,18 @@ class ReceiveMaterialsController extends Controller
               'created_at'=> $request->input('created_at')
             ]);
 
-            ReceivepurchaseOrder::insert([
-              'strReceivePurchaseID' => $id,
-              'strPurchaseID' => $request->input('purchase_id')
-            ]);
-
             $ct = $ct + 1;
           }
+          ReceivepurchaseOrder::insert([
+            'strReceivePurchaseID' => $id,
+            'strPurchaseID' => $request->input('purchase_id')
+          ]);
+
+          DB::table('tblpurchase')
+              ->where('strPurchaseID', $request->input('purchase_id'))
+              ->update([
+                'strPStatus' => 'Partially Delivered'
+              ]);
         }
 
         $supp = Supplier::where('strStatus', 'Active')
@@ -141,7 +148,7 @@ class ReceiveMaterialsController extends Controller
             ->orderBy('created_at', 'desc')
             ->orderBy('strReceivePurchaseID', 'desc')
             ->first();
-      
+
       $new = "";
        $somenew = "";
        $arrNew = [];
@@ -151,16 +158,16 @@ class ReceiveMaterialsController extends Controller
           $idd = $id->strReceivePurchaseID;
 
         $arrID = str_split($idd);
-      
-         
-      
+
+
+
          for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
          {
            $new = $arrID[$ctr];
-      
+
            if($boolAdd)
            {
-      
+
              if(is_numeric($new) || $new == '0')
              {
                if($new == '9')
@@ -180,10 +187,10 @@ class ReceiveMaterialsController extends Controller
                $arrNew[$ctr] = $new;
              }//else
            }//if ($boolAdd)
-      
+
            $arrNew[$ctr] = $new;
          }//for
-      
+
          for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
          {
            $somenew = $somenew . $arrNew[$ctr2] ;

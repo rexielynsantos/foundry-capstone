@@ -24,10 +24,10 @@
                          <select id="reportDropdown" name="reportDropdown" class="select2 form-control">
                              <option value="first" disabled selected>Select...</option>
                              <option value="table1">Sales Report</option>
-                             <option value="table4">Inventory Report</option>
+                             <option value="table2">Inventory Report</option>
                              <option value="table3">Production Monitoring Report</option>
-                             <option value="table2">Product Inspection Report</option>
-                             <option value="table2">Overall Rejection Report</option>
+                             <option value="table4">Product Inspection Report</option>
+                             <option value="table5">Overall Rejection Report</option>
 
                          </select>
                      </div>
@@ -78,10 +78,19 @@
     <!-- START OF TABLE 2 -->
     <div id="table2" align="center" style="display:none;">
       <h3> PRECISION FOUNDRY OF THE PHILIPPINES INC. </h3>
-       <h5> Inventory Report </h5>
+       <h5> Inventory Report </h5><br><br>
+       <div class="row">
+         <div class="col-md-6">
+           <center>Deliveries</center>
+           <canvas id="deliveredChart" width="400" height="400"></canvas>
+         </div>
+         <div class="col-md-6">
+           <center>Returns</center>
+           <canvas id="returnedChart" width="400" height="400"></canvas>
+         </div>
+       </div><br>
        <table id="inventoryRpt" class="table table-striped table-bordered responsive">
           <thead>
-           <th> # </th>
            <th>Material Name </th>
            <th> Delivered </th>
            <th> Returned </th>

@@ -256,8 +256,6 @@ class CustomerController extends Controller
           ->where('tblcosting.strCustomerID', $request->input('cust_id'))
           ->where('tblcosting.strCostingStatus', 'Approved')
           ->first();
-
-   
     // dd($customers);
     return Response::json($customers);
   }
@@ -306,11 +304,13 @@ class CustomerController extends Controller
             ->orderBy('tblcustpurchase.dtOrderDate', 'desc')
             ->first();
 
+    // dd($request->cust_id);
+
     $counter = DB::table('tblcustpurchase')
             ->where('strCustomerID', $request->cust_id)
             ->count();
     // dd($counter);
-    Session::put('strCustomerID',$viewProfile->strCustomerID);
+    Session::put('strCustomerID',$request->cust_id);
     Session::put('strCompanyName',$viewProfile->strCompanyName);
     Session::put('strCustStreet',$viewProfile->strCustStreet);
     Session::put('strCustBrgy',$viewProfile->strCustBrgy);

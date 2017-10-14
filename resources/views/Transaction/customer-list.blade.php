@@ -65,7 +65,7 @@
 </section>
 @push('scripts')
 	<script type="text/javascript" src="{{URL::asset('js/logic/customer.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('js/tables/customer-table.js')}}"></script>
+<!-- <script type="text/javascript" src="{{URL::asset('js/tables/customer-table.js')}}"></script> -->
 <script>
 $('#custTransTable').DataTable();
 </script>

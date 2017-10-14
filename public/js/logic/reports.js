@@ -12,52 +12,98 @@ $(document).ready(function(){
 
   $('#reportDropdown').change(function(){
     var reportVal = $('#reportDropdown').val()
-    $.ajax({
-        url: '/transaction/reports-table1-info',
-        type: 'GET',
-        success: function(data)
-        {
-          table1.clear().draw()
-          console.log(data)
-          for (var i = 0; i < data.customer.length; i++) {
-            table1.row.add([
-              data.customer[i][0],
-              data.count[i],
-              ''
-            ]).draw(true);
-          }
-          var options = {
-              type: 'line',
-              data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                datasets: [
-            	    {
-            	      label: '# of Votes',
-            	      data: [12, 19, 3, 5, 2, 3],
-                  	borderWidth: 1
-                	},
-            			{
-            				label: '# of Points',
-            				data: [7, 11, 5, 8, 3, 7],
-            				borderWidth: 1
-            			}
-            		]
-              },
-              options: {
-              	scales: {
-                	yAxes: [{
-                    ticks: {
-            					reverse: false
-                    }
-                  }]
-                }
-              }
+    if (reportVal == 'table1') {
+      $.ajax({
+          url: '/transaction/reports-table1-info',
+          type: 'GET',
+          success: function(data)
+          {
+            table1.clear().draw()
+            console.log(data)
+            for (var i = 0; i < data.customer.length; i++) {
+              table1.row.add([
+                data.customer[i][0],
+                data.count[i],
+                ''
+              ]).draw(true);
             }
-          var ctx = document.getElementById('myChart').getContext('2d');
-          new Chart(ctx, options);
-        }
-    });
-    $('#'+reportVal).show()
+            var options = {
+               labels : data.customer,
+               datasets : [
+                 {
+                   fillColor : "rgba(172,194,132,0.4)",
+                   strokeColor : "#ACC26D",
+                   pointColor : "#fff",
+                   pointStrokeColor : "#9DB86D",
+                   data : data.count
+                 }
+               ]
+             }
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx).Bar(options);
+          }
+      });
+      $('#table1').show()
+      $('#table2').hide()
+    } //END IF TABLE 1
+
+    else if (reportVal == 'table2') {
+      $.ajax({
+          url: '/transaction/reports-table2-info',
+          type: 'GET',
+          success: function(data)
+          {
+            table2.clear().draw()
+            console.log(data)
+            for (var i = 0; i < data.material.length; i++) {
+              table2.row.add([
+                data.material[i][0],
+                data.delivered[i],
+                data.returned[i],
+                data.totqty[i][0],
+                data.reorder[i][0],
+              ]).draw(true);
+            }
+            var delivered = {
+               labels : data.material,
+               datasets : [
+                 {
+                   label : "Delivered",
+                   fillColor : "rgba(172,194,132,0.4)",
+                   strokeColor : "#ACC26D",
+                   pointColor : "#fff",
+                   pointStrokeColor : "#9DB86D",
+                   data : data.delivered
+                 }
+               ]
+             }
+
+            var ctx = document.getElementById('deliveredChart').getContext('2d');
+            new Chart(ctx).Bar(delivered);
+
+            var returned = {
+               labels : data.material,
+               datasets : [
+                 {
+                   label : 'Returns',
+                   fillColor : "rgba(172,194,132,0.4)",
+                   strokeColor : "#ACC26D",
+                   pointColor : "#fff",
+                   pointStrokeColor : "#9DB86D",
+                   data : data.returned
+                 }
+               ]
+             }
+
+            var rt = document.getElementById('returnedChart').getContext('2d');
+            new Chart(rt).Bar(returned);
+          }
+      });
+      $('#table1').hide()
+      $('#table2').show()
+    } //END OF table2
+
   });
 
 });

@@ -16,6 +16,7 @@ var table1 = $('#custJOTable').DataTable({
     "bInfo": false
   });
 
+  // alert($('#customerID').val())
   $.ajax({
     type: "POST",
     url: '/transaction/customers-contactPersons',
@@ -23,6 +24,7 @@ var table1 = $('#custJOTable').DataTable({
       cust_id : $('#customerID').val(),
     },
     success: function(data) {
+      console.log(data)
       for (var i = 0; i < data.length; i++) {
         tbl.row.add([
           data[i].strContactPersonName,

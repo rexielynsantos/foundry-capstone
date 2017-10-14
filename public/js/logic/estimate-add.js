@@ -70,14 +70,18 @@ $(document).ready(function(){
         {
           console.log(data);
           if (data.length != 0) {
-            // alert(data.strCostingID);
             $('#costingID').val(data.strCostingID)
             for (var i = 0; i < data.costingmaterial.length; i++) {
+              var x = ''
+              for (var index = 0; index < data.costingmaterial.length; index++) {
+                var element = data.costingmaterial[index].details.strMaterialName;
+                x += '<li style="list-style-type:circle">'+element+'</li>'
+              }
 
               table.row.add([
                 data.costingmaterial[i].strCostingID,
                 data.product[i].strProductName,
-                data.costingmaterial[i].details.strMaterialName,
+                x,
                 data.costingmaterial[i].dblFinalCost,
                 '<button type="button" id="deleteButton" class="deleteRow"><i class="fa fa-trash"></i></button>'
               ]).draw(true);

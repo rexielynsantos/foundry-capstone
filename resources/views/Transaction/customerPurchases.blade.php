@@ -1,5 +1,5 @@
 @extends('master')
-@section('pageTitle', 'Customer Purchases')
+@section('pageTitle', 'Sales Order')
 @section('content')
 
 <section class="content">
@@ -15,7 +15,7 @@
 
               </div>
 
-              <h3 class="widget-user-username">Customer Purchases</h3>
+              <h3 class="widget-user-username">Sales Order</h3>
               <h5 class="widget-user-desc"><p style="color:white">Precision Foundry of the Philippines Inc.</p>
             </div>
             <div class="box-footer">
@@ -29,6 +29,7 @@
                   <th width="20%">Action</th>
                 </thead>
                 <tbody>
+                   
                 </tbody>
               </table>
             </div>
