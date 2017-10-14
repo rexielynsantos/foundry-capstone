@@ -18,6 +18,7 @@ class CustPurchaseTableSeeder extends Seeder
           'dtDeliveryDate' => '2017-08-09',
     	    'strCustomerID' => 'CUST00001',
     	    'strQuoteID' => 'QR-00001',
+          'strSOStatus' => 'Job On-Process',
           'created_at' => '2000-01-01 01:00:00',
       ]);
         DB::table('tblcustpurchase')->insert([
@@ -27,6 +28,7 @@ class CustPurchaseTableSeeder extends Seeder
           'dtDeliveryDate' => '2017-08-20',
           'strCustomerID' => 'CUST00001',
           'strQuoteID' => 'QR-00001',
+          'strSOStatus' => 'On-Process',
           'created_at' => '2000-01-01 01:00:00',
       ]);
         DB::table('tblcustpurchase')->insert([
@@ -36,6 +38,7 @@ class CustPurchaseTableSeeder extends Seeder
           'dtDeliveryDate' => '2017-08-20',
           'strCustomerID' => 'CUST00002',
           'strQuoteID' => 'QR-00001',
+          'strSOStatus' => 'On-Process',
           'created_at' => '2000-01-01 01:00:00',
       ]);
     }

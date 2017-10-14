@@ -15,7 +15,7 @@ class CreateJobordersTable extends Migration
     {
         Schema::create('tbljoborder', function (Blueprint $table) {
         $table->string('strJobOrdID')->primary();
-        $table->string('strCustPurchaseID');
+        $table->string('strCustPurchaseID')->unique();
         $table->boolean('boolIsNewProduct');
         $table->boolean('boolIsRepeatOrder');
         $table->text('strJobRemarks');

@@ -20,6 +20,7 @@ class CreateCustomerPurchaseTable extends Migration
         $table->date('dtDeliveryDate');
         $table->string('strCustomerID');
         $table->string('strQuoteID');
+        $table->string('strSOStatus');
         $table->timestamps();
         $table->foreign('strCustomerID')
               ->references('strCustomerID')->on('tblcustomer')

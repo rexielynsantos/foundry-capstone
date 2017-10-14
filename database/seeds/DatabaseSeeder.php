@@ -49,9 +49,9 @@ class DatabaseSeeder extends Seeder
          $this->call(QuotationTableSeeder::class);
          $this->call(QuoteProductVariantTableSeeder::class);
          $this->call(CustPurchaseTableSeeder::class);
-         $this->call(JobOrderTableSeeder::class);
-         $this->call(JobTicketTableSeeder::class);
-         $this->call(JobTicketDetailTableSeeder::class);
+         // $this->call(JobOrderTableSeeder::class);
+         // $this->call(JobTicketTableSeeder::class);
+         // $this->call(JobTicketDetailTableSeeder::class);
 
 
 

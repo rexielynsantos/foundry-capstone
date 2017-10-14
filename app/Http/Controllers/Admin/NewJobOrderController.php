@@ -90,7 +90,7 @@ class NewJobOrderController extends Controller
 
     public function newJobOrder(){
     	$joborder = JobOrder::with('custpurchase')->get();
-    	$custpur = CustPurchase::get();
+    	$custpur = CustPurchase::where('strSOStatus', 'On-Process')->get();
 
     	return view('Transaction.joborder-new')
     	->with('joborder', $joborder)
@@ -125,5 +125,10 @@ class NewJobOrderController extends Controller
     		'strJobOrdStatus' => "On-Process",
     		'created_at' => $request->input('created_at'),
     	]);
+    	DB::table('tblcustpurchase')
+    	->where('strCustPurchaseID', $request->input('custpurid'))
+    	->update([
+         'strSOStatus' => 'Job On-Process'
+    ]);
     }
 }

@@ -96,7 +96,7 @@
             <div class="box-body">
               <div class="row">
                 <div class="col-md-8">
-                	<table id="custTransTable" border="0" class="table table-bordered" style="color:black;">
+                	<table id="dashTable" class="display" style="color:black;background-color: #3c8dbc">
 		                <thead>
 		                  <th width="20%">S.O No.</th>
                       <th width="20%">Reference PO.</th>
@@ -307,8 +307,20 @@
 
  -->
      
+     @push('scripts')
+      
+<script>
+    $('#dashTable').DataTable(
+      {
+    "searching": false,
+    "ordering": false,
+    "paging": false,
+      }
+      );
+</script>
+  @endpush
 
-  
+
 
     
 @stop

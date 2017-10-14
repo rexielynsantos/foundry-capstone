@@ -16,6 +16,7 @@ class CustPurchase extends Model
     	'dtDeliveryDate',
     	'strCustomerID',
     	'strQuoteID',
+        'strSOStatus',
     ];
     public function quotation(){ 
         return $this->belongsTo('App\Models\Quotation', 'strQuoteID', 'strQuoteID');
