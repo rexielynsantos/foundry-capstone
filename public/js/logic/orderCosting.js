@@ -94,9 +94,9 @@ $(document).ready(function(){
                 result[i].strMaterialID,
                 result[i].strMaterialName,
                 '<select id="uomSelect'+result[i].strMaterialName.replace(/ /g, '')+'" style="width: 100%;" class="select2" required></select>',
-                '<input type="number" id="unitCost'+result[i].strMaterialName.replace(/ /g, '')+'" onkeyup="totalCost()" required placeholder="0.00">',
-                '<input type="number" id="usage'+result[i].strMaterialName.replace(/ /g, '')+'" required onkeyup="totalCost()" placeholder="0.0000">',
-                '<input type="number" id="cost'+result[i].strMaterialName.replace(/ /g, '')+'" readonly style="border:none;">',
+                '<input type="text" class="form control validate number" id="unitCost'+result[i].strMaterialName.replace(/ /g, '')+'" onkeyup="totalCost()" required placeholder="0.00">',
+                '<input type="text" class="form control validate number" id="usage'+result[i].strMaterialName.replace(/ /g, '')+'" required onkeyup="totalCost()" placeholder="0.0000">',
+                '<input type="text" id="cost'+result[i].strMaterialName.replace(/ /g, '')+'" readonly style="border:none;">',
               ]).draw(true);
             }
           }
