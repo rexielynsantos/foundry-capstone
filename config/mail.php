@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,8 +42,8 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
-
+    'port' => env('MAIL_PORT', 2525),
+// 587
     /*
     |--------------------------------------------------------------------------
     | Global "From" Address
@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => 'afablepolene@gmail.com',
-        'name' => '',
+        'name' => 'Precision Foundry of the Philippines',
     ],
 
     /*
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => env('MAIL_ENCRYPTION', ''),
 
     /*
     |--------------------------------------------------------------------------

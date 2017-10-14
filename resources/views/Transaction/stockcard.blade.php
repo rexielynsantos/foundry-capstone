@@ -17,7 +17,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <table id="deliveryTable" class="table table-bordered">
-                    <thead> 
+                    <thead>
                       <th class="hidden"> ID </th>
                       <th> Date Delivered  </th>
                       <th> Material </th>
@@ -25,13 +25,13 @@
                       <th> Status </th>
                     </thead>
                     <tbody>
-                     <!--  <tr>                    
+                     <!--  <tr>
                         <td> 2017-08-28 </td>
                         <td> Zircon Sand </td>
                         <td> 100 </td>
                         <td> Partial Delivery </td>
                       </tr>
-                      <tr>                    
+                      <tr>
                         <td> 2017-08-27 </td>
                         <td> Zircon Sand </td>
                         <td> 250 </td>
@@ -42,7 +42,7 @@
                 </div>
               </div>
             </div>
-        
+
             </form>
           </div>
           <!-- /.modal-content -->
@@ -65,7 +65,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <table id="requisitionTable" class="table table-bordered">
-                    <thead> 
+                    <thead>
                       <th class="hidden"> ID </th>
                       <th> Need Date  </th>
                       <th> Material </th>
@@ -80,14 +80,14 @@
                 </div>
               </div>
             </div>
-           
+
             </form>
           </div>
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
  </div>
-     
+
 
   <section class="content-header">
     <h1>
@@ -124,7 +124,7 @@
                           <option value="{{$mat->strMaterialID}}">{{$mat->strMaterialName}}</option>
                        @endforeach
                     </select>
-                  
+
                   </div>
                  </div>
                 </div>
@@ -142,7 +142,7 @@
           <div class="box-header with-border">
             <h3 class="box-title">Material Information</h3>
           </div          <div class="box-body">
-            <table id ="stockTable" class="table table-bordered"> 
+            <table id ="stockTable" class="table table-bordered">
               <thead>
                 <tr>
                   <th class="hidden">asdf</th>
@@ -150,7 +150,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>  
+                <tr>
                   <td><b>Material Name</b> </td>
                   <td id="selectMatName"> </td>
                 </tr>
@@ -174,29 +174,29 @@
                 <td> <b>  Supplier(s) </b> </td>
                 <td id="selectMatSupName"> </td>
               </tr>
-               <tr>
+               <!-- <tr>
                 <td> <b>  Variant(s) </b> </td>
                 <td id="selectMatVariants"> </td>
-              </tr>
+              </tr> -->
               <tr>
                 <td> <b>  Quantity Onhand</b> </td>
                 <td id="selectMatQtyOnhand"> </td>
               </tr>
-              
+
             <!--   <tr>
                 <td> <b> Actions </b></td>
-                <td> 
-                   <button id="btndeliveries" data-toggle="modal" data-target="#receivingModal" class="btn btn-primary"> <i class="fa fa-eye"></i>&nbsp;View Deliveries </button> 
-                   <button id="btnrequisition" data-toggle="modal" data-target="#requisitionModal" class="btn btn-warning"> <i class="fa fa-eye"></i>&nbsp;View Requisitions </button> 
+                <td>
+                   <button id="btndeliveries" data-toggle="modal" data-target="#receivingModal" class="btn btn-primary"> <i class="fa fa-eye"></i>&nbsp;View Deliveries </button>
+                   <button id="btnrequisition" data-toggle="modal" data-target="#requisitionModal" class="btn btn-warning"> <i class="fa fa-eye"></i>&nbsp;View Requisitions </button>
                </td>
               </tr> -->
-              
+
               </tbody>
             </table>
           </div>
         </div>
-      </div>   
-   
+      </div>
+
   </section>
 
 
@@ -206,4 +206,3 @@
 
 @endpush
 @stop
-

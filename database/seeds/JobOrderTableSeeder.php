@@ -17,7 +17,8 @@ class JobOrderTableSeeder extends Seeder
           'boolIsNewProduct' => 1,
     	    'boolIsRepeatOrder' => 0,
     	    'strJobRemarks' => 'description',
-    	    'email' => 'rexielynsantos@gmail.com',
+    	    // 'email' => 'rexielynsantos@gmail.com',
+          'strJobOrdStatus' => 'On-Process',
           'created_at' => '2000-01-01 01:00:00',
       ]);
     }

@@ -15,9 +15,37 @@ class ProductTypeDetailTableSeeder extends Seeder
             'strStageID' => 'ST00001',
             'strProductTypeID' => 'TYPE00001',
         ]);
+        DB::table('tblproducttypedetail')->insert([
+            'strStageID' => 'ST00002',
+            'strProductTypeID' => 'TYPE00001',
+        ]);
+        DB::table('tblproducttypedetail')->insert([
+            'strStageID' => 'ST00003',
+            'strProductTypeID' => 'TYPE00001',
+        ]);
+        DB::table('tblproducttypedetail')->insert([
+            'strStageID' => 'ST00004',
+            'strProductTypeID' => 'TYPE00001',
+        ]);
+        DB::table('tblproducttypedetail')->insert([
+            'strStageID' => 'ST00005',
+            'strProductTypeID' => 'TYPE00001',
+        ]);
 
         DB::table('tblproducttypedetail')->insert([
             'strStageID' => 'ST00002',
+            'strProductTypeID' => 'TYPE00002',
+        ]);
+        DB::table('tblproducttypedetail')->insert([
+            'strStageID' => 'ST00003',
+            'strProductTypeID' => 'TYPE00002',
+        ]);
+        DB::table('tblproducttypedetail')->insert([
+            'strStageID' => 'ST00004',
+            'strProductTypeID' => 'TYPE00002',
+        ]);
+        DB::table('tblproducttypedetail')->insert([
+            'strStageID' => 'ST00006',
             'strProductTypeID' => 'TYPE00002',
         ]);
 

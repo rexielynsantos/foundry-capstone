@@ -78,7 +78,7 @@ $("#refSelect").change(function(){
                data[i].totalQty,
                data[i].strMaterialName +''+'<input type="text" id="materialID'+data[i].strMaterialName.replace(/ /g, '')+'" value="'+data[i].strMaterialID+'" hidden>',
                data[i].strPurchaseID,
-               '<input type="text" id="received'+data[i].strMaterialName.replace(/ /g, '')+'" style="background:white;">',
+               '<input type="number" min=0 id="received'+data[i].strMaterialName.replace(/ /g, '')+'" onkeyup="qtyReceived()" style="background:white;">',
              ]).draw(true);
            }
         }
@@ -87,8 +87,8 @@ $("#refSelect").change(function(){
 
 
 $(document).on('submit', '#receive_form', function(e){
-  var current = new Date();
-  var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+  // var current = new Date();
+  // var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
   var qty = [];
   var purchaseID = [];
   var materialID = [];
@@ -102,17 +102,65 @@ $(document).on('submit', '#receive_form', function(e){
   }
 
    e.preventDefault();
+   $.ajax({
 
-    $.ajax({
+
+      type: "GET",
+      url: '/transaction/receiving-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+        $.ajax({
+          type: "POST",
+          url: "/transaction/receiving-add",
+          data: {
+            id: data,
+            created_at: today,
+            date_delivered : $('#to').val(),
+            supplier_id : $('#supplierSelect').val(),
+            purchase_id : $('#refSelect').val(),
+            mat_data : materialID,
+            mat_qty : qty,
+            created_at: today,
+          },
+
+          success: function(result) {
+            // alert("HNGG")
+            noty({
+                  type: 'success',
+                  layout: 'bottomRight',
+                  timeout: 3000,
+                  text: '<h4><center>You successfully updated Received Deliveries!</center></h4>',
+                });
+
+          }
+
+        })
+      },
+      error: function(data){
+        alert('ERROR IN MAX ID');
+      }
+    })
+
+    
+
+    type: "GET",
+    url: '/transaction/receiving-max',
+    success: function(data){
+      // alert('data: ' + data);
+      var current = new Date();
+      var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+      $.ajax({
       type: "POST",
       url: "/transaction/receiving-add",
       data: {
+        id: data,
+        created_at: today,
         date_delivered : $('#to').val(),
         supplier_id : $('#supplierSelect').val(),
         purchase_id : $('#refSelect').val(),
         mat_data : materialID,
         mat_qty : qty,
-        created_at: today,
       },
 
       success: function(result) {
@@ -123,12 +171,34 @@ $(document).on('submit', '#receive_form', function(e){
               timeout: 3000,
               text: '<h4><center>You successfully updated Received Deliveries!</center></h4>',
             });
-
+        tablee.clear();
+        tablee.draw();
+        $('#refSelect').val('');
+        $('#supplierSelect').val('');
       }
+    })
+    },
+    error: function(data){
+      alert('ERROR IN MAX ID');
+    }
+  })
 
-    });
 });
 
-
-
 });
+
+function qtyReceived()
+{
+  // alert('asd')
+  var table = $('#receiveMatsTable').dataTable();
+  var tblrowd = table.fnGetData().length;
+  qtyArr =  table.fnGetData();
+
+  for (var i = 0; i < tblrowd; i++) {
+    var receivedQty =  $('#received'+qtyArr[i][0].replace(/ /g, '')).val()
+    var orderedQty = qtyArr[i][1]
+    if (receivedQty > orderedQty) {
+      $('#received'+qtyArr[i][0].replace(/ /g, '')).val(orderedQty)
+    }
+  }
+}

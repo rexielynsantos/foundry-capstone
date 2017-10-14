@@ -49,7 +49,7 @@
                 <div class="col-md-4">
 
                   <div class="form-group">
-                    <input type="text" id="streetNum" class="form-control validate" placeholder="Street/Bldg. "required value="{{ Session::get('editstrCustStreet') }}">
+                    <input type="text" id="streetNum" class="form-control validate" placeholder="Street/Bldg." required value="{{ Session::get('editstrCustStreet') }}">
                   </div>
                 </div>
 
@@ -80,7 +80,7 @@
 
 					 <div class="row">
 				    	<div class="col-md-9">
-		               	 <label> Company Telehone Number </label>
+		               	 <label> Company Telehone Number<span style="color:red">*</span> </label>
 		                  	<div class="form-group">
 		                    	<input class="form-control number" type="text" id="telNo"
                            placeholder="ex. 999-99-99"
@@ -107,7 +107,7 @@
 						      maxlength="35">
 						      <div class="help-block with-errors"></div>
 						      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-						      <small class="pull-right"> <a> <button type="button" id="addContactPerson"> <i class="fa fa-plus"></i>&nbsp;&nbsp;Add Contact Person</a></button> </small>
+						      <small class="pull-right"> <a> <button type="button" class="btn btn-default" id="addContactPerson"> <i class="fa fa-plus"></i>&nbsp;&nbsp;Add Contact Person</a></button> </small>
 						    </div>
 					      </div>
 				        </div>
@@ -121,7 +121,7 @@
                           <thead>
                             <!-- <th class="hidden">ID</th> -->
                             <th width="50%">Name</th>
-                            <th width="50%">Contact Number</th>
+                            <th width="50%">Contact Number<span style="color:red">*</span></th>
                             <th>Action</th>
                           </thead>
                           <tbody>

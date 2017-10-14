@@ -9,7 +9,7 @@ $(document).ready(function(){
   var urlCode = ''
 
 // $(#telNo).inputmask("(02) 999 9999");
-
+ 
   if ($('#checkCustomerID').val() != '') {
     urlCode = '/transaction/customers-update'
     $.ajax({
@@ -79,26 +79,39 @@ $(document).ready(function(){
       contactNumberArray[i] = $('#'+tempID).val()
     }
     e.preventDefault();
-      $.ajax({
-        type: "POST",
-        url: urlCode,
-        data: {
-          tempID : $('#checkCustomerID').val(),
-          cust_name : $('#custName').val(),
-          cust_street : $('#streetNum').val(),
-          cust_brgy : $('#brgy').val(),
-          cust_city : $('#city').val(),
-          custTelNo : $('#telNo').val(),
-          cust_email : $('#custEmail').val(),
-          cust_contact : contactPersonArray,
-          cust_contactNum : contactNumberArray
-        },
-        success: function(result) {
-          $('#addedCustomer').val(result)
-          $('#addedCustomerID').val($('#custName').val())
-          $('#modalAdded').modal('show');
-        }
-      })
+    $.ajax({
+      type: "POST",
+      url: '/transaction/customers-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+        $.ajax({
+          type: "POST",
+          url: urlCode,
+          data: {
+            id: data,
+            created_at: today,
+            tempID : $('#checkCustomerID').val(),
+            cust_name : $('#custName').val(),
+            cust_street : $('#streetNum').val(),
+            cust_brgy : $('#brgy').val(),
+            cust_city : $('#city').val(),
+            custTelNo : $('#telNo').val(),
+            cust_email : $('#custEmail').val(),
+            cust_contact : contactPersonArray,
+            cust_contactNum : contactNumberArray
+          },
+          success: function(result) {
+            $('#addedCustomer').val(result)
+            $('#addedCustomerID').val($('#custName').val())
+            $('#modalAdded').modal('show');
+          }
+        })
+      },
+      error: function(data){
+        alert('ERROR IN MAX ID');
+      }
+    })
   });
 
 

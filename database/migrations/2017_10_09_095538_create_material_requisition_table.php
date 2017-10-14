@@ -15,11 +15,11 @@ class CreateMaterialRequisitionTable extends Migration
     {
         Schema::create('tblmaterialrequisition', function (Blueprint $table) {
         $table->string('strMaterialRequisitionID')->primary();
-        $table->string('strJobOrderID');
+        $table->string('strJobOrdID');
         $table->string('strEmployeeID');
         $table->date('dtNeeded');
-        $table->foreign('strJobOrderID')
-              ->references('strJobOrderID')->on('tblquotejoborder')
+        $table->foreign('strJobOrdID')
+              ->references('strJobOrdID')->on('tbljoborder')
               ->onUpdate('cascade');
         $table->foreign('strEmployeeID')
               ->references( 'strEmployeeID')->on('tblemployee')

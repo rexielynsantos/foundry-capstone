@@ -11,6 +11,7 @@ use App\Models\MatSpecDetail;
 use App\Models\Material;
 use App\Models\Unit;
 use App\Models\Product;
+use App\Models\ProductType;
 
 
 class MaterialSpecController extends Controller
@@ -78,16 +79,18 @@ class MaterialSpecController extends Controller
 
 	public function viewMatSpec()
     {
-       $matspec = MatSpec::with('material.details.unit', 'product.producttype')->where('strStatus','Active')->get();
+       $matspec = MatSpec::with('material.details.unit', 'product.producttype.stage.details')->where('strStatus','Active')->get();
       $unit = Unit::where('strStatus', 'Active')->get();
       $mat = Material::where('strStatus','Active')->get();
-      $prodct = Product::where('strStatus', 'Active')->get();
+      $prodct = Product::with('producttype')->where('strStatus', 'Active')->get();
+      // $type = ProductType::with('stage.details')->where('strStatus', 'Active')->get();
 
         // return Response::json($matspec);
         return view('Transaction.jobOrder-monitoring')
         ->with('matr',$mat)
         ->with('unit', $unit)
         ->with('prodct', $prodct)
+         // ->with('type', $type)
         ->with('matspec', $matspec);
 
     }
@@ -131,9 +134,9 @@ public function addCart(Request $request)
           ]);
           $ctr = $ctr + 1;
         }
-      }
+      } 
 
-      $prdvrc = MatSpec::with(['material.details.unit', 'product.producttype'])->where('strMatSpecID', $id)->first();
+      $prdvrc = MatSpec::with(['material.details.unit', 'product.producttype.stage.details'])->where('strMatSpecID', $id)->first();
       return $prdvrc;
     }
     public function editMatSpec(Request $request)
@@ -173,7 +176,7 @@ public function addCart(Request $request)
          }
        }
 
-       $prdvrc = MatSpec::with(['material.details.unit', 'product.producttype'])->where('strMatSpecID', $id)->first();
+       $prdvrc = MatSpec::with(['material.details.unit', 'product.producttype.stage.details'])->where('strMatSpecID', $id)->first();
        return $prdvrc;
 		}
 
@@ -204,7 +207,7 @@ public function addCart(Request $request)
         'strStatus' => 'Active',
       ]);
 
-      $matspec = MatSpec::with(['material.details.unit', 'product.producttype'])->where('strVarianceCode', $request->variance_code)->first();
+      $matspec = MatSpec::with(['material.details.unit', 'product.producttype.stage.details'])->where('strVarianceCode', $request->variance_code)->first();
       return $matspec;
 
   }

@@ -23,6 +23,8 @@ class DashboardController extends Controller
               ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblcustpurchase.strCustomerID')
                ->select('tblcustpurchase.*','tblcustomer.strCompanyName')
               ->get(); 
+    $joborder = DB::table('tbljoborder')
+                ->count();
 
     
    
@@ -32,6 +34,7 @@ class DashboardController extends Controller
       ->with('orders',$orders)
       ->with('customer',$customer)
       ->with('purch', $purch)
-      ->with('supplier',$supplier);
+      ->with('supplier',$supplier)
+      ->with('joborders', $joborder);
   }
 }

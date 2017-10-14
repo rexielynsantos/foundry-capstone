@@ -16,10 +16,11 @@ class CreateJobticketDetailTable extends Migration
         Schema::create('tbljobticketdetail', function (Blueprint $table) {
         $table->string('strJobTicketID');
         $table->string('strProductID');
-        $table->string('strCastingID'); //generated to per product
+        // $table->string('strCastingID'); //generated to per product
         $table->double('dblJobFinished')->nullable();
         $table->time('timeStarted');
         $table->time('timeFinished')->nullable(); 
+        $table->timestamps();
         $table->foreign('strJobTicketID')
                   ->references('strJobTicketID')->on('tbljobticket');
         $table->foreign('strProductID')

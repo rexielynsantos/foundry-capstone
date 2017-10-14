@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\CustContact;
+use App\Models\Costing;
+use App\Models\CostingMaterial;
+use App\Models\Product;
+use App\Mail\QuotationMail;
 use DB;
 use Response;
 use Session;
@@ -17,7 +21,7 @@ class CustomerController extends Controller
           ->orderBy('created_at', 'desc')
           ->orderBy('strCostingID', 'desc')
           ->first();
-    
+
     $new = "";
      $somenew = "";
      $arrNew = [];
@@ -27,16 +31,16 @@ class CustomerController extends Controller
         $idd = $id->strCostingID;
 
       $arrID = str_split($idd);
-    
-       
-    
+
+
+
        for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
        {
          $new = $arrID[$ctr];
-    
+
          if($boolAdd)
          {
-    
+
            if(is_numeric($new) || $new == '0')
            {
              if($new == '9')
@@ -56,10 +60,10 @@ class CustomerController extends Controller
              $arrNew[$ctr] = $new;
            }//else
          }//if ($boolAdd)
-    
+
          $arrNew[$ctr] = $new;
        }//for
-    
+
        for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
        {
          $somenew = $somenew . $arrNew[$ctr2] ;
@@ -71,32 +75,32 @@ class CustomerController extends Controller
     return response()->json($somenew);
   }
 
-  public function getQuotationMax(){
-    $id = DB::table('tblquotation')
-          ->select('strQuoteID')
+  public function getCustomerMax(){
+    $id = DB::table('tblcustomer')
+          ->select('strCustomerID')
           ->orderBy('created_at', 'desc')
-          ->orderBy('strQuoteID', 'desc')
+          ->orderBy('strCustomerID', 'desc')
           ->first();
-    
+
     $new = "";
      $somenew = "";
      $arrNew = [];
      $boolAdd = TRUE;
 
      if($id != ''){
-        $idd = $id->strQuoteID;
+        $idd = $id->strCustomerID;
 
       $arrID = str_split($idd);
-    
-       
-    
+
+
+
        for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
        {
          $new = $arrID[$ctr];
-    
+
          if($boolAdd)
          {
-    
+
            if(is_numeric($new) || $new == '0')
            {
              if($new == '9')
@@ -116,10 +120,70 @@ class CustomerController extends Controller
              $arrNew[$ctr] = $new;
            }//else
          }//if ($boolAdd)
-    
+
          $arrNew[$ctr] = $new;
        }//for
-    
+
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'CUST00001';
+     }
+    return response()->json($somenew);
+  }
+
+  public function getQuotationMax(){
+    $id = DB::table('tblquotation')
+          ->select('strQuoteID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strQuoteID', 'desc')
+          ->first();
+
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strQuoteID;
+
+      $arrID = str_split($idd);
+
+
+
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+
+         if($boolAdd)
+         {
+
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+
+         $arrNew[$ctr] = $new;
+       }//for
+
        for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
        {
          $somenew = $somenew . $arrNew[$ctr2] ;
@@ -178,28 +242,44 @@ class CustomerController extends Controller
   public function newQuote(Request $request)
   {
     // dd($request->all());
-    $customers = DB::table('tblcosting')
-    ->leftjoin('tblcustomer', 'tblcosting.strCustomerID', 'tblcustomer.strCustomerID')
-    ->leftjoin('tblcostingmaterial', 'tblcostingmaterial.strCostingID', 'tblcosting.strCostingID')
-    // ->leftjoin('tblmatspec', 'tblmatspec.strMaterialID', 'tblcostingmaterial.strMaterialID')
-    ->leftjoin('tblproduct', 'tblproduct.strProductID', 'tblcosting.strProductID')
-    ->select('tblcosting.*', 'tblcustomer.*', 'tblproduct.*', 'tblcostingmaterial.*')
-    ->where('tblcosting.strCustomerID', $request->cust_id)
-    ->where('tblcosting.strCostingStatus', 'Approved')
-    ->get();
+    // $customers = DB::table('tblcosting')
+    // ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblcosting.strCustomerID')
+    // ->leftjoin('tblproduct', 'tblproduct.strProductID', 'tblcosting.strProductID')
+    // ->leftjoin('tblcostingmaterial', 'tblcostingmaterial.strCostingID', 'tblcosting.strCostingID')
+    // ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', 'tblcostingmaterial.strMaterialID')
+    // ->where('tblcosting.strCustomerID', $request->cust_id)
+    // ->where('tblcosting.strCostingStatus', 'Approved')
+    // ->select('tblcosting.*', 'tblcustomer.*', 'tblcostingmaterial.*', 'tblmaterial.*', 'tblproduct.*')
+    // ->get();
 
+    $customers = Costing::with(['costingmaterial.details', 'product', 'customer'])
+          ->where('tblcosting.strCustomerID', $request->input('cust_id'))
+          ->where('tblcosting.strCostingStatus', 'Approved')
+          ->first();
+
+   
     // dd($customers);
     return Response::json($customers);
   }
 
   public function addQuote(Request $request)
   {
-    $customer = DB::table('tblcustomer')
-        ->where('tblcustomer.strCustomerID', '=', $request->input('cust_id'))
-        ->get();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // $customer = DB::table('tblcustomer')
+    //     ->where('tblcustomer.strCustomerID', '=', $request->input('cust_id'))
+    //     ->select('tblcustomer.strCustEmail')
+    //     ->get();
 
-    \Mail::to($customer)->send(new QuotationMail($customer));
-    
+    // $customer = Customer::create(
+    //   request([$cust])
+    // );
+
+    // $customer = 'afablepolene@gmail.com';
+
+
+    // \Mail::to($customer)->send(new QuotationMail($customer));
+    // dd($request->all());
+
     $id = $request->input('id');
 
     DB::table('tblquotation')
@@ -208,9 +288,11 @@ class CustomerController extends Controller
         'strCustomerID' => $request->input('cust_id'),
         'strTermID' => $request->input('term_id'),
         'strCostingID' => $request->input('costing_id'),
+        'strQuoteStatus' => 'For Approval',
         'strQuoteDescription' => $request->input('quote_desc'),
         'created_at' => $request->input('created_at')
       ]);
+
 
   }
 
@@ -255,6 +337,18 @@ class CustomerController extends Controller
             ->get();
 
     return Response::json($custpurchase);
+  }
+  public function currentJob(Request $request)
+  {
+
+    $job = DB::table('tblcustpurchase')
+            ->leftjoin('tbljoborder', 'tbljoborder.strCustPurchaseID', 'tblcustpurchase.strCustPurchaseID')
+
+            ->where('strJobOrdStatus', 'On-Process')
+            ->where('strCustomerID', $request->cust_id)
+            ->get();
+
+    return Response::json($job);
   }
 
   public function editCustomer(Request $request)
@@ -350,7 +444,7 @@ class CustomerController extends Controller
   {
     // dd($request->all());
       $temp = $request->input('tempID');
-      $id = str_random(10);
+      $id = $request->input('id');
       DB::table('tblcustomer')
       ->insert([
         'strCustomerID' => $id,
@@ -360,7 +454,8 @@ class CustomerController extends Controller
         'strCustCity' => $request->input('cust_city'),
         'strCustTelNo' => $request->input('custTelNo'),
         'strCustEmail' => $request->input('cust_email'),
-        'strStatus' => 'Active'
+        'strStatus' => 'Active',
+        'created_at' => $request->input('created_at')
       ]);
 
       $contactNum = $request->input('cust_contactNum');
@@ -463,6 +558,7 @@ class CustomerController extends Controller
       'strCostingID' => $id,
       'strCustomerID' => $request->input('customer_id'),
       'strProductID' => $request->input('product_id'),
+      'strMatSpecID'=> $request->input('matspec_id'),
       'dblSpecificGravity' => $request->input('spGravity'),
       'dblSurfaceArea' => $request->input('surfaceArea'),
       'dblMainVolume' => $request->input('volume'),

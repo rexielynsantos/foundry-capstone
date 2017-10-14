@@ -69,6 +69,8 @@ $(document).ready(function(){
           }
           else {
             alert('No variance for this product')
+            $("#prodVarianceSelect").empty();
+            $(`<option value='0'>Select Variance</option>`).appendTo("#prodVarianceSelect");
           }
         }
     });
@@ -180,7 +182,8 @@ $(document).ready(function(){
           usage : usageArr,
           cost : costArr,
           uom : submitUomArr,
-          matspec : matspecArr
+          matspec : matspecArr,
+          matspec_id : $('#prodVarianceSelect').val()
         },
         success: function()
         {
@@ -192,6 +195,72 @@ $(document).ready(function(){
         }
     });
   });
+
+  $('#changetabbutton').click(function(e){
+    e.preventDefault();
+    var custSelect = $('#selectCustomer').val()
+    var prodSelect = $('#productSelect').val()
+    var spGravity = $('#spGravity').val()
+    if (custSelect == 0 && prodSelect == 0 && spGravity == '') {
+      noty({
+        type: 'error',
+        layout: 'bottomRight',
+        timeout: 3000,
+        text: '<h4><center>Fill up required fields</center></h4>',
+      });
+    }
+    else {
+      $('#mytabs a[href="#tab_2"]').tab('show');
+      $('#tab2').removeClass('disabled');
+    }
+  })
+  $('#changetabbutton1').click(function(e){
+    e.preventDefault();
+    var surfaceArea = $('#surfaceArea').val()
+    var volume = $('#volume').val()
+    var spGravity = $('#spGravity').val()
+    if (surfaceArea == '' && volume == '') {
+      noty({
+        type: 'error',
+        layout: 'bottomRight',
+        timeout: 3000,
+        text: '<h4><center>Fill up required fields</center></h4>',
+      });
+    }
+    else {
+      $('#mytabs a[href="#tab_3"]').tab('show');
+      $('#tab3').removeClass('disabled');
+    }
+  })
+  $('#changetabbutton2').click(function(e){
+    e.preventDefault();
+    var runnerType = $('#runnerType').val();
+    var area = $('#area').val();
+    var svolume = $('#svolume').val();
+    var weight = $('#weight').val();
+    var sprue = $('#sprue').val();
+    var cluster = $('#cluster').val();
+    var wax = $('#wax').val();
+    var asMetal = $('#asMetal').val();
+    var pcsPerCluster = $('#pcsPerCluster').val();
+    var atInjection = $('#atInjection').val();
+    var atAssembly = $('#atAssembly').val();
+    var atCoating = $('#atCoating').val();
+    var atCasting = $('#atCasting').val();
+    if (runnerType == '' && area == '' && svolume == '' && weight == '' && sprue == '' && cluster == '' && wax == '' && asMetal == '' && pcsPerCluster == '' && atInjection == '' && atAssembly == '' && atCoating == '' && atCasting == '') {
+      noty({
+        type: 'error',
+        layout: 'bottomRight',
+        timeout: 3000,
+        text: '<h4><center>Fill up required fields</center></h4>',
+      });
+    }
+    else {
+      $('#tab3').removeClass('disabled');
+      $('#tab4').removeClass('disabled');
+      $('#mytabs a[href="#tab_4"]').tab('show');
+    }
+  })
 
   $('#spGravity').keyup(function(){
     var specGrave = $('#spGravity').val()

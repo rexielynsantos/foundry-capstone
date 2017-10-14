@@ -11,6 +11,7 @@ class CustPurchase extends Model
     public $incrementing = false;
     public $timestamps = true;
     protected $fillable = [
+        'strPOID',
     	'dtOrderDate',
     	'dtDeliveryDate',
     	'strCustomerID',

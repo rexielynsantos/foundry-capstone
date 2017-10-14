@@ -23,7 +23,7 @@ class MaterialController extends Controller
           ->orderBy('created_at', 'desc')
           ->orderBy('strMaterialID', 'desc')
           ->first();
-    
+
     $new = "";
      $somenew = "";
      $arrNew = [];
@@ -33,16 +33,16 @@ class MaterialController extends Controller
         $idd = $id->strMaterialID;
 
       $arrID = str_split($idd);
-    
-       
-    
+
+
+
        for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
        {
          $new = $arrID[$ctr];
-    
+
          if($boolAdd)
          {
-    
+
            if(is_numeric($new) || $new == '0')
            {
              if($new == '9')
@@ -62,10 +62,10 @@ class MaterialController extends Controller
              $arrNew[$ctr] = $new;
            }//else
          }//if ($boolAdd)
-    
+
          $arrNew[$ctr] = $new;
        }//for
-    
+
        for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
        {
          $somenew = $somenew . $arrNew[$ctr2] ;
@@ -78,7 +78,7 @@ class MaterialController extends Controller
   }
 
     public function getAllVariant()
-    { 
+    {
       $variant = MaterialVariant::with('unit')->  where('strStatus', 'Active')->get();
 
       return response()->json($variant);
@@ -138,14 +138,14 @@ class MaterialController extends Controller
         'strStatus' => 'Active'
         ]);
 
-      
+
         // $ctr = 0;
         // foreach($request->input('variant_data') as $variant){
         //   MaterialDetail::insert([
         //     'strMaterialID' => $id,
         //     'strMaterialVariantID' => $variant,
         //   ]);
-          
+
         // }
         // $ctr=0;
 
@@ -262,7 +262,7 @@ class MaterialController extends Controller
         'strStatus' => 'Active',
       ]);
 
-      $material = Material::with(['materialsupplier.supplier','materialvariant.details.unit', 'unit'])->where('strMaterialName', $request->material_name)->first();
+      $material = Material::with(['materialsupplier.supplier','variant', 'unit'])->where('strMaterialName', $request->material_name)->first();
       return $material;
 
   }

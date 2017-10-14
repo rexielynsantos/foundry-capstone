@@ -24,8 +24,8 @@ class StocksController extends Controller
   	{
 
     $stocks = Stock::get();
-    $material =Material::with(['materialsupplier.supplier','materialvariant.details.unit', 'unit'])->get();
-   
+    $material =Material::with(['materialsupplier.supplier','variant', 'unit'])->get();
+
       // return Response::json($stocks);
       return view('Transaction.stockcard')
       ->with('stocks',$stocks)
@@ -33,16 +33,16 @@ class StocksController extends Controller
   	}
 
   	public function getStockDetails(Request $request)
-  	
+
     {
       // $mat = DB::table('tblmaterial')
-      $mat = Material::with(['materialsupplier.supplier','materialvariant.details', 'unit'])
+      $mat = Material::with(['materialsupplier.supplier','variant', 'unit'])
       ->where('strMaterialID', $request->material_id)
       ->get();
 
 
     return Response::json($mat);
-      
+
 
     }
     public function getReceivingRecords(Request $request)
@@ -58,7 +58,7 @@ class StocksController extends Controller
       ->get();
       // $delivery = ReceivePurchase::with('orders.details','orders.materialvariant')
       // ->where('tblreceivepurchasedetail.strMaterialID', $request->material_id)->get();
-      
+
     return Response::json($delivery);
     }
     public function getRequisitionRecords(Request $request)
@@ -74,17 +74,17 @@ class StocksController extends Controller
       ->get();
       // $delivery = ReceivePurchase::with('orders.details','orders.materialvariant')
       // ->where('tblreceivepurchasedetail.strMaterialID', $request->material_id)->get();
-      
+
     return Response::json($delivery);
     }
     // public function getRequisitionRecords(Request $request)
     // {
     //   $requisition = ReceivePurchase::with('orders.details')
     //   ->where('tblreceivepurchasedetail.strMaterialID', $request->material_id)->get();
-      
+
     // return Response::json($requisition);
     // }
 
 
-  	
+
 }

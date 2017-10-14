@@ -71,7 +71,7 @@ $(document).ready(function(){
               data[i].strMaterialID,
               data[i].quantityReceived,
               data[i].strMaterialName,
-              '<input type="text" id="return'+data[i].strMaterialID+'" onkeyup="validateReturn()" style="background:white;">'
+              '<input type="number" min=0 id="return'+data[i].strMaterialID+'" onkeyup="validateReturn()" style="background:white;">'
             ]).draw(true);
           }
         }
@@ -79,8 +79,8 @@ $(document).ready(function(){
   });
 
   $(document).on('submit', '#return_form', function(e){
-    var current = new Date();
-    var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+    // var current = new Date();
+    // var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
     var qtyReturned = [];
     var qtyReceived = [];
     var materialID = [];
@@ -93,42 +93,59 @@ $(document).ready(function(){
       qtyReceived[i] = materialArr[i][1]
       materialID[i] = materialArr[i][0]
     }
-
+    e.preventDefault();
     $.ajax({
-        url: '/transaction/return-submit',
-        type: 'POST',
-        data: {
-          receive_id : $('#receivingID').val(),
-          supplier_id : $('#supplierselection').val(),
-          return_date : $('#orderDate').val(),
-          qty_returned : qtyReturned,
-          qty_received : qtyReceived,
-          mat_id : materialID,
-          created_at: today
-        },
-        success: function(data)
-        {
-          alert('yey')
-        }
-    });
+      type: "GET",
+      url: '/transaction/return-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+        $.ajax({
+            url: '/transaction/return-submit',
+            type: 'POST',
+            data: {
+              id: data,
+              receive_id : $('#receivingID').val(),
+              supplier_id : $('#supplierselection').val(),
+              return_date : $('#orderDate').val(),
+              qty_returned : qtyReturned,
+              mat_id : materialID,
+              created_at: today
+            },
+            success: function(data)
+            {
+              // alert('yey')
+               noty({
+                  type: 'success',
+                  layout: 'bottomRight',
+                  timeout: 3000,
+                  text: '<h4><center>You successfully updated Returned Items!</center></h4>',
+                });
+               table.clear();
+               table.draw();
+            }
+        })
+      },
+      error: function(data){
+        alert('ERROR IN MAX ID');
+      }
+    })
   });
 
 });
 
 function validateReturn()
 {
-  var qtyRet = [];
-  var qtyRec = [];
-  var oTable = $('#returnTable').dataTable();
-  var tblrow = oTable.fnGetData().length;
-  quantity =  oTable.fnGetData();
+  // alert('asd')
+  var table = $('#returnTable').dataTable();
+  var tblrowd = table.fnGetData().length;
+  qtyArr =  table.fnGetData();
 
-  for (var i = 0; i < tblrow; i++) {
-    qtyRet[i] = $("#return"+quantity[i][0]).val();
-    qtyRec[i] = quantity[i][1]
-
-    if (qtyRet[i]) {
-
+  for (var i = 0; i < tblrowd; i++) {
+    var returnedQty =  $('#return'+qtyArr[i][0]).val()
+    var deliveredQty = qtyArr[i][1]
+    if (returnedQty > deliveredQty) {
+      $('#return'+qtyArr[i][0]).val(deliveredQty)
     }
   }
 }

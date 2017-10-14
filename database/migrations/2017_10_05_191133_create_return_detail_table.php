@@ -16,8 +16,8 @@ class CreateReturnDetailTable extends Migration
         Schema::create('tblreturndetail', function (Blueprint $table) {
         $table->string('strReturnID');
         $table->string('strMaterialID');
-        $table->string('strReceivePurchaseID');
-        $table->date('quantityReturned');
+        // $table->string('strReceivePurchaseID');
+        $table->integer('quantityReturned');
         $table->boolean('isActive')->default(1);
 
         $table->foreign('strReturnID')
@@ -28,10 +28,10 @@ class CreateReturnDetailTable extends Migration
               ->references( 'strMaterialID')->on('tblmaterial')
               ->onUpdate('cascade')
               ->onDelete('restrict');
-        $table->foreign('strReceivePurchaseID')
-              ->references( 'strReceivePurchaseID')->on('tblreceivepurchase')
-              ->onUpdate('cascade')
-              ->onDelete('restrict');
+        // $table->foreign('strReceivePurchaseID')
+        //       ->references( 'strReceivePurchaseID')->on('tblreceivepurchase')
+        //       ->onUpdate('cascade')
+        //       ->onDelete('restrict');
 
         });
     }

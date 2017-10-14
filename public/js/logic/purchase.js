@@ -92,6 +92,11 @@ var table = $('#addMaterialsTablee').DataTable(
 $("#addCart").click(function(){
     var matVal = $('#matSelect').val();
     var matID = [];
+    var materialValue = []
+    for (var i = 0; i < matVal.length; i++) {
+      materialValue[i] = matVal[i].split('-')
+    }
+    // alert(materialValue[0][0])
 
     table.column(0).visible(false);
     for (var j = 0; j < matVal.length; j++) {
@@ -99,23 +104,23 @@ $("#addCart").click(function(){
           url: "/transaction/purchaseCart",
           type: "POST",
           data: {
-            mat_data : matVal[j]
+            mat_data : materialValue[j][0]
           },
           success: function(data) {
             $('#totCost').val('0')
-            // console.log(data);
+            console.log(data);
             // getMaterialVars();
-            var btnn = "<button type='button' id = 'btnTrash'  class='deleteRow btn btn-danger' name='"+data[0].strMaterialName+"' onclick='removeProd(this.name)'><i class='fa fa-trash'></i></button>";
+            var btnn = "<button type='button' id = 'btnTrash'  class='deleteRow btn btn-danger' name='"+data[0].strMaterialName+' - ('+data[0].intVariantQty+''+data[0].strUOMName+')'+"' onclick='removeProd(this.name)'><i class='fa fa-trash'></i></button>";
               $('#matSelect option:selected').remove();
+            var costt = parseInt(data[0].intReorderQty) * parseInt(data[0].dblBasePrice)
               table.row.add([
                 data[0].strMaterialID,
-                data[0].strMaterialName,
-                '<select id="matvarSelect'+data[0].strMaterialID+'" class="form-control select2"></select>',
+                data[0].strMaterialName+' - ('+data[0].intVariantQty+''+data[0].strUOMName+')',
                 data[0].intReorderQty,
                 '<input type="number" id="basePrice'+data[0].strMaterialID+'" value="'+data[0].dblBasePrice+'" class="form-control" readonly style="border:none; background:white;" placeholder="0">',
-                '<input type="number" id="matqty'+data[0].strMaterialID+'" onkeyup="computeTotalCost()" placeholder="0">',
-                data[0].unit.strUOMName,
-                '<input type="text" class="number" id="matcost'+data[0].strMaterialID+'" placeholder="0">',
+                '<input type="number" min="0" id="matqty'+data[0].strMaterialID+'" onkeyup="computeTotalCost()">',
+                'pcs',
+                '<input type="text" id="matcost'+data[0].strMaterialID+'" value="'+costt+'" readonly style="border:none;">',
                 btnn
               ]).draw(true);
 
@@ -142,13 +147,14 @@ $("#addCart").click(function(){
 $(document).on('submit', '#purchase_form', function(e){
   e.preventDefault();
   table.column(0).visible(false);
-  var current = new Date();
-  var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+  // var current = new Date();
+  // var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
   var qty = [];
   var cost = [];
   var varia = [];
   var uomArr = [];
-  var totalQty = []
+  var totalQty = [];
+  var splitter = [];
   var oTable = $('#addMaterialsTablee').dataTable();
   var tblrowd = oTable.fnGetData().length;
   materialArr =  oTable.fnGetData();
@@ -156,44 +162,51 @@ $(document).on('submit', '#purchase_form', function(e){
   // var regex = /(\d+)/g;
 
   for(var i = 0; i<tblrowd; i++){
+    splitter[i] = materialArr[i][1].split('-');
     qty[i] = $("#matqty"+materialArr[i][0]).val();
     cost[i] = $("#matcost"+materialArr[i][0]).val();
-    varia[i] = $("#matvarSelect"+materialArr[i][0]).val().replace(/\D/g, "");
-    uomArr[i] = $("#matvarSelect"+materialArr[i][0]).val().replace(/[^a-z]/gi, "");
-    totalQty[i] = parseInt(materialArr[i][3]) + parseInt($("#matqty"+materialArr[i][0]).val());
+    varia[i] = materialArr[i][1].replace(/\D+/g, "");
+    uomArr[i] = splitter[i][1].replace(/[^a-z]/ig, "");
+    totalQty[i] = parseInt(materialArr[i][2]) + parseInt($("#matqty"+materialArr[i][0]).val());
+    // alert(totalQty[i])
   }
+  // alert(varia)
+  // alert(uomArr)
   // alert(totalQty)
+  $.ajax({
+    type: "GET",
+    url: '/transaction/purchase-max',
+    success: function(data){
+      var current = new Date();
+      var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+      $.ajax({
+        type: "POST",
+        url: "/transaction/purchaseorder-add",
+        data: {
+          id: data,
+          mat_data : materialArr,
+          sup_id : $('#supplierselection').val(),
+          sup_contact : $('#contactPerson').val(),
+          pterm_id : $('#paymentTermSelect').val(),
+          date_created : $('#orderDate').val(),
+          mat_var : varia,
+          mat_qty : qty,
+          mat_cost : cost,
+          uom : uomArr,
+          total_qty : totalQty,
+          created_at: today,
+        },
 
-    $.ajax({
-      type: "POST",
-      url: "/transaction/purchaseorder-add",
-      data: {
-        mat_data : materialArr,
-        sup_id : $('#supplierselection').val(),
-        sup_contact : $('#contactPerson').val(),
-        pterm_id : $('#paymentTermSelect').val(),
-        date_created : $('#orderDate').val(),
-        mat_var : varia,
-        mat_qty : qty,
-        mat_cost : cost,
-        uom : uomArr,
-        total_qty : totalQty,
-        created_at: today,
-      },
+        success: function(result) {
+            window.location.href = '/transaction/purchaseOrder';
+        }
 
-      success: function(result) {
-        // alert("HNGG")
-        noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>You successfully sent a Purchase Request!</center></h4>',
-            });
-            // window.location.href = '/transaction/purchase-final';
-        // console.log(data);
-      }
-
-    });
+      })
+    },
+    error: function(data){
+      alert('ERROR IN MAX ID');
+    }
+  })
 });
 
 });
@@ -270,8 +283,8 @@ function computeTotalCost(){
   var matID =  oTable.fnGetData();
 
   for (var i = 0; i < tblrows; i++) {
-  var tempCost = matID[i][3] + $('#matqty'+matID[i][0]).val()
-  var totalCost = tempCost * $('#basePrice'+matID[i][0]).val()
+  var tempCost = matID[i][2] + parseInt($('#matqty'+matID[i][0]).val())
+  var totalCost = tempCost * parseInt($('#basePrice'+matID[i][0]).val())
   $('#matcost'+matID[i][0]).val(totalCost)
 
   tempCost = ''

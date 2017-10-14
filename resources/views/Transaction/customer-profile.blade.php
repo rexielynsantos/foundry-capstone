@@ -28,6 +28,8 @@
                 <li><a href="#"><b> Email Address </b><br>{{ Session::get('strCustEmail') }}</a>
                 </li>
               	<li>
+                 <!--  <a> -->
+                  <div class="col-md-12">
 									<table name = "contactTable" id="contactTable" class="table table-bordered">
 						        <thead>
 						        	<tr>
@@ -39,7 +41,8 @@
 
 						        </tbody>
 						      </table>
-		            </a>
+                </div>
+		          <!--   </a> -->
               	</li>
               	<li><a href="#"><b> Last Order Date: <input type="text" value="{{ Session::get('dtOrderDate') }}" readonly style="border:none;"></b><br>
                 </li>
@@ -99,30 +102,15 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-	          	<table id="custTransTable" border="0" class="table table-bordered" style="color:black;">
+	          	<table id="custJOTable" border="0" class="table table-bordered" style="color:black;">
 	              <thead>
 	                <th width="20%">J.O No</th>
-	                <th width="50%">Quantity Done</th>
-	                <th width="50%">Target Quantity</th>
+                  <th width="20%">J.O No</th>
+	                <th width="50%">Status</th>
+	                <th width="50%">Delivery Date</th>
 	                <th>Progress</th>
 	              </thead>
 	              <tbody>
-	              	<tr>
-	              		<td> JO-00002 </td>
-	              		<td> 500 </td>
-	              		<td> 1500 </td>
-	              		<td>
-		              		<div class="clearfix">
-		                    	<small class="pull-right">90%</small>
-		                    </div>
-
-		                    <div class="progress xs">
-		                    	<div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-		                    </div>
-		                 </td>
-	              	</tr>
-
-
 	              </tbody>
 	            </table>
             </div>
@@ -137,7 +125,7 @@
 	        </div>
 	    </div>
 
-      <button id="btnPDF" type="submit">Generate PDF</button>
+     <!--  <button id="btnPDF" type="submit">Generate PDF</button> -->
 	</div>
 
 

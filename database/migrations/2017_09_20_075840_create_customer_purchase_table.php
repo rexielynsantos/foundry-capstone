@@ -15,6 +15,7 @@ class CreateCustomerPurchaseTable extends Migration
     {   
         Schema::create('tblcustpurchase', function (Blueprint $table) {
         $table->string('strCustPurchaseID')->primary();
+        $table->string('strPOID');
         $table->date('dtOrderDate');
         $table->date('dtDeliveryDate');
         $table->string('strCustomerID');

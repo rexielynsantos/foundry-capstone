@@ -19,7 +19,7 @@ class PurchaseController extends Controller
           ->orderBy('created_at', 'desc')
           ->orderBy('strCustPurchaseID', 'desc')
           ->first();
-    
+
     $new = "";
      $somenew = "";
      $arrNew = [];
@@ -29,16 +29,16 @@ class PurchaseController extends Controller
         $idd = $id->strCustPurchaseID;
 
       $arrID = str_split($idd);
-    
-       
-    
+
+
+
        for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
        {
          $new = $arrID[$ctr];
-    
+
          if($boolAdd)
          {
-    
+
            if(is_numeric($new) || $new == '0')
            {
              if($new == '9')
@@ -58,10 +58,10 @@ class PurchaseController extends Controller
              $arrNew[$ctr] = $new;
            }//else
          }//if ($boolAdd)
-    
+
          $arrNew[$ctr] = $new;
        }//for
-    
+
        for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
        {
          $somenew = $somenew . $arrNew[$ctr2] ;
@@ -135,10 +135,10 @@ class PurchaseController extends Controller
       ->leftjoin('tblcosting', 'tblcosting.strProductID', 'tblproduct.strProductID')
       ->leftjoin('tblcostingmaterial', 'tblcostingmaterial.strCostingID', 'tblcosting.strCostingID')
       ->leftjoin('tblquotation', 'tblquotation.strCostingID', 'tblcosting.strCostingID')
-      // ->leftjoin('tblmatspec', 'tblmatspec.strMatSpecID', 'tblcostingmaterial.strMatSpecID')
+      ->leftjoin('tblmatspec', 'tblmatspec.strMatSpecID', 'tblcosting.strMatSpecID')
       ->where('tblproduct.strProductID', $request->prod_name)
       ->where('tblquotation.strQuoteID', $request->quote_id)
-      ->get();
+      ->first();
       // ->sum('tblcostingmaterial.dblFinalCost');
     // dd($prd);
     return Response::json($prd);
@@ -160,6 +160,7 @@ class PurchaseController extends Controller
     DB::table('tblcustpurchase')
       ->insert([
         'strCustPurchaseID' => $request->input('id'),
+        'strPOID' => $request->input('po_id'),
         'dtOrderDate' => $request->input('orderDate'),
         'dtDeliveryDate' => $request->input('targetDate'),
         'strCustomerID' => $request->input('customer_id'),

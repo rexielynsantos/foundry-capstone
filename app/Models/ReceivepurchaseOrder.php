@@ -10,7 +10,7 @@ class ReceivepurchaseOrder extends Model
     public $incrementing = false;
     public $timestamps = false;
     protected $fillable = [
-        'strReceivePurchaseID',
+      'strReceivePurchaseID',
     	'strPurchaseID',
 
     ];

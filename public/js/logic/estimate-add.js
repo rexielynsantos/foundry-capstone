@@ -5,7 +5,9 @@ $(document).ready(function(){
       "ordering": false,
       "paging": false,
   });
+
   var terms = "";
+  var moduleName = 'Quotation';
 //AJAX GET AND DISPLAY MAX ID
   $.ajax({
     type: 'GET',
@@ -19,14 +21,39 @@ $(document).ready(function(){
     }
   });
 
+  $('#termsCondition').change(function(){
+    if ($('#termsCondition').is(':checked')) {
+      // alert('checked')
+      $.ajax({
+        type: 'POST',
+        url: '/transaction/estimate-terms-view',
+        data: {
+          moduleName : moduleName
+        },
+        success: function(data){
+          $('#termsConditionView').show()
+          $('#termsConditionView').val(data[0].strNote)
+        }
+      });
+    }
+  });
+
   $('#changetabbutton').click(function(e){
     e.preventDefault();
-    if (document.getElementById('termsCondition').checked) {
+    if (document.getElementById('termsCondition').checked && $('#custSelect').val() != null) {
+      // alert($('#termsCondition').checked)
       $('#mytabs a[href="#tab_2"]').tab('show');
       terms = 'TERM00001';
+      $('#tab2').removeClass('disabled')
     }
     else{
-      alert("Required fields are null")
+      // alert($('#custSelect').val())
+      noty({
+        type: 'error',
+        layout: 'bottomRight',
+        timeout: 3000,
+        text: '<h4><center>Fill up required fields</center></h4>',
+      });
     }
   });
 
@@ -42,18 +69,30 @@ $(document).ready(function(){
         success: function(data)
         {
           console.log(data);
-          $('#costingID').val(data[0].strCostingID)
-          for (var i = 0; i < data.length; i++) {
-            table.row.add([
-              data[i].strCostingID,
-              data[i].strProductName,
-              data[i].strProductName,
-              data[i].dblFinalCost,
-              ''
-            ]).draw(true);
+          if (data.length != 0) {
+            // alert(data.strCostingID);
+            $('#costingID').val(data.strCostingID)
+            for (var i = 0; i < data.costingmaterial.length; i++) {
+
+              table.row.add([
+                data.costingmaterial[i].strCostingID,
+                data.product[i].strProductName,
+                data.costingmaterial[i].details.strMaterialName,
+                data.costingmaterial[i].dblFinalCost,
+                '<button type="button" id="deleteButton" class="deleteRow"><i class="fa fa-trash"></i></button>'
+              ]).draw(true);
+            }
+            var address = data.customer[0].strCustStreet+" "+data.customer[0].strCustBrgy+" "+data.customer[0].strCustCity
+            $('#confAddress').val(address)
           }
-          var address = data[0].strCustStreet+" "+data[0].strCustBrgy+" "+data[0].strCustCity
-          $('#confAddress').val(address)
+          else {
+            noty({
+              type: 'error',
+              layout: 'bottomRight',
+              timeout: 3000,
+              text: '<h4><center>There`s no approved costing for this customer</center></h4>',
+            });
+          }
           }
       });
   });
@@ -78,6 +117,10 @@ $(document).ready(function(){
           $('#quotationAddModal').modal('show')
         }
     });
+  });
+
+  $('#reloader').click(function(){
+    location.reload()
   });
 
 });

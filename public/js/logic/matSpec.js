@@ -142,7 +142,7 @@ $("#addCart").click(function(){
                 data[0].strMaterialID,
                 data[0].strMaterialName,
                 "<input type='number' min=1 id='"+data[0].strMaterialName.replace(/ /g,'')+"' placeholder='0'>",
-                data[0].unit.strUOMName,
+                data[0].strUOMID,
                 btnn
               ]).draw(true);
               $("#materialSelect").val(null).change();
@@ -203,27 +203,31 @@ $(document).on('submit', '#matspec_form', function(e){
             tmp_id : tempID
           },
           success: function(result) {
-            // console.log(result);
+            console.log(result);
             if(urlCode == '/transaction/matspec-update'){
               table.rows('tr.active').remove().draw();
               noty({
                 type: 'success',
                 layout: 'bottomRight',
                 timeout: 3000,
-                text: '<h4><center>Product Variance successfully updated!</center></h4>',
+                text: '<h4><center>Bill of Materials successfully updated!</center></h4>',
               });
             }else{
               noty({
                 type: 'success',
                 layout: 'bottomRight',
                 timeout: 3000,
-                text: '<h4><center>Product Variance successfully added!</center></h4>',
+                text: '<h4><center>Bill of Materials successfully added!</center></h4>',
               });
             }
-
+ 
             var mat = "";
+            var sta = "";
             for (var index = 0; index < result.material.length; index++) {
               mat += '<li style="list-style-type:circle">'+result.material[index].details.strMaterialName+' - '+result.material[index].dblMaterialQuantity+result.material[index].details.unit.strUOMName+ '</li>';
+            }
+            for (var index = 0; index < result.product.producttype.stage.length; index++) {
+              sta += '<li style="list-style-type:circle">'+result.product.producttype.stage[index].details.strStageName+' - '+result.product.producttype.stage[index].details.dbltimeRequired+' hrs</li>'
             }
 
             table.row.add([
@@ -231,6 +235,7 @@ $(document).on('submit', '#matspec_form', function(e){
               result.strVarianceCode,
               result.product.strProductName,
               result.product.producttype.strProductTypeName,
+              sta,
               mat,
             ]).draw(false);
 
@@ -308,7 +313,7 @@ function removeProd(id){
         });
       var mat = "";
         for (var index = 0; index < result.material.length; index++) {
-          mat += '<li style="list-style-type:circle">'+result.material[index].details.strMaterialName+' - '+result.material[index].dblMaterialQuantity+result.material[index].details.unit.strUOMName+ '</li>';
+          mat += '<li style="list-style-type:circle">'+result.material[index].details.strMaterialName+' - '+result.material[index].dblMaterialQuantity+result.material[index].details.strUOMID+ '</li>';
         }
 
         table.row.add([
@@ -316,6 +321,7 @@ function removeProd(id){
           result.strVarianceCode,
           result.product.strProductName,
           result.product.producttype.strProductTypeName,
+          result.product.producttype.stage.strStageName,
           mat,
         ]).draw(false);
     },

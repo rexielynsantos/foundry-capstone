@@ -10,7 +10,8 @@ width: 10px!important;
 z-index: 99;
 opacity:0.7!important;
 }
-
+canvas { background-color : #eee;
+}
 section
 {
 	overflow:hidden;

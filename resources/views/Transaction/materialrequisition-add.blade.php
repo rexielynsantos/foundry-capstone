@@ -120,7 +120,6 @@
                       <thead style="color:black">
                         <th class = "hidden">ID</th>
                         <th width="60%">Material</th>
-                        <th width="60%">Variant </th>
                         <th width="60%">Quantity </th>
                         <th width="10%">U/M</th>
 

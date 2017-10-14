@@ -14,12 +14,12 @@ class MaterialSpecDetailTableSeeder extends Seeder
         DB::table('tblmatspecdetail')->insert([
 	      'strMatSpecID' => 'MS00001',
 	      'strMaterialID' => 'MAT00001',
-	      'dblMaterialQuantity' => 50,
+	      'dblMaterialQuantity' => 500,
 	       ]);
 	    DB::table('tblmatspecdetail')->insert([
 	      'strMatSpecID' => 'MS00001',
 	      'strMaterialID' => 'MAT00002',
-	      'dblMaterialQuantity' => 50,
+	      'dblMaterialQuantity' => 300,
 
 	    ]);
     }

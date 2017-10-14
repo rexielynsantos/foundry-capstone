@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Carbon\Carbon as Carbon;
 class UserTableSeeder extends Seeder
 {
     /**
@@ -12,10 +12,12 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-          'id' => 1,
           'name' => 'Administrator',
           'email' => 'rexielynsantos@gmail.com',
           'password' => 'admin',
+          'created_at' => Carbon::now(),
+          'updated_at' => Carbon::now(),
+
 
       ]);
         

@@ -17,26 +17,19 @@ class DatabaseSeeder extends Seeder
         $this->call(DepartmentTableSeeder::class);
         $this->call(StageTableSeeder::class);
         $this->call(ModuleTableSeeder::class);
-        $this->call(WorkflowTableSeeder::class);
         $this->call(SubStageTableSeeder::class);
         $this->call(ProductTypeDetailTableSeeder::class);
         // $this->call(QuoteRequestTableSeeder::class);
         $this->call(JobtitleTableSeeder::class);
         $this->call(EmployeeTableSeeder::class);
-        $this->call(UserActionTableSeeder::class);
         $this->call(PaymentTermTableSeeder::class);
-        $this->call(UnitTableSeeder::class);
-        $this->call(ProductVariantSeeder::class);
+        $this->call(UnitTableSeeder::class);    
         $this->call(SupplierTableSeeder::class);
         // $this->call(ProductTypeDetailTableSeeder::class);
         $this->call(StageDetailSeeder::class);
         $this->call(ProductTableSeeder::class);
-        $this->call(ProductDetailTableSeeder::class);
-        $this->call(ProductVariantDetailTableSeeder::class);
         $this->call(MaterialTableSeeder::class);
         // $this->call(QuoteProductTableSeeder::class);
-        // $this->call(JobTicketTableSeeder::class);
-        // $this->call(JobTicketDetailTableSeeder::class);
          $this->call(MaterialVariantTableSeeder::class);
          $this->call(MaterialDetailTableSeeder::class);
          $this->call(MaterialSupplierTableSeeder::class);
@@ -57,6 +50,8 @@ class DatabaseSeeder extends Seeder
          $this->call(QuoteProductVariantTableSeeder::class);
          $this->call(CustPurchaseTableSeeder::class);
          $this->call(JobOrderTableSeeder::class);
+         $this->call(JobTicketTableSeeder::class);
+         $this->call(JobTicketDetailTableSeeder::class);
 
 
 

@@ -13,10 +13,29 @@ class CustPurchaseTableSeeder extends Seeder
     {
         DB::table('tblcustpurchase')->insert([
           'strCustPurchaseID' => 'SO-00001',
+          'strPOID' => 'PO-00001',
           'dtOrderDate' => '2017-08-09',
           'dtDeliveryDate' => '2017-08-09',
     	    'strCustomerID' => 'CUST00001',
     	    'strQuoteID' => 'QR-00001',
+          'created_at' => '2000-01-01 01:00:00',
+      ]);
+        DB::table('tblcustpurchase')->insert([
+          'strCustPurchaseID' => 'SO-00002',
+          'strPOID' => 'PO-00002',
+          'dtOrderDate' => '2017-08-11',
+          'dtDeliveryDate' => '2017-08-20',
+          'strCustomerID' => 'CUST00001',
+          'strQuoteID' => 'QR-00001',
+          'created_at' => '2000-01-01 01:00:00',
+      ]);
+        DB::table('tblcustpurchase')->insert([
+          'strCustPurchaseID' => 'SO-00003',
+          'strPOID' => 'PO-00909',
+          'dtOrderDate' => '2017-08-11',
+          'dtDeliveryDate' => '2017-08-20',
+          'strCustomerID' => 'CUST00002',
+          'strQuoteID' => 'QR-00001',
           'created_at' => '2000-01-01 01:00:00',
       ]);
     }

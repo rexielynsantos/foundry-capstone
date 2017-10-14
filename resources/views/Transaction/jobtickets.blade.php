@@ -28,7 +28,7 @@
               <div class="col-md-6">
               <label> Personnel Name: </label> <label id="endjtpersonnel"></label><br>
               <label> Stage: </label> <label id="endjtstage"></label> <br>
-              <label> Sub-Stage: <label id="endjtsubstage"></label> </label> <br>
+              <label> Sub-Stage: <label id="endjtsubstage"></label> </label> <br><input type="text" hidden id="orderQty"><input type="text" hidden id="jobordid">
               <hr>
 
              </div>
@@ -242,6 +242,7 @@
                 <thead>
 
                   <th class="hidden"> ID </th>
+                  <!-- <th> Code No. </th> -->
                   <th> Part Name </th>
                   <th> Type </th>
                   <th> Time Started</th>

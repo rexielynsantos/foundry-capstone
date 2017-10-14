@@ -59,9 +59,7 @@
                     <label for="uomTypeSelect" class="control-label">Unit Type<span style="color:red">*</span></label>
                     <select class="form-control select2" id = "uomTypeSelect" style="width: 100%;" required>
                      <option value="first" selected disabled>Select a Unit Type</option>
-                      @foreach($uomType as $u)
-                      <option value="{{$u->strUOMTypeID}}">{{$u->strUOMTypeName}}</option>
-                      @endforeach
+                    
                     </select>
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   </div>

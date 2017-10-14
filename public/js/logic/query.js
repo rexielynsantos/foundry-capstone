@@ -1,32 +1,12 @@
 $(document).ready(function(){
 
-  var table1 = $('#MostProducts').DataTable({
-  "searching": false,
-  "ordering": false,
-  "paging": false,
-  "bInfo": false
-  });
+  var table1 = $('#MostProducts').DataTable();
 
-  var table2 = $('#MostSupplies').DataTable({
-  "searching": false,
-  "ordering": false,
-  "paging": false,
-  "bInfo": false
-  });
+  var table2 = $('#MostSupplies').DataTable();
 
-  var table3 = $('#MostJobs').DataTable({
-  "searching": false,
-  "ordering": false,
-  "paging": false,
-  "bInfo": false
-  });
+  var table3 = $('#MostJobs').DataTable();
 
-  var table4 = $('#MostActiveCustomer').DataTable({
-  "searching": false,
-  "ordering": false,
-  "paging": false,
-  "bInfo": false
-  });
+  var table4 = $('#MostActiveCustomer').DataTable();
 
   $('#querySearch').change(function(){
      $('#table1').hide();
@@ -43,12 +23,67 @@ $(document).ready(function(){
            type: 'GET',
            success: function(data)
            {
-            //  console.log(data)
-             table1.row.add([
-               data.strProductName,
-               data.strProductDesc,
-               data.strProductName
-             ]).draw(true);
+             table1.clear().draw()
+             console.log(data)
+             for (var i = 0; i < data.product.length; i++) {
+               table1.row.add([
+                 data.product[i][0],
+                 data.productDesc[i][0],
+                 data.count[i]
+               ]).draw(true);
+             }
+           }
+       });
+     }
+     else if (tableID == 'table2') {
+       $.ajax({
+           url: '/transaction/query-table2-info',
+           type: 'GET',
+           success: function(data)
+           {
+             table2.clear().draw()
+             console.log(data)
+             for (var i = 0; i < data.material.length; i++) {
+               table2.row.add([
+                 data.material[i][0],
+                 data.materialDesc[i][0],
+                 data.count[i]
+               ]).draw(true);
+             }
+           }
+       });
+     }
+     else if (tableID == 'table3') {
+       alert('di ko alam ano kukunin dito hehe')
+      //  $.ajax({
+      //      url: '/transaction/query-table2-info',
+      //      type: 'GET',
+      //      success: function(data)
+      //      {
+      //        table3.clear().draw()
+      //        console.log(data)
+      //        table3.row.add([
+      //          data.material.strMaterialName,
+      //          data.material.strMaterialDesc,
+      //          data.count
+      //        ]).draw(true);
+      //      }
+      //  });
+     }
+     else if (tableID == 'table4') {
+       $.ajax({
+           url: '/transaction/query-table4-info',
+           type: 'GET',
+           success: function(data)
+           {
+             table4.clear().draw()
+             console.log(data)
+             for (var i = 0; i < data.customer.length; i++) {
+               table4.row.add([
+                 data.customer[i][0],
+                 data.count[i]
+               ]).draw(true);
+             }
            }
        });
      }

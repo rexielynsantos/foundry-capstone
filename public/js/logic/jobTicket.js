@@ -12,6 +12,7 @@ $(document).ready(function(){
   var row = '';
   var timeEnded = '';
   var currentTime = new Date();
+  var casting = "";
 
   var clear = 0;
   var jtable =  $('#jobTicketTable').DataTable({
@@ -74,12 +75,15 @@ $(document).ready(function(){
         jt_id: tempID
       },
       success: function(data){
+          // alert('qty: '+data.joborder.custpurchase.quotation.quoteprodvariant[0].intOrderQty);
           $('#endjtid').text(tempID);
           $('#endjtpersonnel').text(data.employee.strEmployeeFirst+" "+data.employee.strEmployeeLast);
           $('#endjtstage').text(data.stage.strStageName);
           if(data.strSubStageID != null){
             $('#endjtsubstage').text(data.substage.strSubStageName);
-          }          
+          }        
+          $('#orderQty').val(data.joborder.custpurchase.quotation.quoteprodvariant[0].intOrderQty);  
+          $('#jobordid').val(data.strJobOrdID);  
           etable.clear();
           etable.draw();
 
@@ -142,7 +146,9 @@ $(document).ready(function(){
         prod_id: prodid,
         prev_job: prevJob,
         add_job: addJob,
-        jt_id: $('#endjtid').text()
+        jt_id: $('#endjtid').text(),
+        jobord: $('#orderQty').val(),
+        jobordid: $('#jobordid').val()
       },
       success: function(result){
         noty({
@@ -236,55 +242,65 @@ $(document).ready(function(){
     $('#prodSelect :selected').each(function(i, selected){
       ctr+=1;
     });
-    // var timep = '<div class="bootstrap-timepicker"><div class="form-group"><div class="input-group"><input type="time" id="timePicker'+ctr+'" class="form-control"/></div></div></div>';
-    if(ctr == '0'){
-      noty({
-          type: 'error',
-          layout: 'bottomRight',
-          timeout: 3000,
-          text: '<h4><center>You chose '+ctr+' product(s)!</center></h4>',
-        });
-    }
-    else{
-      $('#hidee').show();
-      noty({
-          type: 'success',
-          layout: 'bottomRight',
-          timeout: 3000,
-          text: '<h4><center>You chose '+ctr+' product(s)!</center></h4>',
-        });
-        var prodVal = [];
-        $('#prodSelect :selected').each(function(i, selected){
-          prodVal[i] = $(selected).val();
-        });
-        // alert(prodVal);
-        for(var j = 0; j < prodVal.length; j++)
-        {
-          $.ajax({
-              url: '/transaction/jobtickets-products',
-              type: 'POST',
-              data: {
-                  prodct_data: prodVal[j]
-              },
-              success: function(data) {
-                var oTable = $('#jobtixTable').dataTable();
-                var tblrows = oTable.fnGetData().length;
-                var row = tblrows+1;
-                pName = data[0].strProductName;
-                var btn = "<button type='button' id = 'btnTrash'  class='deleteRow btn btn-danger' name='"+data[0].strProductID+"'><i class='fa fa-trash-o'></i</button>";
-                $('#prodSelect option:selected').remove();
-                  table.row.add([
-                    data[0].strProductID,
-                    data[0].strProductName,
-                    data[0].strProductTypeName,
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    '<div class="bootstrap-timepicker"><div class="form-group"><div class="input-group"><input type="time" id="'+data[0].strProductID+'" class="form-control"/></div></div></div>',
-                    btn
-                  ]).draw(true);
-              }
-          });
+    // $.ajax({
+    //   type: "GET",
+    //   url: '/transaction/jobtickets-casting-max',
+    //   success: function(datacasting){
+    //     var current = new Date();
+    //     var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+    //     casting = datacasting;
+    //     alert(casting);
+        // var timep = '<div class="bootstrap-timepicker"><div class="form-group"><div class="input-group"><input type="time" id="timePicker'+ctr+'" class="form-control"/></div></div></div>';
+        if(ctr == '0'){
+          noty({
+              type: 'error',
+              layout: 'bottomRight',
+              timeout: 3000,
+              text: '<h4><center>You chose '+ctr+' product(s)!</center></h4>',
+            });
         }
-    }
+        else{
+          $('#hidee').show();
+          noty({
+              type: 'success',
+              layout: 'bottomRight',
+              timeout: 3000,
+              text: '<h4><center>You chose '+ctr+' product(s)!</center></h4>',
+            });
+            var prodVal = [];
+            $('#prodSelect :selected').each(function(i, selected){
+              prodVal[i] = $(selected).val();
+            });
+            // alert(prodVal);
+            for(var j = 0; j < prodVal.length; j++)
+            {
+
+              $.ajax({
+                  url: '/transaction/jobtickets-products',
+                  type: 'POST',
+                  data: {
+                      prodct_data: prodVal[j]
+                  },
+                  success: function(data) {
+                    var oTable = $('#jobtixTable').dataTable();
+                    var tblrows = oTable.fnGetData().length;
+                    var row = tblrows+1;
+                    pName = data[0].strProductName;
+                    var btn = "<button type='button' id = 'btnTrash'  class='deleteRow btn btn-danger' name='"+data[0].strProductID+"'><i class='fa fa-trash-o'></i</button>";
+                    $('#prodSelect option:selected').remove();
+                    table.row.add([
+                      data[0].strProductID,
+                      // somenew,
+                      data[0].strProductName,
+                      data[0].strProductTypeName,
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                      '<div class="bootstrap-timepicker"><div class="form-group"><div class="input-group"><input type="time" id="'+data[0].strProductID+'" class="form-control"/></div></div></div>',
+                      btn
+                    ]).draw(true);                    
+                  }
+              });
+            }
+        }
   });
 
   $('#jobtixTable tbody').on( 'click', '#btnTrash', function () {
@@ -309,72 +325,85 @@ $(document).ready(function(){
     }
     e.preventDefault();
     $.ajax({
-      type: "POST",
-      url: urlCode,
-      data: {
-          prod_data: prodArr,
-          time_data: times,
-          emp_id: $('#personnel').val(),
-          stage_id: $('#stage').val(),
-          substage_id: $('#substage').val(),
-          joborder_id: $('#joborderRef').val()
+      type: "GET",
+      url: '/transaction/jobtickets-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+        $.ajax({
+          type: "POST",
+          url: urlCode,
+          data: {
+              id: data,
+              created_at: today,
+              prod_data: prodArr,
+              time_data: times,
+              emp_id: $('#personnel').val(),
+              stage_id: $('#stage').val(),
+              substage_id: $('#substage').val(),
+              joborder_id: $('#joborderRef').val()
+          },
+          success: function(result) {
+              noty({
+                  type: 'success',
+                  layout: 'bottomRight',
+                  timeout: 3000,
+                  text: '<h4><center>Job Ticket successfully added!</center></h4>',
+                });
+
+            //para mag fit sa data table
+            var prodRow='';
+            var fjobRow='';
+            var tStartedRow='';
+            var tFinishedRow='';
+            var edit = '<button id = "btnendticket" name='+result.strJobTicketID+' onclick="end(this.name)" data-toggle="modal" data-target="#endticketmodal"> <i class="fa fa-edit"></i></button>';
+            for (var index = 0; index < result.product.length; index++) {
+              prodRow += '<li style="list-style-type:circle">'+result.product[index].details.strProductName+'</li>';
+              // fjobRow += '<li style="list-style-type:circle">'+result.product[index].dblJobFinished+'</li>';
+              fjobRow += '<li style="list-style-type:circle"></li>';
+              tStartedRow += '<li style="list-style-type:circle">'+result.product[index].timeStarted+'</li>';
+              // tFinishedRow += '<li style="list-style-type:circle">'+result.product[index].timeFinished+'</li>';
+              tFinishedRow += '<li style="list-style-type:circle"></li>';
+            }
+            var sub = '';
+            if(result.strSubStageID != null){
+              sub = result.substage.strSubStageName;
+            }
+            console.log(result);
+            var empname = '<a href="read-mail.html">'+ result.employee.strEmployeeFirst+" "+result.employee.strEmployeeLast +'</a>'
+            jtable.row.add([
+              result.strJobTicketID,
+              empname,
+              prodRow,
+              result.stage.strStageName,
+              sub,
+              fjobRow,
+              tStartedRow,
+              tFinishedRow,
+              edit,
+              ]
+            ).draw(false);
+            prodArr = [];
+            times = [];
+            $('#personnel').val('')
+            $('#stage').val('')
+            $('#substage').val('')
+            $('#joborderRef').val('')
+            oTable.fnClearTable();
+            oTable.fnDraw();
+            $('#ticketmodal').modal('toggle');
+
+          },
+          error: function(result){
+            alert('Error adding jobticket!');
+
+          }
+        })
       },
-      success: function(result) {
-          noty({
-              type: 'success',
-              layout: 'bottomRight',
-              timeout: 3000,
-              text: '<h4><center>Job Ticket successfully added!</center></h4>',
-            });
-
-        //para mag fit sa data table
-        var prodRow='';
-        var fjobRow='';
-        var tStartedRow='';
-        var tFinishedRow='';
-        var edit = '<button id = "btnendticket" name='+result.strJobTicketID+' onclick="end(this.name)" data-toggle="modal" data-target="#endticketmodal"> <i class="fa fa-edit"></i></button>';
-        for (var index = 0; index < result.product.length; index++) {
-          prodRow += '<li style="list-style-type:circle">'+result.product[index].details.strProductName+'</li>';
-          // fjobRow += '<li style="list-style-type:circle">'+result.product[index].dblJobFinished+'</li>';
-          fjobRow += '<li style="list-style-type:circle"></li>';
-          tStartedRow += '<li style="list-style-type:circle">'+result.product[index].timeStarted+'</li>';
-          // tFinishedRow += '<li style="list-style-type:circle">'+result.product[index].timeFinished+'</li>';
-          tFinishedRow += '<li style="list-style-type:circle"></li>';
-        }
-        var sub = '';
-        if(result.strSubStageID != null){
-          sub = result.substage.strSubStageName;
-        }
-        console.log(result);
-        var empname = '<a href="read-mail.html">'+ result.employee.strEmployeeFirst+" "+result.employee.strEmployeeLast +'</a>'
-        jtable.row.add([
-          result.strJobTicketID,
-          empname,
-          prodRow,
-          result.stage.strStageName,
-          sub,
-          fjobRow,
-          tStartedRow,
-          tFinishedRow,
-          edit,
-          ]
-        ).draw(false);
-        prodArr = [];
-        times = [];
-        $('#personnel').val('')
-        $('#stage').val('')
-        $('#substage').val('')
-        $('#joborderRef').val('')
-        oTable.fnClearTable();
-        oTable.fnDraw();
-        $('#ticketmodal').modal('toggle');
-
-      },
-      error: function(result){
-        alert('Error adding jobticket!');
-
+      error: function(data){
+        alert('ERROR IN MAX ID');
       }
-    });
+    })
   });
 
 function btnclear(){

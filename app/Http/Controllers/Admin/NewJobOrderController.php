@@ -122,6 +122,7 @@ class NewJobOrderController extends Controller
     		'boolIsNewProduct' => $request->input('np'),
     		'boolIsRepeatOrder' => $request->input('ro'),
     		'strJobRemarks' => $request->input('remarks'),
+    		'strJobOrdStatus' => "On-Process",
     		'created_at' => $request->input('created_at'),
     	]);
     }

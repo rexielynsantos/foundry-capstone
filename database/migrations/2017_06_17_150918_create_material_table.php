@@ -17,6 +17,7 @@ class CreateMaterialTable extends Migration
         $table->string('strMaterialID')->primary();
         $table->string('strMaterialName');
         $table->string('strMaterialVariantID');
+        $table->integer('intQtyOnHand')->default(0);
         $table->integer('intReorderLevel');
         $table->integer('intReorderQty');
         $table->string('strUOMID');

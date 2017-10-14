@@ -41,7 +41,7 @@
                 <!-- /.input group -->
               </div>
                 </div>
-          
+
                 <div class="col-md-4">
 
 
@@ -72,7 +72,7 @@
           <div class="nav-tabs-custom">
             <ul id="mytabs" class="nav nav-tabs">
               <li class="active"><a href="#tab_1" data-toggle="tab">Step 1: Purchase Details</a></li>
-              <li><a href="#tab_2" data-toggle="tab">Step 2: Order Details</a></li>
+              <li><a href="#tab_2" id="tab2" class="disabled" data-toggle="tab">Step 2: Order Details</a></li>
             </ul>
 
             <div class="tab-content">
@@ -162,7 +162,6 @@
                       <thead style="color:black">
                         <th class = "hidden">ID</th>
                         <th width="60%">Items</th>
-                        <th width="60%">Variant</th>
                         <th width="10%">Re-order Quantity</th>
                         <th width="10%">Base Price</th>
                         <th width="10%">Addtl. Qty</th>
@@ -207,7 +206,13 @@
         </div>
         </div>
 
-
+        <style media="screen">
+        .disabled{
+          pointer-events: none;
+          cursor: default;
+          opacity:0.6;
+        }
+        </style>
 
 
 
@@ -228,6 +233,7 @@
 
     $('#changetabbutton').click(function(e){
       e.preventDefault();
+        $('#tab2').removeClass('disabled')
         $('#mytabs a[href="#tab_2"]').tab('show');
     })
 

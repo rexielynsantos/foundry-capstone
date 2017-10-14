@@ -45,7 +45,7 @@
            
             
             <td>{{$mtrl->intReorderLevel}}</td>
-            <td>{{$mtrl->intReorderQty}} {{$mtrl->unit->strUOMName}}</td>
+            <td>{{$mtrl->intReorderQty}}</td>
             <td>{{$mtrl->dblBasePrice}}</td>
             <td>{{$mtrl->strMaterialDesc}}</td>
           </tr>

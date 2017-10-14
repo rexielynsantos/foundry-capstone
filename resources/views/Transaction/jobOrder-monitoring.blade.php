@@ -1,13 +1,22 @@
 @extends('master')
-@section('pageTitle', 'Product Variance')
+@section('pageTitle', 'Bill of Materials')
 @section('content')
 
-<h3 style="color:black;font-family: 'Abel', sans-serif;font-size: 180%;">Product Variance </h3>
-
-	<div class="box box-default">
 
 
-		<div class="box-body">
+	  <div class="box box-widget widget-user-2">
+
+            <div class="widget-user-header bg-blue">
+              <div class="widget-user-image">
+              <img src="../images/mainlogo.png" alt="User Avatar">
+
+              </div>
+
+              <h3 class="widget-user-username">Bill of Materials</h3>
+              <h5 class="widget-user-desc"><p style="color:white">Precision Foundry of the Philippines Inc.</p>
+                 
+            </div>
+            <div class="box-footer">
 
     <div class="col-md-12">
       <button class="btn btn-app pull-right" id="btnAddMat" data-toggle="modal" data-target="#matModal">
@@ -30,7 +39,8 @@
 										<th>Variance Code</th>
 		                <th>Product Name</th>
                     <th>Type</th>
-		                <th>Specification</th>
+                    <th>Stages to Undergo</th>
+		                <th>Materials to be Used</th>
 		            </tr>
 		        </thead>
 		        <tbody>
@@ -40,6 +50,16 @@
 								<td>{{$md->strVarianceCode}}</td>
                 <td>{{$md->product->strProductName}}</td>
                 <td>{{$md->product->producttype->strProductTypeName}}</td>
+                 
+                <td>
+                  @foreach($md->product->producttype->stage as $mds)
+                   <li width="35%" style="list-style-type:circle">
+                  {{$mds->details->strStageName}} -  {{$mds->details->dbltimeRequired}} hrs
+                   
+                   </li>
+                   @endforeach
+                </td>
+                 
                 <td>
                     @foreach($md->material as $var)
                 <li width="35%" style="list-style-type:circle"> {{$var->details->strMaterialName}} - {{$var->dblMaterialQuantity}}{{$var->details->unit->strUOMName}}</li>
@@ -82,7 +102,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
                 <center>
-              <h4 class="modal-title"> Product Variance Information </h4> </center>
+              <h4 class="modal-title"> Bill of Materials </h4> </center>
 
             </div>
              <!-- <form class="" id="product_form" name="product_form" role="form" data-toggle="validator" enctype="multipart/form-data"> -->

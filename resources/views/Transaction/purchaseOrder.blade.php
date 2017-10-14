@@ -37,9 +37,6 @@
                   <th> PO No. </th>
                   <th> Supplier </th>
                   <th width="30%"> Material </th>
-
-
-
                   <th> Payment Term  </th>
                   <th> Order Date </th>
                   <th> Status </th>
@@ -54,13 +51,9 @@
                   <li width="35%"> {{$mat->details->strMaterialName}}</li>
                   @endforeach
                   </td>
-
-
                   <td> {{$purch->paymentterm->strPaymentTermName}} </td>
                   </td>
-                  <td>{{date('Y-m-d')}}</td>
-
-
+                  <td>{{$purch->dateCreated}}</td>
                   <td> <small class="label pull-right bg-blue">{{$purch->strPStatus}}</small> </td>
                 </tr>
                 @endforeach

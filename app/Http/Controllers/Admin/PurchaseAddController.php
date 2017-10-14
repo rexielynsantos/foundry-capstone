@@ -23,6 +23,66 @@ use PDF;
 
 class PurchaseAddController extends Controller
 {
+  public function getPurchaseAddMax(){
+    $id = DB::table('tblpurchase')
+          ->select('strPurchaseID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strPurchaseID', 'desc')
+          ->first();
+
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strPurchaseID;
+
+      $arrID = str_split($idd);
+
+
+
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+
+         if($boolAdd)
+         {
+
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+
+         $arrNew[$ctr] = $new;
+       }//for
+
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'P00001';
+     }
+    return response()->json($somenew);
+  }
+
     public function getAllMaterial(){
       $material = Material::with(['variant', 'variant.unit'])->get();
       // $materialvariant = MaterialVariant::get();
@@ -118,7 +178,11 @@ class PurchaseAddController extends Controller
     {
 
       // foreach ($request->mat_data as $matcart) {
-        $matt = Material::with(['unit'])->where('strMaterialName',  $request->mat_data)->get();
+        $matt = DB::table('tblmaterial')
+              ->leftjoin('tblmaterialvariant', 'tblmaterialvariant.strMaterialVariantID', 'tblmaterial.strMaterialVariantID')
+              ->leftjoin('tbluom', 'tbluom.strUOMID', 'tblmaterialvariant.strUOMID')
+              ->where('tblmaterial.strMaterialName',  $request->mat_data)
+              ->get();
       // }
       return response()->json($matt);
 
@@ -129,7 +193,7 @@ class PurchaseAddController extends Controller
       $supplier = Supplier::where('strStatus', 'Active')->get();
        $paymentterm = PaymentTerm::where('strStatus', 'Active')->get();
 
-      $id = str_random(10);
+      $id = $request->input('id');
       Purchase::insert([
         'strPurchaseID' => $id,
         'strSupplierID' => $request->input('sup_id'),
@@ -182,6 +246,30 @@ class PurchaseAddController extends Controller
               'dblMaterialCost' => $cost[$ctr],
             ]);
             $ctr = $ctr + 1;
+
+
+            $getMatID = DB::table('tblmaterial')
+                      ->where('strMaterialID', $material[0])
+                      ->first()
+                      ->strMaterialID;
+            $arrMatID[] = $getMatID;
+
+            $getQty = DB::table('tblmaterial')
+                      ->where('strMaterialID', $material[0])
+                      ->first()
+                      ->intQtyOnHand;
+            $arrQtyOnHand[] = $getQty;
+          }
+          // dd($arrMatID);
+          $ct = 0;
+          foreach ($arrMatID as $matIdd) {
+            $updateQty = $totQty[$ct] + $arrQtyOnHand[$ct];
+            DB::table('tblmaterial')
+                ->where('strMaterialID', $matIdd)
+                ->update([
+                  'intQtyOnHand' => $updateQty
+                ]);
+            $ct = $ct + 1;
           }
 
         }
@@ -192,7 +280,7 @@ class PurchaseAddController extends Controller
         Session::put('purchaseID', $id);
 
 
-    $purchase = Purchase::with('material.details','variant.unit','supplier', 'paymentterm', 'unit')->where('strPurchaseID',$id)->first();
+    $purchase = Purchase::with('material.details','supplier', 'paymentterm')->where('strPurchaseID',$id)->first();
     return View('Transaction.purchase-add')
     ->with('purchase', $purchase)
     ->with('supplier', $supplier)

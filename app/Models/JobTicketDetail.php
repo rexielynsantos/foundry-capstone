@@ -8,11 +8,12 @@ class JobTicketDetail extends Model
 {
     protected $table = 'tbljobticketdetail';
     public $incrementing = false;
-    public $timestamps = false;
-    
+    public $timestamps = true;
+     
     protected $fillable = [
     	'strJobTicketID',
     	'strProductID',
+        // 'strCastingID',
         'dblJobFinished',
         'timeStarted',
         'timeFinished'

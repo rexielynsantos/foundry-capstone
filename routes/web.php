@@ -204,6 +204,7 @@ Route::get('/maintenance/uom-alls','Admin\MaterialController@getAllUOM');
 
 Route::get('/transaction/customers','Admin\CustomerController@customerView');
 Route::post('/transaction/customers-add','Admin\CustomerController@addCustomer');
+Route::post('/transaction/customers-max','Admin\CustomerController@getCustomerMax');
 Route::get('/maintenance/customer-get','Admin\CustomerController@viewCustomer');
 Route::get('/transaction/customer-list','Admin\CustomerController@viewCustomerr');
 Route::get('/maintenance/customer-product-get','Admin\CustomerController@viewCustomerProduct');
@@ -217,6 +218,8 @@ Route::post('/transaction/costing-approve','Admin\CustomerController@approveCost
 Route::post('/transaction/costing-disapprove','Admin\CustomerController@disapproveCosting');
 Route::post('/transaction/customers-viewProfile','Admin\CustomerController@viewProfile');
 Route::post('/transaction/customer-orderHistory','Admin\CustomerController@orderHistory');
+Route::post('/transaction/customer-currentJob','Admin\CustomerController@currentJob');
+
 Route::post('/transaction/customers-contactPersons','Admin\CustomerController@viewCustomerContacts');
 Route::post('/transaction/customers-edit','Admin\CustomerController@editCustomer');
 Route::post('/transaction/customers-update','Admin\CustomerController@updateCustomer');
@@ -283,6 +286,12 @@ Route::get('/queries/queries', function () {
 });
 
 Route::get('/transaction/query-table1-info','Admin\QueryController@viewTable1Info');
+Route::get('/transaction/query-table2-info','Admin\QueryController@viewTable2Info');
+Route::get('/transaction/query-table4-info','Admin\QueryController@viewTable4Info');
+
+
+Route::get('/reports','Admin\ReportsController@viewReport');
+Route::get('/transaction/reports-table1-info','Admin\ReportsController@viewTable1Info');
 
 Route::get('/utilities/terms-condition','Admin\TermsConditionController@viewTerms');
 Route::get('/utilities/terms-condition-max','Admin\TermsConditionController@getTermsMax');
@@ -301,6 +310,7 @@ Route::post('/transaction/estimate-pdf','Admin\EstimateController@pdfEstimate');
 Route::post('/transaction/quoteSubmit','Admin\EstimateController@tofinal');
 Route::post('/transaction/estimate-final-read','Admin\EstimateController@finalRead');
 Route::post('/transaction/estimate-read','Admin\EstimateController@finalRead');
+Route::post('/transaction/estimate-terms-view','Admin\EstimateController@termsView');
 Route::post('/transaction/modalInfos','Admin\EstimateController@modalInfo');
 Route::post('/transaction/estimate-modalTable','Admin\EstimateController@modalTableInfo');
 Route::get('/transaction/estimate-variance','Admin\EstimateController@varianceCode');
@@ -342,6 +352,8 @@ Route::get('/transaction/material-all','Admin\JobOrderController@getAllMaterial'
 
 Route::get('/transaction/jobtickets','Admin\JobTicketController@viewJobTicket');
 Route::get('/transaction/substage-get','Admin\JobTicketController@getSubStage');
+Route::get('/transaction/jobtickets-max','Admin\JobTicketController@getJobTicketMax');
+Route::get('/transaction/jobtickets-casting-max','Admin\JobTicketController@getCastingMax');
 Route::get('/transaction/jobtickets-productGet','Admin\JobTicketController@getProducts');
 Route::post('/transaction/jobtickets-add','Admin\JobTicketController@addJobTicket');
 Route::post('/transaction/jobtickets-update','Admin\JobTicketController@updateJobTicket');
@@ -351,6 +363,7 @@ Route::post('/transaction/jobtickets-products','Admin\JobTicketController@getPro
 
 Route::get('/transaction/purchaseOrder','Admin\PurchaseAddController@viewPurchase');
 Route::get('/transaction/mat-all','Admin\PurchaseAddController@getAllMaterial');
+Route::get('/transaction/purchase-max','Admin\PurchaseAddController@getPurchaseAddMax');
 Route::post('/transaction/matvar-all','Admin\PurchaseAddController@getAllMaterialVariant');
 Route::get('/transaction/purchase-add','Admin\PurchaseAddController@viewaddPurchase');
 Route::post('/transaction/purchase-matvar','Admin\PurchaseAddController@matvari');
@@ -362,9 +375,10 @@ Route::post('/transaction/purchase-final-read','Admin\PurchaseAddController@purc
 Route::post('/transaction/purchase-table-read','Admin\PurchaseAddController@finalRead');
 
 Route::get('/transaction/supplier-dropdown','Admin\ReturnController@suppliers');
+Route::get('/transaction/return-max','Admin\ReturnController@getReturnMax');
 Route::post('/transaction/receive-dropdown','Admin\ReturnController@receive');
 Route::post('/transaction/receive-infos','Admin\ReturnController@receiveInfos');
-Route::post('/transaction/return-submit','Admin\StocksController@addReturn');
+Route::post('/transaction/return-submit','Admin\ReturnController@addReturn');
 
 Route::get('/transaction/inspection','Admin\ProductInspectionController@viewInspection');
 Route::post('/transaction/inspection-add','Admin\ProductInspectionController@addInspection');
@@ -390,6 +404,7 @@ Route::post('/transaction/receive-supplier','Admin\ReceiveMaterialsController@ge
 Route::get('/transaction/matvariant-all','Admin\ReceiveMaterialsController@getAllMaterialVariant');
 Route::post('/transaction/receiveCart','Admin\ReceiveMaterialsController@addCart');
 Route::post('/transaction/receiving-add','Admin\ReceiveMaterialsController@addReceiving');
+Route::get('/transaction/receiving-max','Admin\ReceiveMaterialsController@getReceivingMax');
 
 Route::get('/transaction/stocks','Admin\StocksController@viewStocks');
 Route::post('/transaction/materials-all','Admin\StocksController@getStockDetails');

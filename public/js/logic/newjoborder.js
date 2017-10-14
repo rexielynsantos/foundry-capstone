@@ -50,6 +50,7 @@ $(document).ready(function(){
           data[i].custpurchase.dtOrderDate,
           data[i].custpurchase.dtDeliveryDate,
           classification,
+          data[i].strJobOrdStatus,
           btn
         ]).draw(true);
       }

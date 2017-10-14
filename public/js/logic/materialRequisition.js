@@ -11,8 +11,8 @@ $.ajax({
     for (var i = 0; i < result.length; i++) {
       tbl.row.add([
         result[i].strMaterialRequisitionID,
-        result[i].strJobOrderID,
-        result[i].strEmployeeID,
+        result[i].strJobOrdID,
+        result[i].strEmployeeFirst+' '+result[i].strEmployeeMiddle+' '+result[i].strEmployeeLast,
         result[i].dtNeeded,
       ]).draw(true);
     }
@@ -33,7 +33,7 @@ $.ajax({
         // $("#joborderNo").empty();
         for(var i = 0; i < jobOrder.length; i++)
         {
-          $(`<option value=`+jobOrder[i].strJobOrderID+`>`+jobOrder[i].strJobOrderID+`</option>`).appendTo("#joborderNo");
+          $(`<option value=`+jobOrder[i].strJobOrdID+`>`+jobOrder[i].strJobOrdID+`</option>`).appendTo("#joborderNo");
         }
       }
 
@@ -52,14 +52,13 @@ $('#joborderNo').change(function(){
     },
     success: function(result)
     {
-      // console.log(result)
+      console.log(result)
       $('#productName').val(result[0].strProductName)
       $('#prodVariance').val(result[0].strVarianceCode)
       for (var i = 0; i < result.length; i++) {
         table.row.add([
           result[i].strMaterialID,
           result[i].strMaterialName,
-          '<select class="" id="'+result[i].strMaterialID+'"></select>',
           result[i].intOrderQty*result[i].dblMaterialQuantity,
           'pcs'
         ]).draw(true)

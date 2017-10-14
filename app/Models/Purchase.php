@@ -14,6 +14,7 @@ class Purchase extends Model
     	'strSupplierID',
       'strSupplierContactPerson',
     	'strPaymentTermID',
+      'dateCreated',
       'strPStatus',
       'isFinalize',
       'isDelivered'

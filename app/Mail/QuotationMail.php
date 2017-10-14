@@ -11,14 +11,14 @@ class QuotationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $customer;
+    // public $customer;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Customer $customer)
+    public function __construct( $customer)
     {
         $this->customer = $customer;
     }

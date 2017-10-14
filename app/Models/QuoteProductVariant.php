@@ -25,6 +25,7 @@ class QuoteProductVariant extends Model
     public function details4(){
         return $this->hasOne('App\Models\Product','strProductID','strProductID');
     }
+
     // public function quotation(){
     //   return $this->hasOne('App\Models\Quotation', 'strQuoteID', 'strQuoteID');
     // }

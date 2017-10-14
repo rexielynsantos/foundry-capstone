@@ -20,7 +20,7 @@ class ReceiveMaterialsController extends Controller
     public function viewReceivePurchase()
     {
 
-     $rp =    $receivepurchase = ReceivePurchase::with(['order.details'])
+     $rp =    $receivepurchase = ReceivePurchase::with(['order.details', 'purchase', 'purchase.supplier'])
      ->get();
      return view('Transaction.receivePurchase')
      ->with('rp', $rp);
@@ -88,7 +88,7 @@ class ReceiveMaterialsController extends Controller
     {
       // dd($request->all());
 
-      $id = str_random(10);
+      $id = $request->input('id');
       ReceivePurchase::insert([
         'strReceivePurchaseID' => $id,
         'strPurchaseID' => $request->input('purchase_id'),
@@ -129,4 +129,69 @@ class ReceiveMaterialsController extends Controller
 
     }
 
+
+
+
+          public function getDepartmentMax(){}
+
+    public function getReceivingMax(){
+
+      $id = DB::table('tblreceivepurchase')
+            ->select('strReceivePurchaseID')
+            ->orderBy('created_at', 'desc')
+            ->orderBy('strReceivePurchaseID', 'desc')
+            ->first();
+      
+      $new = "";
+       $somenew = "";
+       $arrNew = [];
+       $boolAdd = TRUE;
+
+       if($id != ''){
+          $idd = $id->strReceivePurchaseID;
+
+        $arrID = str_split($idd);
+      
+         
+      
+         for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+         {
+           $new = $arrID[$ctr];
+      
+           if($boolAdd)
+           {
+      
+             if(is_numeric($new) || $new == '0')
+             {
+               if($new == '9')
+               {
+                 $new = '0';
+                 $arrNew[$ctr] = $new;
+               }
+               else
+               {
+                 $new = $new + 1;
+                 $arrNew[$ctr] = $new;
+                 $boolAdd = FALSE;
+               }//else
+             }//if(is_numeric($new))
+             else
+             {
+               $arrNew[$ctr] = $new;
+             }//else
+           }//if ($boolAdd)
+      
+           $arrNew[$ctr] = $new;
+         }//for
+      
+         for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+         {
+           $somenew = $somenew . $arrNew[$ctr2] ;
+        }
+       }
+       else{
+        $somenew = 'REC00001';
+       }
+      return response()->json($somenew);
+    }
 }

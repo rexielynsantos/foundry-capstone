@@ -98,7 +98,7 @@ $(document).ready(function(){
               stage_desc: $('#stageDesc').val(),
               created_at: today,
               stage_id: tempID,
-              process_time: $('#timeRequired').val()
+              process_time: $('#timeRequired').val(),
           },
           success: function(result) {
             console.log(result);

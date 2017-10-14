@@ -14,7 +14,9 @@ class JobOrder extends Model
     	'strCustPurchaseID',
     	'boolIsNewProduct',
     	'boolIsRepeatOrder',
-    	'strJobRemarks',
+        'strJobRemarks',
+    	// 'email',   
+        'strStatus'
     ];
     public function custpurchase(){
         return $this->belongsTo('App\Models\CustPurchase', 'strCustPurchaseID', 'strCustPurchaseID');

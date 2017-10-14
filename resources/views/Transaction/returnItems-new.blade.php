@@ -73,13 +73,6 @@
                         <th width="10%">Return Quantity</th>
                       </thead>
                       <tbody>
-
-                        <tr>
-                            <td> 10pcs </td>
-                            <td> Oil (500ml) </td>
-                            <td>  <input type="number" class="form-control"> </td>
-                        </tr>
-
                       </tbody>
                     </table>
                   </div>

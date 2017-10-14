@@ -444,7 +444,7 @@ $('#btnReactivateMaterial').click(function(){
             suppl,
             // varr,
             result.intReorderLevel,
-            result.intReorderQty +" "+ result.unit.strUOMName,
+            result.intReorderQty,
             result.dblBasePrice,
             result.strMaterialDesc,
             ]

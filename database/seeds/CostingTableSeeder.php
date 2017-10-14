@@ -15,6 +15,7 @@ class CostingTableSeeder extends Seeder
           'strCostingID' => 'PC00001',
           'strCustomerID' => 'CUST00001',
           'strProductID' => 'PROD00001',
+          'strMatSpecID' => 'MS00001',
     	  'dblSpecificGravity' => 7.83,
 
     	  'dblSurfaceArea' => 14.364,

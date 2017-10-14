@@ -14,6 +14,7 @@
               </div>
               <h3 class="widget-user-username" style="color:black">Precision Foundry of the Philippines Inc.</h3>
               <h5 class="widget-user-desc"><a href="#" style="color:black"> <label id="maxQuotation"></label></a></h5>
+              <h5 class="widget-user-desc"><a href="#" style="color:black"> All fields with <span style="color:red">*</span> are required</a></h5>
               <a href="/transaction/estimate" style="margin-left:70px"  class="btn btn-social btn-instagram"><i class="fa fa-list-alt"></i> View Quotes </a>
             </div>
       <div class="row">
@@ -23,14 +24,14 @@
           <div class="nav-tabs-custom">
             <ul id="mytabs" class="nav nav-tabs">
               <li class="active"><a href="#tab_1" data-toggle="tab">Step 1: Quotation Details</a></li>
-              <li><a href="#tab_2" data-toggle="tab">Step 2: Order Details</a></li>
+              <li ><a href="#tab_2" id="tab2" data-toggle="tab" class="disabled">Step 2: Order Details</a></li>
             </ul>
 
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
                  <div class="row" style="margin-left: 5px;">
                 <div class="col-md-6">
-                <label> Customer Name </label>
+                <label> Customer Name<span style="color:red">*</span> </label>
                  <select class="form-control select2" id="custSelect" style="width: 100%;" required>
                   <option value="first" selected disabled>Select a Customer</option>
                     @foreach ($cust as $cs)
@@ -51,7 +52,7 @@
                 <div class="col-md-6">
 
                   <div class="form-group">
-                        <textarea id="quoteNote" class="form-control validate" rows="5" placeholder="Please indicate note here">
+                        <textarea id="quoteNote" class="form-control validate" rows="5" style="resize:none;" placeholder="Please indicate note here">
                         </textarea>
                   </div>
                 </div>
@@ -62,6 +63,15 @@
                       <label>
                         <input type="checkbox" id="termsCondition">
                         Use Terms and Condition
+                      </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-left: 5px;">
+                <div class="col-md-6">
+                  <div class="checkbox">
+                      <label>
+                        <textarea id="termsConditionView" rows="8" cols="80" readonly style="border:none; resize:none;" hidden></textarea>
                       </label>
                   </div>
                 </div>
@@ -181,14 +191,20 @@
               </div>
               <div class="modal-footer">
 
-                <button type="button" href="/transaction/estimate-add" class="btn btn-success">Add Another Quote</button>
+                <button type="button" id="reloader" class="btn btn-success">Add Another Quote</button>
                 <button type="button" class="btn btn-primary">View Quote</button>
         </div>
             </div>
           </div>
         </div>
 
-
+<style media="screen">
+.disabled{
+  pointer-events: none;
+  cursor: default;
+  opacity:0.6;
+}
+</style>
 
 @push('scripts')
   <script type="text/javascript" src="{{URL::asset('js/logic/estimate-add.js')}}"></script>

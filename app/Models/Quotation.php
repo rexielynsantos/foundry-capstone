@@ -16,6 +16,7 @@ class Quotation extends Model
     	'strCostingID',
     	'strQuoteDescription',
     ];
+
     public function custpurchase(){ 
         return $this->hasOne('App\Models\CustPurchase', 'strCustPurchaseID', 'strCustPurchaseID');
     }
@@ -24,6 +25,12 @@ class Quotation extends Model
     }
     public function customer(){
         return $this->belongsTo('App\Models\Customer', 'strCustomerID', 'strCustomerID');
+    }
+    public function termscondition() {
+        return $this->belongsTo('App\Models\TermsCondition', 'strTermID', 'strTermID');
+    }
+    public function costing() {
+        return $this->belongsTo('App\Models\Costing', 'strCostingID', 'strCostingID');
     }
   
 }

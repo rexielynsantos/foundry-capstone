@@ -98,7 +98,8 @@
                 <div class="col-md-8">
                 	<table id="custTransTable" border="0" class="table table-bordered" style="color:black;">
 		                <thead>
-		                  <th width="10%">S.O No.</th>
+		                  <th width="20%">S.O No.</th>
+                      <th width="20%">Reference PO.</th>
 		                  <th width="20%">Customer Name</th>
 		                  <th width="20%">Order Date</th>
 		                </thead>
@@ -106,6 +107,7 @@
 		                	 @foreach($purch as $pu)
                         <tr>
                           <td>{{$pu->strCustPurchaseID}}</td>
+                          <td>{{$pu->strPOID}}</td>
                           <td>{{$pu->strCompanyName}}</td>
                           <td class="col-md-6">{{$pu->dtOrderDate}}</td>
                          

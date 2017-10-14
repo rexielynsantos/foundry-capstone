@@ -16,6 +16,7 @@
 
               <h3 class="widget-user-username" style="color:black">Customer Purchase</h3>
               <h5 class="widget-user-desc"><a href="#" style="color:black"> <label id="maxCustPurchase"></label></a></h5>
+              <h5 class="widget-user-desc"><a href="#" style="color:black"> All fields with <span style="color:red">*</span> are required</a></h5>
               <a href="/transaction/customerPurchases" style="margin-left:70px"  class="btn btn-social btn-instagram"><i class="fa fa-shopping-cart"></i> View Purchases </a>
 
             </div>
@@ -26,18 +27,18 @@
           <div class="nav-tabs-custom">
             <ul id="mytabs" class="nav nav-tabs">
               <li class="active"><a href="#tab_1" data-toggle="tab">&nbsp;&nbsp;Customer Details</a></li>
-              <li><a href="#tab_2" data-toggle="tab">&nbsp;&nbsp;Order Details</a></li>
+              <li><a href="#tab_2" class="disabled" id="tab2" data-toggle="tab">&nbsp;&nbsp;Order Details</a></li>
 
             </ul>
- 
+
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group has-feedback">
                         <div class="form-group">
-                          <label for="modName" class="control-label">Customer P.O. No.<span style="color:red">*</span></label>
-                          <input type="text" class="form-control validate" disabled id ="custPONo" required>
+                          <label for="purchaseID" class="control-label">Customer P.O. No.<span style="color:red">*</span></label>
+                          <input type="text" class="form-control validate" id ="purchaseID" required>
                           <div class="help-block with-errors"></div>
                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         </div>
@@ -45,7 +46,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>Order Date:</label>
+                        <label>Order Date<span style="color:red">*</span></label>
 
                         <div class="input-group date">
                           <div class="input-group-addon">
@@ -58,7 +59,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>Target Delivery Date:</label>
+                        <label>Target Delivery Date<span style="color:red">*</span></label>
 
                         <div class="input-group date">
                           <div class="input-group-addon">
@@ -108,7 +109,7 @@
                             <br>
                 <div class="row">
                   <div class="col-md-12">
-                   <label> Select Products to Order </label>
+                   <label> Select Products to Order<span style="color:red">*</span> </label>
                   </div>
                 </div>
                <div class="row">
@@ -182,26 +183,16 @@
   </div>
 </div>
 
+<style media="screen">
+.disabled{
+  pointer-events: none;
+  cursor: default;
+  opacity:0.6;
+}
+</style>
+
 @push('scripts')
   <script type="text/javascript" src="{{URL::asset('js/logic/customer-purchase.js')}}"></script>
-<script>
-  $(function(){
-
-    $('#changetabbutton').click(function(e){
-      e.preventDefault();
-        $('#mytabs a[href="#tab_2"]').tab('show');
-    })
-    $('#changetabbutton1').click(function(e){
-      e.preventDefault();
-        $('#mytabs a[href="#tab_3"]').tab('show');
-    })
-    $('#changetabbutton2').click(function(e){
-      e.preventDefault();
-        $('#mytabs a[href="#tab_4"]').tab('show');
-    })
-
-})
- </script>
 
 @endpush
 @stop

@@ -13,8 +13,8 @@ class ModuleTableSeeder extends Seeder
     {
       DB::table('tblmodule')->insert([
           'strModuleID' => 'MOD00001',
-          'strModuleName' => 'Job Order Processing',
-          'strModuleDesc' => 'Job Order',
+          'strModuleName' => 'Quotation',
+          'strModuleDesc' => 'Quotation',
           'strDepartmentID' => 'DEPT00001',
           'strStatus' => 'Active',
           'created_at' => '2000-01-01 01:00:00',

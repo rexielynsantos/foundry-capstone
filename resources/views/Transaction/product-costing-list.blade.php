@@ -50,11 +50,11 @@
                                 <td> {{$vc->strCostingID}} </td>
                                 <td> {{$vc->strCompanyName}} </td>
                                 <td> {{$vc->strProductName}} </td>
-                                <td></td>
+                                <td> {{date('Y-m-d')}}</td>
                                 <td>
                                   <button type="button" id="{{$vc->strCostingID}}" onclick="approveModal(this.id)" class="btn btn-success"><i class="fa fa-check"></i></button>
                                   <button type="button" id="{{$vc->strCostingID}}" onclick="disapproveModal(this.id)" class="btn btn-danger"><i class="fa fa-close"></i></button>
-																	<button type="button" id="{{$vc->strCostingID}}" class="btn btn-primary"><i class="fa fa-eye"></i></button>
+																	<button type="button" id="{{$vc->strCostingID}}" onclick="viewCosting(this.id)" class="btn btn-primary"><i class="fa fa-eye"></i></button>
                                 </td>
                               </tr>
 															@endforeach
@@ -80,7 +80,7 @@
                                 <td> {{$avc->strCostingID}} </td>
                                 <td> {{$avc->strCompanyName}} </td>
                                 <td> {{$avc->strProductName}} </td>
-                                <td></td>
+                                <td> {{date('Y-m-d')}}</td>
                                 <td>
                                   <button type="button" id="pdfCosting" class="btn btn-primary"><i class="fa fa-print"></i></button>
 																	<button type="button" id="{{$avc->strCostingID}}" onclick="viewCosting(this.id)" class="btn btn-primary"><i class="fa fa-eye"></i></button>
@@ -157,7 +157,7 @@ $.ajax({
   url: '/transaction/product-costing-list-pdf',
   data: {
     id: tbldata[0]
-  }, 
+  },
   success: function(data){
     // alert(data.custpurchase.customer.strCompanyName);
 console.log(data);

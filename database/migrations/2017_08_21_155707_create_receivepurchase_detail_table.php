@@ -21,9 +21,7 @@ class CreateReceivepurchaseDetailTable extends Migration
         $table->boolean('isActive')->default(1);
         $table->timestamps();
         $table->foreign('strReceivePurchaseID')
-          ->references('strReceivePurchaseID')->on('tblreceivepurchase')
-          ->onUpdate('cascade')
-          ->onDelete('restrict');
+          ->references('strReceivePurchaseID')->on('tblreceivepurchase');
            $table->foreign('strMaterialID')
           ->references('strMaterialID')->on('tblmaterial')
           ->onUpdate('cascade')

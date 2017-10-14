@@ -32,7 +32,7 @@ class EstimateController extends Controller
         ->leftjoin('tblcustcontact', 'tblcustcontact.strCustomerID', 'tblcustomer.strCustomerID')
         ->where('tblquotation.strQuoteStatus', '=', "Approved")
         ->get();
- 
+
       return view('Transaction.estimate')
       ->with('quoteApproved', $quoteApproved)
     ->with('quote', $quote);
@@ -48,6 +48,18 @@ class EstimateController extends Controller
         // dd($prodd);
 
 			return Response::json($prodd);
+    }
+
+    public function termsView(Request $request)
+    {
+      $module = DB::table('tblmodule')
+              ->where('strModuleName', $request->moduleName)
+              ->first()
+              ->strModuleID;
+      // dd($module);
+      $terms = DB::table('tbltermscondition')->where('strModuleID', $module)->get();
+
+      return Response::json($terms);
     }
 
     public function varianceInfo(Request $request)
@@ -196,7 +208,7 @@ class EstimateController extends Controller
       // $po = QuoteRequest::with(['custpurchase.customer.contact', 'custpurchase.quotation.quoteprodvariant.details4'])
       //   ->where('tbljoborder.strJobOrdID', $request->input('id'))
       //   ->first();
-      
+
       $po = DB::table('tblquotation')
             ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblquotation.strCustomerID')
             ->leftjoin('tblcustcontact', 'tblcustcontact.strCustomerID', 'tblcustomer.strCustomerID')

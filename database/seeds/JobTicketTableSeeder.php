@@ -17,6 +17,7 @@ class JobTicketTableSeeder extends Seeder
           'strStageID' => 'ST00001', 
           'strSubStageID' => 'SUBST00002', 
           'strJobOrdID' => 'JO-00001',
+          'created_at' => '2000-01-01 01:00:00',
       ]);
     }
 }

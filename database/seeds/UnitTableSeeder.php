@@ -13,8 +13,8 @@ class UnitTableSeeder extends Seeder
     {
         DB::table('tbluom')->insert([
         'strUOMID' => 'U00001',
-        'strUOMName' => 'm',
-        'strUOMDesc' => 'meters',
+        'strUOMName' => 'ml',
+        'strUOMDesc' => 'mililiters',
         'strStatus' => 'Active',
         'created_at' => '2000-01-01 01:00:00',
       ]);

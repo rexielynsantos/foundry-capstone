@@ -31,9 +31,9 @@
             <table id="custTransTable" border="0" class="table table-bordered" style="color:black;">
               <thead>
                 <th width="10%">Customer No.</th>
-                <th width="20%">Company Name</th>
+                <th width="15%">Company Name</th>
                 <th width="20%">Address</th>
-                <th width="20%">Contact(s)</th>
+                <th width="25%">Contact(s)</th>
                 <th width="5%">Action</th>
 
               </thead>

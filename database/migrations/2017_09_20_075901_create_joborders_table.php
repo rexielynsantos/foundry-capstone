@@ -19,17 +19,18 @@ class CreateJobordersTable extends Migration
         $table->boolean('boolIsNewProduct');
         $table->boolean('boolIsRepeatOrder');
         $table->text('strJobRemarks');
-        $table->string('email');
+        // $table->string('email');
+        $table->string('strJobOrdStatus');
         $table->timestamps();
 
         $table->foreign('strCustPurchaseID')
               ->references('strCustPurchaseID')->on('tblcustpurchase')
               ->onUpdate('cascade')
               ->onDelete('restrict');
-            $table->foreign('email')
-                  ->references('email')->on('users')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+            // $table->foreign('email')
+            //       ->references('email')->on('users')
+            //       ->onUpdate('cascade')
+            //       ->onDelete('restrict');
       });
     }
 

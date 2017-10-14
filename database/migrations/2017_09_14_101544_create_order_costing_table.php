@@ -17,6 +17,7 @@ ble     *
         $table->string('strCustomerID');
         $table->string('strProductID');
         $table->double('dblSpecificGravity');
+        $table->string('strMatSpecID');
 
         $table->double('dblSurfaceArea');
         $table->double('dblMainVolume');
@@ -47,6 +48,10 @@ ble     *
         $table->timestamps();
         $table->foreign('strCustomerID')
               ->references('strCustomerID')->on('tblcustomer')
+              ->onUpdate('cascade')
+              ->onDelete('restrict');
+        $table->foreign('strMatSpecID')
+              ->references('strMatSpecID')->on('tblmatspec')
               ->onUpdate('cascade')
               ->onDelete('restrict');
         $table->foreign('strProductID')

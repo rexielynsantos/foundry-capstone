@@ -13,11 +13,11 @@ class Unit extends Model
     protected $fillable = [
         // 'strUOMTypeID',
     	'strUOMName',
-    	'strUOMDesc',	
+    	'strUOMDesc',
     	'strStatus'
     ];
-    
-  
+
+
     public function variant() {
         return $this->hasOne('App\Models\MaterialVariant', 'strMaterialVariantID', 'strMaterialVariantID');
     }
@@ -27,5 +27,5 @@ class Unit extends Model
       public function product() {
         return $this->hasOne('App\Models\Product', 'strProductID', 'strProductID');
     }
-  
+
 }

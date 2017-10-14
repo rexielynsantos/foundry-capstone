@@ -15,6 +15,7 @@ $(document).ready(function(){
        format: 'yyyy-mm-dd',
        autoclose: true
      });
+  $("#orderDate").datepicker('setDate', new Date());
 
   $('#targetDate').datepicker({
     format: 'yyyy-mm-dd',
@@ -23,6 +24,32 @@ $(document).ready(function(){
 
   $('#addCart').prop('disabled', true);
 
+    $('#changetabbutton').click(function(e){
+      e.preventDefault();
+      var purchaseID = $('#purchaseID').val()
+      var oDate = $('#orderDate').val()
+      var tDate = $('#targetDate').val()
+      var qRef = $('#quoteRefer').val()
+
+      if (purchaseID == '' && oDate == '' && tDate == '' && qRef == 0) {
+        noty({
+          type: 'error',
+          layout: 'bottomRight',
+          timeout: 3000,
+          text: '<h4><center>Fill up required fields</center></h4>',
+        });
+      }
+      else{
+        // alert(purchaseID)
+        // alert(oDate)
+        // alert(tDate)
+        // alert(qRef)
+        $('#mytabs a[href="#tab_2"]').tab('show');
+        $('#tab2').removeClass('disabled')
+      }
+    });
+
+
 //AJAX GET AND DISPLAY MAX ID
   $.ajax({
     type: 'GET',
@@ -30,7 +57,7 @@ $(document).ready(function(){
     success: function(data){
         console.log(data);
       $('#maxCustPurchase').text(data);
-      $('#custPONo').val(data);
+      $('#purchaseID').val(data);
     },
     error: function(data){
         alert('ERROR IN MAX ID');
@@ -107,13 +134,13 @@ $("#quoteRefer").change(function(){
           {
             console.log(data)
             table.row.add([
-              data[i].strProductID,
-              data[i].strProductName,
-              data[i].strProductTypeName,
-              data[i].strVarianceCode,
-              '<input type="text" id="qty'+data[i].strProductID+'">',
-              '<input type="text" id="cost'+data[i].strProductID+'">',
-              '<input type="text" id="remarks'+data[i].strProductID+'">',
+              data.strProductID,
+              data.strProductName,
+              data.strProductTypeName,
+              data.strVarianceCode,
+              '<input type="text" id="qty'+data.strProductID+'">',
+              '<input type="text" id="cost'+data.strProductID+'">',
+              '<input type="text" id="remarks'+data.strProductID+'">',
               '<button type="button" id="'+data.strProductName+'" onclick="deleteRow(this.id)" class="deleteRow">Delete</button>'
             ]).draw(true);
             $('#addCart').prop('disabled', false);
@@ -183,6 +210,7 @@ $("#quoteRefer").change(function(){
         id: $('#maxCustPurchase').text(),
         created_at: today,
         // cust_po : $('#custPONo').val(),
+        po_id : $('#purchaseID').val(),
         orderDate : $('#orderDate').val(),
         targetDate : $('#targetDate').val(),
         customer_id : $('#quoteCustID').val(),

@@ -44,32 +44,99 @@ class ReturnController extends Controller
 
   public function addReturn(Request $request)
   {
-    $id = $id = str_random(10);
-    DB::table('tblreturnheader')->insert([
-      'strReturnID' => $id,
-      'strSupplierID' => $request->supplier_id,
-      'strReceivePurchaseID' => $request->receive_id,
-      'dateReturned' => $request->return_date
-    ]);
+    $id = $request->input('id');
+    DB::table('tblreturnheader')
+        ->insert([
+          'strReturnID' => $id,
+          'strSupplierID' => $request->input('supplier_id'),
+          'strReceivePurchaseID' => $request->input('receive_id'),
+          'dateReturned' => $request->input('return_date'),
+          'created_at' => $request->input('created_at')
+        ]);
 
+    DB::table('tblreturnmaterial')
+        ->insert([
+          'strReturnID' => $id,
+          'strReceivePurchaseID' => $request->input('receive_id'),
+          'created_at' => $request->input('created_at')
+        ]);
 
-    DB::table('tblreturnmaterial')->insert([
-      'strReturnID' => $id,
-      'strReceivePurchaseID' => $request->receive_id,
-      'created_at' => $request->created_at
-    ]);
-    
-    foreach($request->input('mat_id') as $material){
-      DB::table('tblreturndetail')->insert([
-        'strReturnID' => $id,
-        'strMaterialID' => $material,
-        'strReceivePurchaseID' => $request->receive_id,
-        'dateReturned' => $request->return_date,
-        'isActive' => 1
-      ]);
+    // $receive = $request->input('receive_id');
+    $returned = $request->input('qty_returned');
+    $ct = 0;
+    foreach ($request->mat_id as $mat) {
+      DB::table('tblreturndetail')
+          ->insert([
+            'strReturnID' => $id,
+            'strMaterialID' => $mat,
+            // 'strReceivePurchaseID' => $receive[$ct],
+            'quantityReturned' => $returned[$ct],
+            'isActive' => 1
+          ]);
+      $ct = $ct + 1;
     }
 
-
   }
+
+   public function getReturnMax(){
+    $id = DB::table('tblreturnheader')
+          ->select('strReturnID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strReturnID', 'desc')
+          ->first();
+    
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strReturnID;
+
+      $arrID = str_split($idd);
+    
+       
+    
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+    
+         if($boolAdd)
+         {
+    
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+    
+         $arrNew[$ctr] = $new;
+       }//for
+    
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'RETURN00001';
+     }
+    return response()->json($somenew);
+  }
+
 
 }

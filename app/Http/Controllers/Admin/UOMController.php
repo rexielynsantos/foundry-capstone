@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UOMRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Unit;
-use App\Models\UnitType;
+
 use DB;
 use Response;
 class UOMController extends Controller
@@ -73,14 +73,11 @@ class UOMController extends Controller
 
   public function viewUOM()
   {
-    $uom = Unit::with('unittype')->where('strStatus', 'Active')->get();
-    $uomType = DB::table('tbluomtype')
-                ->where('tbluomtype.strStatus', '=' , 'Active')
-                ->get();
+    $uom = Unit::where('strStatus', 'Active')->get();
+  
       // return Response::json($product);
       return view('Utilities.UnitOfMeasurement')
-      ->with('productUOM',$uom)
-      ->with('uomType',$uomType);
+      ->with('productUOM',$uom);
   }
 
   public function addUOM(UOMRequest $request)
@@ -114,9 +111,7 @@ class UOMController extends Controller
     ]);
 
     $unit = Unit::where('strUOMID', $request->uom_id)->get();
-    $uomType = DB::table('tbluomtype')
-                ->where('tbluomtype.strStatus', '=' , 'Active')
-                ->get();
+    
     return Response::json($unit);
   }
 
@@ -135,13 +130,10 @@ class UOMController extends Controller
   {
     $unit = Unit::where('strStatus', 'Inactive')->get();
 
-    $uomType = DB::table('tbluomtype')
-                ->where('tbluomtype.strStatus', '=' , 'Inactive')
-                ->get();
+   
       // return Response::json($product);
       return view('Reactivation.uomReactivation')
-      ->with('productUOM',$unit)
-      ->with('uomType',$uomType);
+      ->with('productUOM',$unit);
   }
 
   public function activateUOM(Request $request)
@@ -173,7 +165,7 @@ class UOMController extends Controller
         'strStatus' => 'Active',
       ]);
 
-      $uomtype = Unit::with('unittype')->where('strUOMName', $request->uom_name)->first();
+      $uomtype = Unit::where('strUOMName', $request->uom_name)->first();
       return $uomtype;
   }
 

@@ -15,6 +15,7 @@ class ReceivePurchaseTableSeeder extends Seeder
           'strReceivePurchaseID' => 'REC00001',
           'strPurchaseID' => 'P00001',
           'dtDeliveryReceived' => '2017-08-09',
+          'created_at' => '2000-01-01 01:00:00',
       ]);
 
     }

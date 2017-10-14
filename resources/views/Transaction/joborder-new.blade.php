@@ -16,6 +16,7 @@
 
               <h3 class="widget-user-username" style="color:black">New Job Order</h3>
               <h5 class="widget-user-desc"><a href="#" style="color:black"> <label id="max"></label></a></h5>
+              <h5 class="widget-user-desc"><a href="#" style="color:black"> All fields with <span style="color:red">*</span> are required</a></h5>
                <a href="/transaction/joborders" style="margin-left:70px" class="btn btn-social btn-tumblr"><i class="fa fa-cubes"></i> View Job Orders </a>
                <br>
             </div>

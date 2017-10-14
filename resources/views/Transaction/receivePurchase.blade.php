@@ -21,13 +21,8 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-3">
-        <a id="btnAddReceive" class="btn btn-block btn-social btn-linkedin"><i class="fa fa-truck"></i> New Receive Delivery </a>
-        <a href="/transaction/purchaseOrder" class="btn btn-block btn-social btn-instagram"><i class="fa fa-edit"></i> Go to Purchase Orders </a>
-        <a href="/transaction/stocks" class="btn btn-block btn-social btn-bitbucket"><i class="fa fa-industry"></i> Go to Stocks </a>
-      </div>
-        <!-- /.col -->
-        <div class="col-md-9">
+       
+        <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Received Orders</h3>
@@ -51,35 +46,7 @@
                     <th width="10%"> Date Received</th>
                   </thead>
                   <tbody>
-                  @foreach($rp as $r)
-                   <tr>
-                    <td>{{$r->strPurchaseID}} </td>
-                    <td>{{$r->purchase->supplier->strSupplierName}}</a></td>
-                    
-                    <td>
-                  @foreach($r->orders as $mat)
-                  <li width="35%"> {{$mat->details->strMaterialName}}</li>
-                   <ul>
-                     @foreach($mat->materialvariant as $vars)
-                        <li width="35%" style="list-style-type:circle"> {{$vars->details->intVariantQty}}{{$vars->details->unit->strUOMName}} - ({{$vars->intQtyReceived}}pcs received)</li>
-                      @endforeach
-                    </ul>
-                  @endforeach
-                  </td>
-
-
-                  <td>{{$r->dtDeliveryReceived}} </td>
-                 <!--  <td>100   </td> -->
-
-                   <!--   <td>
-                      @foreach ($r->orders as $var)
-                      <ul width="35%" style="list-style-type:circle"> {{$var->intQtyLeft}}</ul>
-                      @endforeach
-                     </td> -->
-
-                    
-                  </tr>
-                  @endforeach
+              
                   </tbody>
                 </table>
           

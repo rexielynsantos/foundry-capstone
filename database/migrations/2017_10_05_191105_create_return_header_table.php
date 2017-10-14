@@ -18,7 +18,7 @@ class CreateReturnHeaderTable extends Migration
         $table->string('strSupplierID');
         $table->string('strReceivePurchaseID');
         $table->date('dateReturned');
-
+        $table->timestamps();
         $table->foreign('strSupplierID')
               ->references('strSupplierID')->on('tblsupplier')
               ->onUpdate('cascade');

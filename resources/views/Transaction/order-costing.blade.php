@@ -16,9 +16,10 @@
                 <div class="widget-user-image">
                  <img src="../images/mainlogo.png" alt="User Avatar">
               </div>
- 
+
               <h3 class="widget-user-username" style="color:black">Precision Foundry of the Philippines Inc.</h3>
               <h5 class="widget-user-desc"><a href="#" style="color:black"> <label id="maxCosting"></label></a></h5>
+              <h5 class="widget-user-desc"><a href="#" style="color:black"> All fields with <span style="color:red">*</span> are required</a></h5>
               <a href="/transaction/product-costing-list" style="margin-left:70px" class="btn btn-social btn-instagram"><i class="fa fa-users"></i> View Product Costings </a>
 
             </div>
@@ -29,9 +30,9 @@
           <div class="nav-tabs-custom">
             <ul id="mytabs" class="nav nav-tabs">
               <li class="active"><a style="color:black" href="#tab_1" data-toggle="tab"><i class="fa fa-circle"></i>&nbsp;&nbsp;Material</a></li>
-              <li><a href="#tab_2" data-toggle="tab"><i class="fa fa-circle"></i>&nbsp;&nbsp;Part Specification</a></li>
-              <li><a href="#tab_3" data-toggle="tab"><i class="fa fa-circle"></i>&nbsp;&nbsp;Production Data</a></li>
-              <li><a href="#tab_4" data-toggle="tab"><i class="fa fa-circle"></i>&nbsp;&nbsp;Cost Computation</a></li>
+              <li><a href="#tab_2" id="tab2" class="disabled" data-toggle="tab"><i class="fa fa-circle"></i>&nbsp;&nbsp;Part Specification</a></li>
+              <li><a href="#tab_3" id="tab3" class="disabled" data-toggle="tab"><i class="fa fa-circle"></i>&nbsp;&nbsp;Production Data</a></li>
+              <li><a href="#tab_4" id="tab4" class="disabled" data-toggle="tab"><i class="fa fa-circle"></i>&nbsp;&nbsp;Cost Computation</a></li>
             </ul>
 
             <div class="tab-content">
@@ -40,7 +41,7 @@
                   <div class="col-md-6">
                     <div class="form-group has-feedback">
                         <div class="form-group">
-                          <label for="customerSelect" class="control-label">Customer Name<span style="color:red">*</span></label>
+                          <label for="selectCustomer" class="control-label">Customer Name<span style="color:red">*</span></label>
                           <select class="form-control select2" id = "selectCustomer" style="width: 100%;" required>
                             <option value="first" selected disabled>Select a Customer</option>
                           </select>
@@ -386,30 +387,18 @@
       <!-- /.modal-dialog -->
     </div>
 
-
+    <style media="screen">
+    .disabled{
+      pointer-events: none;
+      cursor: default;
+      opacity:0.6;
+    }
+    </style>
 
 
 
 @push('scripts')
   <script type="text/javascript" src="{{URL::asset('js/logic/orderCosting.js')}}"></script>
-<script>
-  $(function(){
-
-    $('#changetabbutton').click(function(e){
-      e.preventDefault();
-        $('#mytabs a[href="#tab_2"]').tab('show');
-    })
-    $('#changetabbutton1').click(function(e){
-      e.preventDefault();
-        $('#mytabs a[href="#tab_3"]').tab('show');
-    })
-    $('#changetabbutton2').click(function(e){
-      e.preventDefault();
-        $('#mytabs a[href="#tab_4"]').tab('show');
-    })
-
-})
- </script>
 
 @endpush
 @stop
