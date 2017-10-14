@@ -24,12 +24,17 @@ $(document).ready(function(){
               var element = data[index].quotation.quoteprodvariant[index].details4.strProductName;
               x += '<li style="list-style-type:circle">'+element+'</li>'
             }
+            var y='';
+            for (var index = 0; index < data[index].quotation.quoteprodvariant.length; index++) {
+              var element = data[index].quotation.quoteprodvariant[index].dblRequestCost;
+              y += '<li style="list-style-type:circle">'+element+'</li>'
+            }
 
           table.row.add([
             data[i].strCustPurchaseID,
             data[i].customer.strCompanyName,
             x,
-            data[i].quotation.strCostingID,
+            y, 
             data[i].dtDeliveryDate,
             btn
           ]).draw(true);

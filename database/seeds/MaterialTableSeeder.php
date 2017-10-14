@@ -74,7 +74,7 @@ class MaterialTableSeeder extends Seeder
           'dblBasePrice' => '1000.00',
           'strMaterialDesc' => 'metal casting minerals',
           'strStatus' => 'Active',
-          'created_at' => '2000-01-01 04:00:00',
+          'created_at' => '2000-01-01 05:00:00',
       ]);
       DB::table('tblmaterial')->insert([
           'strMaterialID' => 'MAT00006',
@@ -87,7 +87,7 @@ class MaterialTableSeeder extends Seeder
           'dblBasePrice' => '1000.00',
           'strMaterialDesc' => 'Yellow Green',
           'strStatus' => 'Active',
-          'created_at' => '2000-01-01 04:00:00',
+          'created_at' => '2000-01-01 06:00:00',
       ]);
       DB::table('tblmaterial')->insert([
           'strMaterialID' => 'MAT00007',
@@ -100,7 +100,7 @@ class MaterialTableSeeder extends Seeder
           'dblBasePrice' => '1000.00',
           'strMaterialDesc' => 'Yellow Green',
           'strStatus' => 'Active',
-          'created_at' => '2000-01-01 04:00:00',
+          'created_at' => '2000-01-01 07:00:00',
       ]); 
       DB::table('tblmaterial')->insert([
           'strMaterialID' => 'MAT00008',
@@ -113,7 +113,7 @@ class MaterialTableSeeder extends Seeder
           'dblBasePrice' => '1000.00',
           'strMaterialDesc' => 'also known as Kovar, is a low expansion alloy used for glass-to metal sealing.',
           'strStatus' => 'Active',
-          'created_at' => '2000-01-01 04:00:00',
+          'created_at' => '2000-01-01 08:00:00',
       ]); 
       DB::table('tblmaterial')->insert([
           'strMaterialID' => 'MAT00009',
@@ -126,7 +126,7 @@ class MaterialTableSeeder extends Seeder
           'dblBasePrice' => '1000.00',
           'strMaterialDesc' => 'also known as Kovar, is a low expansion alloy used for glass-to metal sealing.',
           'strStatus' => 'Active',
-          'created_at' => '2000-01-01 04:00:00',
+          'created_at' => '2000-01-01 09:00:00',
       ]); 
       DB::table('tblmaterial')->insert([
           'strMaterialID' => 'MAT00010',
@@ -139,7 +139,7 @@ class MaterialTableSeeder extends Seeder
           'dblBasePrice' => '1000.00',
           'strMaterialDesc' => 'also known as Kovar, is a low expansion alloy used for glass-to metal sealing.',
           'strStatus' => 'Active',
-          'created_at' => '2000-01-01 04:00:00',
+          'created_at' => '2000-01-01 10:00:00',
       ]); 
       DB::table('tblmaterial')->insert([
           'strMaterialID' => 'MAT00011',
@@ -152,7 +152,7 @@ class MaterialTableSeeder extends Seeder
           'dblBasePrice' => '1000.00',
           'strMaterialDesc' => 'offers a good balance between corrosion resistance and strength. It is magnetic and hardenable to various strength levels by varying the aging heat-treating temperature',
           'strStatus' => 'Active',
-          'created_at' => '2000-01-01 04:00:00',
+          'created_at' => '2000-01-01 11:00:00',
       ]); 
 
 

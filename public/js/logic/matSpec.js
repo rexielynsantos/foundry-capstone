@@ -142,7 +142,7 @@ $("#addCart").click(function(){
                 data[0].strMaterialID,
                 data[0].strMaterialName,
                 "<input type='number' min=1 id='"+data[0].strMaterialName.replace(/ /g,'')+"' placeholder='0'>",
-                data[0].strUOMID,
+                data[0].strUOMName,
                 btnn
               ]).draw(true);
               $("#materialSelect").val(null).change();

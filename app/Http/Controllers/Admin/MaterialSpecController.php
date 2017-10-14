@@ -107,8 +107,11 @@ class MaterialSpecController extends Controller
 
 public function addCart(Request $request)
     {
+      $matt = DB::table('tblmaterial')
+            ->leftjoin('tbluom', 'tbluom.strUOMID', 'tblmaterial.strUOMID')
+            ->where('strMaterialName',  $request->mat_data)->get();
 
-      $matt = Material::with(['unit'])->where('strMaterialName',  $request->mat_data)->get();
+      // $matt = Material::with(['unit'])->where('strMaterialName',  $request->mat_data)->get();
       return response()->json($matt);
 
     }
@@ -136,7 +139,7 @@ public function addCart(Request $request)
         }
       } 
 
-      $prdvrc = MatSpec::with(['material.details.unit', 'product.producttype.stage.details'])->where('strMatSpecID', $id)->first();
+      $prdvrc = MatSpec::with(['product.producttype.stage.details'])->where('strMatSpecID', $id)->first();
       return $prdvrc;
     }
     public function editMatSpec(Request $request)
