@@ -329,6 +329,7 @@ Route::post('/transaction/joborder-material','Admin\JobOrderController@joborderM
 Route::post('/transaction/jobOrder-approve','Admin\JobOrderController@approveJob');
 
 Route::get('/transaction/matReq-view','Admin\MatRequisitController@viewMaterialRequisit');
+Route::get('/transaction/matReq-max','Admin\MatRequisitController@getMaterialRequisitMax');
 Route::post('/transaction/getJoborders','Admin\MatRequisitController@getJoborder');
 Route::get('/transaction/matReq-employee','Admin\MatRequisitController@getEmployee');
 Route::get('/transaction/matReq-material','Admin\MatRequisitController@getMaterial');
@@ -377,6 +378,7 @@ Route::post('/transaction/purchase-table-read','Admin\PurchaseAddController@fina
 
 Route::get('/transaction/supplier-dropdown','Admin\ReturnController@suppliers');
 Route::get('/transaction/return-max','Admin\ReturnController@getReturnMax');
+Route::get('/transaction/return-values','Admin\ReturnController@getValues');
 Route::post('/transaction/receive-dropdown','Admin\ReturnController@receive');
 Route::post('/transaction/receive-infos','Admin\ReturnController@receiveInfos');
 Route::post('/transaction/return-submit','Admin\ReturnController@addReturn');
@@ -386,7 +388,7 @@ Route::post('/transaction/inspection-add','Admin\ProductInspectionController@add
 Route::post('/transaction/inspection-edit','Admin\ProductInspectionController@editInspection');
 Route::post('/transaction/inspection-update','Admin\ProductInspectionController@updateInspection');
 
-Route::get('/transaction/production-monitoring','Admin\ProductionMonitoringController@viewMonitoring');
+Route::post('/transaction/monitoring-tbl1','Admin\ProductionMonitoringController@monitoringtbl1');
 Route::post('/transaction/monitoring-add','Admin\ProductionMonitoringController@addMonitoring');
 Route::post('/transaction/monitoring-edit','Admin\ProductionMonitoringController@editMonitoring');
 Route::post('/transaction/monitoring-update','Admin\ProductionMonitoringController@updateMonitoring');
@@ -395,6 +397,9 @@ Route::post('/transaction/monitoring-jobProduct','Admin\ProductionMonitoringCont
 
 Route::get('/transaction/post-monitoring', function () {
     return view('Transaction.postmonitoring');
+});
+Route::get('/transaction/production-monitoring', function () {
+    return view('Transaction.prodmonitoringver2');
 });
 
 

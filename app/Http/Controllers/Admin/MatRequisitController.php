@@ -9,6 +9,65 @@ use Response;
 
 class MatRequisitController extends Controller
 {
+  public function getMaterialRequisitMax(){
+    $id = DB::table('tblmaterialrequisition')
+          ->select('strMaterialRequisitionID')
+          ->orderBy('created_at', 'desc')
+          ->orderBy('strMaterialRequisitionID', 'desc')
+          ->first();
+    
+    $new = "";
+     $somenew = "";
+     $arrNew = [];
+     $boolAdd = TRUE;
+
+     if($id != ''){
+        $idd = $id->strMaterialRequisitionID;
+
+      $arrID = str_split($idd);
+    
+       
+    
+       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
+       {
+         $new = $arrID[$ctr];
+    
+         if($boolAdd)
+         {
+    
+           if(is_numeric($new) || $new == '0')
+           {
+             if($new == '9')
+             {
+               $new = '0';
+               $arrNew[$ctr] = $new;
+             }
+             else
+             {
+               $new = $new + 1;
+               $arrNew[$ctr] = $new;
+               $boolAdd = FALSE;
+             }//else
+           }//if(is_numeric($new))
+           else
+           {
+             $arrNew[$ctr] = $new;
+           }//else
+         }//if ($boolAdd)
+    
+         $arrNew[$ctr] = $new;
+       }//for
+    
+       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
+       {
+         $somenew = $somenew . $arrNew[$ctr2] ;
+      }
+     }
+     else{
+      $somenew = 'MR00001';
+     }
+    return response()->json($somenew);
+  }
 
   public function viewMaterialRequisit()
   {
@@ -51,11 +110,12 @@ class MatRequisitController extends Controller
     $modalinfo = DB::table('tbljoborder')
       ->leftjoin('tblcustpurchase', 'tblcustpurchase.strCustPurchaseID', 'tbljoborder.strCustPurchaseID')
       ->leftjoin('tblquotation', 'tblquotation.strQuoteID', 'tblcustpurchase.strQuoteID')
+      ->leftjoin('tblquoteproductvariant', 'tblquoteproductvariant.strQuoteID', 'tblquotation.strQuoteID')
       ->leftjoin('tblcosting', 'tblcosting.strCostingID', 'tblquotation.strCostingID')
-      ->leftjoin('tblcostingmaterial', 'tblcostingmaterial.strCostingID', 'tblcosting.strCostingID')
-      ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', 'tblcostingmaterial.strMaterialID')
       ->leftjoin('tblproduct', 'tblproduct.strProductID', 'tblcosting.strProductID')
       ->leftjoin('tblmatspec', 'tblmatspec.strMatspecID', 'tblcosting.strMatspecID')
+      ->leftjoin('tblcostingmaterial', 'tblcostingmaterial.strCostingID', 'tblcosting.strCostingID')
+      ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', 'tblcostingmaterial.strMaterialID')
       ->where('tbljoborder.strJobOrdID', $request->input('job_id'))
       ->get();
       // dd($modalinfo);
@@ -76,7 +136,7 @@ class MatRequisitController extends Controller
   public function addMatReq(Request $request)
   {
     // dd($request->all());
-    $id = str_random(10);
+    $id = $request->input('id');
 
     $emp = DB::table('tblemployee')
       ->where('tblemployee.strEmployeeID', $request->input('emp_name'))
@@ -91,6 +151,7 @@ class MatRequisitController extends Controller
         'strJobOrdID' => $request->input('job_id'),
         'strEmployeeID' => $request->input('emp_name'),
         'dtNeeded' => $request->input('date'),
+        'created_at' => $request->input('created_at')
       ]);
 
     $matreqView = DB::table('tblmaterialrequisition')
@@ -101,3 +162,4 @@ class MatRequisitController extends Controller
   }
 
 }
+ 

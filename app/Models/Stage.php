@@ -12,6 +12,7 @@ class Stage extends Model
     public $timestamps = true;
     protected $fillable = [
     	'strStageName',
+        'dbltimeRequired',
     	'strStageDesc',
     	'strStatus',
     ];

@@ -12,6 +12,7 @@ class SubStage extends Model
     public $timestamps = true;
     protected $fillable = [
     	'strSubStageName',
+        'dbltimeRequired',
     	'strSubStageDesc',
     	'strStatus',
     ];

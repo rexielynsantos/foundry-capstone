@@ -146,7 +146,7 @@ class JobTicketController extends Controller
       $stage = Stage::with('substage.details1')->where('strStatus','Active')->get();
       $substage = SubStage::where('strStatus','Active')->get();
       $emp = Employee::where('strStatus','Active')->get();
-      $joborder = JobOrder::where('strStatus', 'On-Process')->get();
+      $joborder = JobOrder::where('strJobOrdStatus', 'On-Process')->get();
 
       return view('Transaction.jobtickets')
   	  ->with('jobticket', $job_tix)

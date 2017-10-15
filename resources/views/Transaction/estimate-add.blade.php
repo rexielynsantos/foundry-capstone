@@ -183,7 +183,7 @@
               <div class="modal-header">
                 <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
                 <!--   <span aria-hidden="true">&times;</span></button> -->
-                <h4 style="text-align:center" class="modal-title">Successfully added Quote No.00001</h4>
+                <h4 style="text-align:center" class="modal-title">Successfully added Quote No. <label id="estimateID"></label></h4>
               </div>
               <div class="modal-body" align="center">
                <!--  <input type="text" id="addedCustomer" style="background-color:white; border:none; font-size:150%;" disabled><br>
@@ -192,7 +192,7 @@
               <div class="modal-footer">
 
                 <button type="button" id="reloader" class="btn btn-success">Add Another Quote</button>
-                <button type="button" class="btn btn-primary">View Quote</button>
+                <button type="button" id="view" class="btn btn-primary">View Quote</button>
         </div>
             </div>
           </div>

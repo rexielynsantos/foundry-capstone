@@ -6,6 +6,12 @@ $(document).ready(function(){
        "paging": false,
        "bInfo" : false,
     });
+    var table1 = $('#returnViewTable').DataTable({
+         "searching": false,
+         "ordering": false,
+         "paging": false,
+         "bInfo" : false,
+      });
 
   $('#orderDate').datepicker({
        format: 'yyyy-mm-dd',
@@ -25,6 +31,28 @@ $(document).ready(function(){
         for(var i = 0; i < data.length; i++)
         {
           $(`<option value=`+data[i].strSupplierID+`>`+data[i].strSupplierName+`</option>`).appendTo("#supplierselection");
+        }
+      }
+  });
+
+  $.ajax({
+      url: '/transaction/return-values',
+      type: 'GET',
+      success: function(data)
+      {
+        // console.log(data)
+        for (var i = 0; i < data.length; i++) {
+          var x='';
+          for (var index = 0; index < data[i].returned.length; index++) {
+            var element = data[i].returned[index].details.strMaterialName;
+            x += '<li style="list-style-type:circle">'+element+'</li>'
+            // alert(x)
+          }
+          table1.row.add([
+            data[i].strReturnID,
+            data[i].supplier.strSupplierName,
+            x
+          ]).draw(true)
         }
       }
   });
@@ -66,6 +94,7 @@ $(document).ready(function(){
         },
         success: function(data)
         {
+          console.log(data)
           for (var i = 0; i < data.length; i++) {
             table.row.add([
               data[i].strMaterialID,

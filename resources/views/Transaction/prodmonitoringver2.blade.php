@@ -22,66 +22,83 @@
             
             <div class="box-body"> 
 
-              @foreach($jobticket as $job)
               <div class="table-responsive mailbox-messages">
-                <table id="monitoringTable" border = "3" class="table table-hover table-striped">
+                <table id="tbl1" border = "3" class="table table-hover table-striped">
                   <thead>
                     <tr>
-                      <th style="background-color: #3c8dbc" colspan="7"> {{ $job -> stage -> strStageName }} </th>
+                      <th style="background-color: #3c8dbc" colspan="7"> Waxing  </th>
                     </tr>
-                    <tr>
+                    <tr><!-- 
                       <th class="hidden">ID</th>
-                      <th class="hidden">Part ID</th>
+                      <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
                       
-                      <td style="background-color: #3c8dbc">Sol. Leaching</td>
-                      <td style="background-color: #3c8dbc">Cleaning</td>
-                      <td style="background-color: #3c8dbc">Assembly</td>
+                      <td style="background-color: #3c8dbc">Primary Coating</td>
+                      <!-- <td style="background-color: #3c8dbc">Cleaning</td>
+                      <td style="background-color: #3c8dbc">Assembly</td> -->
                       <th style="background-color: #f56954">QA</th>
                       <th style="background-color: #605ca8">Total Parts Available</th>
                       <th style="background-color: #ff851b">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                     <td class="hidden">as</td>
-                     <td class="hidden">as</td>
-                     <td style="background-color:#d2d6de">M200 B.SHROUD "P"</td>
-                     <td>5</td>
-                     <td>15</td>
-                     <td>85</td>
-                     <td>145</td>
-                     <td>5</td>
-                     <td>135</td>
-                  </tr>
-                  <tr>
-                     <td class="hidden">as</td>
-                     <td class="hidden">as</td>
-                     <td style="background-color:#d2d6de">M200 HAMMER</td>
-                     <td>5</td>
-                     <td>15</td>
-                     <td>85</td>
-                     <td>145</td>
-                     <td>5</td>
-                     <td>135</td>
-                  </tr>
-                  <tr>
-                     <td class="hidden">as</td>
-                     <td class="hidden">as</td>
-                     <td style="background-color:#d2d6de">M200 TRIGGER</td>
-                     <td>5</td>
-                     <td>15</td>
-                     <td>85</td>
-                     <td>145</td>
-                     <td>5</td>
-                     <td>135</td>
-                  </tr>
+                    
                   </tbody>
                 </table>
                 <!-- /.table -->
               </div>
               <br>
-              @endforeach
+              <div class="table-responsive mailbox-messages">
+                <table id="tbl2" border = "3" class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th style="background-color: #3c8dbc" colspan="7"> Molding </th>
+                    </tr>
+                    <tr><!-- 
+                      <th class="hidden">ID</th>
+                      <th class="hidden">Part ID</th> -->
+                      <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
+                      
+                      <td style="background-color: #3c8dbc">Dewaxing</td><!-- 
+                      <td style="background-color: #3c8dbc">Cleaning</td>
+                      <td style="background-color: #3c8dbc">Assembly</td> -->
+                      <th style="background-color: #f56954">QA</th>
+                      <th style="background-color: #605ca8">Total Parts Available</th>
+                      <th style="background-color: #ff851b">Target Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+                <!-- /.table -->
+              </div>
+              <br>
+              <div class="table-responsive mailbox-messages">
+                <table id="tbl3" border = "3" class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th style="background-color: #3c8dbc" colspan="7"> Fettling/Metal Treatment </th>
+                    </tr>
+                    <tr><!-- 
+                      <th class="hidden">ID</th>
+                      <th class="hidden">Part ID</th> -->
+                      <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
+                      
+                      <td style="background-color: #3c8dbc">Dewaxing</td>
+                      <td style="background-color: #3c8dbc">Primary Coating</td><!-- 
+                      <td style="background-color: #3c8dbc">Cleaning</td>
+                      <td style="background-color: #3c8dbc">Assembly</td> -->
+                      <th style="background-color: #f56954">QA</th>
+                      <th style="background-color: #605ca8">Total Parts Available</th>
+                      <th style="background-color: #ff851b">Target Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+                <!-- /.table -->
+              </div>
+              <br>
               <!-- /.mail-box-messages -->
             </div>
             <!-- /.box-body -->
@@ -112,7 +129,7 @@
 
 
 @push('scripts')
- <!-- <script type="text/javascript" src="{{URL::asset('js/logic/prodmonitoring.js')}}"></script> -->
+ <script type="text/javascript" src="{{URL::asset('js/logic/prodmonitoring.js')}}"></script>
 
 
 @endpush

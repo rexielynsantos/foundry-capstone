@@ -4,6 +4,12 @@ var tbl = $('#tblApprovedQuotes').DataTable({
   "ordering": false,
   "paging": false,
 });
+
+var tbll = $('#tblQuote').DataTable({
+  "searching": false,
+  "ordering": false,
+  "paging": false,
+});
 $('#tblApprovedQuotes tbody').on('click', '#pdfestimate', function () {
 
 var tbldata = tbl.row( $(this).closest('tr') ).data();

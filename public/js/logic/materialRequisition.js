@@ -29,7 +29,7 @@ $.ajax({
     success: function(jobOrder)
     {
       if (jobOrder) {
-        $('#newRequisitionModal').modal('show');
+        // $('#newRequisitionModal').modal('show');
         // $("#joborderNo").empty();
         for(var i = 0; i < jobOrder.length; i++)
         {
@@ -59,7 +59,8 @@ $('#joborderNo').change(function(){
         table.row.add([
           result[i].strMaterialID,
           result[i].strMaterialName,
-          result[i].intOrderQty*result[i].dblMaterialQuantity,
+          // parseInt(result[i].intOrderQty)*parseInt(result[i].dblMaterialQuantity),
+          result[i].intOrderQty,
           'pcs'
         ]).draw(true)
       }
@@ -120,21 +121,35 @@ $(document).on('submit', '#mod_form', function(e){
 // alert(jobID)
 // alert(matReqDate)
     $.ajax({
-      url: '/transaction/matReq-add',
-      type: 'POST',
-      data: {
-        emp_name : emp,
-        job_id : jobID,
-        date : matReqDate
+      type: "GET",
+      url: '/transaction/matReq-max',
+      success: function(data){
+        var current = new Date();
+        var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
+        $('#addedID').val(data);
+        $.ajax({
+          url: '/transaction/matReq-add',
+          type: 'POST',
+          data: {
+            id: data,
+            created_at: today,
+            emp_name : emp,
+            job_id : jobID,
+            date : matReqDate
+          },
+          success: function(data)
+          {
+            // alert('PAPASA TAYO!');
+            // console.log(data);
+            $('#modalAdded').modal('show');
+            // window.location.href = '/transaction/materialrequisition-add'
+          }
+        })
       },
-      success: function(data)
-      {
-        // alert('PAPASA TAYO!');
-        // console.log(data);
-        // $('#newRequisitionModal').modal('hide');
-        window.location.href = '/transaction/materialrequisition-add'
+      error: function(data){
+        alert('ERROR IN MAX ID');
       }
-    });
+    })
   });
 
 //   //AJAX FOR MATERIAL

@@ -112,17 +112,15 @@ $("#addCart").click(function(){
             // getMaterialVars();
             var btnn = "<button type='button' id = 'btnTrash'  class='deleteRow btn btn-danger' name='"+data[0].strMaterialName+' - ('+data[0].intVariantQty+''+data[0].strUOMName+')'+"' onclick='removeProd(this.name)'><i class='fa fa-trash'></i></button>";
               $('#matSelect option:selected').remove();
-            var costt = parseInt(data[0].intReorderQty) * parseInt(data[0].dblBasePrice);
-            // alert('cost: ' + costt)
+            var costt = parseInt(data[0].intReorderQty) * parseInt(data[0].dblBasePrice)
               table.row.add([
                 data[0].strMaterialID,
                 data[0].strMaterialName+' - ('+data[0].intVariantQty+''+data[0].strUOMName+')',
                 data[0].intReorderQty,
                 '<input type="number" id="basePrice'+data[0].strMaterialID+'" value="'+data[0].dblBasePrice+'" class="form-control" readonly style="border:none; background:white;" placeholder="0">',
-                '<input type="number" min="0" id="matqty'+data[0].strMaterialID+'" value=0 onchange="computeTotalCost()">',
+                '<input type="number" min="0" id="matqty'+data[0].strMaterialID+'" onkeyup="computeTotalCost()">',
                 'pcs',
-                // '<input type="text" id="matcost'+data[0].strMaterialID+'" value="'+parseInt(costt)+'" readonly style="border:none;">',
-                '<label id="matcost'+data[0].strMaterialID+'">'+costt+'</label>',
+                '<input type="text" id="matcost'+data[0].strMaterialID+'" value="'+costt+'" readonly style="border:none;">',
                 btnn
               ]).draw(true);
 
@@ -137,9 +135,8 @@ $("#addCart").click(function(){
                 totalCost = ''
               }
               for (var j = 0; j < tblrows; j++) {
-                var totalCosting = parseInt($('#totCost').val()) + parseInt($('#matcost'+matID[j][0]).text())
-                // alert('totcost: '+totalCosting)
-                $('#totCost').val(parseInt(totalCosting))
+                var totalCosting = parseInt($('#totCost').val()) + parseInt($('#matcost'+matID[j][0]).val())
+                $('#totCost').val(totalCosting)
               }
               getMaterialVars();
         }
@@ -167,7 +164,7 @@ $(document).on('submit', '#purchase_form', function(e){
   for(var i = 0; i<tblrowd; i++){
     splitter[i] = materialArr[i][1].split('-');
     qty[i] = $("#matqty"+materialArr[i][0]).val();
-    cost[i] = $("#matcost"+materialArr[i][0]).text();
+    cost[i] = $("#matcost"+materialArr[i][0]).val();
     varia[i] = materialArr[i][1].replace(/\D+/g, "");
     uomArr[i] = splitter[i][1].replace(/[^a-z]/ig, "");
     totalQty[i] = parseInt(materialArr[i][2]) + parseInt($("#matqty"+materialArr[i][0]).val());
@@ -182,7 +179,6 @@ $(document).on('submit', '#purchase_form', function(e){
     success: function(data){
       var current = new Date();
       var today = current.getFullYear() + '-' + current.getMonth() + '-' + current.getDate() + ' ' + current.getHours() + ':' + current.getMinutes() + ':' + current.getSeconds();
-      // alert('pterm: '+$('#paymentTermSelect').val());
       $.ajax({
         type: "POST",
         url: "/transaction/purchaseorder-add",
@@ -269,10 +265,10 @@ function getMaterialVars(){
             var drpdwnId= "matvarSelect"+matID[i][0];
             $("#"+drpdwnId).empty();
             for (var k = 0; k < data.length; k++) {
-              // var getDropdownn = document.getElementById(drpdwnId);
-              // var opt = document.createElement("option");
-              // opt.text = data[k].intVariantQty+''+data[k].strUOMName;
-              // getDropdownn.add(opt);
+              var getDropdownn = document.getElementById(drpdwnId);
+              var opt = document.createElement("option");
+              opt.text = data[k].intVariantQty+''+data[k].strUOMName;
+              getDropdownn.add(opt);
             }
           }
       }
@@ -289,13 +285,13 @@ function computeTotalCost(){
   for (var i = 0; i < tblrows; i++) {
   var tempCost = matID[i][2] + parseInt($('#matqty'+matID[i][0]).val())
   var totalCost = tempCost * parseInt($('#basePrice'+matID[i][0]).val())
-  $('#matcost'+matID[i][0]).text(totalCost)
+  $('#matcost'+matID[i][0]).val(totalCost)
 
   tempCost = ''
   totalCost = ''
   }
   for (var j = 0; j < tblrows; j++) {
-    var totalCosting = parseInt($('#totCost').val()) + parseInt($('#matcost'+matID[j][0]).text())
+    var totalCosting = parseInt($('#totCost').val()) + parseInt($('#matcost'+matID[j][0]).val())
     $('#totCost').val(totalCosting)
   }
 }

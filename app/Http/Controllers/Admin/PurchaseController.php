@@ -80,7 +80,7 @@ class PurchaseController extends Controller
       return response()->json($material);
     }
 
-	public function viewPurchase()
+  public function viewPurchase()
     {
     $purchase = Purchase::with('material.details')->get();
 
@@ -170,6 +170,7 @@ class PurchaseController extends Controller
         'dtDeliveryDate' => $request->input('targetDate'),
         'strCustomerID' => $request->input('customer_id'),
         'strQuoteID' => $request->input('quote_ref'),
+        'strSOStatus' => 'Pending',
         'created_at' => $request->input('created_at'),
     ]);
 

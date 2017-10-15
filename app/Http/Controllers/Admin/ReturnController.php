@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use App\Models\ReturnDetail;
+use App\Models\ReturnHeader;
 use DB;
 use Response;
 
@@ -16,6 +18,13 @@ class ReturnController extends Controller
     $supp = DB::table('tblsupplier')->where('strStatus', 'Active')->get();
 
     return Response::json($supp);
+  }
+
+  public function getValues()
+  {
+    $return = ReturnHeader::with('returned.details','supplier')->get();
+
+    return Response::json($return);
   }
 
   public function receive(Request $request)
@@ -33,13 +42,14 @@ class ReturnController extends Controller
 
   public function receiveInfos(Request $request)
   {
-    $receive = DB::table('tblreceivepurchase')
+    $recc = DB::table('tblreceivepurchase')
               ->leftjoin('tblreceivepurchasedetail', 'tblreceivepurchasedetail.strReceivePurchaseID', 'tblreceivepurchase.strReceivePurchaseID')
               ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', 'tblreceivepurchasedetail.strMaterialID')
               ->where('tblreceivepurchase.strReceivePurchaseID', $request->input('receive_id'))
               ->get();
+    // dd($recc);
 
-    return Response::json($receive);
+    return Response::json($recc);
   }
 
   public function addReturn(Request $request)
@@ -84,7 +94,7 @@ class ReturnController extends Controller
           ->orderBy('created_at', 'desc')
           ->orderBy('strReturnID', 'desc')
           ->first();
-    
+
     $new = "";
      $somenew = "";
      $arrNew = [];
@@ -94,16 +104,16 @@ class ReturnController extends Controller
         $idd = $id->strReturnID;
 
       $arrID = str_split($idd);
-    
-       
-    
+
+
+
        for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
        {
          $new = $arrID[$ctr];
-    
+
          if($boolAdd)
          {
-    
+
            if(is_numeric($new) || $new == '0')
            {
              if($new == '9')
@@ -123,10 +133,10 @@ class ReturnController extends Controller
              $arrNew[$ctr] = $new;
            }//else
          }//if ($boolAdd)
-    
+
          $arrNew[$ctr] = $new;
        }//for
-    
+
        for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
        {
          $somenew = $somenew . $arrNew[$ctr2] ;

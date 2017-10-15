@@ -18,6 +18,7 @@ class CreateMaterialRequisitionTable extends Migration
         $table->string('strJobOrdID');
         $table->string('strEmployeeID');
         $table->date('dtNeeded');
+        $table->timestamps();
         $table->foreign('strJobOrdID')
               ->references('strJobOrdID')->on('tbljoborder')
               ->onUpdate('cascade');

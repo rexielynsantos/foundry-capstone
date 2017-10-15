@@ -140,5 +140,13 @@ class SubStageTableSeeder extends Seeder
         'strStatus' => 'Active',
         'created_at' => '2000-01-01 16:00:00',
       ]);
+        DB::table('tblsubstage')->insert([
+        'strSubStageID' => 'SUBST00018',
+        'strSubStageName' => 'Cleaning',
+        'dblTimeRequired' => 3,
+        'strSubStageDesc' => 'for quality assurance',
+        'strStatus' => 'Active',
+        'created_at' => '2000-01-01 16:00:00',
+      ]);
     }
 }

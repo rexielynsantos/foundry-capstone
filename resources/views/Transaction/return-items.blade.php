@@ -25,11 +25,11 @@
 
             </div>
             <div class="box-footer">
-              <table id="custTransTable" border="0" class="table table-bordered" style="color:black;">
+              <table id="returnViewTable" border="0" class="table table-bordered" style="color:black;">
                 <thead>
                   <th width="10%">Return ID.</th>
                   <th width="20%">Supplier</th>
-                  <th width="20%">Action</th>
+                  <th width="20%">Material</th>
                 </thead>
                 <tbody>
                 </tbody>
@@ -63,7 +63,7 @@
 
 
 @push('scripts')
-  <script type="text/javascript" src="{{URL::asset('js/logic/customerPurchases.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/logic/return.js')}}"></script>
 	<script type="text/javascript" src="{{URL::asset('js/logic/pdfCustomerPurchases.js')}}"></script>
 <!-- <script type="text/javascript" src="{{URL::asset('js/tables/customer-table.js')}}"></script> -->
 @endpush

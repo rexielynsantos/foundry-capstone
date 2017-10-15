@@ -118,6 +118,7 @@ $(document).ready(function(){
         },
         success: function(data)
         {
+          $('#estimateID').text($('#maxQuotation').text());
           $('#quotationAddModal').modal('show')
         }
     });
@@ -125,6 +126,9 @@ $(document).ready(function(){
 
   $('#reloader').click(function(){
     location.reload()
+  });
+  $('#view').click(function(){
+    window.location.href='/transaction/estimate';
   });
 
 });

@@ -145,6 +145,25 @@
         <!-- /.modal-dialog -->
  </div>
 
+ <div class="modal fade" id="modalAdded" style="margin-top: 60px">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+                <!--   <span aria-hidden="true">&times;</span></button> -->
+                <h4 style="text-align:center" class="modal-title">Successfully added New Material Requisition!</h4>
+              </div>
+              <div class="modal-body" align="center">
+                <input type="text" id="addedID" style="background-color:white; border:none; font-size:100%;" disabled>
+              </div>
+              <div class="modal-footer">
+
+                <a href="/transaction/materialrequisition-add"><button type="button" id="" class="btn btn-success">Close</button></a>
+        </div>
+            </div>
+          </div>
+        </div>
+
 
 <!-- <h3 style="color:black;font-family: 'Abel', sans-serif;font-size: 180%;">Order Estimate </h3> -->
 <form class="" id="receive_form" role="form" data-toggle="validator">

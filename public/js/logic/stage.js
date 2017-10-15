@@ -49,7 +49,7 @@ $(document).ready(function(){
         {
           console.log(data);
           $('#stageName').val(data.strStageName);
-          $('#timeRequired').val(data[0].dbltimeRequired)
+          $('#timeRequired').val(data.dbltimeRequired)
           $('#stageDesc').val(data.strStageDesc);
 
             $("#stageSubstage option").each(function()

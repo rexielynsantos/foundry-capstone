@@ -222,7 +222,10 @@ $("#quoteRefer").change(function(){
         rmrks :submitRemarks
       },
       success: function(data) {
-        window.location.href = '/transaction/customerPurchase-new'
+        $('#addedID').val($('#maxCustPurchase').text());
+        $('#modalAdded').modal('show');
+
+        // window.location.href = '/transaction/customerPurchase-new'
       }
     });
   });
