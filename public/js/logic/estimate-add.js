@@ -70,24 +70,63 @@ $(document).ready(function(){
         {
           console.log(data);
           if (data.length != 0) {
-            $('#costingID').val(data.strCostingID)
-            for (var i = 0; i < data.costingmaterial.length; i++) {
+            $("#costingID").empty();
+            $(`<option value=0>-->Select Costing<--</option>`).appendTo("#costingID");
+            for (var i = 0; i < data.length; i++) {
+              $(`<option value=`+data[i].strCostingID+`>`+data[i].strCostingID+`</option>`).appendTo("#costingID");
+            }
+            var address = data[0].customer[0].strCustStreet+" "+data[0].customer[0].strCustBrgy+" "+data[0].customer[0].strCustCity
+            $('#confAddress').val(address)
+
+          }
+          else {
+            noty({
+              type: 'error',
+              layout: 'bottomRight',
+              timeout: 3000,
+              text: '<h4><center>There`s no approved costing for this customer</center></h4>',
+            });
+          }
+          }
+      });
+  });
+
+  $('#costingID').change(function(){
+    var id = $('#costingID').val()
+    table.column(0).visible(false);
+    $.ajax({
+        url: '/transaction/estimate-recycle',
+        type: 'POST',
+        data: {
+        id  : id
+        },
+        success: function(data)
+        {
+          console.log(data);
+          if (data.length != 0) {
+            for (var i = 0; i < data.length; i++) {
               var x = ''
-              for (var index = 0; index < data.costingmaterial.length; index++) {
-                var element = data.costingmaterial[index].details.strMaterialName;
+              for (var index = 0; index < data[i].costingmaterial.length; index++) {
+                var element = data[i].costingmaterial[index].details.strMaterialName;
                 x += '<li style="list-style-type:circle">'+element+'</li>'
+              }
+              var y = 0
+              for (var indexx = 0; indexx < data[i].costingmaterial.length; indexx++) {
+                var element1 = data[i].costingmaterial[indexx].dblFinalCost;
+                // alert(element1)
+                y += parseInt(y) + parseInt(element1)
               }
 
               table.row.add([
-                data.costingmaterial[i].strCostingID,
-                data.product[i].strProductName,
+                data[i].strCostingID,
+                data[i].product[0].strProductName,
                 x,
-                data.costingmaterial[i].dblFinalCost,
-                '<button type="button" id="deleteButton" class="deleteRow"><i class="fa fa-trash"></i></button>'
+                y
               ]).draw(true);
             }
-            var address = data.customer[0].strCustStreet+" "+data.customer[0].strCustBrgy+" "+data.customer[0].strCustCity
+            var address = data[0].customer[0].strCustStreet+" "+data[0].customer[0].strCustBrgy+" "+data[0].customer[0].strCustCity
             $('#confAddress').val(address)
+
           }
           else {
             noty({

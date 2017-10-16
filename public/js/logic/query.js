@@ -54,21 +54,20 @@ $(document).ready(function(){
        });
      }
      else if (tableID == 'table3') {
-       alert('di ko alam ano kukunin dito hehe')
-      //  $.ajax({
-      //      url: '/transaction/query-table2-info',
-      //      type: 'GET',
-      //      success: function(data)
-      //      {
-      //        table3.clear().draw()
-      //        console.log(data)
-      //        table3.row.add([
-      //          data.material.strMaterialName,
-      //          data.material.strMaterialDesc,
-      //          data.count
-      //        ]).draw(true);
-      //      }
-      //  });
+      //  alert('di ko alam ano kukunin dito hehe')
+       $.ajax({
+           url: '/transaction/query-table3-info',
+           type: 'GET',
+           success: function(data)
+           {
+             table3.clear().draw()
+             console.log(data)
+             table3.row.add([
+               data.empname.strEmployeeFirst,
+               data.count
+             ]).draw(true);
+           }
+       });
      }
      else if (tableID == 'table4') {
        $.ajax({

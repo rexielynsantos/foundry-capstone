@@ -218,7 +218,7 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl4.row.add([
 								dataa[0],
-								dataa[1],
+								// dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
@@ -256,7 +256,7 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl5.row.add([
 								dataa[0],
-								dataa[1],
+								// dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
@@ -294,7 +294,7 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl6.row.add([
 								dataa[0],
-								dataa[1],
+								// dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
@@ -332,7 +332,7 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl7.row.add([
 								dataa[0],
-								dataa[1],
+								// dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
@@ -370,7 +370,7 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl8.row.add([
 								dataa[0],
-								dataa[1],
+								// dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
@@ -408,7 +408,7 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl9.row.add([
 								dataa[0],
-								dataa[1],
+								// dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
@@ -446,7 +446,7 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl10.row.add([
 								dataa[0],
-								dataa[1],
+								// dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
@@ -484,7 +484,7 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl11.row.add([
 								dataa[0],
-								dataa[1],
+								// dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
@@ -522,7 +522,7 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl12.row.add([
 								dataa[0],
-								dataa[1],
+								// dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
@@ -560,7 +560,7 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl13.row.add([
 								dataa[0],
-								dataa[1],
+								// dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],

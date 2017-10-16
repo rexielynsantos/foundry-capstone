@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MaterialTableSeeder::class);
         // $this->call(QuoteProductTableSeeder::class);
          $this->call(MaterialVariantTableSeeder::class);
-         $this->call(MaterialDetailTableSeeder::class);
+         // $this->call(MaterialDetailTableSeeder::class);
          $this->call(MaterialSupplierTableSeeder::class);
          // $this->call(PurchaseDetailTableSeeder::class);
          $this->call(MaterialSpecTableSeeder::class);

@@ -33,11 +33,11 @@
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
                       
-                      <th style="background-color: #3c8dbc">Leaching</th>
-                      <th style="background-color: #3c8dbc">Cleaning</th>
-                      <th style="background-color: #f56954">QA</th>
-                      <th style="background-color: #605ca8">Total Parts Available</th>
-                      <th style="background-color: #ff851b">Target Quantity</th>
+                      <th style="background-color: #adb7e2">Leaching</th>
+                      <th style="background-color: #adb7e2">Cleaning</th>
+                      <th style="background-color: #adb7e2">QA</th>
+                      <th style="background-color: #adb7e2">Total Parts Available</th>
+                      <th style="background-color: #adb7e2">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -57,12 +57,12 @@
                       <th class="hidden">ID</th>
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
-                      <th style="background-color: #3c8dbc">Dewaxing</th>
-                      <th style="background-color: #3c8dbc">Primary Coating</th>
-                      <th style="background-color: #3c8dbc">Subsequent Coating</th>
-                      <th style="background-color: #f56954">QA</th>
-                      <th style="background-color: #605ca8">Total Parts Available</th>
-                      <th style="background-color: #ff851b">Target Quantity</th>
+                      <th style="background-color: #adb7e2">Dewaxing</th>
+                      <th style="background-color: #adb7e2">Primary Coating</th>
+                      <th style="background-color: #adb7e2">Subsequent Coating</th>
+                      <th style="background-color: #adb7e2">QA</th>
+                      <th style="background-color: #adb7e2">Total Parts Available</th>
+                      <th style="background-color: #adb7e2">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -82,18 +82,18 @@
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
                       
-                      <th style="background-color: #3c8dbc">Leaching</th>
-                      <th style="background-color: #3c8dbc">Grinding</th>
-                      <th style="background-color: #3c8dbc">Annealing</th>
-                      <th style="background-color: #3c8dbc">Sand-Blasting</th>
-                      <th style="background-color: #3c8dbc">Recoil Height/Flatness</th>
-                      <th style="background-color: #3c8dbc">Stir-Up Mag.Box</th>
-                      <th style="background-color: #3c8dbc">Welding</th>
-                      <th style="background-color: #3c8dbc">Machining</th>
-                      <th style="background-color: #3c8dbc">Final Sand-Blasting</th>
-                      <th style="background-color: #f56954">QA</th>
-                      <th style="background-color: #605ca8">Total Parts Available</th>
-                      <th style="background-color: #ff851b">Target Quantity</th>
+                      <th style="background-color: #adb7e2">Leaching</th>
+                      <th style="background-color: #adb7e2">Grinding</th>
+                      <th style="background-color: #adb7e2">Annealing</th>
+                      <th style="background-color: #adb7e2">Sand-Blasting</th>
+                      <th style="background-color: #adb7e2">Recoil Height/Flatness</th>
+                      <th style="background-color: #adb7e2">Stir-Up Mag.Box</th>
+                      <th style="background-color: #adb7e2">Welding</th>
+                      <th style="background-color: #adb7e2">Machining</th>
+                      <th style="background-color: #adb7e2">Final Sand-Blasting</th>
+                      <th style="background-color: #adb7e2">QA</th>
+                      <th style="background-color: #adb7e2">Total Parts Available</th>
+                      <th style="background-color: #adb7e2">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -113,10 +113,10 @@
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
                       
-                      <th style="background-color: #3c8dbc">Jobs Finished</th>
-                      <th style="background-color: #f56954">QA</th>
-                      <th style="background-color: #605ca8">Total Parts Available</th>
-                      <th style="background-color: #ff851b">Target Quantity</th>
+                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #adb7e2">QA</th>
+                      <th style="background-color: #adb7e2">Total Parts Available</th>
+                      <th style="background-color: #adb7e2">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -136,10 +136,10 @@
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
                       
-                      <th style="background-color: #3c8dbc">Jobs Finished</th>
-                      <th style="background-color: #f56954">QA</th>
-                      <th style="background-color: #605ca8">Total Parts Available</th>
-                      <th style="background-color: #ff851b">Target Quantity</th>
+                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #adb7e2">QA</th>
+                      <th style="background-color: #adb7e2">Total Parts Available</th>
+                      <th style="background-color: #adb7e2">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -159,10 +159,10 @@
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
                       
-                      <th style="background-color: #3c8dbc">Jobs Finished</th>
-                      <th style="background-color: #f56954">QA</th>
-                      <th style="background-color: #605ca8">Total Parts Available</th>
-                      <th style="background-color: #ff851b">Target Quantity</th>
+                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #adb7e2">QA</th>
+                      <th style="background-color: #adb7e2">Total Parts Available</th>
+                      <th style="background-color: #adb7e2">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -182,10 +182,10 @@
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
                       
-                      <th style="background-color: #3c8dbc">Jobs Finished</th>
-                      <th style="background-color: #f56954">QA</th>
-                      <th style="background-color: #605ca8">Total Parts Available</th>
-                      <th style="background-color: #ff851b">Target Quantity</th>
+                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #adb7e2">QA</th>
+                      <th style="background-color: #adb7e2">Total Parts Available</th>
+                      <th style="background-color: #adb7e2">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -204,10 +204,10 @@
                       <th class="hidden">ID</th>
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
-                      <th style="background-color: #3c8dbc">Jobs Finished</th>
-                      <th style="background-color: #f56954">QA</th>
-                      <th style="background-color: #605ca8">Total Parts Available</th>
-                      <th style="background-color: #ff851b">Target Quantity</th>
+                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #adb7e2">QA</th>
+                      <th style="background-color: #adb7e2">Total Parts Available</th>
+                      <th style="background-color: #adb7e2">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -227,10 +227,10 @@
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
                       
-                      <th style="background-color: #3c8dbc">Jobs Finished</th>
-                      <th style="background-color: #f56954">QA</th>
-                      <th style="background-color: #605ca8">Total Parts Available</th>
-                      <th style="background-color: #ff851b">Target Quantity</th>
+                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #adb7e2">QA</th>
+                      <th style="background-color: #adb7e2">Total Parts Available</th>
+                      <th style="background-color: #adb7e2">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -250,10 +250,10 @@
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
                       
-                      <th style="background-color: #3c8dbc">Jobs Finished</th>
-                      <th style="background-color: #f56954">QA</th>
-                      <th style="background-color: #605ca8">Total Parts Available</th>
-                      <th style="background-color: #ff851b">Target Quantity</th>
+                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #adb7e2">QA</th>
+                      <th style="background-color: #adb7e2">Total Parts Available</th>
+                      <th style="background-color: #adb7e2">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -273,10 +273,10 @@
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
                       
-                      <th style="background-color: #3c8dbc">Jobs Finished</th>
-                      <th style="background-color: #f56954">QA</th>
-                      <th style="background-color: #605ca8">Total Parts Available</th>
-                      <th style="background-color: #ff851b">Target Quantity</th>
+                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #adb7e2">QA</th>
+                      <th style="background-color: #adb7e2">Total Parts Available</th>
+                      <th style="background-color: #adb7e2">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -296,10 +296,10 @@
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
                       
-                      <th style="background-color: #3c8dbc">Jobs Finished</th>
-                      <th style="background-color: #f56954">QA</th>
-                      <th style="background-color: #605ca8">Total Parts Available</th>
-                      <th style="background-color: #ff851b">Target Quantity</th>
+                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #adb7e2">QA</th>
+                      <th style="background-color: #adb7e2">Total Parts Available</th>
+                      <th style="background-color: #adb7e2">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -318,10 +318,10 @@
                       <th class="hidden">ID</th>
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
-                      <th style="background-color: #3c8dbc">Jobs Finished</th>
-                      <th style="background-color: #f56954">QA</th>
-                      <th style="background-color: #605ca8">Total Parts Available</th>
-                      <th style="background-color: #ff851b">Target Quantity</th>
+                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #adb7e2">QA</th>
+                      <th style="background-color: #adb7e2">Total Parts Available</th>
+                      <th style="background-color: #adb7e2">Target Quantity</th>
                     </tr>
                   </thead>
                   <tbody>

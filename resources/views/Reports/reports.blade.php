@@ -64,7 +64,13 @@
     <div id="table1" align="center" style="display:none;">
       <h3> PRECISION FOUNDRY OF THE PHILIPPINES INC. </h3>
         <h5> Sales Order Report </h5>
-        <canvas id="myChart" width="400" height="400"></canvas><br><br>
+        <div class="row">
+          <div class="col-md-12">
+            <center>Number of {Purchases</center>
+            <canvas id="myChart" width="400" height="400"></canvas>
+          </div>
+        </div>
+        <br><br>
         <table id="sales" class="table table-striped table-bordered responsive">
           <thead>
             <th>Customer Name </th>

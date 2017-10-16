@@ -161,11 +161,18 @@ $.ajax({
   success: function(data){
     // alert(data.custpurchase.customer.strCompanyName);
 console.log(data);
+// alert(tbldata[0]);
 // var companyName = data[0].strCompanyName;
 // var custStreet = data.custpurchase.customer.strCustStreet;
 // var custCity = data.custpurchase.customer.strCustCity;
 // var contactPerson = data.custpurchase.customer.contact[0].strContactPersonName;
-
+var current = new Date();
+var mo = current.getMonth()+1;
+var dd = current.getDate();
+var mon = ["A", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+// if(mo < 10){ mo = '0' + mo; }
+// if(dd < 10){ dd = '0' + dd; }
+var today = mon[mo] + ' ' + dd + ', ' + current.getFullYear();
 var frame1 = $('<iframe />');
 frame1[0].name = "frame1";
 frame1.css({ "position": "absolute", "top": "-1000000px"});
@@ -181,13 +188,13 @@ frameDoc.document.write('<div class="row">');
 frameDoc.document.write('<div class="col-md-6">');
 frameDoc.document.write('</head><body>');
 frameDoc.document.write('<table align="center" width="100%">');
-frameDoc.document.write('<tr>');
-frameDoc.document.write('<td width="40%" align="left"><p align="left" style="text-decoration: underline; font-weight:bold;">INVESTMENT CASTED PARTS COSTING</p></td>');
-frameDoc.document.write('</tr>');
+// frameDoc.document.write('<tr>');
+// frameDoc.document.write('<td width="40%" align="left"><p align="left" style="text-decoration: underline; font-weight:bold;">INVESTMENT CASTED PARTS COSTING</p></td>');
+// frameDoc.document.write('</tr>');
 frameDoc.document.write('<tr>');
 frameDoc.document.write('<td width="40%" align="left">PART NAME: '+ data[0].strProductName +' </td>');
 frameDoc.document.write('<td width="17%"></td>');
-frameDoc.document.write('<td width="30%"><p align="left">Date: </p></td>');
+frameDoc.document.write('<td width="30%"><p align="left">Date: '+today+'</p></td>');
 frameDoc.document.write('</tr>');
 frameDoc.document.write('<tr>');
 frameDoc.document.write('<td width="40%"><p align="left">CUSTOMER: '+ data[0].strCompanyName +' </p></td>');
@@ -331,7 +338,11 @@ frameDoc.document.write('</tr>');
 frameDoc.document.write('<tr>');
 frameDoc.document.write('<td width="%"><p style="margin-left:12px">A. Materials</p></td>');
 frameDoc.document.write('<td align="center"></td>');
-frameDoc.document.write('<td align="center" style="text-decoration:underline;"><font color="blue">'+ data[0].updated_at +'</font></td>');
+var upd = data[0].updated_at;
+if( upd == null){
+  upd = "";
+}
+frameDoc.document.write('<td align="center" style="text-decoration:underline;"><font color="blue">'+ upd +'</font></td>');
 frameDoc.document.write('</tr>');
 
 var total = 0;

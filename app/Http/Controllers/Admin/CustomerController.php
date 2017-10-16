@@ -239,6 +239,15 @@ class CustomerController extends Controller
           ->with('cust',$customers);
   }
 
+  public function estimateRecycle(Request $request)
+  {
+    $recycle = Costing::with(['costingmaterial.details', 'product', 'customer'])
+              ->where('tblcosting.strCostingID', $request->id)
+              ->get();
+
+    return Response::json($recycle);
+  }
+
   public function newQuote(Request $request)
   {
     // dd($request->all());
@@ -255,7 +264,7 @@ class CustomerController extends Controller
     $customers = Costing::with(['costingmaterial.details', 'product', 'customer'])
           ->where('tblcosting.strCustomerID', $request->input('cust_id'))
           ->where('tblcosting.strCostingStatus', 'Approved')
-          ->first();
+          ->get();
     // dd($customers);
     return Response::json($customers);
   }
@@ -624,6 +633,7 @@ class CustomerController extends Controller
         ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', 'tblcostingmaterial.strMaterialID')
         ->leftjoin('tbluom', 'tbluom.strUOMID', 'tblcostingmaterial.strUOMID')
         ->where('strCostingStatus', 'Approved')
+        ->where('tblcosting.strCostingID', '=', $request->input('id'))
         ->get();
 
       return $approvedViewCost;

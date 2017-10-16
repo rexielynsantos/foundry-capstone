@@ -89,7 +89,12 @@
             </div>
 
               <div class="tab-pane" id="tab_2">
-                <input type="text" id="costingID" hidden>
+                <div class="row">
+                  <div class="col-md-12">
+                    <select class="form-control select2" id="costingID">
+                    </select>
+                  </div>
+                </div>
                 <div class="row">
                       <div class="col-md-12">
                         <table id="quoteTable" border="0" class="table table-bordered" style="color:black;">
@@ -98,7 +103,6 @@
                             <th>Description</th>
                             <th>Materials</th>
                             <th>Unit Cost</th>
-                            <th>Action</th>
                           </thead>
                           <tbody>
                           </tbody>
@@ -110,7 +114,7 @@
 
                 <div class="row">
                   <div class="col-md-12">
-                    <button type="reset" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i></button>
+                    <!-- <button type="reset" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i></button> -->
                     <button type="submit" class="btn bg-blue btn-flat pull-right">Submit</button>
                   </div>
                 </div>

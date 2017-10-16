@@ -76,9 +76,8 @@
 											<table id="MostJobs" class="table table-striped table-bordered responsive">
 													<thead>
 															<tr>
-																	<th>Job</th>
-																	<th>Description</th>
-																	<th class="text-right">No. of times done</th>
+																	<th>Employee</th>
+																	<th>No of  Jobs done</th>
 															</tr>
 													</thead>
 													<tbody>

@@ -85,6 +85,35 @@ class QueryController extends Controller
       return Response::json(array('material'=>$arrMatName, 'materialDesc'=>$arrMatDesc, 'count'=>$arrCounter));
     }
 
+    public function viewTable3Info()
+    {
+      $mostJobs = DB::table('tbljobticket')
+              ->select('strEmployeeID')
+              ->groupBy('strEmployeeID')
+              ->orderByRaw('COUNT(*) DESC')
+              ->pluck('strEmployeeID')
+              ->toArray();
+
+      $arrEmployeeName = [];
+      $arrCounter = [];
+      $ct = 0;
+      foreach ($mostJobs as $empID) {
+        $getEmpName = DB::table('tblemployee')
+                  ->select('strEmployeeFirst')
+                  ->where('strEmployeeID', $empID)
+                  ->pluck('strEmployeeFirst')
+                  ->toArray();
+
+        array_push($arrEmployeeName,$getEmpName);
+        $counter = DB::table('tbljobticket')->where('strEmployeeID', $empID)->count();
+
+        $arrCounter[$ct] = $counter;
+        $ct = $ct + 1;
+      }
+
+      return Response::json(array('empname'=>$arrEmployeeName,'count'=>$arrCounter));
+    }
+
     public function viewTable4Info()
     {
       $mostCustomer = DB::table('tblcustpurchase')

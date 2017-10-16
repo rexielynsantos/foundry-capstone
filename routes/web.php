@@ -225,6 +225,7 @@ Route::post('/transaction/customers-edit','Admin\CustomerController@editCustomer
 Route::post('/transaction/customers-update','Admin\CustomerController@updateCustomer');
 Route::post('/transaction/variance-info','Admin\CustomerController@varianceInfo');
 Route::post('/transaction/quotation-new','Admin\CustomerController@newQuote');
+Route::post('/transaction/estimate-recycle','Admin\CustomerController@estimateRecycle');
 Route::post('/transaction/quotation-add','Admin\CustomerController@addQuote');
 Route::post('/transaction/customerPurchase-add','Admin\PurchaseController@addPurchase');
 Route::post('/transaction/purchase-customerName-get','Admin\PurchaseController@customerName');
@@ -288,6 +289,7 @@ Route::get('/queries/queries', function () {
 
 Route::get('/transaction/query-table1-info','Admin\QueryController@viewTable1Info');
 Route::get('/transaction/query-table2-info','Admin\QueryController@viewTable2Info');
+Route::get('/transaction/query-table3-info','Admin\QueryController@viewTable3Info');
 Route::get('/transaction/query-table4-info','Admin\QueryController@viewTable4Info');
 
 

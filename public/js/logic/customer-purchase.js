@@ -22,6 +22,14 @@ $(document).ready(function(){
     autoclose: true
   });
 
+  $('#targetDate').change(function(){
+    var fromm = $('#orderDate').val()
+    var too = $('#targetDate').val()
+    if (fromm > too) {
+      $('#targetDate').val('')
+    }
+  });
+
   $('#addCart').prop('disabled', true);
 
     $('#changetabbutton').click(function(e){
@@ -170,7 +178,7 @@ $("#quoteRefer").change(function(){
      });
   });
 
-  $('#addvar').click(function(){  
+  $('#addvar').click(function(){
     var varianceText = $('#varianceTextID').val()
     var varianceValuee = $('#prodVarSelect').val()
     // alert(varianceText)
@@ -222,10 +230,10 @@ $("#quoteRefer").change(function(){
         rmrks :submitRemarks
       },
       success: function(data) {
-        $('#addedID').val($('#maxCustPurchase').text());
-        $('#modalAdded').modal('show');
+        // $('#addedID').val($('#maxCustPurchase').text());
+        // $('#modalAdded').modal('show');
 
-        // window.location.href = '/transaction/customerPurchase-new'
+        window.location.href = '/transaction/customerPurchases'
       }
     });
   });
