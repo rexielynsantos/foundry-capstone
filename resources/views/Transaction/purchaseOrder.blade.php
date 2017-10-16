@@ -46,9 +46,9 @@
                  <tr>
                   <td>{{$purch->strPurchaseID}}</td>
                   <td>{{$purch->supplier->strSupplierName}} </td>
-                   <td>
+                   <td> 
                   @foreach($purch->material as $mat)
-                  <li width="35%"> {{$mat->details->strMaterialName}}</li>
+                  <li width="35%"> {{$mat->details->strMaterialName}} ( {{$mat->details->variant->intVariantQty}}{{$mat->details->variant->unit->strUOMName}} )</li>
                   @endforeach
                   </td>
                   <td> {{$purch->paymentterm->strPaymentTermName}} </td>

@@ -34,7 +34,7 @@
                  </div>
               </form>
            </div>
-           <div class="col-md-4">
+           <div class="col-md-3">
                 <label>Starting Date:</label>
                  <div class="input-group">
                    <div class="input-group-addon">
@@ -43,7 +43,7 @@
                    <input type="text" class="form-control pull-right" id="StartDate">
                  </div>
            </div>
-           <div class="col-md-4">
+           <div class="col-md-3">
              <label>End Date:</label>
               <div class="input-group">
                 <div class="input-group-addon">
@@ -51,6 +51,9 @@
                 </div>
                 <input type="text" class="form-control pull-right" id="EndDate">
               </div>
+           </div>
+           <div class="col-md-2">
+             <button type="button" id="searchDate">Search..</button>
            </div>
        </div>
 

@@ -23,20 +23,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="treeview">
-              <a href="#"><i class="fa fa-circle-o"></i> Production Stages
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="/maintenance/substage"><i class="fa fa-plus"></i> Sub-stage</a></li>
-                <li class="treeview">
-                  <a href="/maintenance/stage"><i class="fa fa-plus"></i> Stage </a>
-
-                </li>
-              </ul>
-            </li>
+            
 
             <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> Measurements
@@ -226,12 +213,16 @@
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
+ 
+            
           <ul class="treeview-menu">
             <li><a href="/maintenance/paymentTerms"><i class="fa fa-plus"></i> Payment Terms </a></li>
             <li><a href="/maintenance/dataReactivation"><i class="fa fa-plus"></i> Data Reactivation </a></li>
              <!-- <li><a href="/maintenance/userRole"><i class="fa fa-plus"></i> User Role</a></li> -->
              <li><a href="/utilities/terms-condition"><i class="fa fa-plus"></i> Terms and Condition </a></li>
              <li><a href="/maintenance/module"><i class="fa fa-plus"></i> Module </a></li>
+             <li><a href="/maintenance/substage"><i class="fa fa-plus"></i> Sub-stage</a></li>
+             <li><a href="/maintenance/stage"><i class="fa fa-plus"></i> Stage</a></li>
 
           </ul>
         </li>
