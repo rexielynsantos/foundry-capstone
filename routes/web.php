@@ -303,6 +303,8 @@ Route::post('/utilities/terms-condition-delete','Admin\TermsConditionController@
 
 Route::get('/transaction/estimate','Admin\EstimateController@viewQuote');
 Route::get('/transaction/estimate-table','Admin\EstimateController@viewEstimate');
+Route::post('/transaction/estimate-update-approve','Admin\EstimateController@updateApprove');
+Route::post('/transaction/estimate-update-disapprove','Admin\EstimateController@updateDisapprove');
 Route::get('/transaction/estimate-add-quote','Admin\EstimateController@viewAddEstimate');
 Route::post('/transaction/quoteRequest-view','Admin\EstimateController@editQuote');
 Route::post('/transaction/cart','Admin\EstimateController@addCart');
@@ -388,7 +390,20 @@ Route::post('/transaction/inspection-add','Admin\ProductInspectionController@add
 Route::post('/transaction/inspection-edit','Admin\ProductInspectionController@editInspection');
 Route::post('/transaction/inspection-update','Admin\ProductInspectionController@updateInspection');
 
+Route::post('/transaction/monitoring-tbl','Admin\ProductionMonitoringController@monitoringtbl');
 Route::post('/transaction/monitoring-tbl1','Admin\ProductionMonitoringController@monitoringtbl1');
+Route::post('/transaction/monitoring-tbl2','Admin\ProductionMonitoringController@monitoringtbl2');
+Route::post('/transaction/monitoring-tbl3','Admin\ProductionMonitoringController@monitoringtbl3');
+Route::post('/transaction/monitoring-tbl4','Admin\ProductionMonitoringController@monitoringtbl4');
+Route::post('/transaction/monitoring-tbl5','Admin\ProductionMonitoringController@monitoringtbl5');
+Route::post('/transaction/monitoring-tbl6','Admin\ProductionMonitoringController@monitoringtbl6');
+Route::post('/transaction/monitoring-tbl7','Admin\ProductionMonitoringController@monitoringtbl7');
+Route::post('/transaction/monitoring-tbl8','Admin\ProductionMonitoringController@monitoringtbl8');
+Route::post('/transaction/monitoring-tbl9','Admin\ProductionMonitoringController@monitoringtbl9');
+Route::post('/transaction/monitoring-tbl10','Admin\ProductionMonitoringController@monitoringtbl10');
+Route::post('/transaction/monitoring-tbl11','Admin\ProductionMonitoringController@monitoringtbl11');
+Route::post('/transaction/monitoring-tbl12','Admin\ProductionMonitoringController@monitoringtbl12');
+Route::post('/transaction/monitoring-tbl13','Admin\ProductionMonitoringController@monitoringtbl13');
 Route::post('/transaction/monitoring-add','Admin\ProductionMonitoringController@addMonitoring');
 Route::post('/transaction/monitoring-edit','Admin\ProductionMonitoringController@editMonitoring');
 Route::post('/transaction/monitoring-update','Admin\ProductionMonitoringController@updateMonitoring');

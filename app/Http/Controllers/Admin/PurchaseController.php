@@ -116,7 +116,7 @@ class PurchaseController extends Controller
 
   public function getQuote()
   {
-    $quotes = DB::table('tblquotation')->get();
+    $quotes = DB::table('tblquotation')->where('strQuoteStatus', 'Approved')->get();
 
     return Response::json($quotes);
   }
@@ -170,7 +170,7 @@ class PurchaseController extends Controller
         'dtDeliveryDate' => $request->input('targetDate'),
         'strCustomerID' => $request->input('customer_id'),
         'strQuoteID' => $request->input('quote_ref'),
-        'strSOStatus' => 'Pending',
+        'strSOStatus' => 'On-Process',
         'created_at' => $request->input('created_at'),
     ]);
 

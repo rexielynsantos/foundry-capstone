@@ -18,26 +18,30 @@ class StageDetailSeeder extends Seeder
       ]);
       DB::table('tblstagedetail')->insert([
       'strStageID' => 'ST00001',
-      'strSubStageID' => 'SUBST00018',
+      'strSubStageID' => 'SUBST00005',
+      ]);
+      DB::table('tblstagedetail')->insert([
+      'strStageID' => 'ST00001',
+      'strSubStageID' => 'SUBST00017',
       ]);
       //mold shop
 
 
       DB::table('tblstagedetail')->insert([
       'strStageID' => 'ST00002',
-      'strSubStageID' => 'SUBST00002',
+      'strSubStageID' => 'SUBST00001',
       ]);
       DB::table('tblstagedetail')->insert([
+      'strStageID' => 'ST00002',
+      'strSubStageID' => 'SUBST00002',
+      ]);
+       DB::table('tblstagedetail')->insert([
       'strStageID' => 'ST00002',
       'strSubStageID' => 'SUBST00003',
       ]);
        DB::table('tblstagedetail')->insert([
       'strStageID' => 'ST00002',
-      'strSubStageID' => 'SUBST00001',
-      ]);
-       DB::table('tblstagedetail')->insert([
-      'strStageID' => 'ST00002',
-      'strSubStageID' => 'SUBST00005',
+      'strSubStageID' => 'SUBST00017',
       ]);
 
        //fettling
@@ -78,6 +82,60 @@ class StageDetailSeeder extends Seeder
       DB::table('tblstagedetail')->insert([
       'strStageID' => 'ST00003',
       'strSubStageID' => 'SUBST00016',
+      ]);
+      DB::table('tblstagedetail')->insert([
+      'strStageID' => 'ST00003',
+      'strSubStageID' => 'SUBST00017',
+      ]);
+
+      DB::table('tblstagedetail')->insert([
+      'strStageID' => 'ST00004',
+      'strSubStageID' => 'SUBST00017',
+      ]);
+
+      DB::table('tblstagedetail')->insert([
+      'strStageID' => 'ST00005',
+      'strSubStageID' => 'SUBST00017',
+      ]);
+
+      DB::table('tblstagedetail')->insert([
+      'strStageID' => 'ST00006',
+      'strSubStageID' => 'SUBST00017',
+      ]);
+
+      DB::table('tblstagedetail')->insert([
+      'strStageID' => 'ST00007',
+      'strSubStageID' => 'SUBST00017',
+      ]);
+
+      DB::table('tblstagedetail')->insert([
+      'strStageID' => 'ST00008',
+      'strSubStageID' => 'SUBST00017',
+      ]);
+
+      DB::table('tblstagedetail')->insert([
+      'strStageID' => 'ST00009',
+      'strSubStageID' => 'SUBST00017',
+      ]);
+
+      DB::table('tblstagedetail')->insert([
+      'strStageID' => 'ST00010',
+      'strSubStageID' => 'SUBST00017',
+      ]);
+
+      DB::table('tblstagedetail')->insert([
+      'strStageID' => 'ST00011',
+      'strSubStageID' => 'SUBST00017',
+      ]);
+
+      DB::table('tblstagedetail')->insert([
+      'strStageID' => 'ST00012',
+      'strSubStageID' => 'SUBST00017',
+      ]);
+
+      DB::table('tblstagedetail')->insert([
+      'strStageID' => 'ST00013',
+      'strSubStageID' => 'SUBST00017',
       ]);
     }
 }

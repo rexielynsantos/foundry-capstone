@@ -21,12 +21,12 @@ $(document).ready(function(){
           var btn = btn1 + btn2;
           var x='';
             for (var index = 0; index < data[index].quotation.quoteprodvariant.length; index++) {
-              var element = data[index].quotation.quoteprodvariant[index].details4.strProductName;
+              var element = data[i].quotation.quoteprodvariant[index].details4.strProductName;
               x += '<li style="list-style-type:circle">'+element+'</li>'
             }
             var y='';
             for (var index = 0; index < data[index].quotation.quoteprodvariant.length; index++) {
-              var element = data[index].quotation.quoteprodvariant[index].dblRequestCost;
+              var element = data[i].quotation.quoteprodvariant[index].dblRequestCost;
               y += '<li style="list-style-type:circle">'+element+'</li>'
             }
 
@@ -34,7 +34,7 @@ $(document).ready(function(){
             data[i].strCustPurchaseID,
             data[i].customer.strCompanyName,
             x,
-            y, 
+            y,
             data[i].dtDeliveryDate,
             btn
           ]).draw(true);

@@ -237,7 +237,7 @@ $(document).on('submit', '#matspec_form', function(e){
               result.product.producttype.strProductTypeName,
               sta,
               mat,
-            ]).draw(false);
+            ]).draw(true);
 
             varArr = [];
             qty = [];

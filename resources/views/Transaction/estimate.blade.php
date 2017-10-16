@@ -12,7 +12,7 @@
     <section class="content">
 
      <div class="row">
-   
+
 
     <div class="col-md-12">
 
@@ -53,7 +53,7 @@
                               <th width="10%"> Quote No.  </th>
                               <th width="20%"> Customer </th>
                               <th width="10%"> Shipping City</th>
-                              <th width="20%"> Contact Person  </th>
+                              <th width="30%"> Contact Person  </th>
                               <th> Status </th>
                               <th> Actions </th>
                             </thead>
@@ -61,9 +61,15 @@
                               @foreach ($quote as $qt)
                               <tr>
                                 <td>{{ $qt->strQuoteID }}</td>
-                                <td>{{ $qt->strCompanyName }}</td>
-                                <td>{{ $qt->strCustCity }}</td>
-                                <td>{{ $qt->strContactPersonName }}</td>
+                                <td>{{ $qt->customer->strCompanyName }}</td>
+                                <td>{{ $qt->customer->strCustCity }}</td>
+                                <td>
+                                  @foreach($qt->customer->contact as $qts)
+                                  <li>
+                                  {{ $qts->strContactPersonName }}
+                                </li>
+                                @endforeach
+                                </td>
                                 <td>{{ $qt->strQuoteStatus }}</td>
                                 <td>
                                   <button type="button" id="{{$qt->strQuoteID}}" onclick="approveModal(this.id)" class="btn btn-success"><i class="fa fa-check"></i></button>
@@ -81,7 +87,7 @@
                                <th width="10%"> Quote No.  </th>
                               <th width="20%"> Customer </th>
                               <th width="10%"> Shipping City</th>
-                              <th width="20%"> Contact Person  </th>
+                              <th width="30%"> Contact Person  </th>
                               <th> Status </th>
                               <th> Actions </th>
                             </thead>
@@ -89,9 +95,17 @@
                               @foreach ($quoteApproved as $qta)
                               <tr>
                                 <td>{{ $qta->strQuoteID }}</td>
-                                <td>{{ $qta->strCompanyName }}</td>
-                                <td>{{ $qta->strCustCity }}</td>
-                                <td>{{ $qta->strContactPersonName }}</td>
+                                <td>{{ $qta->customer->strCompanyName }}</td>
+                                <td>{{ $qta->customer->strCustCity }}</td>
+                             
+                                 <td>
+                                  @foreach($qta->customer->contact as $qtas)
+                                  <li>
+                                  {{ $qtas->strContactPersonName }}
+                                </li>
+                                @endforeach
+                                </td>
+                                
                                 <td>{{ $qta->strQuoteStatus }}</td>
                                 <td>
                                   <button type="button" id="pdfestimate" class="btn btn-primary btn-flat" ><i class="fa fa-print"></i> </button>
@@ -170,80 +184,6 @@
 
 </form>
 
-<div class="modal fade" style="margin-top:50px" id="viewAndUpdateQuoteModal" role="dialog">
-      <div class="col-md-8 col-md-offset-2">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span></button>
-                <center>
-              <h4 class="modal-title">Quote No. <input type="text" name="quoteID" id="quoteID" style="border:none; background:white;" disabled></h4>
-              </center>
-            </div>
-            <form class="" id="mod_form"  role="form" data-toggle="validator">
-            <div class="modal-body">
-              <b>
-               <input type="text" name="companyName" id="companyName" style="border:none; background-color:white;" disabled> <br>
-               <input type="text" name="custStreet" id="custStreet" style="border:none;background-color:white;"disabled> <br>
-               <input type="text" name="custCity" id="custCity" style="border:none;background-color:white;"disabled>
-               </b>
-
-               <br><br>
-
-               Attention: <input type="text" name="contactPerson" id="contactPerson" style="border:none;background-color:white;"disabled> <br> <br>
-
-                <!-- <input type="text" name="quoteDesc" id="quoteDesc" style="border:none;"disabled><br> -->
-
-               <table id="viewAndUpdateQuoteTable" class="display">
-                 <thead>
-                   <tr>
-                     <th class='hidden'>ID</th>
-                     <th width = "30%"> Description </th>
-                     <th width = "20%"> Quantity </th>
-                     <th width = "20%"> Amount </th>
-                   </tr>
-                 </thead>
-                 <tbody>
-
-                 </tbody>
-               </table>
-               <!-- <tr>
-                 <td colspan="6"> -->
-                  <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="box-body">
-                     <b> Input Job Order Details: </b>
-                        <table id="addJOTable" class="display">
-                          <thead>
-                            <tr>
-                              <th class='hidden'>ID</th>
-                              <th> Job Description </th>
-                              <th> Qty </th>
-                              <th> Remarks </th>
-                              <th> Action </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-
-                          </tbody>
-
-                        </table>
-                    </div>
-                  </div>
-               <!-- </td>
-             </tr> -->
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn bg-default btn-flat pull-right" onclick="htmltopdf()"><i class="fa fa-print"></i> <a style="color:black">Print</a> </button>
-              <!-- <button type="submit" class="btn bg-blue btn-flat pull-right"><i class="glyphicon glyphicon-ok"></i> &nbsp;Save</button> -->
-            </div>
-            <!-- </form> -->
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-
-
 
   <div class="modal fade" id="approveQuoteModal" style="margin-top: 60px">
           <div class="modal-dialog">
@@ -252,11 +192,30 @@
 
               </div>
               <div class="modal-body" align="center">
-                  <h4 style="text-align:center" class="modal-title">Approve Product Costing 00001?</h4>
+                  <h4 style="text-align:center" class="modal-title">Approve <input type="text" id="quoteModalID" readonly style="border:none;"></h4>
               </div>
               <div class="modal-footer">
                  <button class="btn bg-white btn-flat pull-right" data-dismiss="modal">No</button>
-                 <button  type="button" class="btn bg-blue btn-flat pull-right">Yes</button>
+                 <button type="button" id="approveYes" class="btn bg-blue btn-flat pull-right">Yes</button>
+             </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+  </div>
+
+  <div class="modal fade" id="disapproveQuoteModal" style="margin-top: 60px">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+
+              </div>
+              <div class="modal-body" align="center">
+                  <h4 style="text-align:center" class="modal-title">Disapprove <input type="text" id="quoteModalIDD" readonly style="border:none;"></h4>
+              </div>
+              <div class="modal-footer">
+                 <button class="btn bg-white btn-flat pull-right" data-dismiss="modal">No</button>
+                 <button type="button" id="disapproveYes" class="btn bg-blue btn-flat pull-right">Yes</button>
              </div>
             </div>
             <!-- /.modal-content -->

@@ -38,7 +38,7 @@ class SubStageTableSeeder extends Seeder
       ]);
        DB::table('tblsubstage')->insert([
         'strSubStageID' => 'SUBST00005',
-        'strSubStageName' => 'QA Inspection/Repair',
+        'strSubStageName' => 'Cleaning',
         'dblTimeRequired' => 3.5,
         'strSubStageDesc' => 'for quality assurance',
         'strStatus' => 'Active',
@@ -134,15 +134,7 @@ class SubStageTableSeeder extends Seeder
       ]);
        DB::table('tblsubstage')->insert([
         'strSubStageID' => 'SUBST00017',
-        'strSubStageName' => 'QA Packing',
-        'dblTimeRequired' => 3,
-        'strSubStageDesc' => 'for quality assurance',
-        'strStatus' => 'Active',
-        'created_at' => '2000-01-01 16:00:00',
-      ]);
-        DB::table('tblsubstage')->insert([
-        'strSubStageID' => 'SUBST00018',
-        'strSubStageName' => 'Cleaning',
+        'strSubStageName' => 'QA',
         'dblTimeRequired' => 3,
         'strSubStageDesc' => 'for quality assurance',
         'strStatus' => 'Active',
@@ -150,3 +142,4 @@ class SubStageTableSeeder extends Seeder
       ]);
     }
 }
+ 

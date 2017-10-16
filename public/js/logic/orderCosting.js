@@ -93,7 +93,7 @@ $(document).ready(function(){
               tbl.row.add([
                 result[i].strMaterialID,
                 result[i].strMaterialName,
-                '<select id="uomSelect'+result[i].strMaterialName.replace(/ /g, '')+'" style="width: 100%;" class="select2" required></select>',
+                result[i].strUOMName+'<input type="text" id="uomSelect'+result[i].strMaterialName.replace(/ /g, '')+'" value="'+result[i].strUOMID+'" hidden>',
                 '<input type="text" class="form control validate number" id="unitCost'+result[i].strMaterialName.replace(/ /g, '')+'" onkeyup="totalCost()" required placeholder="0.00">',
                 '<input type="text" class="form control validate number" id="usage'+result[i].strMaterialName.replace(/ /g, '')+'" required onkeyup="totalCost()" placeholder="0.0000">',
                 '<input type="text" id="cost'+result[i].strMaterialName.replace(/ /g, '')+'" readonly style="border:none;">',
@@ -104,24 +104,24 @@ $(document).ready(function(){
             alert('There`s no material in this variance code')
           }
 
-          //AJAX GET UOM
-            $.ajax({
-                url: '/maintenance/costing-uom-get',
-                type: 'GET',
-                success: function(uom)
-                {
-                  var uomArr = [];
-                  var table = $('#varianceTable').dataTable();
-                  var tblrowd = table.fnGetData().length;
-                  uomArr =  table.fnGetData();
-                  for (var i = 0; i < tblrowd; i++) {
-                    $("#uomSelect"+uomArr[i][1].replace(/ /g,'')).empty();
-                    for (var j = 0; j < uom.length; j++) {
-                      $(`<option value=`+uom[j].strUOMID+`>`+uom[j].strUOMName+`</option>`).appendTo("#uomSelect"+uomArr[i][1].replace(/ /g,''));
-                    }
-                  }
-                }
-            });
+          // //AJAX GET UOM
+          //   $.ajax({
+          //       url: '/maintenance/costing-uom-get',
+          //       type: 'GET',
+          //       success: function(uom)
+          //       {
+          //         var uomArr = [];
+          //         var table = $('#varianceTable').dataTable();
+          //         var tblrowd = table.fnGetData().length;
+          //         uomArr =  table.fnGetData();
+          //         for (var i = 0; i < tblrowd; i++) {
+          //           $("#uomSelect"+uomArr[i][1].replace(/ /g,'')).empty();
+          //           for (var j = 0; j < uom.length; j++) {
+          //             $(`<option value=`+uom[j].strUOMID+`>`+uom[j].strUOMName+`</option>`).appendTo("#uomSelect"+uomArr[i][1].replace(/ /g,''));
+          //           }
+          //         }
+          //       }
+          //   });
         }
     });
 

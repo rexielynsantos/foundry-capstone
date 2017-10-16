@@ -107,14 +107,14 @@
             <div class="tab-pane" id="tab_2">
               <div class="row">
                 <div class="col-md-4">
-                <label> Surface Area </label>
+                <label> Surface Area <span style="color:red">*</span></label>
                   <div class="form-group">
                     <input type="text" id="surfaceArea" class="form-control validate number" placeholder="0.00">
                   </div>
                 </div>
 
                 <div class="col-md-4">
-                  <label> Volume: </label>
+                  <label> Volume: <span style="color:red">*</span></label>
                   <div class="form-group">
                     <input type="text" id="volume" class="form-control validate number">
                   </div>
@@ -123,26 +123,26 @@
                <hr>
               <div class="row">
                 <div class="col-md-6">
-                  <label> Weight </label>
+                  <label> Weight <span style="color:red">*</span></label>
                 </div>
               </div>
 
              <div class="row">
               <div class="col-md-6" style="margin-left: 20px">
-                <label> As Wax: </label>
+                <label> As Wax: <span style="color:red">*</span></label>
               </div>
              </div>
 
               <div class="row">
                 <div class="col-md-4" style="margin-left: 25px">
-                <label style="color:grey;font-size: 10pt"> Non-Filled </label>
+                <label style="color:grey;font-size: 10pt"> Non-Filled <span style="color:red">*</span></label>
                   <div class="form-group">
                     <input type="text" id="weightNon" class="form-control validate number" placeholder="0.00">
                   </div>
                 </div>
 
                 <div class="col-md-4" style="margin-left: 25px">
-                  <label style="color:grey;font-size: 10pt"> Filled </label>
+                  <label style="color:grey;font-size: 10pt"> Filled<span style="color:red">*</span> </label>
                   <div class="form-group">
                     <input type="text" id="weightFilled" class="form-control validate number" placeholder="0.00">
                   </div>
@@ -150,14 +150,14 @@
               </div>
               <div class="row">
                 <div class="col-md-4" style="margin-left: 25px">
-                <label style="color:grey;font-size: 10pt"> Soluble </label>
+                <label style="color:grey;font-size: 10pt"> Soluble<span style="color:red">*</span> </label>
                   <div class="form-group">
                     <input type="text" id="soluble" class="form-control validate number" placeholder="0.00">
                   </div>
                 </div>
 
                   <div class="col-md-4" style="margin-left: 25px">
-                <label style="color:grey;font-size: 10pt"> Reclaimed </label>
+                <label style="color:grey;font-size: 10pt"> Reclaimed<span style="color:red">*</span> </label>
                   <div class="form-group">
                     <input type="text" id="reclaimed" class="form-control validate number" placeholder="0.00">
                   </div>
@@ -166,7 +166,7 @@
 
               <div class="row">
                 <div class="col-md-4" style="margin-left: 20px">
-                  <label> As Metal: </label>
+                  <label> As Metal<span style="color:red">*</span> </label>
                   <div class="form-group">
                     &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="asMetal" class="form-control validate number">
                   </div>
@@ -185,7 +185,7 @@
                <div class="tab-pane" id="tab_3">
                 <div class="row">
                   <div class="col-md-4">
-                    <label> Runner-Type </label>
+                    <label> Runner-Type<span style="color:red">*</span> </label>
                       <div class="form-group">
                         <input type="text" id="runnerType" class="form-control validate number" placeholder="0.00">
                       </div>
@@ -194,14 +194,14 @@
 
                <div class="row" style="margin-left: 20px;color:grey">
                 <div class="col-md-3">
-                 <label> Area: </label>
+                 <label> Area<span style="color:red">*</span></label>
                   <div class="form-group">
                     <input type="text" id="area" class="form-control validate number" placeholder="0.00">
                   </div>
                 </div>
 
                 <div class="col-md-3">
-                  <label> Volume: </label>
+                  <label> Volume<span style="color:red">*</span> </label>
                   <div class="form-group">
                     <input type="text" id="svolume" class="form-control validate number">
                   </div>
@@ -209,7 +209,7 @@
 
 
                 <div class="col-md-3">
-                  <label> Weight: </label>
+                  <label> Weight<span style="color:red">*</span> </label>
                   <div class="form-group">
                     <input type="text" id="weight" class="form-control validate number">
                   </div>
@@ -218,7 +218,7 @@
 
                 <div class="row">
                   <div class="col-md-4">
-                  <label> Sprue-Type </label>
+                  <label> Sprue-Type<span style="color:red">*</span> </label>
                     <div class="form-group">
                       <input type="text" id="sprue" class="form-control validate number" placeholder="0.00">
                     </div>
@@ -227,7 +227,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-4">
-                  <label> Cluster Area </label>
+                  <label> Cluster Area<span style="color:red">*</span> </label>
                     <div class="form-group">
                       <input type="text" id="cluster" class="form-control validate number" placeholder="0.00">
                     </div>
@@ -236,20 +236,20 @@
 
                  <div class="row">
                   <div class="col-md-4">
-                    <label> Cluster Weight </label>
+                    <label> Cluster Weight<span style="color:red">*</span> </label>
                   </div>
                 </div>
 
                 <div class="row" style="margin-left: 20px;color:grey">
                   <div class="col-md-3">
-                  <label> As Wax </label>
+                  <label> As Wax<span style="color:red">*</span> </label>
                     <div class="form-group">
                       <input type="text" id="wax" class="form-control validate number" placeholder="0.00">
                     </div>
                   </div>
 
                   <div class="col-md-3">
-                    <label> As Metal </label>
+                    <label> As Metal<span style="color:red">*</span> </label>
                     <div class="form-group">
                       <input type="text" id="asMetal" class="form-control validate number" placeholder="0.00">
                     </div>
@@ -259,7 +259,7 @@
 
                 <div class="row">
                   <div class="col-md-4">
-                  <label> Pcs per Cluster </label>
+                  <label> Pcs per Cluster<span style="color:red">*</span> </label>
                     <div class="form-group">
                       <input type="text" id="pcsPerCluster" class="form-control validate number" placeholder="0">
                     </div>
@@ -268,13 +268,13 @@
 
                 <div class="row">
                   <div class="col-md-4">
-                    <label> Prod. Efficiency </label>
+                    <label> Prod. Efficiency<span style="color:red">*</span> </label>
                   </div>
                 </div>
 
                  <div class="row" style="margin-left: 20px;color:grey">
                   <div class="col-md-3">
-                  <label> at Injection </label>
+                  <label> at Injection<span style="color:red">*</span> </label>
                     <div class="form-group">
                       <input type="text" id="atInjection" class="form-control validate number" placeholder="0.00">
                     </div>
@@ -288,14 +288,14 @@
                   </div>
 
                   <div class="col-md-3">
-                    <label> at Coating  </label>
+                    <label> at Coating<span style="color:red">*</span>  </label>
                     <div class="form-group">
                       <input type="text" id="atCoating" class="form-control validate number" placeholder="0.00">
                     </div>
                   </div>
 
                   <div class="col-md-3">
-                    <label> at Casting  </label>
+                    <label> at Casting<span style="color:red">*</span>  </label>
                     <div class="form-group">
                       <input type="text" id="atCasting" class="form-control validate number" placeholder="0.00">
                     </div>
@@ -314,7 +314,7 @@
               <div class="tab-pane" id="tab_4">
                  <div class="row">
                   <div class="col-md-12">
-                   <label> Product Specification </label>
+                   <label> Product Specification<span style="color:red">*</span> </label>
                   </div>
                 </div>
                <div class="row">
@@ -341,8 +341,8 @@
                         <th class="hidden">ID</th>
                         <th>Material</th>
                         <th>U/M</th>
-                        <th>Unit Cost</th>
-                        <th> Usage </th>
+                        <th>Unit Cost<span style="color:red">*</span></th>
+                        <th> Usage<span style="color:red">*</span> </th>
                         <th>Cost</th>
                       </thead>
                       <tbody>

@@ -425,6 +425,7 @@ class CustomerController extends Controller
     $varianceInfo = DB::table('tblmatspec')
         ->leftjoin('tblmatspecdetail', 'tblmatspecdetail.strMatSpecID' , 'tblmatspec.strMatSpecID')
         ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', 'tblmatspecdetail.strMaterialID')
+        ->leftjoin('tbluom', 'tbluom.strUOMID', 'tblmaterial.strUOMID')
         ->where('tblmatspec.strMatSpecID', $request->variance_code)
         ->get();
 

@@ -54,14 +54,14 @@ class ReturnController extends Controller
 
   public function addReturn(Request $request)
   {
+    // dd($request->all());
     $id = $request->input('id');
     DB::table('tblreturnheader')
         ->insert([
           'strReturnID' => $id,
           'strSupplierID' => $request->input('supplier_id'),
           'strReceivePurchaseID' => $request->input('receive_id'),
-          'dateReturned' => $request->input('return_date'),
-          'created_at' => $request->input('created_at')
+          'dateReturned' => $request->input('return_date')
         ]);
 
     DB::table('tblreturnmaterial')
@@ -71,19 +71,66 @@ class ReturnController extends Controller
           'created_at' => $request->input('created_at')
         ]);
 
-    // $receive = $request->input('receive_id');
+    $receive = $request->input('receive_id');
     $returned = $request->input('qty_returned');
     $ct = 0;
     foreach ($request->mat_id as $mat) {
+
+      $totqty = DB::table('tblreceivepurchasedetail')
+              ->where('strReceivePurchaseID', $receive)
+              ->where('strMaterialID', $mat)
+              ->first()
+              ->quantityReceived;
+
+      // dd($totqty);
+      $initPurchID = DB::table('tblreceivepurchase')
+              ->where('strReceivePurchaseID', $receive)
+              ->first()
+              ->strPurchaseID;
+
+      $initqty = DB::table('tblpurchmatvariantdetail')
+              ->where('strPurchaseID', $initPurchID)
+              ->where('strMaterialID', $mat)
+              ->first()
+              ->totalQty;
+
+      $updateqty = $totqty - $returned[$ct];
+      $addQty =  $returned[$ct] + $initqty;
+
+//UPDATE QTY ON TABLES
+      DB::table('tblreceivepurchasedetail')
+              ->where('strReceivePurchaseID', $receive)
+              ->where('strMaterialID', $mat)
+              ->update([
+                'quantityReceived' => $updateqty
+              ]);
+
+      DB::table('tblpurchmatvariantdetail')
+              ->where('strPurchaseID', $initPurchID)
+              ->where('strMaterialID', $mat)
+              ->update([
+                'totalQty' => $addQty
+              ]);
+//END UPDATE QTY ON TABLES
+      DB::table('tblpurchase')
+              ->where('strPurchaseID', $initPurchID)
+              ->update([
+                'strPStatus' => 'Partially Delivered'
+              ]);
+
       DB::table('tblreturndetail')
           ->insert([
             'strReturnID' => $id,
             'strMaterialID' => $mat,
-            // 'strReceivePurchaseID' => $receive[$ct],
             'quantityReturned' => $returned[$ct],
             'isActive' => 1
           ]);
       $ct = $ct + 1;
+      $totqty = '';
+      $initPurchID = '';
+      $initqty = '';
+      $updateqty = '';
+      $addQty = '';
     }
 
   }

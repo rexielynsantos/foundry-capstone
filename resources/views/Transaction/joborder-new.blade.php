@@ -172,7 +172,7 @@
               <div class="modal-header">
                 <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
                 <!--   <span aria-hidden="true">&times;</span></button> -->
-                <h4 style="text-align:center" class="modal-title">Successfully sent Job Order for approval!</h4>
+                <h4 style="text-align:center" class="modal-title">Successfully sent Job Order!</h4>
               </div>
               <div class="modal-body" align="center">
                 <input type="text" id="addedJobOrderID" style="background-color:white; border:none; font-size:100%;" disabled>

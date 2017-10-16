@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
+use App\Models\CustContact;
 use App\Models\Quotation;
 use App\Models\QuoteRequest;
 use App\Models\MatSpec;
@@ -21,21 +23,49 @@ class EstimateController extends Controller
 
     public function viewQuote()
     {
-      $quote = DB::table('tblquotation')
-        ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblquotation.strCustomerID')
-        ->leftjoin('tblcustcontact', 'tblcustcontact.strCustomerID', 'tblcustomer.strCustomerID')
-        ->where('tblquotation.strQuoteStatus', '=', "Pending")
-        ->get();
 
-      $quoteApproved = DB::table('tblquotation')
-        ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblquotation.strCustomerID')
-        ->leftjoin('tblcustcontact', 'tblcustcontact.strCustomerID', 'tblcustomer.strCustomerID')
-        ->where('tblquotation.strQuoteStatus', '=', "Approved")
+      $quote =Quotation::with(['custpurchase', 'quoteprodvariant', 'customer.contact', 'termscondition', 'costing'])
+        ->where('tblquotation.strQuoteStatus', '=', "For Approval")
         ->get();
+      $quoteApproved =Quotation::with(['custpurchase', 'quoteprodvariant', 'customer', 'termscondition', 'costing'])
+      ->where('tblquotation.strQuoteStatus', '=', "Approved")
+      ->get();
+
+     // $quote = DB::table('tblquotation')
+     //        ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblquotation.strCustomerID')
+     //        ->leftjoin('tblcustcontact', 'tblcustcontact.strCustomerID', 'tblcustomer.strCustomerID')
+     //        ->where('tblquotation.strQuoteStatus', '=', "For Approval")
+     //        ->get();
+
+      // $quoteApproved = DB::table('tblquotation')
+      //   ->leftjoin('tblcustomer', 'tblcustomer.strCustomerID', 'tblquotation.strCustomerID')
+      //   ->leftjoin('tblcustcontact', 'tblcustcontact.strCustomerID', 'tblcustomer.strCustomerID')
+      //   ->where('tblquotation.strQuoteStatus', '=', "Approved")
+      //   ->get();
+
+        // dd($quote);
 
       return view('Transaction.estimate')
       ->with('quoteApproved', $quoteApproved)
-    ->with('quote', $quote);
+      ->with('quote', $quote);
+    }
+
+    public function updateApprove(Request $request)
+    {
+      DB::table('tblquotation')
+          ->where('strQuoteID', $request->quote_id)
+          ->update([
+            'strQuoteStatus' => 'Approved'
+          ]);
+    }
+
+    public function updateDisapprove(Request $request)
+    {
+      DB::table('tblquotation')
+          ->where('strQuoteID', $request->quote_id)
+          ->update([
+            'strQuoteStatus' => 'Disapproved'
+          ]);
     }
 
     public function addCart(Request $request)

@@ -101,7 +101,12 @@
 
          </tbody>
        </table>
-    </div><!-- END OF DIV 1/TABLE1  -->
+    </div><!-- END OF DIV 2/TABLE2  -->
+
+    <!-- START OF DIV 3/TABLE 3  -->
+    <div id="table3" align="center" style="display:none;">
+
+    </div><!-- END OF DIV 3/TABLE3  -->
 
 </section>
 

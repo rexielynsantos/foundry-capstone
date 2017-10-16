@@ -150,8 +150,7 @@ $(document).ready(function(){
                   timeout: 3000,
                   text: '<h4><center>You successfully updated Returned Items!</center></h4>',
                 });
-               table.clear();
-               table.draw();
+               window.location.href = '/transaction/returnItems';
             }
         })
       },

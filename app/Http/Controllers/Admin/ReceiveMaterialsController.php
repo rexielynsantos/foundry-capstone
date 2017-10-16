@@ -58,8 +58,7 @@ class ReceiveMaterialsController extends Controller
                 ->leftjoin('tblpurchmatvariantdetail', 'tblpurchmatvariantdetail.strPurchaseID', '=', 'tblpurchase.strPurchaseID')
                 ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', '=', 'tblpurchmatvariantdetail.strMaterialID')
                 ->where('tblpurchase.strPurchaseID',  $request->po_id)
-                ->where('tblpurchase.strPStatus', 'Pending')
-                ->orWhere('tblpurchase.strPStatus', 'Partial Delivered')
+                ->where('tblpurchase.strPStatus', '!=', 'Complete')
                 ->get();
 
       return Response::json($material);
@@ -69,6 +68,7 @@ class ReceiveMaterialsController extends Controller
     {
       $referencePO = DB::table('tblpurchase')
               ->where('strSupplierID', $request->supplier_id)
+              ->where('tblpurchase.strPStatus', '!=', 'Complete')
               ->get();
 
       return Response::json($referencePO);
@@ -90,6 +90,8 @@ class ReceiveMaterialsController extends Controller
     {
       // dd($request->all());
 
+      $totqty = DB::table('tblpurchmatvariantdetail')->where('strPurchaseID', $request->purchase_id)->first()->totalQty;
+
       $id = $request->input('id');
       ReceivePurchase::insert([
         'strReceivePurchaseID' => $id,
@@ -104,6 +106,20 @@ class ReceiveMaterialsController extends Controller
           $ct = 0;
           $qty = $request->input('mat_qty');
           foreach($request->input('mat_data') as $material){
+            $totqty = DB::table('tblpurchmatvariantdetail')
+                    ->where('strPurchaseID', $request->purchase_id)
+                    ->where('strMaterialID', $material)
+                    ->first()
+                    ->totalQty;
+
+            $updateqty = $totqty - $qty[$ct];
+
+            DB::table('tblpurchmatvariantdetail')
+                    ->where('strPurchaseID', $request->purchase_id)
+                    ->where('strMaterialID', $material)
+                    ->update([
+                      'totalQty' => $updateqty
+                    ]);
             ReceivePurchaseDetail::insert([
               'strReceivePurchaseID' => $id,
               'strMaterialID' => $material,
@@ -114,17 +130,32 @@ class ReceiveMaterialsController extends Controller
             ]);
 
             $ct = $ct + 1;
+            $totqty = '';
+            $updateqty = '';
           }
           ReceivepurchaseOrder::insert([
             'strReceivePurchaseID' => $id,
             'strPurchaseID' => $request->input('purchase_id')
           ]);
 
-          DB::table('tblpurchase')
-              ->where('strPurchaseID', $request->input('purchase_id'))
-              ->update([
-                'strPStatus' => 'Partially Delivered'
-              ]);
+          $delivered = DB::table('tblpurchmatvariantdetail')->where('strPurchaseID', $request->purchase_id)->sum('totalQty');
+
+          if ($delivered == 0) {
+            DB::table('tblpurchase')
+                ->where('strPurchaseID', $request->input('purchase_id'))
+                ->update([
+                  'strPStatus' => 'Complete'
+                ]);
+          }
+          else {
+            DB::table('tblpurchase')
+                ->where('strPurchaseID', $request->input('purchase_id'))
+                ->update([
+                  'strPStatus' => 'Partially Delivered'
+                ]);
+          }
+
+
         }
 
         $supp = Supplier::where('strStatus', 'Active')
