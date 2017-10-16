@@ -123,13 +123,13 @@
                <hr>
               <div class="row">
                 <div class="col-md-6">
-                  <label> Weight <span style="color:red">*</span></label>
+                  <label> Weight</label>
                 </div>
               </div>
 
              <div class="row">
               <div class="col-md-6" style="margin-left: 20px">
-                <label> As Wax: <span style="color:red">*</span></label>
+                <label> As Wax:</label>
               </div>
              </div>
 

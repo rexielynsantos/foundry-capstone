@@ -176,6 +176,6 @@ class ReportsController extends Controller
         array_push($arrreceived,$received);
         // dd($customerID);
       }
-      return Response::json(array('material'=>$arrMatName, 'totqty'=>$arrTotQty, 'reorder'=>$arrReorder, 'delivered'=>$arrdelivered, 'returned'=>$arrreceived));
+      return Response::json(array('material'=>$arrMatName, 'totqty'=>$arrTotQty, 'reorder'=>$arrReorder, 'deliveredDate'=>$arrdelivered, 'returnedDate'=>$arrreceived));
     }
 }

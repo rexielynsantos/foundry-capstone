@@ -3,7 +3,12 @@
 @section('content')
 
 <section class="content">
-
+ <div class="row">
+          <div class="col-md-12">
+            <a href="/transaction/customerPurchase-new" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>&nbsp;&nbsp;New Order</a>
+          </div>
+        </div>
+          <br>
 	<div class="row">
 		<div class="col-md-12">
 

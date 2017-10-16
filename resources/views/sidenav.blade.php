@@ -110,19 +110,19 @@
         </li>
 
         <li class="treeview">
-          <a href="/transaction/estimate-add">
+          <a href="/transaction/estimate">
             <img src="../images/quotation-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Quotation</span>
           </a>
         </li>
 
          <li class="treeview">
-          <a href="/transaction/customerPurchase-new">
+          <a href="/transaction/customerPurchases">
             <img src="../images/purchase-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Sales Order </span>
           </a>
         </li>
 
          <li class="treeview">
-          <a href="/transaction/joborder-new">
+          <a href="/transaction/joborders">
             <img src="../images/joborder-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Job Order</span>
           </a>
         </li>

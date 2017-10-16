@@ -10,7 +10,12 @@
 
 
     <section class="content">
-
+      <div class="row">
+        <div class="col-md-12">
+         <a href="/transaction/estimate-add" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>&nbsp;&nbsp;New Quote</a>
+        </div>
+      </div>
+  <br>
      <div class="row">
 
 

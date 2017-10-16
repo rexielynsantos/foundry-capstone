@@ -9,15 +9,29 @@ $(document).ready(function(){
 
   var table5 = $('#overallRejectPerStage').DataTable();
 
+  $('#searchDate').prop('disabled',true);
+
   $('#StartDate').datepicker({
        format: 'yyyy-mm-dd',
        autoclose: true
-     });
+  });
 
   $('#EndDate').datepicker({
        format: 'yyyy-mm-dd',
        autoclose: true
-     });
+  });
+
+  $('#EndDate').change(function(){
+    var fromm = $('#StartDate').val()
+    var too = $('#EndDate').val()
+    if (fromm > too) {
+      $('#EndDate').val('')
+      $('#searchDate').prop('disabled',true);
+    }
+    else{
+      $('#searchDate').prop('disabled',false);
+    }
+  });
 
   $('#searchDate').click(function(){
     var searchReport = $('#reportDropdown').val()
@@ -76,8 +90,8 @@ $(document).ready(function(){
             for (var i = 0; i < data.material.length; i++) {
               table2.row.add([
                 data.material[i][0],
-                data.delivered[i],
-                data.returned[i],
+                data.deliveredDate[i],
+                data.returnedDate[i],
                 data.totqty[i][0],
                 data.reorder[i][0],
               ]).draw(true);
@@ -91,7 +105,7 @@ $(document).ready(function(){
                    strokeColor : "#ACC26D",
                    pointColor : "#fff",
                    pointStrokeColor : "#9DB86D",
-                   data : data.delivered
+                   data : data.deliveredDate
                  }
                ]
              }
@@ -108,7 +122,7 @@ $(document).ready(function(){
                    strokeColor : "#ACC26D",
                    pointColor : "#fff",
                    pointStrokeColor : "#9DB86D",
-                   data : data.returned
+                   data : data.returnedDate
                  }
                ]
              }

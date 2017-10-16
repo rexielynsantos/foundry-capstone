@@ -291,6 +291,12 @@ class CustomerController extends Controller
         'created_at' => $request->input('created_at')
       ]);
 
+      DB::table('tblcosting')
+    ->where('strCostingID',  $request->costing_id)
+    ->update([
+      'strCostingStatus' => 'Used'
+    ]);
+
 
   }
 

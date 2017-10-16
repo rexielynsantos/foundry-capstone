@@ -230,6 +230,7 @@ Route::post('/transaction/customerPurchase-add','Admin\PurchaseController@addPur
 Route::post('/transaction/purchase-customerName-get','Admin\PurchaseController@customerName');
 Route::get('/transaction/customerPurchases','Admin\PurchaseController@viewCustomerPurchases');
 Route::get('/transaction/customerPurchases-view','Admin\PurchaseController@customerPurchases');
+Route::post('/transaction/customerPurchases-view-pdf','Admin\PurchaseController@customerPurchasesPDF');
 Route::post('/transaction/selectedQuote','Admin\PurchaseController@selectedQuote');
 Route::post('/transaction/costing-view-summary','Admin\CustomerController@viewSummary');
 Route::post('/transaction/view-summaryOfCost','Admin\CustomerController@viewCostingSummary');

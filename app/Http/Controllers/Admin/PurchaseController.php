@@ -97,6 +97,14 @@ class PurchaseController extends Controller
     return view('Transaction.customerPurchases')->with('prchs', $prchs);
   }
 
+  public function customerPurchasesPDF(Request $request)
+  {
+    $prchs = CustPurchase::with(['customer', 'quotation.quoteprodvariant.details4'])->where('strCustPurchaseID', $request->id)->get();
+
+    // dd($prchs);
+    return Response::json($prchs);
+  }
+
   public function customerPurchases()
   {
 

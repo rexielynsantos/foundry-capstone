@@ -6,6 +6,7 @@
 <form class="" id="customer_purchase_form" role="form" data-toggle="validator">
 
     <section class="content">
+       
 
       <div class="box box-widget widget-user-2">
 
