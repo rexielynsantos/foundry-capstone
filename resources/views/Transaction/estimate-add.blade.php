@@ -90,8 +90,8 @@
 
               <div class="tab-pane" id="tab_2">
                 <div class="row">
-                  <div class="col-md-12">
-                    <select class="form-control select2" id="costingID">
+                  <div class="col-md-4">
+                    <select class="form-control select2" style="width:100%" id="costingID">
                     </select>
                   </div>
                 </div>

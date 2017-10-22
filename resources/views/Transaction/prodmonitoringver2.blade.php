@@ -112,8 +112,7 @@
                       <th class="hidden">ID</th>
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
-                      
-                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #3c8dbc">Jobs Finished</th>
                       <th style="background-color: #adb7e2">QA</th>
                       <th style="background-color: #adb7e2">Total Parts Available</th>
                       <th style="background-color: #adb7e2">Target Quantity</th>
@@ -135,8 +134,7 @@
                       <th class="hidden">ID</th>
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
-                      
-                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #3c8dbc">Jobs Finished</th>
                       <th style="background-color: #adb7e2">QA</th>
                       <th style="background-color: #adb7e2">Total Parts Available</th>
                       <th style="background-color: #adb7e2">Target Quantity</th>
@@ -158,8 +156,7 @@
                       <th class="hidden">ID</th>
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
-                      
-                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #3c8dbc">Jobs Finished</th>
                       <th style="background-color: #adb7e2">QA</th>
                       <th style="background-color: #adb7e2">Total Parts Available</th>
                       <th style="background-color: #adb7e2">Target Quantity</th>
@@ -181,8 +178,7 @@
                       <th class="hidden">ID</th>
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
-                      
-                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #3c8dbc">Jobs Finished</th>
                       <th style="background-color: #adb7e2">QA</th>
                       <th style="background-color: #adb7e2">Total Parts Available</th>
                       <th style="background-color: #adb7e2">Target Quantity</th>
@@ -204,7 +200,7 @@
                       <th class="hidden">ID</th>
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
-                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #3c8dbc">Jobs Finished</th>
                       <th style="background-color: #adb7e2">QA</th>
                       <th style="background-color: #adb7e2">Total Parts Available</th>
                       <th style="background-color: #adb7e2">Target Quantity</th>
@@ -226,8 +222,7 @@
                       <th class="hidden">ID</th>
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
-                      
-                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #3c8dbc">Jobs Finished</th>
                       <th style="background-color: #adb7e2">QA</th>
                       <th style="background-color: #adb7e2">Total Parts Available</th>
                       <th style="background-color: #adb7e2">Target Quantity</th>
@@ -249,8 +244,7 @@
                       <th class="hidden">ID</th>
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
-                      
-                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #3c8dbc">Jobs Finished</th>
                       <th style="background-color: #adb7e2">QA</th>
                       <th style="background-color: #adb7e2">Total Parts Available</th>
                       <th style="background-color: #adb7e2">Target Quantity</th>
@@ -272,8 +266,7 @@
                       <th class="hidden">ID</th>
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
-                      
-                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #3c8dbc">Jobs Finished</th>
                       <th style="background-color: #adb7e2">QA</th>
                       <th style="background-color: #adb7e2">Total Parts Available</th>
                       <th style="background-color: #adb7e2">Target Quantity</th>
@@ -295,8 +288,7 @@
                       <th class="hidden">ID</th>
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
-                      
-                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #3c8dbc">Jobs Finished</th>
                       <th style="background-color: #adb7e2">QA</th>
                       <th style="background-color: #adb7e2">Total Parts Available</th>
                       <th style="background-color: #adb7e2">Target Quantity</th>
@@ -318,7 +310,7 @@
                       <th class="hidden">ID</th>
                       <th class="hidden">Part ID</th> -->
                       <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
-                      <!-- <th style="background-color: #3c8dbc">Jobs Finished</th> -->
+                      <th style="background-color: #3c8dbc">Jobs Finished</th>
                       <th style="background-color: #adb7e2">QA</th>
                       <th style="background-color: #adb7e2">Total Parts Available</th>
                       <th style="background-color: #adb7e2">Target Quantity</th>

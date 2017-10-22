@@ -180,11 +180,13 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-3">
-          <a href="../transaction/estimate" class="btn btn-primary btn-block margin-bottom">Back</a>
-          <a id="AddNewRequest" data-toggle="modal" data-target="#newRequisitionModal" class="btn btn-success btn-block margin-bottom">Add New Request</a>
+        <div class="col-md-12">
+          <!-- <a href="../transaction/estimate" class="btn btn-primary btn-block margin-bottom">Back</a> -->
+          <a id="AddNewRequest" data-toggle="modal" data-target="#newRequisitionModal" class="btn btn-success margin-bottom  pull-right">Add New Request</a>
         </div>
-        <div class="col-md-9">
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <div class="box box-success">
             <div class="box-header with-border">
               <h3 class="box-title">Requests</h3>

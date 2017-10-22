@@ -5,9 +5,9 @@ $(document).ready(function(){
 
   var table3 = $('#monitoringTable').DataTable();
 
-  var table4 = $('#prodInspection').DataTable();
-
-  var table5 = $('#overallRejectPerStage').DataTable();
+  // var table4 = $('#prodInspection').DataTable();
+  //
+  // var table5 = $('#overallRejectPerStage').DataTable();
 
   $('#searchDate').prop('disabled',true);
 
@@ -25,7 +25,7 @@ $(document).ready(function(){
     var fromm = $('#StartDate').val()
     var too = $('#EndDate').val()
     if (fromm > too) {
-      $('#EndDate').val('')
+      $('#EndDate').val(fromm)
       $('#searchDate').prop('disabled',true);
     }
     else{
@@ -73,6 +73,7 @@ $(document).ready(function(){
       });
       $('#table1').show()
       $('#table2').hide()
+      $('#table3').hide()
     }// END TABLE1
 
     else if (searchReport =='table2') {
@@ -132,10 +133,11 @@ $(document).ready(function(){
           }
       });
       $('#table1').hide()
+      $('#table3').hide()
       $('#table2').show()
     }//END TABLE2
 
-  });
+  });//END SEARCH BY DATE
 
 //SEARCH BY DROPDOWN
   $('#reportDropdown').change(function(){
@@ -176,6 +178,7 @@ $(document).ready(function(){
       });
       $('#table1').show()
       $('#table2').hide()
+      $('#table3').hide()
     } //END IF TABLE 1
 
     else if (reportVal == 'table2') {
@@ -232,8 +235,14 @@ $(document).ready(function(){
       });
       $('#table1').hide()
       $('#table2').show()
+      $('#table3').hide()
     } //END OF table2
 
+    else if (reportVal == 'table3') {
+      $('#table1').hide()
+      $('#table2').hide()
+      $('#table3').show()
+    }
   });
   //END SEARCH BY DROPDOWN
 

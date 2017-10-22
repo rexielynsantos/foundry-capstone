@@ -146,8 +146,9 @@ $("#quoteRefer").change(function(){
               data.strProductName,
               data.strProductTypeName,
               data.strVarianceCode,
-              '<input type="text" id="qty'+data.strProductID+'">',
-              '<input type="text" id="cost'+data.strProductID+'">',
+              '<input type="number" id="qty'+data.strProductID+'" onkeyup="totalCost()">',
+              '<input type="number" id="cost'+data.strProductID+'" onkeyup="totalCost()">',
+              '<input type="text" id="totalCosting'+data.strProductID+'" disabled style="border:none; background:white;">',
               '<input type="text" id="remarks'+data.strProductID+'">',
               '<button type="button" id="'+data.strProductName+'" onclick="deleteRow(this.id)" class="deleteRow">Delete</button>'
             ]).draw(true);
@@ -251,4 +252,27 @@ function deleteRow(id)
     opt.text = id
     getDropdown.add(opt);
   });
+}
+
+function totalCost()
+{
+  // alert('asd')
+  var initialCost = [];
+  var usageOfMaterial = [];
+  var totalCostt = [];
+  var tablee = $('#prodTable').dataTable();
+  var tblrowd = tablee.fnGetData().length;
+  costingArr =  tablee.fnGetData();
+
+  for (var i = 0; i < tblrowd; i++) {
+    initialCost[i] = $('#qty'+costingArr[i][0]).val()
+    usageOfMaterial[i] = $('#cost'+costingArr[i][0]).val()
+    totalCostt[i] = initialCost[i] * usageOfMaterial[i]
+    $('#totalCosting'+costingArr[i][0]).val(totalCostt[i])
+    // alert(initialCost)
+    // alert(usageOfMaterial)
+  }
+  initialCost = ''
+  usageOfMaterial = ''
+  totalCostt = ''
 }

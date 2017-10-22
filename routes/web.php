@@ -423,7 +423,11 @@ Route::get('/transaction/production-monitoring', function () {
 });
 
 
-Route::get('/transaction/receive','Admin\ReceiveMaterialsController@viewReceivePurchase');
+// Route::get('/transaction/receive','Admin\ReceiveMaterialsController@viewReceivePurchase');
+Route::get('/transaction/receive', function () {
+    return view('Transaction.receivePurchase');
+});
+Route::get('/transaction/receive-view','Admin\ReceiveMaterialsController@viewReceivePurchase');
 Route::get('/transaction/receive-add','Admin\ReceiveMaterialsController@viewReceiveAddPurchase');
 Route::post('/transaction/receive-po','Admin\ReceiveMaterialsController@getPOInfo');
 Route::post('/transaction/receive-supplier','Admin\ReceiveMaterialsController@getPO');

@@ -17,7 +17,7 @@ class NewJobOrderController extends Controller
 	          ->orderBy('created_at', 'desc')
 	          ->orderBy('strJobOrdID', 'desc')
 	          ->first();
-	    
+
 	    $new = "";
 	     $somenew = "";
 	     $arrNew = [];
@@ -27,16 +27,16 @@ class NewJobOrderController extends Controller
 	        $idd = $id->strJobOrdID;
 
 	      $arrID = str_split($idd);
-	    
-	       
-	    
+
+
+
 	       for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
 	       {
 	         $new = $arrID[$ctr];
-	    
+
 	         if($boolAdd)
 	         {
-	    
+
 	           if(is_numeric($new) || $new == '0')
 	           {
 	             if($new == '9')
@@ -56,17 +56,17 @@ class NewJobOrderController extends Controller
 	             $arrNew[$ctr] = $new;
 	           }//else
 	         }//if ($boolAdd)
-	    
+
 	         $arrNew[$ctr] = $new;
 	       }//for
-	    
+
 	       for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
 	       {
 	         $somenew = $somenew . $arrNew[$ctr2] ;
 	      }
 	     }
 	     else{
-	      $somenew = 'J.O. 00001';
+	      $somenew = 'JO00001';
 	     }
 	    return response()->json($somenew);
   	}
@@ -101,7 +101,7 @@ class NewJobOrderController extends Controller
     	$po = CustPurchase::with(['customer', 'quotation.quoteprodvariant.details4'])
     		->where('tblcustpurchase.strCustPurchaseID', $request->input('refpo'))
     		->first();
-    	
+
 
     	return $po;
     }
@@ -110,7 +110,7 @@ class NewJobOrderController extends Controller
     	$po = JobOrder::with(['custpurchase.customer.contact', 'custpurchase.quotation.quoteprodvariant.details4'])
     		->where('tbljoborder.strJobOrdID', $request->input('id'))
     		->first();
-    	
+
 
     	return $po;
     }
@@ -119,8 +119,8 @@ class NewJobOrderController extends Controller
     	JobOrder::insert([
     		'strJobOrdID' => $request->input('id'),
     		'strCustPurchaseID' => $request->input('custpurid'),
-    		'boolIsNewProduct' => $request->input('np'),
-    		'boolIsRepeatOrder' => $request->input('ro'),
+    		'boolIsNewProduct' => 1,
+    		'boolIsRepeatOrder' => 0,
     		'strJobRemarks' => $request->input('remarks'),
     		'strJobOrdStatus' => "On-Process",
     		'created_at' => $request->input('created_at'),

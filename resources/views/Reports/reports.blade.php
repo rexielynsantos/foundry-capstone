@@ -2,19 +2,21 @@
 @section('pageTitle', 'Reports')
 @section('content')
 
-    <section class="content-header">
+    <section class="content">
       <div class="row">
-        <div class="col-md-12">
-          <div class="widget-user-header bg-blue">
-            <div class="widget-user-image">
-             <img src="../images/mainlogo.png" alt="User Avatar">
-            </div>
-             <h3 class="widget-user-username">Reports</h3>
-             <h5 class="widget-user-desc"><p style="color:white">Precision Foundry of the Philippines Inc.</p>
-          </div>
-        </div>
-      </div>
+    		<div class="col-md-12">
 
+        <div class="box box-widget widget-user-2">
+      <div class="widget-user-header bg-red">
+        <div class="widget-user-image">
+        <img src="../images/mainlogo.png" alt="User Avatar">
+
+        </div>
+
+        <h3 class="widget-user-username">Sales Order</h3>
+        <h5 class="widget-user-desc"><p style="color:white">Precision Foundry of the Philippines Inc.</p>
+      </div>
+      <div class="box-footer">
       <div class="row">
            <div class="col-md-4">
              <label> Report Search </label>
@@ -22,12 +24,12 @@
                      <div class="input-group">
                          <span class="input-group-addon"><i class="fa fa-search"></i></span>
                          <select id="reportDropdown" name="reportDropdown" class="select2 form-control">
-                             <option value="first" disabled selected>Select...</option>
+                             <option value="first" disabled selected>Select Report</option>
                              <option value="table1">Sales Report</option>
                              <option value="table2">Inventory Report</option>
                              <option value="table3">Production Monitoring Report</option>
-                             <option value="table4">Product Inspection Report</option>
-                             <option value="table5">Overall Rejection Report</option>
+                             <!-- <option value="table4">Product Inspection Report</option>
+                             <option value="table5">Overall Rejection Report</option> -->
 
                          </select>
                      </div>
@@ -52,15 +54,16 @@
                 <input type="text" class="form-control pull-right" id="EndDate">
               </div>
            </div>
+           <br>
            <div class="col-md-2">
-             <button type="button" id="searchDate">Search..</button>
+             <button type="button" class="btn btn-primary" id="searchDate">Search..</button>
            </div>
        </div>
 
-    </section>
+    <!-- </section>
 
 
-<section class="content">
+<section class="content"> -->
     <div id="table1" align="center" style="display:none;">
       <h3> PRECISION FOUNDRY OF THE PHILIPPINES INC. </h3>
         <h5> Sales Order Report </h5>
@@ -114,10 +117,37 @@
 
     <!-- START OF DIV 3/TABLE 3  -->
     <div id="table3" align="center" style="display:none;">
+      <div class="col-md-12">
+      <center>
+        <h3> PRECISION FOUNDRY OF THE PHILIPPINES INC. </h3>
+        <h5> Production Report </h5>
+      </center>
 
+      <table id="monitoringTable" border = "3" class="table table-hover table-striped">
+        <!-- <tr>
+          <td style="background-color: #3c8dbc" colspan="7"> Waxing </td>
+        </tr> -->
+        <thead>
+          <tr>
+            <th class="col-md-3" style="background-color:#d2d6de"> Part Name (#)</th>
+            <td style="background-color: #3c8dbc">Sol. Leaching</td>
+            <td style="background-color: #3c8dbc">Cleaning</td>
+            <td style="background-color: #3c8dbc">Assembly</td>
+            <th style="background-color: #f56954"> QA</th>
+            <th style="background-color: #605ca8">Total Parts Available</th>
+            <th style="background-color: #ff851b">Target Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      </div>
     </div><!-- END OF DIV 3/TABLE3  -->
-
-</section>
+</div>
+</div>
+</div>
+</div>
+  </section>
 
 <style>
 div.tab {

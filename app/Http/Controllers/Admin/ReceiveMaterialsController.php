@@ -22,8 +22,9 @@ class ReceiveMaterialsController extends Controller
 
      $rp =    $receivepurchase = ReceivePurchase::with(['order.details', 'purchase', 'purchase.supplier'])
      ->get();
-     return view('Transaction.receivePurchase')
-     ->with('rp', $rp);
+    //  return view('Transaction.receivePurchase')
+    //  ->with('rp', $rp);
+    return $rp;
     }
     public function viewReceiveAddPurchase()
     {
@@ -36,6 +37,11 @@ class ReceiveMaterialsController extends Controller
      ->with('supp', $supp);
 
     }
+
+    public function receivesView(){
+
+    }
+
     public function getAllMaterialVariant(){
 
        $matVar = DB::table('tblmaterialdetail')

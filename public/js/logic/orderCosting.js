@@ -68,7 +68,7 @@ $(document).ready(function(){
             }
           }
           else {
-            alert('No variance for this product')
+            alert('No bill of materials for this product')
             $("#prodVarianceSelect").empty();
             $(`<option value='0'>Select Variance</option>`).appendTo("#prodVarianceSelect");
           }

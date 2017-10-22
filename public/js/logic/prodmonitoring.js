@@ -97,13 +97,13 @@ $(document).ready(function(){
 						// }
 					},
 					error: function(data){
-						alert('substage_error1');
+						// alert('substage_error1');
 					}
 				})
 			}
 		},
 		error: function(data){
-			alert('product_error1');
+			// alert('product_error1');
 		}
 	});
 //2-7
@@ -139,13 +139,13 @@ $(document).ready(function(){
 						// }
 					},
 					error: function(data){
-						alert('substage_error2');
+						// alert('substage_error2');
 					}
 				})
 			}
 		},
 		error: function(data){
-			alert('product_error2');
+			// alert('product_error2');
 		}
 	});
 //3-13
@@ -187,13 +187,13 @@ $(document).ready(function(){
 						// }
 					},
 					error: function(data){
-						alert('substage_error3');
+						// alert('substage_error3');
 					}
 				})
 			}
 		},
 		error: function(data){
-			alert('product_error3');
+			// alert('product_error3');
 		}
 	});
 //4-5
@@ -218,20 +218,20 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl4.row.add([
 								dataa[0],
-								// dataa[1],
+								dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
 							]).draw(true);
 					},
 					error: function(data){
-						alert('substage_error4');
+						// alert('substage_error4');
 					}
 				})
 			}
 		},
 		error: function(data){
-			alert('product_error4');
+			// alert('product_error4');
 		}
 	});
 //5
@@ -256,20 +256,20 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl5.row.add([
 								dataa[0],
-								// dataa[1],
+								dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
 							]).draw(true);
 					},
 					error: function(data){
-						alert('substage_error5');
+						// alert('substage_error5');
 					}
 				})
 			}
 		},
 		error: function(data){
-			alert('product_error5');
+			// alert('product_error5');
 		}
 	});
 //6
@@ -294,20 +294,20 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl6.row.add([
 								dataa[0],
-								// dataa[1],
+								dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
 							]).draw(true);
 					},
 					error: function(data){
-						alert('substage_error6');
+						// alert('substage_error6');
 					}
 				})
 			}
 		},
 		error: function(data){
-			alert('product_error6');
+			// alert('product_error6');
 		}
 	});
 //7
@@ -332,20 +332,20 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl7.row.add([
 								dataa[0],
-								// dataa[1],
+								dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
 							]).draw(true);
 					},
 					error: function(data){
-						alert('substage_error7');
+						// alert('substage_error7');
 					}
 				})
 			}
 		},
 		error: function(data){
-			alert('product_error7');
+			// alert('product_error7');
 		}
 	});
 //8
@@ -370,20 +370,20 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl8.row.add([
 								dataa[0],
-								// dataa[1],
+								dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
 							]).draw(true);
 					},
 					error: function(data){
-						alert('substage_error8');
+						// alert('substage_error8');
 					}
 				})
 			}
 		},
 		error: function(data){
-			alert('product_error8');
+			// alert('product_error8');
 		}
 	});
 //9
@@ -408,20 +408,20 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl9.row.add([
 								dataa[0],
-								// dataa[1],
+								dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
 							]).draw(true);
 					},
 					error: function(data){
-						alert('substage_error9');
+						// alert('substage_error9');
 					}
 				})
 			}
 		},
 		error: function(data){
-			alert('product_error9');
+			// alert('product_error9');
 		}
 	});
 //10
@@ -446,20 +446,20 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl10.row.add([
 								dataa[0],
-								// dataa[1],
+								dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
 							]).draw(true);
 					},
 					error: function(data){
-						alert('substage_error10');
+						// alert('substage_error10');
 					}
 				})
 			}
 		},
 		error: function(data){
-			alert('product_error10');
+			// alert('product_error10');
 		}
 	});
 //11
@@ -491,13 +491,13 @@ $(document).ready(function(){
 							]).draw(true);
 					},
 					error: function(data){
-						alert('substage_error11');
+						// alert('substage_error11');
 					}
 				})
 			}
 		},
 		error: function(data){
-			alert('product_error11');
+			// alert('product_error11');
 		}
 	});
 //12
@@ -522,20 +522,20 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl12.row.add([
 								dataa[0],
-								// dataa[1],
+								dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
 							]).draw(true);
 					},
 					error: function(data){
-						alert('substage_error12');
+						// alert('substage_error12');
 					}
 				})
 			}
 		},
 		error: function(data){
-			alert('product_error12');
+			// alert('product_error12');
 		}
 	});
 //13
@@ -560,20 +560,20 @@ $(document).ready(function(){
 						console.log(dataa);
 							tbl13.row.add([
 								dataa[0],
-								// dataa[1],
+								dataa[1],
 								dataa[2],
 								dataa[2],
 								dataa[3],
 							]).draw(true);
 					},
 					error: function(data){
-						alert('substage_error13');
+						// alert('substage_error13');
 					}
 				})
 			}
 		},
 		error: function(data){
-			alert('product_error13');
+			// alert('product_error13');
 		}
 	});
 

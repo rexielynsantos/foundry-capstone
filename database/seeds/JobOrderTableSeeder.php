@@ -12,7 +12,7 @@ class JobOrderTableSeeder extends Seeder
     public function run()
     {
         DB::table('tbljoborder')->insert([
-          'strJobOrdID' => 'JO-00001',
+          'strJobOrdID' => 'JO00001',
           'strCustPurchaseID' => 'SO-00001',
           'boolIsNewProduct' => 1,
     	    'boolIsRepeatOrder' => 0,

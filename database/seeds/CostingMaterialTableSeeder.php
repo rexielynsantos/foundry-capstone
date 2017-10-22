@@ -17,7 +17,7 @@ class CostingMaterialTableSeeder extends Seeder
           'strUOMID' => 'U00002',
 		      'dblMatCost' => 100.00,
 		      'dblUsage' => 0.0034,
-	      'dblFinalCost' => 0.34,
+	      'dblFinalCost' => 1,
       ]);
     }
 }

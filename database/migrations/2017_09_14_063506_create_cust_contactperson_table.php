@@ -17,10 +17,10 @@ class CreateCustContactpersonTable extends Migration
         $table->string('strCustomerID');
         $table->string('strContactPersonName');
         $table->string('strContactNo');
-        $table->foreign('strCustomerID')
-              ->references('strCustomerID')->on('tblcustomer')
-              ->onUpdate('cascade')
-              ->onDelete('restrict');
+        // $table->foreign('strCustomerID')
+        //       ->references('strCustomerID')->on('tblcustomer');
+              // ->onUpdate('cascade')
+              // ->onDelete('restrict');
       });
     }
 

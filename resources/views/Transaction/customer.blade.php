@@ -24,7 +24,7 @@
 								    <div class="col-md-6">
 									  <div class="form-group has-feedback">
 									    <div class="form-group">
-									      <label for="compName" class="control-label">Company Name<span style="color:red">*</span></label>
+									      <label for="compName" class="control-label">Customer Name<span style="color:red">*</span></label>
 									      <input type="text" class="form-control validate letter" id ="custName" required
 									      data-error="Customer name is required."
 									      data-minlength-error="Minimum length 6."
@@ -76,7 +76,7 @@
 						                 </div>
 					                </div>
 					              </div>
-				
+
 			 <!--  </div>  --><!--end of col md 12-->
 
 									  <hr>

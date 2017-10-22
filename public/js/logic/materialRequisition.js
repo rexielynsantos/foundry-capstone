@@ -3,6 +3,12 @@ $(document).ready(function (){
   var tbl = $('#materialrequisitionTable').DataTable();
   var jobID = $('#jobID').val();
 
+  $('#to').datepicker({
+       format: 'yyyy-mm-dd',
+       autoclose: true
+     });
+  $("#to").datepicker('setDate', new Date());
+
 $.ajax({
   url: '/transaction/matReq-view',
   type: 'GET',
@@ -58,8 +64,7 @@ $('#joborderNo').change(function(){
       for (var i = 0; i < result.length; i++) {
         table.row.add([
           result[i].strMaterialID,
-          result[i].strMaterialName,
-          // parseInt(result[i].intOrderQty)*parseInt(result[i].dblMaterialQuantity),
+          result[i].strMaterialName+'('+result[i].intVariantQty+result[i].strUOMName+')',
           result[i].intOrderQty,
           'pcs'
         ]).draw(true)

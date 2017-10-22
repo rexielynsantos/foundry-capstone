@@ -185,7 +185,7 @@
                <div class="tab-pane" id="tab_3">
                 <div class="row">
                   <div class="col-md-4">
-                    <label> Runner-Type<span style="color:red">*</span> </label>
+                    <label> Runner<span style="color:red">*</span> </label>
                       <div class="form-group">
                         <input type="text" id="runnerType" class="form-control validate number" placeholder="0.00">
                       </div>
@@ -218,7 +218,7 @@
 
                 <div class="row">
                   <div class="col-md-4">
-                  <label> Sprue-Type<span style="color:red">*</span> </label>
+                  <label> Sprue<span style="color:red">*</span> </label>
                     <div class="form-group">
                       <input type="text" id="sprue" class="form-control validate number" placeholder="0.00">
                     </div>

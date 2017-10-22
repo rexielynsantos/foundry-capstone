@@ -79,15 +79,8 @@
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-wrench"></i></button>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                  </ul>
+             
+                  
                 </div>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
@@ -96,12 +89,12 @@
             <div class="box-body">
               <div class="row">
                 <div class="col-md-8">
-                	<table id="dashTable" class="display" style="color:black;background-color: #3c8dbc">
+                	<table id="dashTable" class="table table-bordered" style="color:black;background-color: #3c8dbc">
 		                <thead>
-		                  <th width="20%">S.O No.</th>
+		                  <th width="40%">S.O No.</th>
                       <th width="20%">Reference PO.</th>
-		                  <th width="20%">Customer Name</th>
-		                  <th width="20%">Order Date</th>
+		                  <th width="60%">Customer Name</th>
+		                  <th width="10%">Order Date</th>
 		                </thead>
 		                <tbody>
 		                	 @foreach($purch as $pu)
@@ -123,38 +116,42 @@
                   </p>
 
                   <div class="progress-group">
-                    <span class="progress-text">Product Costing Done</span>
-                    <span class="progress-number"><b>160</b>/200</span>
+                    <span class="progress-text">Approved Costing</span>
+                    <span class="progress-number"><b>{{$costing}}</b>/{{$costingAll}}</span>
 
                     <div class="progress sm">
-                      <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                     <div class="progress-bar progress-bar-blue" role="progressbar" aria-valuenow="{{$costingPer}}"
+  aria-valuemin="0" aria-valuemax="{{$costingAll}}" style="width: {{$costingPer}}%" ></div>
                     </div>
                   </div>
                   <!-- /.progress-group -->
                   <div class="progress-group">
-                    <span class="progress-text">Approved Quotations</span>
-                    <span class="progress-number"><b>310</b>/400</span>
+                    <span class="progress-text">Approved Quotes</span>
+                    <span class="progress-number"><b>{{$quote}}</b>/{{$quoteAll}}</span>
 
                     <div class="progress sm">
-                      <div class="progress-bar progress-bar-red" style="width: 80%"></div>
+                     <div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="{{$quotePer}}"
+  aria-valuemin="0" aria-valuemax="{{$quoteAll}}" style="width: {{$quotePer}}%" ></div>
                     </div>
                   </div>
                   <!-- /.progress-group -->
                   <div class="progress-group">
-                    <span class="progress-text">Processed Jobs</span>
-                    <span class="progress-number"><b>480</b>/800</span>
+                    <span class="progress-text">On-Process Jobs</span>
+                    <span class="progress-number"><b>{{$job}}</b>/{{$jobAll}}</span>
 
                     <div class="progress sm">
-                      <div class="progress-bar progress-bar-green" style="width: 80%"></div>
+                     <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="{{$jobPer}}"
+  aria-valuemin="0" aria-valuemax="{{$jobAll}}" style="width: {{$jobPer}}%" ></div>
                     </div>
                   </div>
                   <!-- /.progress-group -->
                   <div class="progress-group">
-                    <span class="progress-text">Released Orders</span>
-                    <span class="progress-number"><b>250</b>/500</span>
+                    <span class="progress-text">On Process Sales Order</span>
+                    <span class="progress-number"><b>{{$sales}}</b>/{{$salesAll}}</span>
 
                     <div class="progress sm">
-                      <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
+                     <div class="progress-bar progress-bar-yellow" role="progressbar" aria-valuenow="{{$salesPer}}"
+  aria-valuemin="0" aria-valuemax="{{$salesAll}}" style="width: {{$salesPer}}%" ></div>
                     </div>
                   </div>
                   <!-- /.progress-group -->

@@ -9,7 +9,7 @@ $(document).ready(function(){
   var urlCode = ''
 
 // $(#telNo).inputmask("(02) 999 9999");
-
+  // alert($('#checkCustomerID').val())
   if ($('#checkCustomerID').val() != '') {
     urlCode = '/transaction/customers-update'
     $.ajax({
@@ -22,7 +22,7 @@ $(document).ready(function(){
         for (var i = 0; i < data.length; i++) {
           table.row.add([
             data[i].strContactPersonName,
-            '<input type="text" class="form-control number" id="'+data[i].strContactPersonName+'" placeholder="ex.09123456789" title="09*********" data-inputmask="mask": "(99) 999-999-999" data-mask data-error="Contact number is required." minlength="11" maxlength="11" required value="'+data[i].strContactNo+'">',
+            '<input type="text" class="form-control number" id="'+data[i].strContactPersonName.replace(/ /g, '')+'" placeholder="ex.09123456789" title="09*********" data-inputmask="mask": "(99) 999-999-999" data-mask data-error="Contact number is required." minlength="11" maxlength="11" required value="'+data[i].strContactNo+'">',
             '<button type="button" name="delete" class="deleteRow"><i class="fa fa-trash"></i></button>'
           ]).draw(true);
         }
@@ -47,7 +47,7 @@ $(document).ready(function(){
 
   $('#addContactPerson').click(function(){
     var contactPerson = $('#contactName').val();
-    var contactPersonTextField = '<input class="form-control" id="'+contactPerson+'" type="text" placeholder="ex.09123456789" title="09*********" data-inputmask="mask": "(99) 999-999-999" data-mask data-error="Contact number is required." required>'
+    var contactPersonTextField = '<input class="form-control" id="'+contactPerson.replace(/ /g, '')+'" type="text" placeholder="ex.09123456789" title="09*********" data-inputmask="mask": "(99) 999-999-999" data-mask data-error="Contact number is required." required>'
     var deleteButtonContactPerson = '<button type="button" name="delete" class="deleteRow"><i class="fa fa-trash"></i></button>'
 
     table.row.add([
@@ -74,7 +74,7 @@ $(document).ready(function(){
     submitArr =  table.fnGetData();
 
     for (var i = 0; i < tblrowd; i++) {
-      var tempID = submitArr[i][0]
+      var tempID = submitArr[i][0].replace(/ /g, '')
       contactPersonArray[i] = submitArr[i][0]
       contactNumberArray[i] = $('#'+tempID).val()
     }

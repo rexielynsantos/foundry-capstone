@@ -15,7 +15,7 @@ class MatRequisitController extends Controller
           ->orderBy('created_at', 'desc')
           ->orderBy('strMaterialRequisitionID', 'desc')
           ->first();
-    
+
     $new = "";
      $somenew = "";
      $arrNew = [];
@@ -25,16 +25,16 @@ class MatRequisitController extends Controller
         $idd = $id->strMaterialRequisitionID;
 
       $arrID = str_split($idd);
-    
-       
-    
+
+
+
        for($ctr = count($arrID) - 1; $ctr >= 0; $ctr--)
        {
          $new = $arrID[$ctr];
-    
+
          if($boolAdd)
          {
-    
+
            if(is_numeric($new) || $new == '0')
            {
              if($new == '9')
@@ -54,10 +54,10 @@ class MatRequisitController extends Controller
              $arrNew[$ctr] = $new;
            }//else
          }//if ($boolAdd)
-    
+
          $arrNew[$ctr] = $new;
        }//for
-    
+
        for($ctr2 = 0; $ctr2 < count($arrID); $ctr2++)
        {
          $somenew = $somenew . $arrNew[$ctr2] ;
@@ -107,15 +107,18 @@ class MatRequisitController extends Controller
 
   public function matReqModal(Request $request)
   {
+    // dd($request->all());
     $modalinfo = DB::table('tbljoborder')
       ->leftjoin('tblcustpurchase', 'tblcustpurchase.strCustPurchaseID', 'tbljoborder.strCustPurchaseID')
       ->leftjoin('tblquotation', 'tblquotation.strQuoteID', 'tblcustpurchase.strQuoteID')
       ->leftjoin('tblquoteproductvariant', 'tblquoteproductvariant.strQuoteID', 'tblquotation.strQuoteID')
       ->leftjoin('tblcosting', 'tblcosting.strCostingID', 'tblquotation.strCostingID')
-      ->leftjoin('tblproduct', 'tblproduct.strProductID', 'tblcosting.strProductID')
-      ->leftjoin('tblmatspec', 'tblmatspec.strMatspecID', 'tblcosting.strMatspecID')
       ->leftjoin('tblcostingmaterial', 'tblcostingmaterial.strCostingID', 'tblcosting.strCostingID')
       ->leftjoin('tblmaterial', 'tblmaterial.strMaterialID', 'tblcostingmaterial.strMaterialID')
+      ->leftjoin('tblproduct', 'tblproduct.strProductID', 'tblcosting.strProductID')
+      ->leftjoin('tblmatspec', 'tblmatspec.strMatSpecID', 'tblcosting.strMatSpecID')
+      ->leftjoin('tblmaterialvariant', 'tblmaterialvariant.strMaterialVariantID', 'tblmaterial.strMaterialVariantID')
+      ->leftjoin('tbluom', 'tbluom.strUOMID', 'tblmaterialvariant.strUOMID')
       ->where('tbljoborder.strJobOrdID', $request->input('job_id'))
       ->get();
       // dd($modalinfo);
@@ -162,4 +165,3 @@ class MatRequisitController extends Controller
   }
 
 }
- 

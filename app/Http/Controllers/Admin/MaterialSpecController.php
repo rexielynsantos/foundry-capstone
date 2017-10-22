@@ -139,7 +139,7 @@ public function addCart(Request $request)
         }
       } 
 
-      $prdvrc = MatSpec::with(['product.producttype.stage.details'])->where('strMatSpecID', $id)->first();
+      $prdvrc = MatSpec::with(['material.details.unit', 'product.producttype.stage.details'])->where('strMatSpecID', $id)->first();
       return $prdvrc;
     }
     public function editMatSpec(Request $request)

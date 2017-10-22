@@ -383,10 +383,12 @@ class CustomerController extends Controller
 
   public function updateCustomer(Request $request)
   {
+    // dd($request->all());
+    $kunwaringID = $request->input('id');
     $id = $request->input('tempID');
     DB::table('tblcustomer')
+    ->where('strCustomerID', $id)
     ->update([
-      'strCustomerID' => $id,
       'strCompanyName' => $request->input('cust_name'),
       'strCustStreet' => $request->input('cust_street'),
       'strCustBrgy' => $request->input('cust_brgy'),

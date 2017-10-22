@@ -9,7 +9,7 @@ $(document).ready(function(){
     "ordering": false,
     "paging": false,
   });
-  
+
 
   $('#dateReceived').datepicker({
        format: 'yyyy-mm-dd',
@@ -49,7 +49,7 @@ $(document).ready(function(){
           data[i].custpurchase.customer.strCompanyName,
           data[i].custpurchase.dtOrderDate,
           data[i].custpurchase.dtDeliveryDate,
-          classification,
+          // classification,
           data[i].strJobOrdStatus,
           btn
         ]).draw(true);
@@ -91,7 +91,7 @@ $(document).ready(function(){
             data.quotation.quoteprodvariant[i].details4.strProductName,
             data.quotation.quoteprodvariant[i].intOrderQty,
             "pcs",
-            
+
           ]).draw(true);
          }
        },
@@ -128,8 +128,6 @@ $(document).ready(function(){
             id: data,
             created_at: today,
             custpurid: $('#refPO').val(),
-            np: radioNew,
-            ro: radioRpt,
             remarks: $('#remarks').val()
           },
           success: function(result){
@@ -163,7 +161,7 @@ $.ajax({
   url: '/transaction/joborders-pdf',
   data: {
     id: tbldata[0]
-  }, 
+  },
   success: function(data){
     // alert(data.custpurchase.customer.strCompanyName);
 console.log(data);

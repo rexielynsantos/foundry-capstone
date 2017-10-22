@@ -71,7 +71,7 @@ $(document).ready(function(){
           console.log(data);
           if (data.length != 0) {
             $("#costingID").empty();
-            $(`<option value=0>-->Select Costing<--</option>`).appendTo("#costingID");
+            $(`<option value=0>Select Costing</option>`).appendTo("#costingID");
             for (var i = 0; i < data.length; i++) {
               $(`<option value=`+data[i].strCostingID+`>`+data[i].strCostingID+`</option>`).appendTo("#costingID");
             }
@@ -114,7 +114,7 @@ $(document).ready(function(){
               for (var indexx = 0; indexx < data[i].costingmaterial.length; indexx++) {
                 var element1 = data[i].costingmaterial[indexx].dblFinalCost;
                 // alert(element1)
-                y += parseInt(y) + parseInt(element1)
+                y = parseInt(y) + parseInt(element1)
               }
 
               table.row.add([

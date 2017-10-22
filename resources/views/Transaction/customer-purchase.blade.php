@@ -6,7 +6,7 @@
 <form class="" id="customer_purchase_form" role="form" data-toggle="validator">
 
     <section class="content">
-       
+
 
       <div class="box box-widget widget-user-2">
 
@@ -38,7 +38,7 @@
                     <div class="col-md-4">
                       <div class="form-group has-feedback">
                         <div class="form-group">
-                          <label for="purchaseID" class="control-label">Customer P.O. No.<span style="color:red">*</span></label>
+                          <label for="purchaseID" class="control-label">Customer P.O.<span style="color:red">*</span></label>
                           <input type="text" class="form-control validate" id ="purchaseID" required>
                           <div class="help-block with-errors"></div>
                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -138,6 +138,7 @@
                             <th>Variance Code</th>
                             <th>Quantity</th>
                             <th>Cost</th>
+                            <th>Total Cost</th>
                             <th> Remarks </th>
                             <th>Action</th>
                           </thead>

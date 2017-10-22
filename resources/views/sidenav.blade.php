@@ -23,7 +23,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            
+
 
             <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> Measurements
@@ -59,7 +59,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="/maintenance/productType"><i class="fa fa-circle-o"></i> Product Types</a></li>
-               
+
                <!--  <li> <a href="/transaction/jobOrder-monitoring"><i class="fa fa-circle-o"></i> Product Variance </a> -->
             <li><a href="/maintenance/product"><i class="fa fa-circle-o"></i> Products</a></li>
               </ul>
@@ -103,6 +103,11 @@
             <img src="../images/customer-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Customer</span>
           </a>
         </li>
+        <li class="treeview">
+         <a href="/transaction/jobOrder-monitoring">
+           <img src="../images/bill-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Bill of Materials</span>
+         </a>
+       </li>
          <li class="treeview">
           <a href="/transaction/product-costing-list">
             <img src="../images/costing-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Product Costing</span>
@@ -126,11 +131,7 @@
             <img src="../images/joborder-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Job Order</span>
           </a>
         </li>
-         <li class="treeview">
-          <a href="/transaction/jobOrder-monitoring">
-            <img src="../images/bill-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Bill of Materials</span>
-          </a>
-        </li>
+
          <li class="treeview">
           <a href="/transaction/materialrequisition-add">
             <img src="../images/materialrequi-icon.png"> <span> &nbsp;&nbsp;&nbsp;&nbsp;Material Requisition </span>
@@ -213,8 +214,8 @@
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
- 
-            
+
+
           <ul class="treeview-menu">
             <li><a href="/maintenance/paymentTerms"><i class="fa fa-plus"></i> Payment Terms </a></li>
             <li><a href="/maintenance/dataReactivation"><i class="fa fa-plus"></i> Data Reactivation </a></li>

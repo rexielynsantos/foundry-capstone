@@ -31,12 +31,12 @@
                   <th width="20%">Customer</th>
                   <th width="%">Date Received</th>
                   <th width="%">Delivery Date</th>
-                  <th width="%">Classification</th>
+                  <!-- <th width="%">Classification</th> -->
                   <th width="%">Status</th>
                   <th width="11%">Action</th>
                 </thead>
                 <tbody>
-                  
+
                 </tbody>
               </table>
             </div>

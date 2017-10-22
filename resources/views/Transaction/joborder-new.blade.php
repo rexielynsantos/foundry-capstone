@@ -26,16 +26,16 @@
 
           <div class="nav-tabs-custom">
             <ul id="mytabs" class="nav nav-tabs">
-              <li class="active"><a href="#tab_1" data-toggle="tab">&nbsp;&nbsp;New</a></li>  
+              <li class="active"><a href="#tab_1" data-toggle="tab">&nbsp;&nbsp;New</a></li>
             </ul>
-            
+
 
 
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
                   <div class="row">
                     <div class="col-md-4">
-                      <div class="form-group has-feedback"> 
+                      <div class="form-group has-feedback">
                         <div class="form-group">
                           <label for="refPO" class="control-label">Reference P.O. No.<span style="color:red">*</span></label>
                            <select class="form-control select2" id = "refPO" style="width: 100%;" required>
@@ -56,7 +56,7 @@
                     <div class="form-group has-feedback">
                         <div class="form-group">
                           <label for="customerName" class="control-label">Customer Name<span style="color:red">*</span></label>
-                          
+
                           <input type="text" disabled id = "customerName" class="form-control pull-right" style="width: 100%;">
                           <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         </div>
@@ -70,26 +70,26 @@
                           <div class="input-group-addon">
                            <i class="fa fa-calendar"></i>
                           </div>
-                          
+
                           <input disabled type="text" class="form-control pull-right" id="dateReceived">
                         </div>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>Delivery Date:</label>  
+                        <label>Delivery Date:</label>
 
                         <div class="input-group date">
                           <div class="input-group-addon">
                            <i class="fa fa-calendar"></i>
                           </div>
-                          
+
                           <input disabled type="text" class="form-control pull-right" id="dateDelivery">
                         </div>
                       </div>
                     </div>
 
-                     <div class="row" style="margin-left: 5px;">
+                     <!-- <div class="row" style="margin-left: 5px;">
                       <div class="col-md-12">
                         <div class="checkbox">
                             <label>
@@ -103,7 +103,7 @@
                             </label>
                         </div>
                       </div>
-                     </div>
+                     </div> -->
 
                      <hr>
 
@@ -154,7 +154,7 @@
                         </div>
                     </div>
 
-                <br><br>  
+                <br><br>
               <div class="row">
                  <div class="col-md-12">
                     <button type="reset" class="btn bg-white btn-flat pull-right"><i class="fa fa-pencil"></i> &nbsp;Clear</button>
